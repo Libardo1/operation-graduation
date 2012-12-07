@@ -1,0 +1,105 @@
+\documentclass[11pt]{report}
+\usepackage{geometry}              % See geometry.pdf to learn the layout options. There are lots.
+\usepackage{outline}  
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Outline of ATLAS Chapter}
+
+%\date{}                                           % Activate to display a given date or no date
+\begin{document}
+\begin{outline}
+
+	\item Tracker
+	\begin{outline}
+		\item Pixels
+		\begin{outline}
+			\item Technology
+			\begin{outline}
+				\item Physical basis of charged particle detection by semiconductor
+				\item Silicon sensors with front end chips for readout
+				\item Optical readout
+			\end{outline}
+			\item Physical structure
+			\begin{outline}
+				\item 46,080 pixels per sensor
+				\item Sensors generally 50x400 microns each
+				\item 16 sensors per module, 1744 modules total
+				\item 80 million channels, 1.4 m long, 0.5 m wide
+			\end{outline}
+			\item Readout
+			\begin{outline}
+				\item On-detector lasers provide optical readout link
+				\item DAQ crates off-detector receive and interpret signals
+				\item Failures of lasers and motivation for alternatives
+			\end{outline}
+			\item Relevance for b-tagging
+		\end{outline}
+		\item SCT
+		% http://www.atlas.ch/sct.html
+		\begin{outline}
+			\item Technology and structure
+			\begin{outline}
+				\item Silicon technology also
+				\item 4 double-sided layers, 6.36 x 6.40 cm
+			\end{outline}
+			\item Role in track reconstruction
+		\end{outline}
+		\item TRT
+		\begin{outline}
+			\item Technology, structure, readout
+			\begin{outline}
+				\item Ionization of gas when traversed by charged particle
+				\item 2-tier threshold system distinguishes between tracking hits and transition radiation
+			\end{outline}
+			\item Particle identification role
+		\end{outline}
+	\end{outline}
+	
+	\item Calorimeters
+	\begin{outline}
+		\item Electromagnetic
+		\item Hadronic
+	\end{outline}
+	
+	\item Muon System
+
+	
+	\item Trigger and Data Acquisition
+	% overview reference: http://www.atlas.ch/trigger.html
+	\begin{outline}
+		\item Three-Layer Trigger System
+		\begin{outline}
+			\item L1
+			\begin{outline}
+				\item Muon Stream
+				\item EGamma Stream
+				\item JetTauEtMiss Stream
+			\end{outline}
+			\item L2
+			\begin{outline}
+				\item Region of Interest readout based on L1 objects
+				\item More granular
+			\end{outline}
+			\item Event Filter
+			\begin{outline}
+				\item Full event reconstruction
+				\item Reconstruction time and rate
+			\end{outline}
+		\end{outline}
+		\item Data Recording
+		\item Event Reconstruction
+	\end{outline}
+	
+	
+%	\item Measuring the Luminosity
+%%	\end{outline}
+
+
+\end{outline}  
+\end{document}
