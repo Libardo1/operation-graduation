@@ -59,42 +59,102 @@
 			\end{outline}
 			\item Particle identification role
 		\end{outline}
+		\item Track reconstruction and SV reconstruction
+		\begin{outline}
+			\item Quality cuts
+			\item Track Reconstruction algorithms %http://iopscience.iop.org/1742-6596/119/3/032014/pdf/1742-6596_119_3_032014.pdf (NEWT)
+			\begin{outline}
+				\item Kalman fitter
+				\item Track seed finding: road window around a track seed
+				\item Leapfrog to further points along trajectory
+				\item Ambiguity solving: generally give hits to tracks with higher chi2
+				\item Points where problems can arise
+				\begin{outline}
+					\item Noise hits
+					\item Dropped hits
+					\item Scatters off detector material
+					\item Other stuff: bremsstrahlung, photon conversions
+				\end{outline}
+			\end{outline}
+			\item Secondary Vertex Reconstruction
+			\begin{outline}
+				\item Significance: used in b-jet identification
+				\item determination of signed impact parameter (is IP in front of or behind jet)
+			\end{outline}
+		\end{outline}
 	\end{outline}
 	
-	\item Calorimeters
+	\item Calorimeters  
+	% http://atlas.web.cern.ch/Atlas/TDR/caloperf/caloperf.html
 	\begin{outline}
+		\item Introduction
+		\begin{outline}
+			\item Jets, MET, particle ID
+			\item Large range of energies detected
+		\end{outline}
 		\item Electromagnetic
+		\begin{outline}
+			\item Purpose
+			\begin{outline}
+				\item Higgs and heavy VB measurements
+				\item Shield hadronic calorimeter from EM jets
+			\end{outline}
+			\item Specifications
+			\begin{outline}
+				\item lead and liquid Argon accordion geometry
+				\item fine (order 0.01) granularity over 3 sampling layers
+				\item out to $\eta$=3.2
+				\item about 25 radiation lengths thick
+			\end{outline}
+			\item Performance
+		\end{outline}
 		\item Hadronic
+		\begin{outline}
+			\item Purpose
+				\begin{outline}
+					\item Measurement of hadronic jets from quarks and gluons
+					\item particular attention to b, tau, hadronic W
+				\end{outline}
+			\item Specifications
+				\begin{outline}
+					\item Tile scintillator and iron in central region
+					\item Liquid argon in more forward region (radiation hard)
+					\item Endcap at high $\eta$
+					\item 11 interaction lengths thick at $\eta$=0 to reduce punch-through to muons
+				\end{outline}
+			\item Performance
+			\item B-jet detection
+		\end{outline}
 	\end{outline}
 	
 	\item Muon System
 
 	
-	\item Trigger and Data Acquisition
+%	\item Trigger and Data Acquisition
 	% overview reference: http://www.atlas.ch/trigger.html
-	\begin{outline}
-		\item Three-Layer Trigger System
-		\begin{outline}
-			\item L1
-			\begin{outline}
-				\item Muon Stream
-				\item EGamma Stream
-				\item JetTauEtMiss Stream
-			\end{outline}
-			\item L2
-			\begin{outline}
-				\item Region of Interest readout based on L1 objects
-				\item More granular
-			\end{outline}
-			\item Event Filter
-			\begin{outline}
-				\item Full event reconstruction
-				\item Reconstruction time and rate
-			\end{outline}
-		\end{outline}
-		\item Data Recording
-		\item Event Reconstruction
-	\end{outline}
+%	\begin{outline}
+%		\item Three-Layer Trigger System
+%		\begin{outline}
+%			\item L1
+%			%\begin{outline}
+%			%	\item Muon Stream
+%			%	\item EGamma Stream
+%			%	\item JetTauEtMiss Stream
+%			%\end{outline}
+%			\item L2
+%			\begin{outline}
+%				\item Region of Interest readout based on L1 objects
+%				\item More granular
+%			\end{outline}
+%			\item Event Filter
+%			\begin{outline}
+%				\item Full event reconstruction
+%				\item Reconstruction time and rate
+%			\end{outline}
+%		\end{outline}
+%		\item Data Recording
+%		\item Event Reconstruction
+%	\end{outline}
 	
 	
 %	\item Measuring the Luminosity
