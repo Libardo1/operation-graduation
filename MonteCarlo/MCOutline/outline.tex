@@ -1,0 +1,46 @@
+\documentclass[11pt]{report}
+\usepackage{geometry}              % See geometry.pdf to learn the layout options. There are lots.
+\usepackage{outline}  
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Outline of Monte Carlo Chapter}
+
+\begin{document}
+\begin{outline}
+	\item Physics
+		\begin{outline}
+			\item Jet multiplicity in event
+			\item SM vs. MSSM generation
+			\item Cross section (allow to float) and mass (several points)
+		\end{outline}
+	\item Generators
+		\begin{outline}
+			\item Pythia
+				\begin{outline}
+					\item LO generator
+					\item Relevant Feynman diagrams all present?
+					\item Showering and hadronization of quarks and gluons
+				\end{outline}
+			\item Sherpa
+				\begin{outline}
+					\item NLO generator
+					\item Ambiguity of the associated b
+				\end{outline}
+			\item MadGraph
+				\begin{outline}
+					\item NLO generator
+					\item parton matching to Pythia for showering and hadronization
+				\end{outline}
+		\end{outline}
+	\item Simulation
+	\item Digitization and Reconstruction
+	\item Background Samples
+
+\end{outline}
+\end{document}
