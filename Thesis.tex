@@ -1,0 +1,69 @@
+\documentclass[12pt]{book}
+\usepackage{Template/suthesis-2e}
+\usepackage{geometry}        
+\geometry{letterpaper}    
+\usepackage[parfill]{parskip}  
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{multirow}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue, 
+            citecolor=blue, urlcolor=blue]{hyperref}
+
+%\includeonly{Chapter1}
+
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{exercise}{Exercise}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{warning}{Warning}
+
+\def\grad{ \mbox{grad}}
+\def\curl{ \mbox{curl}}
+\def\div{ \mbox{div}}
+\def\U{\ensuremath {\cal U}}
+\def\S{\ensuremath {\cal S}}
+\def\V{\ensuremath {\cal V}}
+\def\R{\ensuremath {\cal R}}
+\def\tr{\ensuremath {\mbox{tr}}}
+
+
+
+
+% ------------------- Title and Author -----------------------------
+\title{bH$\rightarrow$bbb Analysis at ATLAS}
+\author{Katie Malone}
+\begin{document}
+
+
+\frontmatter
+\maketitle
+
+\tableofcontents
+
+\include{ATLASDetector/ChapterFormat}
+
+\include{ReconstructionPerformance/ChapterFormat}
+
+\include{MonteCarlo/MonteCarloChapter}
+
+%\include{Chapter4/chapter4}
+
+%\include{Chapter5/chapter5}
+
+
+\bibliographystyle{plain-annote}
+\bibliography{mybibliography}
+
+
+\end{document}
+\end
+
