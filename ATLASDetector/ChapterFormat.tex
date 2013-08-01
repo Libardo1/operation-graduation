@@ -3,7 +3,7 @@
  
 %!TEX root =  ../Thesis.tex
 
-\chapter[ATLASDetector]{Full Title}
+\chapter[ATLAS Detector]{CERN, the LHC Accelerator and the ATLAS Detector}
 
 
 
@@ -14,16 +14,24 @@
 \section{CERN and the Large Hadron Collider}
 The European Center for Nuclear Research (CERN) is a scientific complex in Geneva, Switzerland that was established in the years following World War II.  Its focus is experimental particle physics, in particular the Large Hadron Collider (LHC), although it also houses a theoretical physics department and numerous other experiments relating to the fundamental particles and their interactions.  
 
-The LHC is the accelerator that serves as the centerpiece of CERN's scientific program.  The accelerator is circular and located in an underground tunnel with a circumference of 27 km, and when it is running, accelerates and collides two proton beams (sometimes two lead ion beams) at four points around the accelerator ring.  At each of these collision points is a detector designed to measure the particles resulting from the collisions: CMS, LHCb, ALICE, and the experiment where the data for this thesis was collected, ATLAS.
+The LHC is the accelerator that serves as the centerpiece of CERN's scientific program.  The accelerator is an RF-driven circular sychrotron located in an underground tunnel with a circumference of 27 km, and when it is running, accelerates and collides two proton beams (sometimes two lead ion beams) at four points around the accelerator ring.  At each of these collision points is a detector designed to measure the particles resulting from the collisions: CMS, LHCb, ALICE, and the experiment where the data for this thesis was collected, ATLAS.
 
 The LHC is the last and most powerful in a series of staged accelerator complexes, which in combination accelerate protons from rest to an energy of 4 TeV as of 2012.  Since there are 2 beams that collide head-on, the total center-of-mass energy is 8 TeV.  The first step in the process is the proton source, where hydrogen atoms are subjected to an electric field that separates the protons from the electrons.  Then the protons are accelerated by a 90kV field and focused, then sent to the linear collider.  From this point forward, all the accelerators use radio frequency (RF) electromagnetic waves to impart energy to the protons.  
 
 The linear accelerator brings the protons up to an energy of 50 MeV, then they go to the Proton Synchrotron Booster (up to 1.4 GeV), and then the Proton Sychrotron (25 GeV).  Then the protons are passed to the Super Proton Synchrotron, where they reach an energy of 450 GeV, and finally the beam is split into half and each half is injected into the LHC going a different direction.  Figure ~\ref{fig:accelerator_complex} shows all the major accelerators at the CERN site.
 
 %%% CERN accelerator figure
-\includegraphics[width=\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/Cern-Accelerator-Complex.pdf}\label{fig:accelerator_complex}
+\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/Cern-Accelerator-Complex.pdf}\label{fig:accelerator_complex}
+%%% lumi in 2010, 2011 and 2012
+\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/intlumivsyear.eps}\label{fig:lumi_vs_year}
+
 
 Once the beams are in the LHC, they are accelerated over the course of about 20 minutes up to the full collision energy of 4 TeV per beam.  Then the beams are focused at each of the 4 interaction points, and carefully steered into position so that head-on collisions commence.  The protons are arranged in bunches within the beams, with each bunch 50 ns away from its neighbors, so that the collision frequency within the detectors is 20 MHz.  
+
+The LHC first turned on in 2008, but within days had to shut down following a catastrophic failure of the bus bar between superconducting magnets.  It restarted in 2009 at 7 TeV, half the design energy of 14 TeV, and the first run for physics was performed in 2010, with a total dataset size of 36 inverse picobarns.  The progress in 2011 was dramatic, as the beam intensity was steadily increased over the course of the run to create an exponential increase of the luminosity recorded, and at the end of 2011 the total dataset size was about 5 inverse femtobarns.  The progress continued in 2012, with a slightly increased energy of 8 TeV, culminating in the 4 July 2012 announcement of the discovery of a new particle, later confirmed to be the long-sought Higgs boson.  At the end of 2012, the LHC commenced a 2-year shutdown to complete upgrades and repairs, with the intention of starting up again in 2015 at 13 TeV and 25 ns spacing between bunch crossings.
+
+As Figure lumifigure shows, the luminosity delivered in 2010, 2011 and 2012 increased dramatically from year to year.  This increase in data enabled more sensitive analyses and the Higgs discovery, but did not come for free.  In particular, over the course of this period, the number of protons and the bunch emittance were tuned to increase the number of collisions per bunch crossing, and thus the instantaneous luminosity.  An important consequence was that the pileup increased dramatically, creating a very busy environment where identification and reconstruction of physics objects becomes more challenging.  The implications of pileup both in general and in this analysis will be detailed in further chapters.
+
 
 It is then the job of the ATLAS detector, and its readout system, to measure and record the particles that result from these collisions.  The detector is cylindrical in shape and constructed of several main subsystems, each of which is designed to make certain types of measurements of certain types of particles.  The main layers of the detector are the inner detector, the hadronic and electromagnetic calorimeter, and the muon system.
 
@@ -73,7 +81,9 @@ The performance requirement for the resolution of the EM calorimeter is $\sigma_
 \subsection{Hadronic Calorimeter} 
 The hadronic calorimeter measures the energy from hadrons, jets, taus and allows for a measurement of missing transverse energy.  The hadronic calorimeter, nicknamed the tile calorimeter because of its composition of scintillating tiles interleaved with steel plates.  The calorimeter is partitioned into four major subsections, two barrel sections and two extended barrel sections, allowing for measurements out to $|\eta|<$1.7.  In order to stop all particles from the collision, with the notable exception of muons, the hadronic calorimeter is about 7.4 radiation lengths ($\lambda$) thick.
 
-
+\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/innerDetector.pdf}\label{fig:inner_detector}
+\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/LArg_accordion.pdf}\label{fig:lar}
+\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/tile_cal.pdf}\label{fig:tile_cal}
 
 
 %http://iopscience.iop.org/1742-6596/331/2/022024/pdf/1742-6596_331_2_022024.pdf
@@ -87,10 +97,36 @@ The muon system is often used in conjunction with the tracking of the inner dete
 \includegraphics[width=\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/AtlasDetectorLabeled.pdf}\label{fig:detector}
 
 %http://www.slac.stanford.edu/econf/C0303241/proc/pres/502.PDF
+%https://cds.cern.ch/record/1267390/files/ATL-DAQ-SLIDE-2010-087.pdf
 \section{Trigger}
 Although the LHC delivers 20 million bunch crossings per second to the ATLAS detector, the detector does not have the capacity in either storage space or readout bandwidth to record all these collisions.  The trigger has the task of selecting the most interesting 100 or so events per second, which are then fully reconstructed and recorded.  The trigger is a three-layer system, with a first level (L1) implemented solely in hardware, a second level (L2) that reconstructs ``regions of interest'' (RoI's) with special fast algorithms, and an event filter (EF) that reconstructs the full event with offline algorithms.  
+ 
 
-L1 reduces the rate from 20 MHz to 70-100 kHz, then L2 reduces an additional factor of 100 to 1 kHz, and about 100 events/second pass the EF.   
+The smallest piece of the trigger is a trigger object.  This is the signature left behind by a high-$E_T$ particle such as an electron, muon, b-quark, or photon (this is not an exhaustive list).  Many physics analyses look for signatures that have more than one physics object in them (for instance, multiple electrons, or a lepton plus jets), so multiple physics objects are often required in a single trigger.  If all of the objects are seen, the trigger is passed and the event moves forward in the data collection process.  This process repeats three times, once for each of the levels of the trigger--only those events which pass L1 move onto L2, and so on.   The chain of algorithms and decisions that are successively applied to a given trigger object are collectively called the trigger chain.  Then, groups of trigger chains that share common features are grouped together into trigger streams, where the primary trigger streams are JetTauEtMiss, EGamma, MinBias, and CosmicCalo.  The end result of this process is approximately 200 events per second (320 GB/s of data) being written to disk; the trigger rates and latency information can be found in Table \ref{tab:trigger_stats}.
+
+  
+
+% https://cds.cern.ch/record/1181075/files/05446486.pdf
+\begin{table}
+\begin{tabular}{c | c | c | c}
+Trigger Level & Input Rate in Hz  & Latency  & Data Rate\\  \hline
+None (Event rate) & 20 MHz  & no decision applied yet & 1600 TB/s \\
+L1  & 75 kHz  &  $\sim$ 1$\mu s$  & 120 GB/s\\
+L2  & 3 kHz    & $\sim$ 10 ms & 5 GB/s \\
+EF  &  200 Hz  & $\sim$ 1 s & 320 MB/s \\
+\end{tabular}
+\end{table}
+\label{tab:trigger_stats}
+
+
+Of particular interest to this analysis are the jet thresholds and b-tagging applied in the trigger.  This will be outlined in greater detail in a later section, but we will introduce the ideas here.  As only 200 events per second get written to disk, the bandwidth has to be carefully allocated across triggers, and it is very expensive to keep a trigger that allows high rates of events to be written to data.  In an analysis such as this one, the physics objects coming from the signal (b-jets from a Higgs decay) are generally higher in p$_T$ than the background (continuum QCD processes) so one way to keep event rates reasonable in the face of rising luminosity is to place higher p$_T$ thresholds on the jets that fire the trigger.   
+
+The thresholds increase with each trigger level, as the reconstruction algorithms become more accurate, so that a jet which is reconstructed with 145 GeV of p$_T$ at L1 might be required to have 170 GeV at EF in order to pass the full trigger.  Once the event is written to disk, it is subject to the full offline reconstruction and calibration so that the final p$_T$ of the jet might not be exactly the number measured at EF.  There is therefore a range of p$_T$ values, called the turn-on curve, where the trigger goes from rejecting all events to accepting all events.  Within the turn-on curve even a small change in the p$_T$ of a jet can have a dramatic difference in whether the jet fires a trigger accept, so this instability is mitigated by placing p$_T$ cuts on the trigger jets that require that their respective p$_T$ values are above the turn-on curve.  
+
+The ATLAS trigger also allows for b-tagging of jets at L2 and EF.  For analyses that have b-jets in the final state, b-tagging in the trigger provides a tool for keeping rates low without pushing up jet p$_T$ thresholds.  B-tagging in the trigger introduces several challenges, though.  First, the online b-tagging algorithms have less time and information than the offline algorithms.  Second, a jet that passes an L2 b-tag will not necessarily pass an EF b-tag, and vice versa, so more work is required in understanding the correlations between tags at different trigger levels.  
+
+
+
 
 
 

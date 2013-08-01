@@ -8,23 +8,42 @@
 \usepackage{epstopdf}
 \usepackage{amsmath}
 \usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{afterpage}
+\usepackage{longtable}
+\usepackage{booktabs}
+
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue 
+            citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage{bm}
+\usepackage{slashed}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=red,
+  citecolor=red,
+  urlcolor=blue
+}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
-\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue, 
-            citecolor=blue, urlcolor=blue]{hyperref}
+%\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=blue 
+ %           citecolor=blue, urlcolor=blue]{hyperref}
 
 %\includeonly{Chapter1}
 
 
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{definition}{Definition}
-\newtheorem{lemma}{Lemma}
-\newtheorem{exercise}{Exercise}
-\newtheorem{remark}{Remark}
-\newtheorem{example}{Example}
-\newtheorem{warning}{Warning}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{definition}{Definition}
+%\newtheorem{lemma}{Lemma}
+%\newtheorem{exercise}{Exercise}
+%\newtheorem{remark}{Remark}
+%\newtheorem{example}{Example}
+%\newtheorem{warning}{Warning}
 
 \def\grad{ \mbox{grad}}
 \def\curl{ \mbox{curl}}
@@ -39,15 +58,20 @@
 
 
 % ------------------- Title and Author -----------------------------
-\title{bH$\rightarrow$bbb Analysis at ATLAS}
-\author{Katie Malone}
+
 \begin{document}
+	\title{bH$\rightarrow$bbb Analysis at ATLAS}
+	\author{Katie Malone}
+	\dept{Physics}
 
 
-\frontmatter
-\maketitle
 
-\tableofcontents
+%\frontmatter
+%\maketitle
+
+%\tableofcontents
+
+\include{Theory/ChapterFormat}
 
 \include{ATLASDetector/ChapterFormat}
 
@@ -55,7 +79,7 @@
 
 \include{MonteCarlo/MonteCarloChapter}
 
-%\include{Chapter4/chapter4}
+\include{BackgroundEstimation/ChapterFormat}
 
 %\include{Chapter5/chapter5}
 
