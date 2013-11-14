@@ -22,19 +22,26 @@ The LHC is the last and most powerful in a series of staged accelerator complexe
 The linear accelerator brings the protons up to an energy of 50 MeV, then they go to the Proton Synchrotron Booster (up to 1.4 GeV), and then the Proton Sychrotron (25 GeV).  Then the protons are passed to the Super Proton Synchrotron, where they reach an energy of 450 GeV, and finally the beam is split into half and each half is injected into the LHC going a different direction.  Figure ~\ref{fig:accelerator_complex} shows all the major accelerators at the CERN site.
 
 %%% CERN accelerator figure
-\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/Cern-Accelerator-Complex.pdf}\label{fig:accelerator_complex}
+\begin{figure}
+	\includegraphics[width=0.8\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/Cern-Accelerator-Complex.pdf}
+	\label{fig:accelerator_complex}
+\end{figure}
+
 %%% lumi in 2010, 2011 and 2012
-\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/intlumivsyear.eps}\label{fig:lumi_vs_year}
+\begin{figure}
+	\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/intlumivsyear.eps}
+	\label{fig:lumi_vs_year}
+\end{figure}
 
 
-Once the beams are in the LHC, they are accelerated over the course of about 20 minutes up to the full collision energy of 4 TeV per beam.  Then the beams are focused at each of the 4 interaction points, and carefully steered into position so that head-on collisions commence.  The protons are arranged in bunches within the beams, with each bunch 50 ns away from its neighbors, so that the collision frequency within the detectors is 20 MHz.  
+Once the beams are in the LHC, they are accelerated up to the full collision energy of 4 TeV per beam.  Then the beams are focused at each of the 4 interaction points, and carefully steered into position so that head-on collisions commence.  The protons are arranged in bunches within the beams, with each bunch 50 ns away from its neighbors, so that the collision frequency within the detectors is 20 MHz.  
 
 The LHC first turned on in 2008, but within days had to shut down following a catastrophic failure of the bus bar between superconducting magnets.  It restarted in 2009 at 7 TeV, half the design energy of 14 TeV, and the first run for physics was performed in 2010, with a total dataset size of 36 inverse picobarns.  The progress in 2011 was dramatic, as the beam intensity was steadily increased over the course of the run to create an exponential increase of the luminosity recorded, and at the end of 2011 the total dataset size was about 5 inverse femtobarns.  The progress continued in 2012, with a slightly increased energy of 8 TeV, culminating in the 4 July 2012 announcement of the discovery of a new particle, later confirmed to be the long-sought Higgs boson.  At the end of 2012, the LHC commenced a 2-year shutdown to complete upgrades and repairs, with the intention of starting up again in 2015 at 13 TeV and 25 ns spacing between bunch crossings.
 
-As Figure \ref{fig:lumi_vs_year} shows, the luminosity delivered in 2010, 2011 and 2012 increased dramatically from year to year.  This increase in data enabled more sensitive analyses and the Higgs discovery, but did not come for free.  In particular, over the course of this period, the number of protons and the bunch emittance were tuned to increase the number of collisions per bunch crossing, and thus the instantaneous luminosity.  An important consequence was that the pileup increased dramatically, creating a very busy environment where identification and reconstruction of physics objects becomes more challenging.  The implications of pileup both in general and in this analysis will be detailed in further chapters.
+As Figure ~\ref{fig:lumi_vs_year} shows, the luminosity delivered in 2010, 2011 and 2012 increased dramatically from year to year.  This increase in data enabled more sensitive analyses and the Higgs discovery, but did not come for free.  In particular, over the course of this period, the number of protons and the bunch emittance were tuned to increase the number of collisions per bunch crossing, and thus the instantaneous luminosity.  An important consequence was that the pileup increased dramatically, creating a very busy environment where identification and reconstruction of physics objects becomes more challenging.  The implications of pileup both in general and in this analysis will be detailed in further chapters.
 
 
-It is then the job of the ATLAS detector, and its readout system, to measure and record the particles that result from these collisions.  The detector is constructed of several main subsystems, each of which is designed to make certain types of measurements of certain types of particles.  The main layers of the detector are the inner detector, the hadronic and electromagnetic calorimeter, and the muon system.
+Once the LHC delivers collisions, it is then the job of the ATLAS detector, and its readout system, to measure and record the particles that result from these collisions.  The detector is constructed of several main subsystems, each of which is designed to make certain types of measurements of certain types of particles.  The main layers of the detector are the inner detector, the hadronic and electromagnetic calorimeter, and the muon system.
 
 
 \section{The ATLAS Coordinate System}
@@ -120,9 +127,11 @@ The ATLAS detector has two calorimeter systems: the electromagnetic (EM) calorim
 %http://iopscience.iop.org/1742-6596/110/9/092007/pdf/jpconf8_110_092007.pdf
 \subsection{Electromagnetic Calorimeter}
 \label{sec:em_cal}
-The electromagnetic (EM) calorimeter measures electrons and photons after they exit the tracking system.  The calorimeter consists of two major parts, the barrel and the endcaps; the barrel measures particles with $|\eta|<$1.475 and the endcaps measure particles with 1.375$<|\eta|<$3.2.  The calorimeter is a sampling calorimeter, with the passive showering material (lead) interleaved with active energy measurement material (liquid argon, or LAr).  An electron or photon will interact with the lead as it travels through it, creating an electromagnetic shower, which then propagates to the adjacent LAr layer, where it is measured and read out.
 
-A notable feature of the EM calorimeter is the accordion geometry, which has several key characteristics.  First, the geometry enables complete coverage in $\phi$ without azimuthal cracks.  Second, the LAr sampling layer between lead layers is constant throughout the calorimeter barrel.  Third, a particle traveling through the calorimeter will generate approximately the same number of sampling instances (i.e. measurements) regardless of the direction in which it travels.  These pieces add up to a very uniform coverage of electromagnetic calorimetry.
+The electromagnetic (EM) calorimeter measures electrons and photons after they exit the tracking system.  Nicknamed the LAr calorimeter for its liquid argon technology,  the calorimeter is a sampling calorimeter, with the passive showering material (lead) interleaved with active energy measurement material (liquid argon).  An electron or photon will interact with the lead as it travels through it, creating an electromagnetic shower, which then propagates to the adjacent LAr layer, where it is measured and read out.
+
+
+A notable feature of the EM calorimeter is the accordion geometry, which has several key characteristics.  First, the geometry enables complete coverage in $\phi$ without azimuthal cracks.  Second, the LAr sampling layer between lead layers is constant throughout the calorimeter barrel.  Third, a particle traveling through the calorimeter will generate approximately the same number of sampling instances (i.e. measurements) regardless of the direction in which it travels.  These pieces add up to a very uniform coverage of electromagnetic calorimetry.  The calorimeter consists of two major parts, the barrel and the endcaps; the barrel measures particles with $|\eta|<$1.475 and the endcaps measure particles with 1.375$<|\eta|<$3.2.  
 
 The performance requirement for the resolution of the EM calorimeter is $\sigma_E/E=\frac{10\%}{\sqrt{E}}+$0.7\%, and a crucial part of reaching this resolution is precisely understanding the shape of the readout pulse.  The traversing particle produces an electromagnetic shower where the drift time of the particles in the shower cause a readout pulse that is roughly triangular in shape and typically 400 ns long.  This pulse is shaped by the readout electronics and the signal shape is simulated with Monte Carlo and calibrated using precisely known test pulses deposited into the readout chain.  However, as detailed below, the presence of multiple interactions per bunch crossing, known as pileup, has a significant effect in the calorimeters and is an important task for understanding jet energy.
 
