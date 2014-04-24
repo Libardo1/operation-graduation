@@ -29,8 +29,9 @@ The linear accelerator brings the protons up to an energy of 50 MeV, then they g
 
 %%% lumi in 2010, 2011 and 2012
 \begin{figure}
-	\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/intlumivsyear.eps}
+	\includegraphics[width=\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/intlumivsyear.eps}
 	\label{fig:lumi_vs_year}
+	\caption{The luminosity collected in 2010, 2011 and 2012 at ATLAS. }
 \end{figure}
 
 
@@ -41,7 +42,7 @@ The LHC first turned on in 2008, but within days had to shut down following a ca
 As Figure ~\ref{fig:lumi_vs_year} shows, the luminosity delivered in 2010, 2011 and 2012 increased dramatically from year to year.  This increase in data enabled more sensitive analyses and the Higgs discovery, but did not come for free.  In particular, over the course of this period, the number of protons and the bunch emittance were tuned to increase the number of collisions per bunch crossing, and thus the instantaneous luminosity.  An important consequence was that the pileup increased dramatically, creating a very busy environment where identification and reconstruction of physics objects becomes more challenging.  The implications of pileup both in general and in this analysis will be detailed in further chapters.
 
 
-Once the LHC delivers collisions, it is then the job of the ATLAS detector, and its readout system, to measure and record the particles that result from these collisions.  The detector is constructed of several main subsystems, each of which is designed to make certain types of measurements of certain types of particles.  The main layers of the detector are the inner detector, the hadronic and electromagnetic calorimeter, and the muon system.
+Once the LHC delivers collisions, it is then the job of the ATLAS detector, and its readout system, to measure and record the particles that result from these collisions.  The detector is constructed of several main subsystems, each of which is designed to make certain types of measurements of certain types of particles.  The main layers of the detector are the inner detector, the hadronic and electromagnetic calorimeter, and the muon system.  The trigger and data acquisition systems (TDAQ) are responsible for determining which events to record, and then reading out/storing the data from the entire detector for those events.
 
 
 \section{The ATLAS Coordinate System}
@@ -65,7 +66,7 @@ The information from the tracker is used in particular to determine the transver
 \begin{figure}
 	\includegraphics[width=0.8\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/innerDetector.pdf}
 	\label{fig:inner_detector}  
-	\caption{A cutaway picture showing the main components of the ATLAS inner detector.}
+	\caption{A cutaway picture showing the main components of the ATLAS inner detector.  The ATLAS coordinate system is sketched on the right-hand side of the figure.}
 \end{figure}
 
 
@@ -85,7 +86,19 @@ The pixel technology is designed to give high-precision measurements of the loca
 
 The pixel readout is based on detecting and quantifying this ionization current.  A particle with greater momentum will create more electron-hole pairs and thus a longer readout pulse, which passes through a preamplifier and then a discriminator.  The discriminator is set with a tunable threshold number of electrons, typically a few thousand, and the signal metric is then the length of time for which the pulse was above that value (called ``time over threshold'', or TOT).  Having a threshold in place helps distinguish ionization current from leakage current, which occurs when the silicon does not have robust insulator characteristics and current begins to flow across the sensor even when there is no ionizing particle present.  One important effect of radiation damage to the pixel detector is that it damages the silicon, allowing for increases in leakage current up to 100 nA, so over the course of large radiation doses to the detector the thresholds sometimes have to be raised to compensate for the damaged material.  
 
-Another important consideration when designing and constructing the pixel detector is the material budget of the system.  When a charged particle traverses the pixels, interacting with the silicon, its trajectory can change by virtue of these interactions as it undergoes multiple scattering or secondary interactions.  This can be a problem, for example, when reconstructing tracks--if a track has a kink from where it scattered off detector material, it will be more challenging to reconstruct the track or correctly measure its momentum.  These material effects are particularly important for the pixel detector, because they are the first layer of detector traversed by particles after they leave the collision point.  One way to mitigate these effects are to place high-material components, such as power supplies and readout electronics, in more forward regions so that they are not in the path of central tracks.  There are two figures of merit when evaluating the material budget of a system: the radiation length is the distance an electromagnetically interacting particle (such as an electron, positron or photon) travels before losing 1/$e$ of its energy to bremsstrahlung, which the interaction length is the mean distance traveled by a hadronically-interacting particle (such as a proton, neutron or pion) before undergoing an inelastic nuclear interaction.
+
+%from atlas TDR
+\begin{wrapfigure}{R}{0.5\textwidth}
+  \begin{center}
+%\begin{figure}
+	\includegraphics[width=0.45\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/id_material_budget.pdf}
+	\label{fig:id_material}
+	\end{center}
+%\end{figure}
+\end{wrapfigure}
+
+Another important consideration when designing and constructing the pixel detector is the material budget of the system.  When a charged particle traverses the pixels, interacting with the silicon, its trajectory can change by virtue of these interactions as it undergoes multiple scattering or secondary interactions.  This can be a problem, for example, when reconstructing tracks--if a track has a kink from where it scattered off detector material, it will be more challenging to reconstruct the track or correctly measure its momentum.  These material effects are particularly important for the pixel detector, because they are the first layer of detector traversed by particles after they leave the collision point.  One way to mitigate these effects are to place high-material components, such as power supplies and readout electronics, in more forward regions so that they are not in the path of central tracks.  There are two figures of merit when evaluating the material budget of a system: the radiation length is the distance an electromagnetically interacting particle (such as an electron, positron or photon) travels before losing 1/$e$ of its energy to bremsstrahlung, while the interaction length is the mean distance traveled by a hadronically-interacting particle (such as a proton, neutron or pion) before undergoing an inelastic nuclear interaction.  Figure ~\ref{fig:id_material} of the material volume, in units of radiation length vs. $\eta$, shows that the material budget (especially pixels) is minimized in the most central regions.
+
 
 %https://cds.cern.ch/record/1445527/files/ATL-COM-PHYS-2012-471.pdf
 The pixel system all together provides fine resolution of the beamspot and surrounding area, which serves several important purposes.  First, since there are typically many hard p-p collisions in each bunch crossing, the pixels system has longitudinal resolution $z_0\sin\theta\approx$0.05-0.3 mm enables the reconstruction of multiple primary vertices that are typically separated by a few millimeters.  This is critical for controlling pileup in the high-luminosity LHC environment.  Second, the transverse resolution of 0.01-0.1 mm enables precision b-tagging for identification of bottom quarks.  B quarks typically have a lifetime of about 1ps, and since they are often created in high-p$_T$ collisions or come from the decay of heavy particles, they can have considerable $p_T$ and travel a few millimeters before decaying.  B-tagging algorithms typically look for evidence of secondary decay vertices that are displaced from the beamspot in the transverse direction.   
@@ -131,6 +144,15 @@ The ATLAS detector has two calorimeter systems: the electromagnetic (EM) calorim
 The electromagnetic (EM) calorimeter measures electrons and photons after they exit the tracking system.  Nicknamed the LAr calorimeter for its liquid argon technology,  the calorimeter is a sampling calorimeter, with the passive showering material (lead) interleaved with active energy measurement material (liquid argon).  An electron or photon will interact with the lead as it travels through it, creating an electromagnetic shower, which then propagates to the adjacent LAr layer, where it is measured and read out.
 
 
+\begin{figure}
+\begin{center}
+	\includegraphics[width=0.6\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/LArg_accordion.pdf}		
+	\label{fig:lar}
+	\caption{A depiction of a section of the LAr calorimeter.  The accordion structure of the towers is visible, as well as the three sampling layers}
+\end{center}
+\end{figure}
+
+
 A notable feature of the EM calorimeter is the accordion geometry, which has several key characteristics.  First, the geometry enables complete coverage in $\phi$ without azimuthal cracks.  Second, the LAr sampling layer between lead layers is constant throughout the calorimeter barrel.  Third, a particle traveling through the calorimeter will generate approximately the same number of sampling instances (i.e. measurements) regardless of the direction in which it travels.  These pieces add up to a very uniform coverage of electromagnetic calorimetry.  The calorimeter consists of two major parts, the barrel and the endcaps; the barrel measures particles with $|\eta|<$1.475 and the endcaps measure particles with 1.375$<|\eta|<$3.2.  
 
 The performance requirement for the resolution of the EM calorimeter is $\sigma_E/E=\frac{10\%}{\sqrt{E}}+$0.7\%, and a crucial part of reaching this resolution is precisely understanding the shape of the readout pulse.  The traversing particle produces an electromagnetic shower where the drift time of the particles in the shower cause a readout pulse that is roughly triangular in shape and typically 400 ns long.  This pulse is shaped by the readout electronics and the signal shape is simulated with Monte Carlo and calibrated using precisely known test pulses deposited into the readout chain.  However, as detailed below, the presence of multiple interactions per bunch crossing, known as pileup, has a significant effect in the calorimeters and is an important task for understanding jet energy.
@@ -142,10 +164,7 @@ The performance requirement for the resolution of the EM calorimeter is $\sigma_
 \label{sec:h_cal}
 The hadronic calorimeter measures the energy from hadrons, jets, taus and allows for a measurement of missing transverse energy.  The hadronic calorimeter, nicknamed the tile calorimeter because of its composition of scintillating tiles interleaved with steel plates.  The calorimeter is partitioned into four major subsections, two barrel sections and two extended barrel sections, allowing for measurements out to $|\eta|<$1.7.  In order to stop all particles from the collision, with the notable exception of muons, the hadronic calorimeter is about 7.4 radiation lengths ($\lambda$) thick.
 
-
 \begin{figure}
-	\includegraphics[width=0.8\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/LArg_accordion.pdf}		\label{fig:lar}
-	\caption{A depiction of a section of the LAr calorimeter.  The accordion structure of the towers is visible, as well as the three sampling layers}
 	\includegraphics[width=0.8\textwidth]{/Users/caitlinmalone/Documents/Thesis/ATLASDetector/images/tile_cal.pdf}
 	\label{fig:tile_cal}
 	\caption{A depiction of the overall tile calorimeter, and a close-up view of one of its cells.}
@@ -169,10 +188,23 @@ The muon system is often used in conjunction with the tracking of the inner dete
 %https://cds.cern.ch/record/1267390/files/ATL-DAQ-SLIDE-2010-087.pdf
 \section{Trigger}
 \label{sec:atlas_trig}
-Although the LHC delivers 20 million bunch crossings per second to the ATLAS detector, the detector does not have the capacity in either storage space or readout bandwidth to record all these collisions.  The trigger has the task of selecting the most interesting 100 or so events per second, which are then fully reconstructed and recorded.  The trigger is a three-layer system, with a first level (L1) implemented solely in hardware, a second level (L2) that reconstructs ``regions of interest'' (RoI's) with special fast algorithms, and an event filter (EF) that reconstructs the full event with offline algorithms.  
+Although the LHC delivers 20 million bunch crossings per second to the ATLAS detector, the detector does not have the capacity in either storage space or readout bandwidth to record all these collisions.  The trigger has the task of selecting the most interesting 200 or so events per second, which are then fully reconstructed and recorded.  The trigger is a three-layer system, with a first level (L1) implemented solely in hardware, a second level (L2) that reconstructs ``regions of interest'' (RoI's) with special fast algorithms, and an event filter (EF) that reconstructs the full event with offline algorithms.  L2 and EF together are called the high level trigger, or HLT.
+
+\begin{itemize}
+	\item trigger object: the signature left by a particle in the detector, once it has been reconstructed and identified.  Examples include electrons, muons, photons, and jets.
+	\item trigger accept: when all the requirements for a particular trigger level are met, and the event gets promoted to the next level.
+	\item threshold: the minimum momentum or energy required in order for a trigger object to be accepted.
+	\item trigger item: one or more trigger objects that define whether an event passes a particular level (L1, L2, EF).
+	\item trigger chain: a set of L1, L2 and EF trigger items (also called simply a trigger).
+	\item trigger menu: the set of all L1, L2 and EF trigger items, which collectively define which events will be written to disk.
+	\item trigger prescale: a set reduction factor, so that a trigger can be maintained with low thresholds while not exceeding rate limits.  For example, for a trigger with a prescale of 10, only 1 in 10 events passing the trigger get written to disk.
+\end{itemize}
  
 
-The smallest piece of the trigger is a trigger object.  This is the signature left behind by a high-$E_T$ particle such as an electron, muon, b-quark, or photon (this is not an exhaustive list).  Many physics analyses look for signatures that have more than one physics object in them (for instance, multiple electrons, or a lepton plus jets), so multiple physics objects are often required in a single trigger.  If all of the objects are seen, the trigger is passed and the event moves forward in the data collection process.  This process repeats three times, once for each of the levels of the trigger--only those events which pass L1 move onto L2, and so on.   The chain of algorithms and decisions that are successively applied to a given trigger object are collectively called the trigger chain.  Then, groups of trigger chains that share common features are grouped together into trigger streams, where the primary trigger streams are JetTauEtMiss, EGamma, MinBias, and CosmicCalo.  The end result of this process is approximately 200 events per second (320 GB/s of data) being written to disk; the trigger rates and latency information can be found in Table \ref{tab:trigger_stats}.
+The trigger has a step-type structure, where progressively smaller numbers of events are processed with progressively more detailed and computationally intensive algorithms.  Many physics analyses look for signatures that have more than one physics object in them (for instance, multiple electrons, or a lepton plus jets), so multiple physics objects are often required in a single trigger.  There are also single-item triggers, although typically these have higher thresholds than triggers that look for multiple objects.  If all of the objects in a given trigger item are seen, the event is accepted for the current level and the event moves forward in the data collection process.  This process repeats three times, once for each of the levels of the trigger--only those events which pass L1 move onto L2, those which pass L2 move on to EF, and those that pass EF are written to disk.   As the machine settings for the LHC changed over the course of 2012, resulting in different conditions for data-taking, the trigger menu was adjusted periodically to keep rates under control (in practice, this generally means either raising thresholds or adding prescales).  
+
+
+Groups of trigger chains that share common features are grouped together into trigger streams, where the primary trigger streams are JetTauEtMiss, EGamma, MinBias, and CosmicCalo.  The end result of this process is approximately 200 events per second (320 GB/s of data) being written to disk; the trigger rates and latency information can be found in Table \ref{tab:trigger_stats}.
 
   
 
