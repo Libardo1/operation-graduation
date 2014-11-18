@@ -1,0 +1,120 @@
+% Activate the following line by filling in the right side. If for example the name of the root file is Main.tex, write
+% "...root = Main.tex" if the chapter file is in the same directory, and "...root = ../Main.tex" if the chapter is in a subdirectory.
+ 
+%!TEX root =  ../Thesis.tex
+
+\chapter[Trigger and Cuts]{Trigger and Cuts}
+ 
+\section{Trigger}
+The purpose and structure of the ATLAS trigger are explained in Section~\ref{sec:atlas_trig}.  The trigger chain for this analysis is as follows: 
+
+\begin{itemize}
+    \item L1: At least one J75 RoI (region of interest), implying an L1 jet of at least 75 GeV
+    \item L2: least two 30 GeV jets, of which one must be at least 140 GeV. Additionally, at least two
+jets must satisfy a medium b-tag (L2 xComb > 1.276)
+    \item EF: At least two 35 GeV jets, of which one must be at least 145 GeV. Additionally, at least two
+jets must satisfy a medium b-tag (EF xComb > 1.099). There is no explicit requirement that the
+b-tagged jets from L2 correspond with the b-tagged jets from EF. However, as detailed later, this
+requirement is added later as an offline cut.
+\end{itemize}
+
+
+In the trigger, the L2 and EF jets are b-tagged using xComb \cite{}, a likelihood ratio of IP3D (sig
+nificance of z0 and d0 impact parameters), SV1 (mass of the secondary vertex), NVTX (the number of
+vertices with two tracks), and EVTX (the energy fraction of the secondary vertex), as well as the number
+of vertices with 2 tracks. The triggers in this analysis use the medium operating point, such that L2 xComb
+> 1.276 and EF xComb > 1.099.
+
+
+
+
+\section{Offline Baseline Cuts}
+
+
+\begin{itemize}
+\item
+\textbf{$p_T$ cuts of 155 and 55 GeV on leading and sub-leading jets, respectively.}
+In order to get out of the \pt turn-on curves of the trigger, cuts of
+155~GeV and 55~GeV are applied to the leading and second jets in the
+event.
+\item
+\textbf{$p_T$ cut of 25 GeV on third jet.}
+A third jet is not required by the trigger, but is required by
+the offline cuts, and it must have a \pt greater than 25 GeV.  There is
+no veto on additional jets.  Further details on the jet cuts can be found
+in Section~\ref{sec:jets}.
+\item
+\textbf{Two jets passing online (L2 and EF in trigger) and offline (MV1) $b$-tags}
+As part of the trigger, two jets are required to be $b$-tagged at L2 and at EF.  It
+is not explicitly required by the trigger that the same jets pass $b$-tagging at the two trigger levels,
+or that those jets be tagged offline by the MV1 algorithm, so we make an
+offline cut that imposes that requirement.  There is further discussion of the online
+and offline $b$-tagging correlations in Section~\ref{sec:online_btagging},
+where one of the important conclusions is that there is not perfect correspondence
+between jets passing the three levels of $b$-tagging (L2, EF, MV1).  For
+example, a jet with a large xComb value at L2 (and passing the $b$-tagging
+requirement at L2) might have a small xComb value at EF (and fail the $b$-tagging
+requirement at EF).  Likewise with L2 and MV1, or EF and MV1.  As a result, we
+make an explicit requirement offline that the same two jets be $b$-tagged in L2, EF
+and MV1.  Jets that are tagged in both L2 and EF of the trigger are referred to as
+``trigger-tagged'' jets, and jets that pass L2, EF and MV1 are called ``triple-tagged''
+jets.
+The offline cut on the
+trigger-matched $b$-jets is set to the 60\% efficiency
+operating point. Due to the bias introduced by the trigger (see
+Section~\ref{sec:online_btagging}), this provides additional rejection of
+light jets for a relatively small decrease in signal efficiency.
+
+
+\item\textbf{Leading 2 jets must pass tight MV1 $b$-tag}
+It is also required that the two jets in the event with the highest \pt be $b$-tagged
+offline by the MV1 algorithm.  There is no explicit requirement that the leading
+two jets be trigger-tagged or triple-tagged.
+  In addition to preferentially keeping signal events at a higher rate than
+background events, this cut considerably improves the combinatorics of reconstructing
+the Higgs and we see markedly better signal mass peak resolution when this cut is in
+place.  Further details can be found in Section~\ref{sec:combinatorics}.
+
+
+\item
+\textbf{Third jet passing offline $b$-tag}
+After two
+$b$-jets have been triple-tagged, a third jet is tagged using the MV1 tagger.  The third
+$b$-jet must have an MV1 value that passes a tight (60\% efficiency)
+cut.
+
+\end{itemize}
+
+
+
+%------------------------------------------------------
+\begin{figure}
+	\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/TriggerCuts/cut_efficiencies_j35_signal.pdf}	
+	\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/TriggerCuts/cut_efficiencies_logy_j35_signal.pdf}	
+    \caption{A diagram of the ATLAS detector as a whole, with major subsystems labeled.  A couple of human figures are shown standing on and near the detector, for scale. \label{fig:signal_eff_cutflow}}
+\end{figure}
+
+%http://www.slac.stanford.edu/econf/C0303241/proc/pres/502.PDF
+%------------------------------------------------------
+
+
+
+
+
+%------------------------------------------------------
+\begin{figure}
+	\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/TriggerCuts/cut_efficiencies_j35_background.pdf}	
+	\includegraphics[width=0.5\textwidth]{/Users/caitlinmalone/Documents/Thesis/TriggerCuts/cut_efficiencies_logy_j35_background.pdf}	
+    \caption{A diagram of the ATLAS detector as a whole, with major subsystems labeled.  A couple of human figures are shown standing on and near the detector, for scale. \label{fig:background_eff_cutflow}}
+\end{figure}
+
+%http://www.slac.stanford.edu/econf/C0303241/proc/pres/502.PDF
+
+
+%------------------------------------------------------
+
+
+
+
+
+
