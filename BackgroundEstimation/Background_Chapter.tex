@@ -1,0 +1,160 @@
+% Activate the following line by filling in the right side. If for example the name of the root file is Main.tex, write
+% "...root = Main.tex" if the chapter file is in the same directory, and "...root = ../Main.tex" if the chapter is in a subdirectory.
+ 
+%!TEX root =  ../Thesis.tex
+
+\chapter[Background Estimation]{Background Estimation}
+
+The background estimate is crucial to the analysis.  The QCD cross section at a hadron machine like the LHC is quite large; only a small subset of QCD events have 3 or more b-jets, but b-tagging does not have perfect performance and we expect a large contribution from QCD events in which one or more light or charm jets are b-tagged.
+
+The b-tagging in the trigger provides a handle for controlling the mistag background.  The L2, EF and offline MV1 b-tags are independent of each other, which is to say that (for example) the EF b-tagging decision on a given jet does not take into account whether the jet was tagged in L2, so we can improve the purity of our b-jet sample by requiring that the same jet pass L2, EF and MV1 tags.  
+
+
+  \begin{table}[hbt]
+
+    \begin{tabular}{l | l | c | c || c | c }
+    \multicolumn{2}{c}{}  & \multicolumn{2}{c}{Signal MC} & \multicolumn{2}{c}{Unbiased Data} \\
+      X         & Y         & sig-like & bkgd-like   &   sig-like & bkgd-like \\
+      \hline
+      EF        & L2        & 0.917    & 0.248 &   0.424       & 0.035 \\
+      \hline
+      L2        & MV1 (80)  & 0.675    & 0.031 &       0.510       & 0.077 \\
+      EF        & MV1 (80)  & 0.824    & 0.090 & 0.515       & 0.050\\
+      L2 and EF & MV1 (80)  & 0.676    & 0.036 & 0.414       & 0.031 \\
+      MV1 (80)  & L2 and EF & 0.977    & 0.434 & 0.640       & 0.076 \\
+      \hline
+      L2        & MV1 (70)  & 0.716    & 0.060 & 0.652       & 0.086\\
+      EF        & MV1 (70)  & 0.867    & 0.131 & 0.665       & 0.060 \\
+      L2 and EF & MV1 (70)  & 0.721    & 0.060 & 0.563       & 0.038\\
+      MV1 (70)  & L2 and EF & 0.954    & 0.340 & 0.538       & 0.034\\
+      \hline
+      L2        & MV1 (60)  & 0.757    & 0.101 & 0.762       & 0.095\\
+      EF        & MV1 (60)  & 0.903    & 0.193 & 0.779       & 0.070 \\
+      L2 and EF & MV1 (60)  & 0.765    & 0.103 & 0.692       & 0.045\\
+      MV1 (60)  & L2 and EF & 0.902    & 0.250 & 0.429       & 0.015\\
+    \end{tabular}
+    \\
+    \vspace{2mm}
+
+\caption{  The acceptance of a cut on variable X given that the events have
+  already passed (sig-like) or failed (bkgd-like) a cut on variable Y.}
+  \end{table}
+  
+
+
+The third jet in the event, however, will not be tagged by the trigger.  The jet will be tagged offline, but even after the offline tagging we expect there will be many events in which the third jet is not a b-jet, but is a mistagged light or charm jet.  The exact size of this background for light jets is given by equation \ref{eq:mistag}, and a similar equation can be written for charm jets.
+
+  \begin{equation}
+	N_{mistagged\ light\ jets} = N_{light\ jets} \times \epsilon_{light\ jet\ passing\ tag}
+\end{equation} \label{eq:mistag}
+
+The light mistag efficiency $\epsilon_{light\ jet\ passing\ tag}$ is computed and calibrated by the b-tagging performance group (see the b-tagging chapter for further details), so we need to compute the composition of light or charm jets in the original sample in order to estimate their contamination after b-tagging has been applied.  
+
+The QCD background is notoriously difficult to model in MC, and we find unacceptably low statistics in MC after our analysis cuts have been applied, so we use the data-driven matrix method to compute the QCD background composition as accurately as possible.  The matrix method makes use of the known efficiencies for tagging b, c and light jets, as well as information about how many jets pass a given b-tag, to arrive at 
+
+
+
+\section{Matrix Method Strategy and Mathematics}
+
+
+There are three unknown quantities being sought when we apply the matrix method: the amount of bbb, bbc, and bbl in our sample after all cuts except the b-tag on the third jet has been applied.   Since there are three unknowns, we must write a system of three linear equations, and we must have three tag categories, which appear on the left hand side of equation \ref{eq:matrix1}.  There are three tag categories:
+	
+	\begin{itemize}
+		\item $N_{tight}$: third jet has an MV1 value that is at least as high as the 60\% efficiency working point
+		\item $N_{loose}$: third jet has MV1 value that is at or above the 80\% efficiency working point, but below the 60\% efficiency working point
+		\item $N_{anti}$: third jet has MV1 value below the 80\% working point
+	\end{itemize}
+
+All jets being examined will fall into exactly one of these categories.
+
+        \begin{equation}
+            \begin{bmatrix} \scriptstyle
+            N_{tight} \\ \scriptstyle
+            N_{loose} \\ \scriptstyle
+            N_{total}
+            \end{bmatrix}    
+            = 
+            \begin{bmatrix} \scriptstyle
+                \epsilon^b_{tight} & \scriptstyle \epsilon^c_{tight} & \scriptstyle \epsilon^l_{tight} \\  \scriptstyle
+                \epsilon^b_{loose} - \epsilon^b_{tight} & \scriptstyle \epsilon^c_{loose} - \epsilon^c_{tight} & \scriptstyle \epsilon^l_{loose} - \epsilon^l_{tight} \\      \scriptstyle
+                1.0 - \epsilon^b_{loose} & \scriptstyle 1.0 - \epsilon^c_{loose} & \scriptstyle  1.0 - \epsilon^l_{loose}
+            \end{bmatrix}
+            \begin{bmatrix} \scriptstyle
+                N^b \\ \scriptstyle
+                N^c \\ \scriptstyle
+                N^l
+            \end{bmatrix} 
+        \end{equation} \label{eq:matrix1}
+
+Once the tag counts $N_{tight}$, $N_{loose}$ and $N_{anti}$ are found in data, the equation in \ref{eq:matrix1} can be inverted to solve for the flavor composition of the sample, as shown in \ref{eq:matrix2}.
+
+
+        \begin{equation}
+            \begin{bmatrix} \scriptstyle
+                N^b \\ \scriptstyle
+                N^c \\ \scriptstyle
+                N^l
+            \end{bmatrix} 
+            = 
+            \begin{bmatrix} \scriptstyle
+                \epsilon^b_{tight} & \scriptstyle \epsilon^c_{tight} & \scriptstyle \epsilon^l_{tight} \\  \scriptstyle
+                \epsilon^b_{loose} - \epsilon^b_{tight} & \scriptstyle \epsilon^c_{loose} - \epsilon^c_{tight} & \scriptstyle \epsilon^l_{loose} - \epsilon^l_{tight} \\      \scriptstyle
+                1.0 - \epsilon^b_{loose} & \scriptstyle 1.0 - \epsilon^c_{loose} & \scriptstyle  1.0 - \epsilon^l_{loose}
+            \end{bmatrix}
+            ^{-1}
+            \begin{bmatrix} \scriptstyle
+            N_{tight} \\ \scriptstyle
+            N_{loose} \\ \scriptstyle
+            N_{total}
+            \end{bmatrix}    
+        \end{equation} \label{eq:matrix2}
+
+The b-tagging efficiencies that comprise the matrix are $p_T$ and $\eta$ dependent, so we create a 2D binning and create a different matrix and set of tag counts for each bin.  The details of the binning are explained in section \ref{sec:matrix_method_binning}.
+
+
+\section{Matrix Method Binning} \label{sec:matrix_method_binning}
+The tag counts $N_{tight}$, $N_{loose}$ and $N_{anti}$ obey Poisson statistics, and are prone to statistical fluctuations that can propagate through the method and make the flavor predictions less accurate.  As the number of events in a given bin goes up, the relative Poisson error goes down and the method generally gives better performance.  However, having bins that cover a large region in $p_T$/$\eta$ phase space comes with the complication that the b-tagging efficiencies might vary within that phase space, so assigning a single efficiency value in that bin would wash out the variation and create larger systematic errors.
+
+The matrix method binning thus must optimize the tradeoff between small statistical errors (large bins) and small efficiency-related systematic errors (small bins).  In order to probe the statistical error on the bin as a function of bin statistics, figure \ref{fig:bin_stats_errors} shows the performance (defined as (prediction-truth)/truth for a given flavor) of the matrix method versus the bin statistics.  The bin statistics is defined as the total number of events in a given bin, so it encompasses all tag categories.
+
+The results seen in Figure \ref{fig:bin_stats_errors} allow us to make several insights.  At low bin statistics, where Poisson errors are expected to have the most impact, the performance shows the most variation, indicating larger relative errors.  As the bin statistics increase, the performance converges asymptotically on 0, indicating that, for example, there is no great change in statistical errors between 400 events and 1000 events per bin.  With this in mind, and estimating that 300 events per bin is approximately where this asymptotic behavior becomes dominant, the bins should be drawn such that they each contain at least approximately 300 events.
+
+% this figure is made by executing "binning_study" in matrix_method_systematics.py
+%   the drawing is done in plotPerformanceVsStats in mms_plots.py
+%   and generally lives in h4b/python/dovers.eps
+\includegraphics[width=\textwidth]{/Users/caitlinmalone/Documents/Thesis/BackgroundEstimation/images/dovers.eps}
+\label{fig:bin_stats_errors}
+
+\section{Closure Tests}
+Closure tests are applications of the matrix method in a very controlled situation, where the expected prediction of the method is easy to predict.  Closure tests allow bugs in the method to be more readily seen, so they can be targeted for further study.  In this implementation of the matrix method, closure tests are performed by deriving the efficiencies from a sample which is then used as the input to the matrix method.  
+
+\begin{enumerate}
+	\item In a Monte Carlo QCD sample, count the number of jets of a given flavor
+	\item In the same sample, count the number of jets of a given flavor passing a b-tag cut of a given working point 
+	\item Divide (2) by (1) to derive the b-tagging efficiency for that flavor and working point in QCD MC
+	\item Repeat for all flavors and working points
+	\item Run matrix method with the QCD MC events as the inputs and the derived efficiencies as the matrix inputs
+\end{enumerate}
+
+Mathematically, since the flavor counts can be expressed in terms of the efficiencies and the tag counts, the equations of the matrix method should give perfect predictions of the flavor counts in the QCD MC sample, modulo rounding or matrix inversion errors.  
+
+The closure test method outlined above can be repeated bin-by-bin for testing closure of each bin individually.  Then the difference between the prediction and MC truth in each bin for each flavor can be plotted; the difference should be very close to zero.
+
+\section{Statistical Errors}
+
+
+
+\section{Systematic Errors}
+%b-tagging systematics in VH:  https://cds.cern.ch/record/1551231/files/ATL-COM-PHYS-2013-697.pdf
+Unlike statistical errors, the systematic errors of the matrix method do not decrease as the method is run over more jets.  In practice, the systematic errors of the method arise from deviations between the efficiencies that are used in the matrix and the true efficiencies of the input sample.  Such deviations can come from several places, most notably sample dependence and Monte Carlo vs. data differences. 
+
+The sample on which the efficiencies are derived can affect what values are computed for the efficiencies themselves.  The b-tagging efficiencies at ATLAS are computed on a $t\bar{t}$ sample, which generally does not have identical kinematics to a QCD sample.   
+
+
+\section{Performance}
+
+\section{Non-QCD Backgrounds}
+
+
+
+
