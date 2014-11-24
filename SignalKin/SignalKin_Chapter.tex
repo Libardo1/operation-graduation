@@ -6,13 +6,89 @@
 \chapter[Signal Kinematics]{Signal Kinematics}
  
 \section{Signal Jet Kinematics}
+%----------------------------------------------
+\begin{figure}[H]
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_250.pdf}
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_280.pdf}
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_310.pdf}
+    \newline
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_350.pdf}
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_400.pdf}
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_450.pdf}
+    \newline
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_500.pdf}
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_550.pdf}
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_600.pdf}
+    \newline
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_650.pdf}
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_700.pdf}
+    \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_800.pdf}
+    \label{fig:pt_higgs_and_associated_jets}
+    \caption{The \pt of the two jets from the Higgs (classified as ``first'' and ``second'' based
+    on which one has more \pt in the event), and all other $b$-tagged jet(s) in the event.
+    The peaks at about 155 GeV and 55 GeV is a result of the trigger turn-on points and
+    associated cut(s).  }
+\end{figure}
+%----------------------------------------------
+
 
 \section{Signal Jet Combinatorics}
+\label{sec:combinatorics}
+An important point when trying to reconstruct the Higgs is which 2 $b$-tagged jets (of the
+three available) should be used in reconstruction.  If the associated $b$-jet is accidentally
+selected, then the Higgs will be mis-reconstructed and our sensitivity hurt.  At the same time,
+since the mass of the Higgs is not known, tools like a kinematic fit are not available to
+help with the combinatorics.  In Figure~\ref{fig:combinatorics}, we use the MC truth
+information in the signal MC to plot how often the Higgs decays to various pairs of jets
+within the event; we find that especially for masses above 350 GeV or so it usually decays to
+the leading and second $b$-tagged jets in the event (with about a 70\% probability).
+    
+\begin{figure}[hbt]
+  \includegraphics[width=0.78\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/combinatorics.pdf}
+  \label{fig:combinatorics}
+  \caption{The percentage probability of the Higgs decaying to a given pair of $b$-tagged jets in signal MC,
+    as a function of the generated Higgs mass.  The assumption being checked is that the majority of
+    the time, the Higgs decays to the leading two $b$-tagged jets (blue line), so that reconstructing with these jets
+    will yield the correct combinatorics.  That assumption is correct 60-70\% of the time for $m_A>$350 GeV,
+    with the remaining 30-40\% of events being spread out over many other combinations of jets.}
+\end{figure}
+                                                                                                                                    
+                                                                                                                                    
+If we require only that the leading 2 $b$-tagged jets be used in reconstruction, there can                                          
+still be events in our sample where the leading 2 $b$-tagged jets in the event are not                                              
+the leading 2 jets overall--for example, there can be a very hard light jet, and the $b$-tagged                                     
+jets are the second and third jets in $p_T$.  When we introduce a cut that eliminates these events,                                 
+by requiring that the leading 2 jets in the event be $b$-tagged, both the signal to background                                      
+ratio improves (this cut is about 25\% efficient in background, and over 90\% efficient                                             
+in signal) and the mass resolution is improved in signal as the events that rejected have                                           
+hard FSR present and the reconstructed $m_{bb}$ is far from the generated $m_H$.    
+
+
+
 
 \section{Mass Resolution}
 Once the trigger and all the analysis cuts have been applied, we take the leading 2 jets in the event (which are also the leading 2 $b$-tagged jets, since we place a cut requiring that the leading 2 jets in the event be $b$-tagged) and reconstruct their combined invariant mass--if they came from a decaying particle, the reconstructed mass should be the mass of the parent particle.  On the other hand, if the leading 2 jets come from continuum QCD processes, there should be no resonance present, so we look for the presence of a resonance peak on top of a decaying power-law background.
 
-The sensitivity of this analysis depends on the signal cross section and efficiency, the background cross section and efficiency, but also the signal resolution.  The broader the signal mass peak, the more difficult it is to distinguish from the background.  
+
+A consistent refrain throughout this analysis is the challenge of poor mass resolution when reconstructing
+the signal, especially in the low-mass tail for high values of $m_A$. The issue is important because a poorly-reconstructed (very wide)
+signal peak can easily be confused with a background normalization error, which makes the analysis less
+sensitive to small signals. This section will summarize the efforts to make the mass resolution as good
+as possible; some tactics did produce an improvement while others did not.
+
+\begin{itemize}
+    \item REWRITE THIS LIST TO MATCH UP WITH THESIS TOPICS/ORDER
+    \item require that the leading 2 jets in the event be b-tagged (improved resolution)
+    \item when b-tagged jets have one or more jets nearby, include those jets in the mbb reconstruction (does
+not improve resolution)
+    \item when a hard ($>$80 GeV) untagged jet is present in an event, include it in the mbb reconstruction
+(does not improve resolution)
+\end{itemize}
+However, the mass resolution remains an issue. The problem is significantly worse at higher masses;
+to some extent, this is inevitable because the inherent width of the Higgs resonance increases with mA
+(quantification of this ect can be found in Table 5. However, the inherent width goes up to about 12
+GeV (at mA=800 GeV), while the width of the reconstructed mass peak goes up to several hundred GeV.
+With this in mind, it’s clear that other ects drive the mass resolution. Thishe sensitivity of this analysis depends on the signal cross section and efficiency, the background cross section and efficiency, but also the signal resolution.  The broader the signal mass peak, the more difficult it is to distinguish from the background.  
 
 Unfortunately, the mass resolution significantly degrades as a $m_A$ grows.  Some of this is due to the inherent width growing as $m_A$ grows, as can be seen in Table~\ref{tab:sig_mc_parameters}.  
 
@@ -56,31 +132,6 @@ The mass resolution also improves when we require that the leading two jets in t
 %----------------------------------------------
 
 
-%----------------------------------------------
-\begin{figure}
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_250.pdf}
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_280.pdf}
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_310.pdf}
-%    \newline
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_350.pdf}
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_400.pdf}
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_450.pdf}
-%    \newline
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_500.pdf}
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_550.pdf}
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_600.pdf}
-%    \newline
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_650.pdf}
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_700.pdf}
-    \includegraphics[width=0.33\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_800.pdf}
-    \label{fig:pt_higgs_and_associated_jets}
-    \caption{The \pt of the two jets from the Higgs (classified as ``first'' and ``second'' based
-    on which one has more \pt in the event), and all other $b$-tagged jet(s) in the event.
-    The peaks at about 155 GeV and 55 GeV is a result of the trigger turn-on points and
-    associated cut(s).  }
-\end{figure}
-%----------------------------------------------
-
 
 
 
@@ -88,6 +139,26 @@ The mass resolution also improves when we require that the leading two jets in t
 \subsection{Validation of Qualitative Shape Differences}
 \subsection{Jet Modifications}
 \subsection{Topology-Based Energy Recovery Algorithm}
+ One hypothesis for the distribution of the FSR is that, for the high-\pt jets that result from the Higgs
+ daughter b-quarks, they might radiate away partons that are hard enough to be clustered into their own
+ jets (\pt$>$25 GeV) but end up nearby the leading jets in the detector (where nearby is defined as within
+ dR$<$1.0). In other words, we look for a topology where there are one or more jets near one of the leading
+2 jets, and in cases where such jets are found, we add them back in when reconstructing mbb.
+ This is found to have little ect on the mass resolution. In practice, only about 20\% of events
+ have the topology where additional jet(s) are found near the leading 2 jets, and the mass resolution
+ looks virtually unchanged before and after adding this correction. This suggests a couple of possible
+ conditions: either the FSR is too diffuse and/or low-energy to be clustered into jets, and/or it is farther
+ than the dR $<$ 1.0 search zone allows for recovery.
+
+
 \subsection{\pt-Based Energy Recovery Algorithm}
- 
+The \pt-based energy recovery algorithm is based on the idea that perhaps the FSR takes the form of one
+ or two very high-energy radiated particles that can end up far away from the leading 2 jets but can be
+ identified by their high pT . In practice, what this means is looking for events with a non-b-tagged jet that
+ has \pt$>$80 GeV, and when one is found, adding this back in when reconstructing mbb.
+ Unfortunately the ect on the mass resolution is negligible. A few events move out of the low-mass
+ tail, and the high-mass tail gets a few more events as jets can be mistakenly added back in even when no
+ FSR was lost.
+
+\subsection{$n_{jets}$ Dependence} 
 

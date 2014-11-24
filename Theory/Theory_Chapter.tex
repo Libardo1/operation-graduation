@@ -125,7 +125,8 @@ Taken at face value, SUSY requires that the supersymmetric partners have the sam
 SUSY has additional motivations, however.  Another appealing feature of SUSY is that it adjusts the coupling constants of the three SM forces.  At very high energies the coupling constants come close to the same value, but do not quite match up, a theoretically unsatisfying fact that SUSY addresses.  When SUSY enters the picture, the running values of the coupling constants change such that they unify at a high energy scale.
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/FeynmanDiagrams/3_couplings.pdf}
+	\includegraphics[width=\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/figures/kazakov_coupling.pdf}
+    \caption{The coupling constants for the three fundamental forces of the Standard Model, as a function of energy.  On the left, the coupling constants almost unify (but don't quite meet) in the SM-only framework, whereas on the right there is unification when SUSY effects are allowed to enter the picture \cite{Kazakov}. }
 	\label{fig:couplings}
 \end{figure}
 
@@ -175,10 +176,10 @@ The $H/A$ search being performed in this thesis has two important experimental f
 \end{itemize}
 
 \begin{figure}[H]
-	\caption{Feynman diagrams for leading-order production of $h$ in association with $b$-quarks.  }
 	\includegraphics[width=0.55\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/FeynmanDiagrams/bbH_FeynmanDiagrams.pdf}		
 	\includegraphics[width=0.55\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/FeynmanDiagrams/bH_FeynmanDiagrams.pdf}
 	\label{fig:fd}
+	\caption{Feynman diagrams for leading-order production of $h$ in association with $b$-quarks.  }
 \end{figure}
 
 Technically speaking, there is not a Feynman diagram for $H/A$ production that occurs in association with exactly one $b$-quark; even in the second set of diagrams in Figure~\ref{fig:fd} there is a second $b$-quark that comes from the PDF (parton distribution function) of the second proton.  In practice, the fourth $b$-quark tends to be both soft in \pt and far forward in the detector, making it difficult to see experimentally.  For that reason, we only require the presence of one $b$-quark in addition to the two $b$-quarks coming from the $H/A$ decay, which makes for a $bbb$ final state.
@@ -203,8 +204,8 @@ While the behavior of the Higgs system can be complicated to fully map out, ther
 %-------------------------------------------------
 \begin{figure}
 	\centering
-	\caption{The production cross section of $A$, $H$ and $h$ as a function of $m_A$ for several different values of $tan\beta$. \label{fig:xsec_vs_mass} }
 	\includegraphics[width=0.8\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/figures/mssm_xsec/AH_xsec_vs_mass.pdf}
+	\caption{The production cross section of $A$, $H$ and $h$ as a function of $m_A$ for several different values of $tan\beta$. \label{fig:xsec_vs_mass} }
 \end{figure}
 
 
@@ -212,15 +213,23 @@ While the behavior of the Higgs system can be complicated to fully map out, ther
 
 \begin{figure}
 	\centering
-	\caption{The branching ratio to $b\bar{b}$ of $A$, $H$ and $h$ as a function of $m_A$ for several different values of $tan\beta$. \label{fig:br_vs_mass} }
 	\includegraphics[width=0.7\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/figures/mssm_xsec/AH_br_vs_mass.pdf}
+	\caption{The branching ratio to $b\bar{b}$ of $A$, $H$ and $h$ as a function of $m_A$ for several different values of $tan\beta$. \label{fig:br_vs_mass} }
 \end{figure}
 
 
 \begin{figure}
 	\centering
-	\caption{The inherent width of $A$, $H$, and $h$ as a function of $m_A$ for tan$\beta$=20. \label{fig:width}}
 	\includegraphics[width=0.7\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/figures/gamma.pdf}
+	\caption{The inherent width of $A$, $H$, and $h$ as a function of $m_A$ for tan$\beta$=20. \label{fig:width}}
+\end{figure}
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/figures/TB_gamma.pdf}
+	\caption{The inherent width of $A$, $H$, and $h$ as a function of tan$\beta$ when $m_A$=500 GeV. \label{fig:TB_width}}
 \end{figure}
 %-------------------------------------------------
 
@@ -228,15 +237,15 @@ While the behavior of the Higgs system can be complicated to fully map out, ther
 
 \begin{figure}
 	\centering
-	\caption{The favored and excluded region in $m_A/tan\beta$ in the $m_h^{max}$ scenario \cite{Carena-2}. \label{fig:mh_max}}
 	\includegraphics[width=0.7\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/figures/mh_max.pdf}
+	\caption{The favored and excluded region in $m_A/tan\beta$ in the $m_h^{max}$ scenario \cite{Carena-2}. \label{fig:mh_max}}
 \end{figure}
 
 
 \begin{figure}
 	\centering
-	\caption{The favored and excluded region in $m_A/tan\beta$ in the $m_h^{mod}$ scenario \cite{Carena-2}. \label{fig:mh_mod}}
 	\includegraphics[width=0.7\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/figures/mh_mod.pdf}
+	\caption{The favored and excluded region in $m_A/tan\beta$ in the $m_h^{mod}$ scenario \cite{Carena-2}. \label{fig:mh_mod}}
 \end{figure}
 
 
@@ -281,7 +290,7 @@ It is the experimentalist's job to understand what all this theoretical physics 
 
 First, as we've implied throughout this section, many of the particles for which a physicist searches cannot be seen directly--they live for a fraction of a second, and then decay into other particles.  Those daughter particles often decay themselves, and so on into a  multi-step decay chain.  Only the particles from the last stage in this chain actually get detected, so part of the physicist's job is to reconstruct the original particle(s) from the daughter particles.  Once the daughter particles are identified, all that is needed to reconstruct the parent particle is the transverse momentum (see below), energy, polar angle, and azimuthal angle.  These components go into a Lorentz 4-vector for each particle, and then the Lorentz-vectors can be added together in a relativistically invariant way to get the mass and flight direction of the parent.
 
-Second, certain types of particles leave distinctive signatures.  One important example is that particles associated with QCD, quarks and gluons, are subject to the laws of QCD confinement.  Once they are produced or excited in the hard scatter, quarks and gluons hadronize and shower.  A spray of particles, largely pions, show up in the detector in the general direction of the original parent quark or gluon--if all the shower particles could be collected, they could be recombined into the parent particle.  These showers of particles are called jets, and are often named after the parent particle, such as $b$-jets, light jets and gluon jets.  The topic of jet reconstruction is detailed further in ~\ref{}.  Photons and electrons shower as well, but they generate much narrower electromagnetic showers that are easy to identify and reconstruct, when compared to most QCD showers.  Muons have the cleanest signature of all; because of their large mass, they don't decay before exiting the detector, so they generally make a single charged track that is quite distinctive in the dedicated muon layers of the detector.
+Second, certain types of particles leave distinctive signatures.  One important example is that particles associated with QCD, quarks and gluons, are subject to the laws of QCD confinement.  Once they are produced or excited in the hard scatter, quarks and gluons hadronize and shower.  A spray of particles, largely pions, show up in the detector in the general direction of the original parent quark or gluon--if all the shower particles could be collected, they could be recombined into the parent particle.  These showers of particles are called jets, and are often named after the parent particle, such as $b$-jets, light jets and gluon jets.  The topic of jet reconstruction is detailed further in ~\ref{sec:jet_reco}.  Photons and electrons shower as well, but they generate much narrower electromagnetic showers that are easy to identify and reconstruct, when compared to most QCD showers.  Muons have the cleanest signature of all; because of their large mass, they don't decay before exiting the detector, so they generally make a single charged track that is quite distinctive in the dedicated muon layers of the detector.
 
 A third important feature of particles as they appear in the detector is their $p_T$, or transverse momentum.  Since the initial state of each collision involves two protons, which are composite particles, it is impossible to know the exact longitudinal momentum of two quarks when they collide.  However, the transverse momentum is zero, so in the final state, the transverse momentum must also sum to zero.  When heavy particles are created and then decay, or have other particles deflecting off of them, the $p_T$ of the resulting particles can be tens to hundreds of GeV, which creates a striking signal in the detector and provides an experiment handle when trying to understand the event.
 
