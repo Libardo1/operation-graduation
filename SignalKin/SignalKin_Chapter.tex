@@ -6,6 +6,21 @@
 \chapter[Signal Kinematics]{Signal Kinematics}
  
 \section{Signal Jet Kinematics}
+
+Once the trigger and cuts have been applied to the data, the events that remain can be signal, background, or a mixture of the two.  
+It then falls to understanding the kinematics of the signal and background to look for features that can
+provide enough discrimination to detect the presence of the signal.  In this case, that means reconstructing
+the invariant mass of the leading 2 jets in the event, which will create a smoothly falling power
+law distribution in QCD background but a resonance structure in signal.  The kinematics of the signal
+distribution then come into play in a few major ways
+\begin{itemize}
+    \item Signal Jet \pt Distributions:  By examining the \pt distributions of the Higgs daughters, and the associated $b$-jet(s), we can get a better understanding of what might be optimal jet \pt cuts for future iterationsof this analysis 
+    \item Signal Jet Combinatorics: A perfectly good signal event can be inadvertently turned into a type of background if the associated $b$-jet is chosen when reconstructing the Higgs; unfortunately these combinatorial mistakes can arise easily when there are 3 $b$-jets but only two jets being used for reconstruction
+    \item Mass Resolution: The Higgs resonance width is $m_A$/tan$\beta$ dependent, with inherent widths
+up to a few tens of GeV; however, if energy is lost to FSR, the resonance can be much wider and this makes
+the signal much more difficult to distinguish from the background
+\end{itemize}
+
 %----------------------------------------------
 \begin{figure}[H]
     \includegraphics[width=0.3\textwidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/jet_pt_compare_bAbb_250.pdf}
@@ -113,7 +128,7 @@ The mass resolution also improves when we require that the leading two jets in t
     is dominated by combinatorics only.\label{tab:signal_mass_RMS_compare}   }
   \begin{tabular}{ccccc}
      \hline \hline
-     generated mass (GeV) & \multicolumn{2}{c}{require $b$-tags on leading 2 jets (GeV)} & \multicolumn{2}{c}{no $b$-tag required on leading 2 jets (GeV)}  \\
+     mass (GeV) & \multicolumn{2}{c}{$b$-tags on leading jets (GeV)} & \multicolumn{2}{c}{no $b$-tags on leading jets (GeV)}  \\
         & left & right & left & right \\ \hline
      250 & 13.5 & 89.2 & 36.7 & 87.7 \\
      280 & 19.2 & 68.8 & 27.5 & 71.4 \\
@@ -137,6 +152,26 @@ The mass resolution also improves when we require that the leading two jets in t
 
 
 \subsection{Validation of Qualitative Shape Differences}
+The first question to ask is whether the high-mass mbb distributions are qualitatively lower-resolution than
+the low-mass distributions–in other words, whether the ratio of the width to the generated mass changes
+as a function of mass. We probe this by “normalizing” the signal MC mass, dividing each entry in the mbb
+histogram by the nominal mass which was generated; for example, a signal MC event that was generated
+with a Higgs mass of 350 GeV and reconstructed to have 300 GeV would be entered into the histogram
+as (300/350). Repeating this normalization process for several mass points allows us to compare the
+shapes for different $m_A$ values.
+We find that even when the mbb distributions are renormalized, the high-mass distributions remain
+wider than the low-mass distributions. That points toward FSR as a likely culprit, and in the following
+sections we will detail several attempts at FSR recovery.
+\begin{figure}[hbt]
+  \includegraphics[width=0.78\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/mbb_normalized_signal.pdf}
+  \label{fig:mbb_norm}
+  \caption{The normalized $m_{bb}$ distributions for several signal mass points}
+\end{figure}
+
+
+
+
+
 \subsection{Jet Modifications}
 \subsection{Topology-Based Energy Recovery Algorithm}
  One hypothesis for the distribution of the FSR is that, for the high-\pt jets that result from the Higgs
@@ -148,7 +183,18 @@ The mass resolution also improves when we require that the leading two jets in t
  have the topology where additional jet(s) are found near the leading 2 jets, and the mass resolution
  looks virtually unchanged before and after adding this correction. This suggests a couple of possible
  conditions: either the FSR is too diffuse and/or low-energy to be clustered into jets, and/or it is farther
- than the dR $<$ 1.0 search zone allows for recovery.
+ than the dR $<$ 1.0 search zone allows for recovery. 
+    
+\begin{figure}[hbt]
+  \includegraphics[width=0.45\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/fsr_recovery_bAbb_250.pdf}
+  \includegraphics[width=0.45\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/fsr_recovery_bAbb_400.pdf}
+\newline
+  \includegraphics[width=0.45\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/fsr_recovery_bAbb_550.pdf}
+  \includegraphics[width=0.45\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/fsr_recovery_bAbb_800.pdf}
+  \label{fig:fsr_recovery}
+  \caption{The $m_{bb}$ distributions out-of-the-box, and after attempting the $p_T$-based and topology-based FSR recovery algorithms, for several signal mass points.}
+\end{figure}
+
 
 
 \subsection{\pt-Based Energy Recovery Algorithm}
@@ -161,4 +207,16 @@ The \pt-based energy recovery algorithm is based on the idea that perhaps the FS
  FSR was lost.
 
 \subsection{$n_{jets}$ Dependence} 
-
+\begin{figure}[hbt]
+  \includegraphics[width=0.45\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/fsr_recovery_bAbb_250.pdf}
+  \includegraphics[width=0.45\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/fsr_recovery_bAbb_400.pdf}
+\newline
+  \includegraphics[width=0.45\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/fsr_recovery_bAbb_550.pdf}
+  \includegraphics[width=0.45\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/fsr_recovery_bAbb_800.pdf}
+%  \includegraphics[width=0.3\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/mbb_bbb_bbloose_bbanti_3jets_r200-215.pdf}
+%  \includegraphics[width=0.3\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/mbb_bbb_bbloose_bbanti_4jets_r200-215.pdf}
+%  \includegraphics[width=0.3\linewidth]{/Users/caitlinmalone/Documents/Thesis/SignalKin/mbb_bbb_bbloose_bbanti_5jets_r200-215.pdf}
+  \label{fig:mbb_njets_signal}
+  \caption{The $m_{bb}$ distributions at a few representative mass points in signal MC, as a function of the number of jets in the event.  
+    The 5+ jets bin contains all events with 5 jets or more.}
+\end{figure}
