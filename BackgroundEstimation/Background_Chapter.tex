@@ -17,6 +17,7 @@ to validating the background estimation and providing uncertainties for especial
 of the background.  
 
 \section{Background Estimation Strategy}
+\label{sec:background_strategy}
 As QCD is the dominant background in this analysis, it is important to understand
 what flavors of QCD jets comprise the population of events that survive the cut
 chain.  In order to do this, we apply the trigger and all cuts up to (but not including)
@@ -27,10 +28,10 @@ jet in the event can have any $b$-tag value.
  The signal and background are then split into 3 exclusive regions, defined as follows:
 \begin{itemize}
     \item bbb: one or more jets (in addition to the two triple-tagged jets) passing a tight (60\% working point)
- MV1 cut–in ect, the full signal selection criteria
+ MV1 cut–-in effect, the full signal selection criteria
     \item bbloose: events failing the bbb classification but which have one or more jets passing a loose (80\%
  working point) MV1 cut
-    \item bbanti: events that have no jets passing an 80\% MV1 cut–effectively a veto on the presence of any
+    \item bbanti: events that have no jets passing an 80\% MV1 cut-–effectively a veto on the presence of any
  b-tagged jets other than those firing the trigger
 \end{itemize}
 
@@ -57,17 +58,18 @@ This assumption is validated in several ways, which are detailed in this section
  in data for the bbb, bbloose and bbanti distributions tag bins; we would expect these to have different
  admixtures of bottom, charm and light jets in the third jet and so differences in these $m_{bb}$ distributions
  would hint at our assumption being violated. There are 12,308 bbb events, 9,049 bbloose, and 76,123
- bbanti events in 10\% of the 2012 data. The three mbb distributions are plotted in Figure~\ref{fig:mbb_bbb_bbloose_bbanti_data}, where the
+ bbanti events in 10\% of the 2012 data. The three mbb distributions are plotted in Figure~\ref{fig:mbb_data}, where the
  out-of-the-box distributions are shown on the left and the distributions are normalized to the same area
- on the right. No shape differences are apparent. Figure~\ref{fig:mbb_bbb_bbloose_bbanti_data} shows the distributions normalized to the
+ on the right. No shape differences are apparent. Figure~\ref{fig:mbb_data} shows the distributions normalized to the
  same area and with a logarithmic y scale for easy shape comparison; no major shape differences appear
  there either.
 
 \begin{figure}[hbt]
   \includegraphics[width=0.5\linewidth]{/Users/caitlinmalone/Documents/Thesis/BackgroundEstimation/images/mbb_bbb_bbloose_bbanti_r200-215.pdf}
   \includegraphics[width=0.5\linewidth]{/Users/caitlinmalone/Documents/Thesis/BackgroundEstimation/images/mbb_bbb_bbloose_bbanti_r200-215_normalized.pdf}
-  \label{fig:mbb_bbb_bbloose_bbanti_data}
-  \caption{$m_{bb}$ distributions in data, based on the $b$-tag status of the third jet.}
+%  \label{fig:mbb_data}
+  \caption{$m_{bb}$ distributions in data, based on the $b$-tag status of the third jet. 
+    \label{fig:mbb_data} }
 \end{figure}
 
 
@@ -84,7 +86,7 @@ hard scatter and/or gluon splitting
 
 
 The goal of the matrix method is to disentangle these backgrounds, and allow us to describe the shape of the $m_{bb}$ distribution from $bbb$ events
-in a data-driven way.In what follows, we adopt the convention where lowercase letters indicate flavors
+in a data-driven way.  In what follows, we adopt the convention where lowercase letters indicate flavors
 that are ``known,'' either via assumption or via truth-matching using MC.  Thus $bbb$ refers to an event where the true flavor of the three jets is bottom.  Uppercase letters,
 on the other hand, denote a presumed flavor, most likely because either a jet has been $b$-tagged or reweighted by the matrix method.  An event which has a third jet
 that is $b$-tagged (but could still be a mistagged light or charm jet) would be
@@ -103,12 +105,12 @@ us to use a data-driven quantity, the MV1 distribution of the third jet
 solve for the (experimentally inaccessible) distribution of truth flavor in data events.
 
 \subsubsection{Mathematics of the Matrix Method}
-There are three unknown quantities being sought when we apply the matrix method: the amount of bbb, bbc, and bbl in our sample after all cuts except the b-tag on the third jet has been applied.   Since there are three unknowns, we must write a system of three linear equations, and we must have three tag categories, which appear on the left hand side of equation \ref{eq:matrix1}.  There are three tag categories:
+There are three unknown quantities being sought when we apply the matrix method: the amount of $bbB$, $bbC$, and $bbL$ in our sample after all cuts except the b-tag on the third jet has been applied.   Since there are three unknowns, we must write a system of three linear equations, and we must have three tag categories, which appear on the left hand side of equation \ref{eq:matrix1}.  There are three tag categories:
 	
 	\begin{itemize}
-		\item $N_{tight}$: third jet has an MV1 value that is at least as high as the 60\% efficiency working point
-		\item $N_{loose}$: third jet has MV1 value that is at or above the 80\% efficiency working point, but below the 60\% efficiency working point
-		\item $N_{anti}$: third jet has MV1 value below the 80\% working point
+		\item $N_{tight}$: third jet has an MV1 value that is at least as high as the 60\% efficiency working point (the same as the bbb category introduced in Section~\ref{sec:background_strategy})
+		\item $N_{loose}$: third jet has MV1 value that is at or above the 80\% efficiency working point, but below the 60\% efficiency working point (same as bbloose)
+		\item $N_{anti}$: third jet has MV1 value below the 80\% working point (same as bbanti)
 	\end{itemize}
 
 All jets being examined will fall into exactly one of these categories.
@@ -129,8 +131,9 @@ All jets being examined will fall into exactly one of these categories.
                 N^b \\ \scriptstyle
                 N^c \\ \scriptstyle
                 N^l
-            \end{bmatrix} 
-        \end{equation} \label{eq:matrix1}
+            \end{bmatrix}
+        \label{eq:matrix1} 
+        \end{equation} %\label{eq:matrix1}
 
 Once the tag counts $N_{tight}$, $N_{loose}$ and $N_{anti}$ are found in data, the equation in \ref{eq:matrix1} can be inverted to solve for the flavor composition of the sample, as shown in \ref{eq:matrix2}.
 
@@ -152,10 +155,66 @@ Once the tag counts $N_{tight}$, $N_{loose}$ and $N_{anti}$ are found in data, t
             N_{tight} \\ \scriptstyle
             N_{loose} \\ \scriptstyle
             N_{total}
-            \end{bmatrix}    
-        \end{equation} \label{eq:matrix2}
+            \end{bmatrix}  
+        \label{eq:matrix2} 
+        \end{equation} %\label{eq:matrix2}
 
-The b-tagging efficiencies that comprise the matrix are $p_T$ and $\eta$ dependent, so we create a 2D binning and create a different matrix and set of tag counts for each bin.  The details of the binning are explained in section \ref{sec:matrix_method_binning}.
+The b-tagging efficiencies that comprise the matrix are $p_T$ and $\eta$ dependent, so we create a 2D binning and create a different matrix and set of tag counts for each bin.  
+
+\subsection{Matrix Method Predictions in Data}
+
+%\begin{deluxetable}{cccc}
+%\tablewidth{0pc}
+%\tablecolumns{4}
+%\tablecaption{Matrix method predictions for the flavor contents of the QCD background\label{tab:mm_predictions}}
+%\tablehead{
+%\colhead{jets in event} & \colhead{b prediction} & \colhead{c prediction} & \colhead{light prediction}  }
+%\startdata
+%inclusive & 0.046 & 0.11 & 0.84\\
+%3-jet & 0.039 & 0.11 & 0.85\\
+%4-jet & 0.046 & 0.10 & 0.85\\
+%5-jet & 0.049 & 0.11 & 0.84\\
+%\enddata
+%\end{deluxetable}
+
+
+\subsection{Matrix Method Validation and Errors}
+\subsubsection{Validation Studies}
+Two aspects of the matrix method result must be validated: the overall number of $B$, $C$ and light jets predicted (i.e. the normalization) and the shape of the $m_{bb}$ distribution when reweighted by the matrix method (i.e. that any shape differences in the $m_{bb}$ distributions based on the flavor of the third jet must propagate through in the matrix method predictions).  Toy MC provides a laboratory for performing these checks.  
+
+First, we generate a Toy MC sample where the fraction of $b$, $c$, and light 
+jets is known exactly, then these samples are sent through the analysis framework for $b$-tagging and 
+then the counts in those $b$-tag categories used to predict the flavors of the original sample; 
+the input and output flavor normalizations match to within a few percent (the difference results from statistical fluctuations, 
+since the kinematic distributions of the Toy MC are allowed to have random fluctuatioons that can then propagate through to the final result).  
+%----------------------------------------------
+\begin{table}
+\centering
+\caption{Results of the matrix method normalization tests when run on a Toy MC sample of 
+    900,000 total events.  The matrix method is run with the same efficiencies that
+    are used to generate the toy MC samples, so the errors are statistical only.
+    \label{tab:mm_toy_mc}   }
+  \begin{tabular}{cccc}
+     \hline \hline
+     Flavor & Truth Events & MM Predicted Events & \% Difference  \\ \hline
+     b   & 45,000 & 45,602 & +1.3\% \\
+     c   & 90,000 & 86,938 & -3.4\% \\
+     light & 765,000 & 767,458 & +0.3\% \\
+     \hline     \end{tabular}
+\end{table}
+%----------------------------------------------
+
+A second task for the Toy MC studies is to validate the $m_{bb}$ shapes.  Even if the normalization is perfect coming out of the matrix method, a major concern is the shape of the $m_{bb}$ distribution based on the truth flavor of the third jet.  The shape prediction is validated in Toy MC, by changing the shape of the $m_{bb}$ distribution based on the truth flavor of the third jet and checking to see if the shape differences propagate through.  
+
+
+
+\subsubsection{Statistical and Systematic Errors}
+\begin{itemize}
+    \item Binning studies to quantify statistical errors that can result from having a fine \pt-$\eta$ binning in the $b$-tagging efficiencies
+    \item Systematics associated with the $b$-tagging scale factors
+\end{itemize}
+
+
 
 
 \section{Validation of Background Estimation in Monte Carlo}
