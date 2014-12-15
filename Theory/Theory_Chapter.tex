@@ -68,7 +68,7 @@ All of the quarks and leptons are fermions, meaning they have half-integer spin.
 
 The forces between fermions are carried by bosons, which are integer spin particles.  There are three forces described in the Standard Model: electromagnetic, weak, and strong.  The electromagnetic force is carried by the photon and describes, for example, electric forces between particles.  Photons are massless and as a result, the electromagnetic field can extend infinitely far.  The weak force is carried by W$^+$, W$^-$ and Z$^0$ bosons.  These particles are massive, which means that they are limited in how far they can travel and thus the weak force is confined to distance scales approximately the size of an atomic nucleus.  The weak force is involved when one type of fermion changes into another type of fermion, for example, when a neutron decays or a nucleus fissions.  The strong force is carried by gluons, which are massless but because of confinement, the strong force is restricted to the nuclear scale.  The strong force is responsible for holding quarks together into protons, neutrons and other hadrons. Last, there is the gravitational force, which we will neglect as it is many orders of magnitude weaker than the other forces under discussion.
 
-The electromagnetic and weak forces, as it turns out, can be unified into a single ``electroweak'' force, as discovered in the middle part of the 20th century \cite{Weinberg}.  The vector bosons acquire mass, which is known as electroweak symmetry breaking, via the Higgs mechanism.  The Higgs mechanism, and the particle which conveys the Higgs field (the Higgs boson), are explained in more detail in further sections.  Further unification of forces, between the electroweak and strong forces, remains an unfinished project in physics but a topic of much research.  
+The electromagnetic and weak forces, as it turns out, can be unified into a single ``electroweak'' force, as discovered in the middle part of the 20th century \cite{Weinberg}.  The vector bosons acquire mass, which is known as electroweak symmetry breaking, via the Higgs mechanism \cite{Higgs-1} \cite{Englert_Brout} \cite{Guralink_Hagen_Kibble}.  The Higgs mechanism, and the particle which conveys the Higgs field (the Higgs boson), are explained in more detail in further sections.  Further unification of forces, between the electroweak and strong forces, remains an unfinished project in physics but a topic of much research.  
 
 \section{Electroweak Symmetry Breaking and the Higgs Mechanism in the Standard Model}
 The Standard Model is defined by its Lagrangian, which is a mathematical formula that encodes all the Standard Model particles and their interactions.  The SM Lagrangian was built piece by piece over many decades, starting with classical field theory and later being generalized to account for relativity, electromagnetism, the strong and weak forces, and the unification of the weak and EM forces (this is not an exhaustive list of the features of the SM Lagrangian, of course).  
@@ -81,7 +81,7 @@ Different terms in the SM Lagrangian account for different types of particles.  
 
 (Similarly, the Klein-Gordon Lagrangian is used for spin-0 particles, and the Proca Lagrangian for spin-1.)  When the Dirac Lagrangian is plugged into the Euler-Lagrange equations, the equation that results is a quantum field theory equation describing a particle of mass $m$ and spin $\frac{1}{2}$.  
 
-One problem with simply using the Klein-Gordon Lagrangian as-is arises because the Klein-Gordon Lagrangian is not invariant under local phase transformations.  In other words, if the field $\psi$ is multiplied by an exponential term with a space-dependent (``local'') phase, $\psi \rightarrow e^{i\theta(x)} \psi$, then plugging the new $\psi$ into the Euler-Lagrange equations will result in an extra term because of the derivative of $\theta(x)$.  As written, the Dirac Lagrangian is not invariant under local phase transformations.  The fix for this problem is to replace the ordinary derivative with the covariant derivative:
+One problem with simply using the Klein-Gordon Lagrangian as-is arises because the Klein-Gordon Lagrangian is not invariant under local phase transformations.  In other words, if the field $\psi$ is multiplied by an exponential term with a space-dependent (``local'') phase, $\psi \rightarrow e^{i\theta(x)} \psi$, then plugging the new $\psi$ into the Euler-Lagrange equations will result in an extra term because of the derivative of $\theta(x)$.  This is what we mean by saying that as it is written, the Dirac Lagrangian is not invariant under local phase transformations.  The fix for this problem is to replace the ordinary derivative with the covariant derivative:
 
 \begin{equation}
 \mathscr{D}_\mu \equiv \partial_\mu + i\frac{q}{\hbar c}A_\mu
@@ -101,7 +101,14 @@ The Higgs mechanism is the powerful combination of local gauge invariance and sp
 \section{Supersymmetry}
 
 \begin{centering}
-\includegraphics[width=0.6\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/FeynmanDiagrams/Higgs_mass_corrections.pdf}\label{fig:higgs_mass_corrections}
+    \begin{figure}
+    \includegraphics[width=0.6\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/FeynmanDiagrams/Higgs_mass_corrections.pdf}
+    \caption{The radiative corrections to the Higgs mass can be seen
+    in these Feynman diagrams; one problem with the bare Standard Model
+    is that corrections such as these need to cancel to an incredible
+    degree of precision to allow the Higgs to have a mass of 126 GeV.
+    \label{fig:higgs_mass_corrections}}
+    \end{figure}
 \end{centering}
 
 Despite its robustness in the face of experimental scrutiny, the Standard Model has several important shortcomings.  One of the most important is the hierarchy problem, which refers to the quadratic divergence of the Higgs mass via self-coupling.  On the one hand, it is intuitive (and now experimentally verified) that the Higgs mass is of the same order of magnitude as the masses of the electroweak bosons.  On the other hand, the Higgs can couple to itself via fermion-antifermion pairs, which introduces correction terms to the Higgs mass.  For example, the diagram shown in Figure~\ref{fig:higgs_mass_corrections} (a) contributes the following correction term to the mass:
@@ -164,7 +171,7 @@ There is one additional complication to the 2HDM formalism.  In its most general
 
 
 
-The 2HDM models imply the existence not of one Higgs boson, but of five.  The 5 particles include two CP-even particles, h and H, one CP-odd particle A, and two electrically charged particles $H^\pm$.   This analysis is a search for both the CP-even $H$ and the CP-odd $A$--the CP-even $h$ is assumed to be the Higgs particle found at 126 GeV \cite{PDG-Review}.  The masses of $H/A$ are not known.  While there are at least 19 free parameters in the MSSM, the SUSY Higgs sector is (mostly) governed by only two: $m_A$ and $tan(\beta)$.  As a direct result of this, most interpretations of limits (or signal) are presented in terms of the $m_A$/tan$\beta$ phase space favored or excluded.  
+The 2HDM models imply the existence not of one Higgs boson, but of five.  The 5 particles include two CP-even particles, h and H, one CP-odd particle A, and two electrically charged particles $H^\pm$.   This analysis is a search for both the CP-even $H$ and the CP-odd $A$--the CP-even $h$ is assumed to be the Higgs particle found at 126 GeV \cite{PDG-Review}.  The masses of $H/A$ are not known.  While there are at least 19 free parameters in the MSSM, the SUSY Higgs sector is (at first order) governed by only two: $m_A$ and $tan(\beta)$.  As a direct result of this, most interpretations of limits (or signal) are presented in terms of the $m_A$/tan$\beta$ phase space favored or excluded.  
 
 
 \subsection{H/A Searches in the $bbb$ Final State}
@@ -178,8 +185,7 @@ The $H/A$ search being performed in this thesis has two important experimental f
 \begin{figure}[H]
 	\includegraphics[width=0.55\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/FeynmanDiagrams/bbH_FeynmanDiagrams.pdf}		
 	\includegraphics[width=0.55\textwidth]{/Users/caitlinmalone/Documents/Thesis/Theory/FeynmanDiagrams/bH_FeynmanDiagrams.pdf}
-	\label{fig:fd}
-	\caption{Feynman diagrams for leading-order production of $h$ in association with $b$-quarks.  }
+	\caption{Feynman diagrams for leading-order production of $h$ in association with $b$-quarks.  \label{fig:fd}}
 \end{figure}
 
 Technically speaking, there is not a Feynman diagram for $H/A$ production that occurs in association with exactly one $b$-quark; even in the second set of diagrams in Figure~\ref{fig:fd} there is a second $b$-quark that comes from the PDF (parton distribution function) of the second proton.  In practice, the fourth $b$-quark tends to be both soft in \pt and far forward in the detector, making it difficult to see experimentally.  For that reason, we only require the presence of one $b$-quark in addition to the two $b$-quarks coming from the $H/A$ decay, which makes for a $bbb$ final state.
@@ -252,35 +258,55 @@ While the behavior of the Higgs system can be complicated to fully map out, ther
 
 
 
-An important and subtle point worth highlighting is that, while $A$, $H$, and $H^\pm$ are often called the ``SUSY Higgs bosons'', they are SM particles in the sense that they have R-parity of 1.  Therefore, a search for $A$ and $H$ is different from many other SUSY analyses because all the final state particles are SM particles ($b$ quarks) and there is no missing energy associated with SUSY particles that escape detection.  In fact, the Feynman diagrams for the production of $H$ and $A$ in association with $b$-quarks can also be drawn for $b$-quark associated production of the SM Higgs boson $h$; the most important contribution of SUSY is that, when $tan\beta$ is large, it provides an enhancement factor to the vertices that drives the production cross section up to a magnitude that could be large enough to see in 20 $fb^{-1}$ of proton-proton collisions at $\sqrt{s}$=8 TeV.
+An important and subtle point worth highlighting is that, while $A$, $H$, and $H^\pm$ are often called the ``SUSY Higgs bosons'', they are SM particles in the sense that they have R-parity of 1.  
+The Feynman diagrams for the production of $H$ and $A$ in association with $b$-quarks can also be drawn for $b$-quark associated production of the SM Higgs boson $h$; the most important contribution of SUSY is that, when $tan\beta$ is large, it provides an enhancement factor to the vertices that drives the production cross section up to a magnitude that could be large enough to see in 20 $fb^{-1}$ of proton-proton collisions at $\sqrt{s}$=8 TeV.
 
-However, that does not mean that the SUSY Higgs sector is independent of the details of the supersymmetric parameters.  In particular, it is possible that H/A decay to a pair of SUSY particles, such as charginos or neutralinos.  Depending on the scenario, the branching fraction to SUSY particles could be substantial.  Also important for interpreting any limits is the assumption about the Higgs mixing scenario; the CP-even Higgs eigenstates (H and h) can be expressed in terms of the neutral scalar fields and a mixing angle $\alpha$:
+However, that does not mean that the SUSY Higgs sector is independent of the details of the supersymmetric parameters.  In particular, it is possible that H/A decay to a pair of SUSY particles, such as charginos or neutralinos.  Depending on the scenario, the branching fraction to SUSY particles could be substantial.  
+%Also important for interpreting any limits is the assumption about the Higgs mixing scenario; the CP-even Higgs eigenstates (H and h) can be expressed in terms of the neutral scalar fields and a mixing angle $\alpha$:
 
-\begin{equation}
-    \begin{pmatrix}
-         H \\ h  
-    \end{pmatrix}
-    = 
-    \begin{pmatrix}
-        cos\alpha & sin\alpha \\
-        -sin\alpha & cos\alpha
-    \end{pmatrix}
-    \begin{pmatrix}
-        \phi^0_1 \\ \phi^0_2
-    \end{pmatrix}
-\end{equation}
+%\begin{equation}
+%    \begin{pmatrix}
+%         H \\ h  
+%    \end{pmatrix}
+%    = 
+%    \begin{pmatrix}
+%        cos\alpha & sin\alpha \\
+%        -sin\alpha & cos\alpha
+%    \end{pmatrix}
+%    \begin{pmatrix}
+%        \phi^0_1 \\ \phi^0_2
+%    \end{pmatrix}
+%\end{equation}
 
-There are two common assumptions about the mixing angle: that it is maximal (denoted $m_h^{max}$) or the so-called modified mixing scenario \cite{Carena-2} in which the LHC signal corresponds to the light CP-even Higgs boson h in large parts of the $m_A/tan\beta$ plane.
+%There are two common assumptions about the mixing angle: that it is maximal (denoted $m_h^{max}$) or the so-called modified mixing scenario \cite{Carena-2} in which the LHC signal corresponds to the light CP-even Higgs boson h in large parts of the $m_A/tan\beta$ plane.
 
 
 
 
 \subsection{Constraints on $H/A$}
-The discovery in July 2012 of an SM-like Higgs boson provides important constraints of the MSSM Higgs sector, but leaves other aspects of the theory tantalizingly unconstrained.  On the one hand, for many values of $m_h$, measuring the exact value of $m_h$ places a strong constraint on $m_A$--so once $h$ is found, one may have a good idea of what the mass of $A$ is, assuming the latter exists.  An important exception is when $m_A$ is much larger than the mass of the SM Higgs boson $m_h$, which is called the decoupling limit, where the properties of $h$ are unaffected by the existence of $H/A$.  This means that for a light $m_h$ below 140 GeV or so (recall that the mass of the discovered particle is about 126 GeV), it is very difficult to ascertain constraints on $H/A$ by studying the properties of $h$.  
+The discovery in July 2012 of an SM-like Higgs boson provides important constraints of the MSSM Higgs sector,
+ but leaves other aspects of the theory tantalizingly unconstrained.  On the one hand, 
+for many values of $m_h$, measuring the exact value of $m_h$ 
+places a strong constraint on $m_A$--so once $h$ is found, one may have a good idea of what the mass of 
+$A$ is, assuming the latter exists.  An important exception is when 
+$m_A$ is much larger than the mass of the SM Higgs 
+boson $m_h$, which is called the decoupling limit, where the 
+properties of $h$ are unaffected by the existence of $H/A$.
+  This means that for a light $m_h$ below 140 GeV 
+or so (recall that the mass of the discovered particle is about 126 GeV),
+ it is very difficult to ascertain constraints on $m_A$ by studying the properties of $h$.  
 
-
- 
-
+\begin{itemize}
+    \item Decays of $H/A$ to charginos and neutralinos only occur when kinematically 
+allowed--the lack of evidence for these particles below several hundred GeV suggests
+that in our search region for $H/A$ (which tops out at 800 GeV) there should be little
+effect from supersymmetric decays
+    \item The chargino and neutralino mass limits also suggest that the higgsino mass
+parameter $\mu$ is large, above several hundred GeV
+    \item $B_s^0\rightarrow\mu\mu$ appears consistent with the Standard Model predictions,
+placing strong constraints on the possibility of nonstandard Higgs contributions
+to that decay at loop level \cite{bs_to_mumu}
+\end{itemize}
 
 \section{From Beautiful Theory to Messy Experiment}
 
