@@ -65,6 +65,7 @@ ATLAS has a high-statistics inclusive QCD MC sample that is used primarily in th
 
 
 \subsubsection{$b$-Enriched QCD Multijet}
+\label{sec:bb_qcd_mc}
 Since the inclusive QCD Multijet samples are inadequate for understanding the $bb$ and $bbb$ MC backgrounds, we generate a dedicated sample that undergoes filtering to enrich it in heavy flavor.  This sample is generated using Sherpa 1.4.3 \cite{Sherpa} and detector simulation is done with AFII.  This sample starts with a 5-flavor PDF that assumes massive $b$-quarks and 2, 3 or 4 final state partons; then a filter is applied that requires that the leading 2 partons in the event be true $b$-quarks as well as requiring that the leading parton have a $p_T$ of at least 55 GeV (the latter requirement helps keep an acceptable efficiency when the sample is passed through the trigger and offline cuts).
 i
 
@@ -140,8 +141,12 @@ and a 2.2~fb$^{-1}$ luminosity data sample are shown.    \label{fig:pt_eta_bbqcd
 
 
 \subsection{Top Background}
-
-
+Top-antitop pairs decaying all-hadronically is the largest non-QCD background.  The sample generated
+to model this background is generated in Powheg and Pythia, with Tauola and Photos also used for
+handling tau leptons and photons.  In practice, $t\bar{t}$ is a minor background, both because
+of its small cross section relative to QCD and because in the high mass ranges most relevant for
+this search, it does not show any sigificant structure or $m_{bb}$ shape differences depending
+on the flavor of the third jet.
 
 
 
