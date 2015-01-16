@@ -432,10 +432,47 @@ A second task for the Toy MC studies is to validate the $m_{bb}$ shapes.  Even i
 %The sample on which the efficiencies are derived can affect what values are computed for the efficiencies themselves.  The b-tagging efficiencies at ATLAS are computed on a $t\bar{t}$ sample, which generally does not have identical kinematics to a QCD sample.   
 
 
-%\section{Performance}
-
-%\section{Non-QCD Backgrounds}
 
 
 
+\subsection{Non-QCD Backgrounds}
+\label{sec:non_qcd_bkgs}
 
+\subsubsection{All-Hadronic $t\bar{t}$ Background}
+When $t\bar{t}$ decays all-hadronically, it can create events with several high-$p_T$
+jets and 2 or more $b$-tagged jets (where the $b$-tags come from both real $b$-quarks
+and from mistagged light flavor).  We anticipate that, because it has a production
+cross section that is much smaller than QCD, $t\bar{t}$ will not be a major background.
+We confirm this assumption in MC by using the all-hadronic $t\bar{t}$ sample summarized
+in Table~\ref{tab:ttbar_params}.
+
+
+We find that in MC, all-hadronic $t\bar{t}$ has an efficiency of 7.5\% after
+the EF\_2j35\_loose\_j145\_j35\_a4tchad trigger, and approximately 2\% efficiency
+in the offline cuts relative to the trigger.  Estimating the $t\bar{t}$ cross section
+as 165 pb, and a 44\% branching ratio in the all-hadronic decay channel, this gives
+a 0.11 pb $t\bar{t}$ cross section expected after the trigger and offline cuts.  In the
+full 2012 dataset, this amounts to about 2400 events.  While
+this is not a negligible cross section compared to the signal, it is more than an
+order of magnitude smaller than the QCD background.
+
+In addition to checking the magnitude of the $t\bar{t}$ background, we check the shape
+for any shape differences in the $m_{bb}$ distribution depending on the tag status of the
+third jet, and do not find any major discrepancies that point toward $t\bar{t}$ as a
+potential peaking background in the signal region. The $m_{bb}$ distributions in the
+bbb, bbloose and bbanti bins for the all-hadronic $t\bar{t}$ can be found in Figure
+~\ref{fig:ttbar_mbb}.
+
+
+
+
+\begin{figure}[hbt]
+\includegraphics[width=0.45\linewidth]{BackgroundEstimation/images/mbb_compare_bbb_bbloose_bbanti_ttbar.eps}
+\includegraphics[width=0.45\linewidth]{BackgroundEstimation/images/mbb_compare_bbb_bbloose_bbanti_ttbar_logy.eps}
+\caption{The $m_{bb}$ distributions for all-hadronic $t\bar{t}$ MC after the trigger and all offline cuts are applied (linear Y axis on the left, logarithmic scale on the right).  In addition to the overall cross-section, we also want to probe any shape differences that arise when the tag status changes on the third jet in the event.  No significant shape differences are seen.}
+\label{fig:ttbar_mbb}
+\end{figure}
+
+
+
+              \subsubsection{Vector Boson + Jets Background}
