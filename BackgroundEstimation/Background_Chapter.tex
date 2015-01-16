@@ -107,26 +107,6 @@ The final choices of mass windows are documented in Table~\ref{tab:mass_windows}
 
 
 
-\subsection{Choice of Background Function}
-The background is fit with Bernstein polynomial.  A Bernstein polynomial of degree $n$ is 
-defined by
-
-\begin{equation}
-B_{i,n}(t) = n\choose{i} t^i (1-t)^{n-i}
-\end{equation}
-
-for $i=0,1,...,n$, where
-
-\begin{equation}
-n\choose{i} = \frac{n!}{i!(n-i)!}
-\end{equation}
-
-and there are $n+1$ polynomials of degree $n$.  Bernstein polynomials have the nice property
-that they are guaranteed to always have positive values, as well as a reputation for 
-converging more easily than some other families of polynomials.
-
-The exact degree of the polynomial is a free parameter to be chosen.  We inspect $n$ values
-of 3, 4, and 5.  
 
 
 \section{Attempted (But Not Used) Background Estimation Methods}
