@@ -9,37 +9,64 @@
 
 
 \section{Introduction}
+Experimental particle physics research has many prominent features, but the most prominent
+might be the scope and collaborative nature of the work.  This thesis is one of many that have
+been produced at the ATLAS dectector at CERN, and makes use of the dedicated work of many
+physicists to build and maintain the experimental apparatus and data processing pipeline.
+The Large Hadron Collider is the first major piece of this, where beams of protons are accelerated to
+tremendous energies and the smashed into each other inside the cavernous detectors, including ATLAS.
+It is the collisions
+between individual pairs of protons that underpin the entire scientific mission: in this environment,
+interesting and rare physics can result from the interactions between the protons.  It is the mission of the
+LHC to generate large numbers of high-energy proton-proton collisions, and then the mission of the detectors
+to record and analyze the data that results from the collisions.  
+
+
 
 %http://home.web.cern.ch/about/accelerators
 \section{CERN and the Large Hadron Collider}
 \label{sec:cern_lhc}
 The European Center for Nuclear Research (CERN) is a scientific complex in Geneva, Switzerland that was established 
 in the years following World War II.  Its focus is experimental particle physics, in particular the Large Hadron 
-Collider (LHC), although it also houses a theoretical physics department and numerous other experiments relating to the fundamental 
-particles and their interactions.  The data that underlies this project was produced in the LHC at CERN, and 
-collected in the ATLAS experiment.   
+Collider (LHC), and it has a long and storied history of producing particle discoveries and other scientific
+advances.
 
-The LHC is the accelerator that serves as the centerpiece of CERN's scientific program.  The accelerator is 
+The LHC is the particle accelerator that serves as the centerpiece of CERN's scientific program.  The accelerator is 
 an RF-driven circular sychrotron located in an underground tunnel with a circumference of 27 km, and when 
 it is running, accelerates and collides two proton beams (sometimes two lead ion beams, but we will 
-focus on the protons in this thesis) at four points around the accelerator ring.  Each of those beams 
-is comprised of thousands of bunches of protons which are very deliberately spaced so that every 50 ns, two 
-of those bunches going opposite directions will overlap at one of those interaction points.  Each interaction point is surrounded 
-by a custom-built detector designed to detect and read out information about the particles created in the collision
-, so that the physicists on the experiments can reconstruct and study the events.  
+focus on the protons in this thesis) at four interaction points around the accelerator ring.  Each of proton beam 
+contains thousands of bunches of protons which are very deliberately spaced so that every 50 ns, two 
+of those bunches going opposite directions will overlap at one of the interaction points.  In 2012, the energy
+of the proton beams was 4 TeV each, making for a total of 8 TeV of energy when the beams are collided head-on.
+These are the highest-energy proton-proton collisions ever created by man-made acceleration, and reliably making lots of
+collisions is a scientific and engineering endeavor completely in its own right, even before considering
+the physics insights that we get as a result.
 
 
 There are two major figures of merit for any particle accelerator: energy and luminosity.  Energy is typically limited 
 by the circumference of the accelerator and by the magnetic field strength of the accelerator's bending magnets.  
-The record-breaking energy of the LHC is a function of its tremendous size (27 km) as 
-well as thousands of superconducting dipole magnets that keep the beams in place within the accelerator.  Luminosity, roughly 
-speaking, is a measure of how many collisions the accelerator can produce, with higher luminosities meaning that more 
+The record-breaking energy of the LHC is a function of its tremendous size (27 km in circumference) as 
+well as 1232 8.4 tesla superconducting dipole magnets that keep the beams in place within the accelerator.  Luminosity 
+ is a measure of how many collisions the accelerator can produce, with higher luminosities meaning that more 
 interesting events (and non-interesting events!) can be generated.  Since different processes happen at different rates
 , the rate at which a given process occurs is usually stated in terms of its production cross section.  
 Cross sections are measured in units of barns (or fractions thereof), with one barn being equal to 10
 $^{-28}$ $m^2$.  Luminosity is measured in inverse barns, so that he cross section 
 can be multiplied by the luminosity to give a total number of events for that type of event.  Luminosity 
 is usually limited by the intensity and focus of the beam, and the bunch crossing rate.
+
+
+%http://inspirehep.net/record/805147/plots
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{ATLASDetector/images/crosssections2008.png}
+	\caption{Cross sections for various processes as a function of center-of-mass energy
+            of the original collision.  The ``skip'' at 4 TeV occurs because below that
+            value, the cross sections are for proton-antiproton collisions like those
+            made at the Tevatron, while higher energy collisions are being produced
+            at the LHC. \label{fig:cross_sections}}
+\end{figure}
+
 
 Energy and luminosity go hand-in-hand to push back the frontiers of physics.  One of the 
 major goals of the LHC is to discover new particles, and by conservation of energy the higher the LHC 
@@ -48,28 +75,26 @@ is that, while cross sections for all types of processes typically go up as the 
 many new physics models have production cross sections that go up faster than the backgrounds as a function of center
 -of-mass energy.  In other words, for a given process, the signal-to-
 background ratio tends to go up as energy increases so new physics can be much easier to spot at higher 
-energies than at lower energies.  Discovery reach can also be extended by increasing the luminosity of a machine, 
+energies than at lower energies.   
+
+Discovery reach can also be extended by increasing the luminosity of a machine, 
 since sensitivity to a signal is typically defined as $s/\sqrt{b}$--for example, a 
-10-fold increase in luminosity means approximately a 3-fold increase in a search's sensitivity.  
+10-fold increase in luminosity means a $\sqrt{10}$-fold increase in a search's sensitivity.  
 Luminosity can be increased by either tuning the accelerator to have a higher instantaneous luminosity, with a more focused 
 beam or higher beam current for example, or by simply running the machine for a longer time.  In 
-practice, as we will see, increasing instantaneous luminosity at the LHC also means increasing the number of lower
+practice, increasing instantaneous luminosity at the LHC also means increasing the number of lower
 -energy collisions that, while not of physical interest, still get picked up in the detector (pileup
-).  The removal of pileup is an intense and dedicated effort that will be addressed in a later section.
+).  The removal of pileup is an intense and dedicated effort that will be addressed in Section~\ref{sec:pileup}.
 
 
-The history of the LHC is a dramatic one.  The LHC first turned on in 2008, but within 
-days had to shut down following a catastrophic failure of the bus bar between superconducting magnets.  It restarted in 
-2009 at 7 TeV, half the design energy of 14 TeV (a repercussion of the accident), and 
-the first run for physics was performed in 2010, with a total dataset size of 36 inverse picobarns.  
-The progress in 2011 was dramatic, as the beam intensity was steadily increased over the course of the run 
-to create an exponential increase of the luminosity recorded, and at the end of 2011 the total dataset size 
-was about 5 inverse femtobarns (a factor of more than 1000 greater than the data recorded in 2010).  
-The progress continued in 2012, with a slightly increased energy of 8 TeV and about 20 $fv^{-1}$ 
-collected, culminating in the 4 July 2012 announcement of the discovery of a new particle, later confirmed to 
-be the long-sought Higgs boson.  The total collected luminosity is illustrated in Figure~\ref{fig:lumi_vs_year}.  
-At the end of 2012, the LHC commenced a 2-year shutdown to complete upgrades and repairs, 
-with the intention of starting up again in 2015 at 13 TeV and 25 ns spacing between bunch crossings.
+
+%%% lumi in 2010, 2011 and 2012
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{ATLASDetector/images/intlumivsyear.eps}
+	\caption{The luminosity collected in 2010, 2011 and 2012 at ATLAS. \label{fig:lumi_vs_year}}
+\end{figure}
+
 
 
 The LHC is only the last in a chain of accelerators, which all work together to create the high 
@@ -84,13 +109,6 @@ the protons are passed to the Super Proton Synchrotron, where they reach an ener
 finally the beam is split into half and each half is injected into the LHC going a different direction.  
 Figure ~\ref{fig:accelerator_complex} shows all the major accelerators at the CERN site.
 
-
-%%% lumi in 2010, 2011 and 2012
-\begin{figure}
-	\centering
-	\includegraphics[width=0.6\textwidth]{ATLASDetector/images/intlumivsyear.eps}
-	\caption{The luminosity collected in 2010, 2011 and 2012 at ATLAS. \label{fig:lumi_vs_year}}
-\end{figure}
 
 
 %%% CERN accelerator figure
@@ -110,14 +128,21 @@ runs, where collisions are created continuously for up to 16 or so hours at a ti
 typically ends either when enough of the beam gets burned away by the collisions that the instantaneous luminosity drops and 
 it becomes worthwhile to refill, or when a technical glitch causes the beams to be dumped.
 
+The history of the LHC is a dramatic one.  The LHC first turned on in 2008, but within 
+days had to shut down following a catastrophic failure of the bus bar between superconducting magnets.  It restarted in 
+2009 at 7 TeV, half the design energy of 14 TeV (a repercussion of the accident), and 
+the first run for physics was performed in 2010, with a total dataset size of 36 inverse picobarns.  
+The progress in 2011 was dramatic, as the beam intensity was steadily increased over the course of the run 
+to create an exponential increase of the luminosity recorded, and at the end of 2011 the total dataset size 
+was about 5 inverse femtobarns (a factor of more than 1000 greater than the data recorded in 2010).  
+The progress continued in 2012, with a slightly increased energy of 8 TeV and about 20 $fb^{-1}$ 
+collected, culminating in the 4 July 2012 announcement of the discovery of a new particle, later confirmed to 
+be the long-sought Higgs boson.  The total collected luminosity is illustrated in Figure~\ref{fig:lumi_vs_year}.  
+At the end of 2012, the LHC commenced a 2-year shutdown to complete upgrades and repairs, 
+with the intention of starting up again in 2015 at 13 TeV and 25 ns spacing between bunch crossings.
+When the LHC starts up again, the search for new particles will begin again as both energy and luminosity
+records are broken by the upgraded machine.
 
-
-Once the LHC delivers collisions, it is then the job of the ATLAS detector, and its readout system
-, to measure and record the particles that result from these collisions.  The detector is constructed of several main 
-subsystems, each of which is designed to make certain types of measurements of certain types of particles.  The 
-main layers of the detector are the inner detector, the hadronic and electromagnetic calorimeter, and the muon system
-.  The trigger and data acquisition systems (TDAQ) are responsible for determining which events to record, and 
-then reading out/storing the data from the entire detector for those events.
 
 
 \section{The ATLAS Coordinate System}
@@ -134,7 +159,7 @@ The definition of pseudorapidity $\eta$ is
 \eta = -ln(tan( \frac{\theta}{2} ))
 \end{equation}
 
-Since the proton is a composite particle, made of three quarks and an indeterminate number of gluons, even 
+Since the proton is a composite particle, made of three valence quarks and an indeterminate number of gluons, even 
 if the proton has a known energy, its constituent partons can have a wide range of energies.  In 
 general, then, the exact collision energy can vary from event to event, and outgoing particles can be 
 boosted forward in $\eta$.  However, energy is conserved in the $\phi$ dimension, so transverse 
@@ -145,8 +170,7 @@ The ATLAS detector is like an onion: it has layers, and it makes you cry.  There
 several main subsystems, each of which is designed to measure a certain characteristic (charge, momentum, energy
 , etc.) of a particular type of particle (quark, electron, muon, etc.).  The subsystems 
 work hand-in-hand with the trigger and data acquisition system, which handles the decision-making 
-of which events to record and goes about writing those events to disk.  This section will outline the main 
-subsystems, starting at the center of the detector and working our way out.
+of which events to record and goes about writing those events to disk.  
 
 \subsection{Inner Detector}
 The innermost layer of the ATLAS detector is the tracker, which provides precision measurements of the trajectories of charged 
@@ -175,8 +199,8 @@ average, a track has 3 pixel hits, 8 hits in the SCT (4 double-sided hits
 \label{sec:pixel}
 The pixel system sits physically closest to the beam line and interaction point.  It is built of silicon pixels 
 that measure 50 x 400 micrometers each, which are organized into sensors.  Each sensor contains 46,080 
-pixels, and the sensors are arranged onto modules.  Each module contains 16 sensors, and there are 1744 
-modules total in the pixel system, organized into 3 layers each in the barrel and the two endcaps.  
+pixels, and then there are 16 sensors organized onto a pixel module.  The pixels as a whole contain 1744 
+modules, organized into 3 layers each in the barrel and the two endcaps.  
 The pixel system in aggregate contains 80 million channels and measures about 1.4 meters long by 0.4 meters in diameter.
 
 \begin{figure}
@@ -187,8 +211,8 @@ The pixel system in aggregate contains 80 million channels and measures about 1.
 % http://iopscience.iop.org/1748-0221/3/07/P07007/pdf/1748-0221_3_07_P07007.pdf
 The pixel technology is designed to give high-precision measurements of the location and momentum of charged tracks.  
 A pixel module has two main components, the silicon sensor and the front-end chip, which are 
-bump-bonded together.  When a charged particle traverses the sensor it ionizes silicon atoms, creating so-
-called electron-hole pairs, and then a bias voltage applied across the sensor causes the electrons and holes 
+bump-bonded together.  When a charged particle traverses the sensor it ionizes silicon atoms, creating 
+electron-hole pairs, and then a bias voltage applied across the sensor causes the electrons and holes 
 to drift to opposite sides of the sensor, where they can be read out by the front-end chips.  
 
 The pixel readout is based on detecting and quantifying this ionization current.  A particle with greater momentum will create 
@@ -218,7 +242,7 @@ as it undergoes multiple scattering or secondary interactions.  This can be a pr
 tracks--if a track has a kink from where it scattered off detector material, it will be more 
 challenging to reconstruct the track or correctly measure its momentum.  These material effects are particularly important for the pixel 
 detector, because they are the first layer of detector traversed by particles after they leave the collision point.  
-One way to mitigate these effects are to place high-material components, such as power supplies and readout 
+One way to mitigate these effects is to place high-material components, such as power supplies and readout 
 electronics, in more forward regions so that they are not in the path of central tracks.  There are 
 two figures of merit when evaluating the material budget of a system: the radiation length is the distance an 
 electromagnetically interacting particle (such as an electron, positron or photon) travels before losing 1/$e$ 
@@ -232,13 +256,10 @@ of the material volume, in units of radiation length vs. $\eta$, shows that the 
 The pixel system all together provides fine resolution of the beamspot and surrounding area, which serves several important purposes
 .  First, since there are typically many hard p-p collisions in each bunch crossing, the pixels 
 system has longitudinal resolution $z_0\sin\theta\approx$0.05-0.3 mm 
-enables the reconstruction of multiple primary vertices that are typically separated by a few millimeters.  This 
+enables the reconstruction of multiple primary vertices that are typically separated by a few millimeters \cite{pixel_res}.  This 
 is critical for controlling pileup in the high-luminosity LHC environment.  Second, the transverse resolution of 0.01-0.1 mm 
-enables precision b-tagging for identification of bottom quarks.  B quarks typically have a lifetime of about 1ps
-, and since they are often created in high-p$_T$ collisions or come from the decay 
-of heavy particles, they can have considerable $p_T$ and travel a few millimeters before decaying
-.  B-tagging algorithms typically look for evidence of secondary decay vertices that are displaced from the beamspot in 
-the transverse direction.   
+enables the track resolution required to allow precision b-tagging for identification of bottom quarks.  More details
+on both the track reconstruction and the $b$-tagging methodology can be found in Sections~\ref{sec:trk_reco} and ~\ref{sec:b-tag}. 
 
 
 % useful thesis: http://www-pnp.physics.ox.ac.uk/~demirkoz/thesis.pdf
@@ -248,12 +269,12 @@ Like the pixels, the silicon microstrip tracker (SCT) is a silicon detector, alt
 distinctly different from the pixel geometry.  Since the SCT is at a farther radius from the interaction point than 
 the pixels, it experiences a lower occupancy.  This allows for substantially larger detector elements, at a lower 
 cost and using less material in the detector than if the same coverage were implemented in pixels, while maintaining 
-16 $\mu$m resolution of tracks in r$\Phi$ and 580 $\mu$m resolution in Z.   
+16 $\mu$m resolution of tracks in r$\Phi$ and 580 $\mu$m resolution in Z ~\cite{sct_res}.   
 
 The SCT geometry has some notable features.  The SCT consists of 8 layers of microstrips organized into 4 double
 -sided pairs, where the two members of each pair have an offset angle of 40 mrad.  The 
 SCT has 4 barrel layers and 9 endcap disks, and the barrel modules are oriented with a tilt angle 
-of about 11$^\circ$ angle relative to being perfectly tangential to $r\phi$.  Whereas the 
+of about 11$^\circ$ angle relative to being perfectly tangential to $r\phi$ ~\cite{tdr}.  Whereas the 
 pixel reads out the TOT of a hit, the SCT has a binary readout: a hit is either recorded or not.
 
 
@@ -265,7 +286,7 @@ The outermost inner detector layer is the transition radiation tracker, or TRT.
 
 The TRT uses gold-plated tungsten wires embedded in straw tubes of 4mm diameter filled with an Xe/O$_2$/Co$_2$ 
 gas mixture, with a total of about 350,000 readout channels covering a pseudorapidity range out to $|\eta|<$2.0.
-  For a typical particle, the TRT will have about 30-35 hits with a hit precision of about 130$\mu m$.
+  For a typical particle, the TRT will have about 30-35 hits with a hit precision of about 130$\mu m$ ~\cite{trt}.
 
 One important objective of the TRT is to identify tracks from electrons by detecting transition radiation (hence the name 
 transition radiation tracker).  Transition radiation occurs when an electron passes between regions with different 
@@ -274,31 +295,6 @@ by the Xe gas and translates into a high-threshold hit in the detector.  Electro
 from hadrons by the presence of many high threshold hits along the track.
 
  
-% http://iopscience.iop.org/1742-6596/119/3/032014/pdf/1742-6596_119_3_032014.pdf
-\subsubsection{Inner Detector Performance and Tracking}
-\label{sec:id_perf}
-Measurements from the pixel, SCT and TRT are combined in the track reconstruction.  There is a broad range 
-of properties that tracks might have, so the inner detector has to be able to measure tracks with p$_T$
- ranging from 150 MeV to 30 GeV or more.   
-
-The main track reconstruction algorithm used at ATLAS is a version of the Kalman filter algorithm.  The track reconstruction 
-begins with track seeds, which are collections of a few hits in the pixel subsystem that could plausibly be 
-parts of tracks.  The advantage of starting with seeds, rather than attempting to find an entire track at 
-once, is that seeds allow flexibility at the beginning of the search (when the track trajectory is the 
-least known) while keeping computational costs down.  Once a seed has been identified, the Kalman fitter (
-as the ATLAS algorithm is called) projects where the next hit would be if there is truly a track 
-present, and then looks for the presence of a hit at the predicted location in the next tracker layer
-.  If a hit is found there, the predicted trajectory of the particle may be refined and the next 
-hit is predicted and sought, until all the detector layers have been traversed. If there is no hit 
-present where one is predicted, the Kalman fitter can project two layers further, to allow for the possibility 
-of a hole where the particle did not leave a hit for some reason. 
-
-In high-pileup environments, the inner detector occupancy can be high which can make for two tracks that 
-overlap, leaving a hit in the same place which must then be allocated to one or the other.  
-Dedicated ambiguity solving is implemented as a second stage in the track reconstruction, where the two candidate tracks are 
-scored against each other via a reward/penalty scheme.  A good $\chi^2/DOF$ 
-score is rewarded, a track with many holes on track or a low $\chi^2/DOF$ 
-is penalized, with subdetector-specific weighting favoring the higher-precision silicon over the the lower-precision TRT. 
 
 
 \subsection{Calorimeters}
