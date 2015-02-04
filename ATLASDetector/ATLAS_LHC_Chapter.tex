@@ -298,6 +298,15 @@ from hadrons by the presence of many high threshold hits along the track.
 
 
 \subsection{Calorimeters}
+The ATLAS calorimeters measure the energy of particles.  There are two main calorimeter
+subsystems, one for electromagnetic particles and the other for hadronically-decaying particles.
+In addition to energy measurements, though, information from the calorimeters also is used
+for particle identification, finding the direction of electromagnetic and hadronic jets, 
+identifying and measuring missing transverse energy or MET, and selecting jets as part of the
+trigger.
+
+
+
 The ATLAS detector has two calorimeter systems: the electromagnetic (EM) calorimeter, designed to measure the energy 
 of electrons and photons, and the hadronic calorimeter, for measuring the energy of hadrons, jets, tau 
 leptons and missing transverse energy.  
@@ -307,7 +316,12 @@ leptons and missing transverse energy.
 \subsubsection{Electromagnetic Calorimeter}
 \label{sec:em_cal}
 
-The electromagnetic (EM) calorimeter measures electrons and photons after they exit the tracking system.  Nicknamed the LAr 
+The electromagnetic (EM) calorimeter measures electrons and photons after they exit the tracking system. It was
+designed with the discovery of the SM Higgs boson in mind, since for many possible values of $m_h$ (including 
+the value where the particle was actually found, $m_h$=126 GeV), the most sensitive search channels contain 
+electromagnetic particles (electrons and photons) in the final state. 
+
+Nicknamed the LAr 
 calorimeter for its liquid argon technology,  the calorimeter is a sampling calorimeter, with the passive showering material (
 lead) interleaved with active energy measurement material (liquid argon).  An electron or photon will interact with the 
 lead as it travels through it, creating an electromagnetic shower, which then propagates to the adjacent LAr layer
@@ -328,11 +342,15 @@ lead layers is constant throughout the calorimeter barrel.  Third, a particle tr
 the same number of sampling instances (i.e. measurements) regardless of the direction in which it 
 travels.  These pieces add up to a very uniform coverage of electromagnetic calorimetry.  The calorimeter consists of two 
 major parts, the barrel and the endcaps; the barrel measures particles with $|\eta|<$1.475 
-and the endcaps measure particles with 1.375$<|\eta|<$3.2.  
+and the endcaps measure particles with 1.375$<|\eta|<$3.2.  The transverse segmentation of the calorimeter
+is $\Delta\eta \times \Delta\phi<$0.03$\times$ 0.03 over the pseudorapidity region $|\eta|<$2.5,  
+to allow for the particle identification and energy resolution needed \cite{cal_tdr}, while the 
+calorimeter is up to 24 radiation lengths thick to minimize punch-through.
 
-The performance requirement for the resolution of the EM calorimeter is 
-$\sigma_E/E=\frac{10\%}{\sqrt{E}}+$0.7\%, and 
-a crucial part of reaching this resolution is precisely understanding the shape of the readout pulse.  The traversing particle 
+The performance requirement for the energy resolution of the EM calorimeter is 
+$\sigma_E/E=\frac{10\%}{\sqrt{E}}+$0.7\%, which has the nice feature that the resolution improves
+as the energy of an electromagnetic jet increases.
+A crucial part of reaching this resolution is precisely understanding the shape of the readout pulse.  The traversing particle 
 produces an electromagnetic shower where the drift time of the particles in the shower cause a readout pulse that is 
 roughly triangular in shape and typically 400 ns long.  This pulse is shaped by the readout electronics and the 
 signal shape is simulated with Monte Carlo and calibrated using precisely known test pulses deposited into the readout chain.  
@@ -344,17 +362,24 @@ a significant effect in the calorimeters and is an important task for understand
 %http://cds.cern.ch/record/1393742/files/CERN-THESIS-2011-144.pdf
 \subsubsection{Hadronic Calorimeter} 
 \label{sec:h_cal}
-Accurate measurement of hadronic energy is crucial for accurately reconstructing $b$-jets.  The hadronic calorimeter measures the 
+Like the EM calorimeter, the hadronic calorimeter was designed with an eye toward Higgs discovery, that it would
+have the resolution needed to find Higgs decays to $b\bar{b}$ and $\tau\tau$ pairs.  This is important and complementary
+to the EM calorimeter because, although the most sensitive decay channels of the Higgs are to photons and electrons,
+the decay modes with the highest branching fractions ($b\bar{b}$ and a large subset of $W^+W^-$) are hadronic.
+For the physics in this thesis, with three $b$-jets in the final state, the hadronic calorimeter does the crucial
+jet energy detection and measurement. 
+
+Accurate measurement of hadronic energy is crucial for accurately reconstructing $b$-jets, and the hadronic calorimeter also measures the 
 energy from hadrons, jets, taus and allows for a measurement of missing transverse energy.  The hadronic calorimeter 
 is a sampling calorimeter, nicknamed the tile calorimeter because of its composition of scintillating tiles (active material) 
-interleaved with steel plates (showering material).  When a strongly-interacting particle hits the steel it creates a 
+interleaved with steel plates (showering material) in the barrel.  When a strongly-interacting particle hits the steel it creates a 
 spray of particles, called a shower, which then enters the scintillator and creates a light signal that is 
 proportional to the energy .  This process repeats until the full energy of the original particle is measured, and 
 usually the calorimeter cells are reconstructed into an object called a jet which aims to cluster the energy together in 
-a way that accurately represents the energy of the original particle.  Much more on jet reconstruction will follow in a later section.
+a way that accurately represents the energy of the original particle.  Much more on hadronic jet reconstruction will follow in Section~\ref{sec:jet_reco}.
 
 The hadronic calorimeter is partitioned into four major subsections, two barrel sections and two extended barrel sections, allowing 
-for measurements out to $|\eta|<$1.7.  In order to stop all particles from the collision, 
+for measurements out to $|\eta|<$1.7.  In the forward regions, hadronic coverage is provided by the liquid argon system and the high-density forward calorimeter \cite{cal_tdr}. In order to stop all remaining particles from the collision, 
 with the notable exception of muons, the hadronic calorimeter is about 7.4 radiation lengths ($\lambda$) thick.
 
 \begin{figure}
