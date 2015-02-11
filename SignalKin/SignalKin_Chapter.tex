@@ -4,6 +4,7 @@
 %!TEX root =  ../Thesis.tex
 
 \chapter[Signal Kinematics]{Signal Kinematics}
+
  
 \section{Signal Jet Kinematics}
 
@@ -20,6 +21,18 @@ distribution then come into play in a few major ways
 up to a few tens of GeV; however, if energy is lost to FSR, the resonance can be much wider and this makes
 the signal much more difficult to distinguish from the background
 \end{itemize}
+
+
+\section{Signal Jet \pt Distributions}
+
+An important place to start is with the \pt distributions of the jets after the trigger
+and cuts have been applied.  Using truth-matching in the Monte Carlo, we can identify
+which jets are daughters of the Higgs and which are associated $b$-jet(s).  Since
+the Higgs is a heavy particle, its decay jets tend to have higher \pt than the associated
+$b$-jet(s), which can be seen in Figure~\ref{fig:pt_higgs_and_associated_jets}. 
+However, in this plot, there has been $b$-tagging applied so an important potential
+component is missing: how does the event topology change when we also include 
+non-$b$-jets, which can potentially be high \pt as well.   
 
 %----------------------------------------------
 \begin{figure}[H]
@@ -38,20 +51,26 @@ the signal much more difficult to distinguish from the background
     \includegraphics[width=0.3\textwidth]{SignalKin/jet_pt_compare_bAbb_650.pdf}
     \includegraphics[width=0.3\textwidth]{SignalKin/jet_pt_compare_bAbb_700.pdf}
     \includegraphics[width=0.3\textwidth]{SignalKin/jet_pt_compare_bAbb_800.pdf}
-    \label{fig:pt_higgs_and_associated_jets}
     \caption{The \pt of the two jets from the Higgs (classified as ``first'' and ``second'' based
     on which one has more \pt in the event), and all other $b$-tagged jet(s) in the event.
     The peaks at about 155 GeV and 55 GeV is a result of the trigger turn-on points and
-    associated cut(s).  }
+    associated cut(s).  \label{fig:pt_higgs_and_associated_jets}}
 \end{figure}
 %----------------------------------------------
+
+As it turns out, the presence of additional non-$b$ jets can have a significant 
+effect in signal.  Since the hard scatter has only $b$-jets in the final state, the
+extra jet(s) must come from other sources like initial state radiation (ISR) or 
+final state radiation (FSR).  This can smear out the signal, as explained in more detail
+in Section~\ref{sec:mass_res}, and combating the effects became a significant part of the
+analysis.
 
 
 \section{Signal Jet Combinatorics}
 \label{sec:combinatorics}
 An important point when trying to reconstruct the Higgs is which 2 $b$-tagged jets (of the
 three available) should be used in reconstruction.  If the associated $b$-jet is accidentally
-selected, then the Higgs will be mis-reconstructed and our sensitivity hurt.  At the same time,
+selected, then the Higgs will be mis-reconstructed and the sensitivity will suffer.  At the same time,
 since the mass of the Higgs is not known, tools like a kinematic fit are not available to
 help with the combinatorics.  In Figure~\ref{fig:combinatorics}, we use the MC truth
 information in the signal MC to plot how often the Higgs decays to various pairs of jets
@@ -82,6 +101,7 @@ hard FSR present and the reconstructed $m_{bb}$ is far from the generated $m_H$.
 
 
 \section{Mass Resolution}
+\label{sec:mass_res}
 Once the trigger and all the analysis cuts have been applied, we take the leading 2 jets in the event (which are also the leading 2 $b$-tagged jets, since we place a cut requiring that the leading 2 jets in the event be $b$-tagged) and reconstruct their combined invariant mass--if they came from a decaying particle, the reconstructed mass should be the mass of the parent particle.  On the other hand, if the leading 2 jets come from continuum QCD processes, there should be no resonance present, so we look for the presence of a resonance peak on top of a decaying power-law background.
 
 

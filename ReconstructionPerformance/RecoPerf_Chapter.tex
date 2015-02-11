@@ -182,19 +182,25 @@ $Z\rightarrow\mu\mu$ event with 25 reconstructed primary vertices.
 
 \section{$b$-Tagging}
 \label{sec:b-tag}
+
+Although the LHC produces huge numbers of hadronic jets, those jets that arise from $b$-quarks
+(which are called, appropriately, $b$-jets) are particularly important and interesting,
+especially for this thesis where all the final state particles are $b$-quarks and so the 
+experimental signature consists entirely of $b$-jets.
 B quarks typically have a lifetime of about 1ps
 , and since they are often created in high-p$_T$ collisions or come from the decay 
-of heavy particles, they can have considerable $p_T$ and travel a few millimeters before decaying
-.  B-tagging algorithms typically look for evidence of secondary decay vertices that are displaced from the beamspot in 
-the transverse direction.   
+of heavy particles, they can have considerable $p_T$ and travel a few millimeters before decaying.
+When they do decay, there is often a reconstructible secondary vertex that is offset from
+the primary vertex and can be used to identify, or tag, the jet as coming from a $b$-quark.  
+There are several $b$-tagging algorithms that look for particular characteristics of $b$-jets:
 
 
 
-Another critical tool built on top of good tracking is $b$-tagging, or identifying jets that likely 
-came from $b$-quarks.  A unique feature of $b$-quarks relative to other strongly interacting 
-particles is the long lifetime of $b$-quarks, which means that they can travel a few mm 
-out from the primary vertex before decaying.  This feature of $b$-jets means they can be identified 
-by the presence of one or more kinematic characteristics:
+%Another critical tool built on top of good tracking is $b$-tagging, or identifying jets that likely 
+%came from $b$-quarks.  A unique feature of $b$-quarks relative to other strongly interacting 
+%particles is the long lifetime of $b$-quarks, which means that they can travel a few mm 
+%out from the primary vertex before decaying.  This feature of $b$-jets means they can be identified 
+%by the presence of one or more kinematic characteristics:
 
 
 %-----------------------------------------------------------------------------
@@ -213,7 +219,12 @@ by the presence of one or more kinematic characteristics:
 
 
 
+\subsection{Online $b$-Tagging}
 
+
+
+
+\subsection{Offline $b$-Tagging}
 There are several different $b$-tagging algorithms that exploit each of these features independently; however, if 
 a jet truly comes from a $b$-quark, then several of these features can arise in the 
 same jet and the correlation can be used to further increase the accuracy of the tagger.  That idea gives 

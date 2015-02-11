@@ -428,35 +428,36 @@ The trigger is a three-layer system, with a first level (L1) implemented solely 
 algorithms, and an event filter (EF) that reconstructs the full event with offline algorithms.  L2 and 
 EF together are called the high level trigger, or HLT.
 
-In what follows, we will make use of the following terminology in explaining the structure and performance of the trigger:
 
-\begin{itemize}
-	\item trigger object: the signature left by a particle in the detector, once it has been reconstructed and identified.  Examples include electrons, muons, photons, and jets.
-	\item trigger item: one or more trigger objects that define whether an event passes a particular level (L1, L2, EF)
-	\item threshold: the minimum momentum or energy required in order for a trigger object to be accepted.
-	\item trigger accept: when all the requirements for a particular trigger level are met, and the event gets promoted to the next level.
+%In what follows, we will make use of the following terminology in explaining the structure and performance of the trigger:
 
-	\item trigger chain: a set of L1, L2 and EF trigger items (also called simply a trigger).
-	\item trigger menu: the set of all L1, L2 and EF trigger items, which collectively define which events will be written to disk.
-	\item trigger prescale: a set reduction factor, so that a trigger can be maintained with low thresholds while not exceeding rate limits.  For example, for a trigger with a prescale of 10, only 1 in 10 events passing the trigger get written to disk.
-\end{itemize}
+%\begin{itemize}
+%	\item trigger object: the signature left by a particle in the detector, once it has been reconstructed and identified.  Examples include electrons, muons, photons, and jets.
+%	\item trigger item: one or more trigger objects that define whether an event passes a particular level (L1, L2, EF)
+%	\item threshold: the minimum momentum or energy required in order for a trigger object to be accepted.
+%	\item trigger accept: when all the requirements for a particular trigger level are met, and the event gets promoted to the next level.
+%
+%	\item trigger chain: a set of L1, L2 and EF trigger items (also called simply a trigger).
+%	\item trigger menu: the set of all L1, L2 and EF trigger items, which collectively define which events will be written to disk.
+%	\item trigger prescale: a set reduction factor, so that a trigger can be maintained with low thresholds while not exceeding rate limits.  For example, for a trigger with a prescale of 10, only 1 in 10 events passing the trigger get written to disk.
+%\end{itemize}
  
 
 The trigger has a step-type structure, where progressively smaller numbers of events are processed with progressively more 
-detailed and computationally intensive algorithms.  Many physics analyses look for signatures that have more than one physics object in 
+detailed and computationally intensive algorithms.  For example, because of the inner detector readout
+bandwidth and the complexity of track reconstruction, tracking information is not used until the Event Filter,
+whereas jet-like signatures can be used at all levels.  
+In addition, many physics analyses (including this one) look for signatures that have more than one physics object in 
 them (for instance, multiple electrons, or a lepton plus jets), so multiple physics objects are often 
 required in a single trigger.  There are also single-item triggers, although typically these have higher thresholds 
 than triggers that look for multiple objects.  If all of the objects in a given trigger item are seen
 , the event is accepted for the current level and the event moves forward in the data collection process.  
 This process repeats three times, once for each of the levels of the trigger--only those events which 
 pass L1 move onto L2, those which pass L2 move on to EF, and those that pass EF 
-are written to disk.   As the machine settings for the LHC changed over the course of 2012, resulting 
+are written to disk.  As the machine settings for the LHC changed over the course of 2012, resulting 
 in different conditions for data-taking, the trigger menu was adjusted periodically to keep rates under control (
 in practice, this generally means either raising thresholds or adding prescales).  
-
-
-Groups of trigger chains that share common features are grouped together into trigger streams, where the primary trigger streams 
-are JetTauEtMiss, EGamma, MinBias, and CosmicCalo.  The end result of this process is approximately 200 events 
+The end result of this process is approximately 200 events 
 per second (320 GB/s of data) being written to disk; the trigger rates and latency 
 information can be found in Table \ref{tab:trigger_stats}.
 
@@ -471,12 +472,14 @@ L1  & 75 kHz  &  $\sim$ 1$\mu s$  & 120 GB/s\\
 L2  & 3 kHz    & $\sim$ 10 ms & 5 GB/s \\
 EF  &  200 Hz  & $\sim$ 1 s & 320 MB/s \\
 \end{tabular}
+\caption{The rates and latency of the three layers of the ATLAS trigger.  Each layer applies increasingly stringent requirements
+while working with progressively more data, in order to diagnose whether an event is ``interesting'' enough to pass
+one of the trigger chains \cite{atlas_trigger}. \label{tab:trigger_stats}}
 \end{table}
-\label{tab:trigger_stats}
 
 
 Of particular interest to this analysis are the jet thresholds and b-tagging applied in the trigger.  This 
-will be outlined in greater detail in a later section, but we will introduce the ideas here.  As 
+will be outlined in greater detail in Sections~\ref{sec:b-tag} and ~\ref{sec:my_trigger}, but we will introduce the ideas here.  As 
 only 200 events per second get written to disk, the bandwidth has to be carefully allocated across triggers, 
 and it is very expensive to keep a trigger that allows high rates of events to be written to data
 .  In an analysis such as this one, the physics objects coming from the signal (b-jets 
@@ -485,23 +488,26 @@ from a Higgs decay) are generally higher in p$_T$ than the background (continuum
 thresholds on the jets that fire the trigger.   
 
 The thresholds increase with each trigger level, as more information is read out of the detector, so that 
-a jet which is reconstructed with 145 GeV of p$_T$ at L1 
-might be required to have 155 GeV at EF in order to pass the full trigger.  Once the event 
+a jet which is reconstructed with 75 GeV of p$_T$ at L1 
+might be required to have 145 GeV at EF in order to pass the full trigger chain.  Once the event 
 is written to disk, it is subject to the full offline reconstruction and calibration so that the final p$_T$ 
 of the jet might not be exactly the number measured at the trigger EF.  There is therefore a range 
 of p$_T$ values, called the turn-on curve, where the trigger goes from rejecting 
 all events to accepting all events.  Within the turn-on curve even a small change in the p$_T$
 of a jet can have a dramatic difference in whether the jet fires a trigger accept, so this 
 instability is mitigated by placing p$_T$ cuts on the trigger jets that require that their respective p$_T$ 
-values are above the turn-on curve.  
+values are above the turn-on curve.  Details on the associated systematic errors in this analysis 
+can be found in Section~\ref{sec:trigger_syst}.  
 
-The ATLAS trigger also allows for b-tagging of jets at L2 and EF.  For analyses that have 
-b-jets in the final state, b-tagging in the trigger provides a tool for keeping rates 
-low without pushing up jet p$_T$ thresholds.  B-tagging in the trigger introduces several challenges
-, though.  First, the online b-tagging algorithms have less time and information than the offline algorithms
-.  Second, a jet that passes an L2 b-tag will not necessarily pass an EF b-
-tag, and vice versa, so more work is required in understanding the correlations between tags at different trigger 
-levels.  
+The ATLAS trigger also allows for $b$-tagging of jets at L2 and EF.  For analyses that have 
+b-jets in the final state, $b$-tagging in the trigger provides a tool for keeping rates 
+low without pushing up jet p$_T$ thresholds.  More details are in Section~\ref{sec:b-tag}.
+
+%B-tagging in the trigger introduces several challenges
+%, though.  First, the online b-tagging algorithms have less time and information than the offline algorithms
+%.  Second, a jet that passes an L2 b-tag will not necessarily pass an EF b-
+%tag, and vice versa, so more work is required in understanding the correlations between tags at different trigger 
+%levels.  
 
 
 
