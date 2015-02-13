@@ -204,13 +204,6 @@ There are several $b$-tagging algorithms that look for particular characteristic
 
 
 %-----------------------------------------------------------------------------
-\begin{itemize}
-	\item large significance of the impact parameter, $d_0$ (IP3D)
-	\item large ratio between the sum of $p_T$ of all tracks associated with the secondary vertex to the sum of all tracks in the jet (SV1)
-	\item large secondary vertex mass (SV1)
-	\item evidence of a decay chain including both a secondary vertex (from the $b$ decay) and a tertiary vertex (from the $c$ quark daughter of the $b$ quark) along the same line of flight (JetFitter)
-\end{itemize}
-
 \begin{figure}
 	\includegraphics[width=0.8\textwidth]{ReconstructionPerformance/images/secondary_vertex.pdf}
 	\caption{An event from early ATLAS data-taking, with a number of tracks (in teal) leading back to the primary vertex, and a secondary vertex reconstructed with the associated tracks highlighted in purple \cite{sv}.	\label{fig:secondary_vertex}  }
@@ -220,13 +213,58 @@ There are several $b$-tagging algorithms that look for particular characteristic
 
 
 \subsection{Online $b$-Tagging}
+The first opportunity for $b$-tagging occurs in the trigger.  The challenge of trigger (also called online)
+$b$-tagging is that it requires secondary vertex identification, which in turn requires track reconstruction,
+which requires the full readout of the inner detector and is also computationally expensive.  The upside,
+however, is that $b$-jets occur at a much lower rate than light flavor jets in background, and are an important
+part of many search signatures, so being able to identify $b$-jets in the trigger allows for lower
+thresholds than could otherwise be supported.  The trigger in this analysis uses online $b$-tagging to keep
+thresholds low. 
+
+Like its offline counterpart, the online $b$-tagging algorithm has three major steps \cite{online_btag_2}:
+\begin{itemize}
+    \item reconstructing the tracks of charged particles
+    \item identifying the primary vertex
+    \item calculating a discriminant weight (in 2012, a likelihood weight) based on the signed impact parameter significance 
+    (Figure ~\ref{fig:ip_sig}) for the reconstructed tracks and the properties of secondary vertices
+\end{itemize}
+
+These steps are repeated both at L2 and EF; so there are two independent layers of $b$-tagging applied by the
+trigger.
+
+%https://twiki.cern.ch/twiki/bin/view/AtlasPublic/BJetTriggerPublicResults
+\begin{figure}
+   \includegraphics[width=0.45\textwidth]{ReconstructionPerformance/online_btag_IP.pdf}
+   \caption{The online signed impact parameter significance, as used in the trigger $b$-tagging algorithms. \label{fig:ip_sig} }
+\end{figure}
+
+
+\begin{figure}
+	\includegraphics[width=0.45\textwidth]{ReconstructionPerformance/online_btag_L2.pdf}
+	\includegraphics[width=0.45\textwidth]{ReconstructionPerformance/online_btag_EF.pdf}
+	\caption{The jet weight distribution for jets undergoing online $b$-tagging at L2 (left) and EF (right),
+        with a comparison between MC predictions of various truth flavors (colored histograms) and data (points).
+        As the $b$-tagging weight increases, the relative enrichment of $b$-jets grows, although the overall
+        efficiency for $b$-jets goes down as tighter online weights are applied. \cite{online_btag}	\label{fig:online_btag}  }
+\end{figure}
 
 
 
 
 \subsection{Offline $b$-Tagging}
-There are several different $b$-tagging algorithms that exploit each of these features independently; however, if 
-a jet truly comes from a $b$-quark, then several of these features can arise in the 
+Offline $b$-tagging is very similar to online tagging, in that it uses reconstructed tracks to gather
+information about whether a secondary vertex might be present.  There are several specialized algorithms
+that are each designed to exploit a specific feature of decays associated with $b$-jets:
+
+\begin{itemize}
+	\item large significance of the impact parameter, $d_0$ (IP3D)
+	\item large ratio between the sum of $p_T$ of all tracks associated with the secondary vertex to the sum of all tracks in the jet (SV1)
+	\item large secondary vertex mass (SV1)
+	\item evidence of a decay chain including both a secondary vertex (from the $b$ decay) and a tertiary vertex (from the $c$ quark daughter of the $b$ quark) along the same line of flight (JetFitter)
+\end{itemize}
+
+Each of these features/algorithms can independently give discriminating power for tagging $b$-jets.
+Additionally, though, if a jet truly comes from a $b$-quark, then several of these features can arise in the 
 same jet and the correlation can be used to further increase the accuracy of the tagger.  That idea gives 
 rise to the MV1 tagger (where the MV stands for ``multivariate''), a neural-net-based 
 $b$-tagging algorithm that uses three other $b$-tagging algorithms (SV1, IP3D, JetFitter
@@ -239,7 +277,9 @@ charm rejection is about 90\% \cite{b-tagging}.
 %https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/CONFNOTES/ATLAS-CONF-2014-046/fig_01.pdf
 \begin{figure}
 	\includegraphics[width=0.8\textwidth]{ReconstructionPerformance/images/mv1_roc.pdf}
-	\caption{secondary vertex \cite{b-tagging}	\label{fig:mv1_roc}  }
+	\caption{The receiver-operator curve (ROC curve) for the MV1 algorithm, showing the tradeoff
+    between light-flavor rejection (vertical axis) and $b$-jet efficiency (horizontal axis)
+     \cite{b-tagging}.	\label{fig:mv1_roc}  }
 \end{figure}
 
 

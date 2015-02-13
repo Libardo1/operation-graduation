@@ -4,6 +4,20 @@
 %!TEX root =  ../Thesis.tex
 
 \chapter[Trigger and Cuts]{Trigger and Cuts}
+
+The very first steps of any analysis consist of gathering the data, and then reducing the background
+as much as possible.  For an experiment like ATLAS, with a dataset that approaches 3 PB of raw
+data collected per year, picking a subset of that data for performing the search is both nontrivial
+and crucial to the overall success of an analysis.  
+
+The data selection starts with the trigger, which determines which events will even be recorded in the
+first place.  The trigger must balance the competing forces of signal processes that can be very rare
+(which would suggest a permissive trigger, so as to not lose already-rare signal events) and the
+huge background rates at the LHC (which would suggest a strict trigger).  Since the trigger must make
+decisions about event acceptance in near real-time, it can generally only require basic physics objects
+like jets and $b$-tags, and more sophisticated background rejection gets implemented as offline event 
+selection criteria, also called cuts.  
+
  
 \section{Trigger}
 \label{sec:my_trigger}
@@ -92,10 +106,9 @@ cut.
 \begin{figure}
 	\includegraphics[width=0.5\textwidth]{TriggerCuts/cut_efficiencies_j35_signal.pdf}	
 	\includegraphics[width=0.5\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_signal.pdf}	
-    \caption{A diagram of the ATLAS detector as a whole, with major subsystems labeled.  A couple of human figures are shown standing on and near the detector, for scale. \label{fig:signal_eff_cutflow}}
+    \caption{The cut efficiencies in signal, cut by cut, shown on a linear (left) and logarithmic (right) vertical axis. \label{fig:signal_eff_cutflow}}
 \end{figure}
 
-%http://www.slac.stanford.edu/econf/C0303241/proc/pres/502.PDF
 %------------------------------------------------------
 
 
@@ -106,11 +119,8 @@ cut.
 \begin{figure}
 	\includegraphics[width=0.5\textwidth]{TriggerCuts/cut_efficiencies_j35_background.pdf}	
 	\includegraphics[width=0.5\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_background.pdf}	
-    \caption{A diagram of the ATLAS detector as a whole, with major subsystems labeled.  A couple of human figures are shown standing on and near the detector, for scale. \label{fig:background_eff_cutflow}}
+    \caption{The cut efficiencies in background, cut by cut, shown on a linear (left) and logarithmic (right) vertical axis. \label{fig:background_eff_cutflow}}
 \end{figure}
-
-%http://www.slac.stanford.edu/econf/C0303241/proc/pres/502.PDF
-
 
 %------------------------------------------------------
 
