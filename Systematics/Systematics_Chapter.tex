@@ -5,42 +5,22 @@
 
 \chapter[Systematic Errors]{Systematic Errors}
 
-\section{Systematic Errors on the Signal}
-\subsection{Trigger Efficiency}
+\section{Trigger Efficiency}
 \label{sec:trigger_syst}
-\subsection{Jet Energy Scale and Resolution}
-\subsection{Signal Monte Carlo Generator Systematics}
-
-\section{Systematic Errors on the Background Estimation}
-\subsection{Systematic Errors on Data-Driven Background Estimates}
-Validating the matrix method predictions of the $m_{bb}$ shap is a bit more subtle. 
-Since we use the matrix method to help validate our assumption that mbb of the leading 2 jets is independent of the truth
- flavor of the third jet, we need to demonstrate that the matrix method reweighting does not distort the
- mbb shape. We test this by generating toy MC distributions where our assumption is incorrect (by design,
- we make the mbb distribution dependent on the truth flavor of the 3rd jet) and then run those toy events
- through the matrix method to check if the different distributions are projected out correctly.
- Using the $m_{bb}$ distribution in data as a template, we generate three $m_{bb}$ distributions that have different
- shapes (the $m_{bb}$ values are scaled down by 7\% for light jets, left unchanged for charm jets, and scaled
- up by 15\% for bottom jets), and draw an $m_{bb}$ value at random from one of those distributions depending
- on the truth flavor. These different $m_{bb}$ distributions are not meant to model the data in any physically
- relevant way, but rather to guarantee that if there are systematic differences in $m_{bb}$ that are correlated
- with the flavor of the third jet, the matrix method will get the $m_{bb}$ shape correct.
- The results of this study can be seen in Figure~\ref{fig:mbb_compare_truth_mm_toy}; it is clear that the 
-shape differences in the original distributions propagate through to the matrix method predictions.
 
 
+\section{Jet Energy Scale and Resolution}
+\label{sec:jes}
+The jet energy scale and its associated uncertainties are estimated using
+in situ and test-beam-based measurements of isolated hadron response \cite{jes}.  The systematic
+errors are applied via 14 independent variations, which are applied to the jet
+4-vectors and then the adjusted 4-vectors are run through the analysis framework.
+The adjusted $m_{bb}$ distributions are propagated through the fit as systematic
+errors.  The effect of the jet energy scale varies depending on the signal mass
+point, from about 3\% per variations at 400 GeV to $<$1\% at 800 GeV.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.3\linewidth]{Systematics/mm_shape_check_b.pdf}
-    \includegraphics[width=0.3\linewidth]{Systematics/mm_shape_check_c.pdf}
-    \includegraphics[width=0.3\linewidth]{Systematics/mm_shape_check_light.pdf}
-    \caption{A comparison of the toy $m_{bb}$ distributions for the different flavors of the
-        third jet, as shown in Figure~\ref{fig:mbb_compare_truth_spectra}, with the matrix
-        method predictions overlaid.  }
-    \label{fig:mbb_compare_truth_mm_toy}
-\end{figure}
 
+%
 
 \subsubsection{$b$-Tagging Scale Factors}
 \label{sec:SF}
@@ -78,19 +58,46 @@ we can ask what the effect is on the total number of $b$, $c$, and light jets pr
 There are 12 variations each for $b$ and $c$ jets, and 24 variations for light jets, so
 overall there are 48 variations that need to be examined.
 
-\begin{figure}[hbt]
-  \includegraphics[width=0.98\linewidth]{Systematics/eigenvector_variations.pdf}
-  \caption{The changes in flavor predictions in data due to eigenvector variations.  Th
-    colored line in each subplot shows the nominal prediction given by the matrix method;
-    each point is the prediction generated when a different eigenvector variation is applied.
-    The variations are labeled on the x axis.  The colored dotted lines show the +\- 2\%
-    envelope for the nominal prediction.}
-  \label{fig:eigenvector_variations}
-\end{figure}
-
-\subsection{Systematic Errors on MC-Derived Background Estimates}
+%\begin{figure}[hbt]
+%  \includegraphics[width=0.98\linewidth]{Systematics/eigenvector_variations.pdf}
+%  \caption{The changes in flavor predictions in data due to eigenvector variations.  Th
+%    colored line in each subplot shows the nominal prediction given by the matrix method;
+%    each point is the prediction generated when a different eigenvector variation is applied.
+%    The variations are labeled on the x axis.  The colored dotted lines show the +\- 2\%
+%    envelope for the nominal prediction.}
+%  \label{fig:eigenvector_variations}
+%\end{figure}
 
 
 
 
+
+%\subsection{Systematic Errors on Data-Driven Background Estimates}
+%Validating the matrix method predictions of the $m_{bb}$ shap is a bit more subtle. 
+%Since we use the matrix method to help validate our assumption that mbb of the leading 2 jets is independent of the truth
+% flavor of the third jet, we need to demonstrate that the matrix method reweighting does not distort the
+% mbb shape. We test this by generating toy MC distributions where our assumption is incorrect (by design,
+% we make the mbb distribution dependent on the truth flavor of the 3rd jet) and then run those toy events
+% through the matrix method to check if the different distributions are projected out correctly.
+% Using the $m_{bb}$ distribution in data as a template, we generate three $m_{bb}$ distributions that have different
+% shapes (the $m_{bb}$ values are scaled down by 7\% for light jets, left unchanged for charm jets, and scaled
+% up by 15\% for bottom jets), and draw an $m_{bb}$ value at random from one of those distributions depending
+% on the truth flavor. These different $m_{bb}$ distributions are not meant to model the data in any physically
+% relevant way, but rather to guarantee that if there are systematic differences in $m_{bb}$ that are correlated
+% with the flavor of the third jet, the matrix method will get the $m_{bb}$ shape correct.
+% The results of this study can be seen in Figure~\ref{fig:mbb_compare_truth_mm_toy}; it is clear that the 
+%shape differences in the original distributions propagate through to the matrix method predictions.
+
+
+
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=0.3\linewidth]{Systematics/mm_shape_check_b.pdf}
+%    \includegraphics[width=0.3\linewidth]{Systematics/mm_shape_check_c.pdf}
+%    \includegraphics[width=0.3\linewidth]{Systematics/mm_shape_check_light.pdf}
+%    \caption{A comparison of the toy $m_{bb}$ distributions for the different flavors of the
+%        third jet, as shown in Figure~\ref{fig:mbb_compare_truth_spectra}, with the matrix
+%        method predictions overlaid.  }
+%    \label{fig:mbb_compare_truth_mm_toy}
+%\end{figure}
 
