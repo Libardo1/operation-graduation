@@ -95,60 +95,96 @@ jets are the second and third jets in $p_T$.  When we introduce a cut that elimi
 by requiring that the leading 2 jets in the event be $b$-tagged, both the signal to background                                      
 ratio improves (this cut is about 25\% efficient in background, and over 90\% efficient                                             
 in signal) and the mass resolution is improved in signal as the events that rejected have                                           
-hard FSR present and the reconstructed $m_{bb}$ is far from the generated $m_H$.    
+hard FSR present and the reconstructed $m_{bb}$ is far from the generated $m_A$.    
 
 
 
 
 \section{Mass Resolution}
 \label{sec:mass_res}
-Once the trigger and all the analysis cuts have been applied, we take the leading 2 jets in the event (which are also the leading 2 $b$-tagged jets, since we place a cut requiring that the leading 2 jets in the event be $b$-tagged) and reconstruct their combined invariant mass--if they came from a decaying particle, the reconstructed mass should be the mass of the parent particle.  On the other hand, if the leading 2 jets come from continuum QCD processes, there should be no resonance present, so we look for the presence of a resonance peak on top of a decaying power-law background.
+%Once the trigger and all the analysis cuts have been applied, we take the leading 2 jets in the 
+%event (which are also the leading 2 $b$-tagged jets, since we place a cut requiring 
+%that the leading 2 jets in the event be $b$-tagged) and reconstruct their combined invariant mass
+%--if they came from a decaying particle, the reconstructed mass should be the mass of the parent particle
+%.  On the other hand, if the leading 2 jets come from continuum QCD processes, there should be 
+%no resonance present, so we look for the presence of a resonance peak on top of a decaying power
+%-law background.
 
 
 A consistent refrain throughout this analysis is the challenge of poor mass resolution when reconstructing
-the signal, especially in the low-mass tail for high values of $m_A$. The issue is important because a poorly-reconstructed (very wide)
+the signal, especially in the low-mass tail for high values of $m_A$. The 
+issue is important because a poorly-reconstructed (very wide)
 signal peak can easily be confused with a background normalization error, which makes the analysis less
 sensitive to small signals. This section will summarize the efforts to make the mass resolution as good
-as possible; some tactics did produce an improvement while others did not.
+as possible; some tactics did produce an improvement while others did not.  In brief, the tactics
+attempted include the following:
 
 \begin{itemize}
-    \item REWRITE THIS LIST TO MATCH UP WITH THESIS TOPICS/ORDER
     \item require that the leading 2 jets in the event be b-tagged (improved resolution)
     \item when b-tagged jets have one or more jets nearby, include those jets in the mbb reconstruction (does
 not improve resolution)
     \item when a hard ($>$80 GeV) untagged jet is present in an event, include it in the mbb reconstruction
 (does not improve resolution)
 \end{itemize}
-However, the mass resolution remains an issue. The problem is significantly worse at higher masses;
-to some extent, this is inevitable because the inherent width of the Higgs resonance increases with mA
-(quantification of this ect can be found in Table 5. However, the inherent width goes up to about 12
-GeV (at mA=800 GeV), while the width of the reconstructed mass peak goes up to several hundred GeV.
-With this in mind, it’s clear that other ects drive the mass resolution. Thishe sensitivity of this analysis depends on the signal cross section and efficiency, the background cross section and efficiency, but also the signal resolution.  The broader the signal mass peak, the more difficult it is to distinguish from the background.  
 
-Unfortunately, the mass resolution significantly degrades as a $m_A$ grows.  Some of this is due to the inherent width growing as $m_A$ grows, as can be seen in Table~\ref{tab:sig_mc_parameters}.  
+
+The problem is significantly worse at higher masses;
+to some extent, this is inevitable because the inherent width of the Higgs resonance increases with $m_A$
+(quantification of this effect can be found in Figure~\ref{fig:width}). However, the inherent width goes up to about 12
+GeV (at $m_A$=800 GeV), while the width of the reconstructed mass peak goes up to several hundred GeV.
+With this in mind, it’s clear that other effects drive the mass resolution.  The following sections, 
+and the tactics documented in them that attempt to recover lost mass resolution, focus mainly 
+on two hypotheses: that the lost mass resolution arises from final state radiation (FSR), and/or
+that it arises from incorrectly picking the jets when reconstructing (combinatorics). 
+
+
+
 
 \subsection{Mass Resolution Improvement after Requiring that Leading Two Jets be $b$-Tagged}
-The mass resolution also improves when we require that the leading two jets in the event be b-tagged;
- the plots in Figure 39 and Figure 40 show the ect on the invariant mass distribution.
- In order to quantify the mass resolution ect, we define the “left” and “right” shoulders of the mbb
- distribution, which are respectively the portion of the mbb distribution that are below and above the peak.
- go into further detail on the signal shape in Section 6.2; but in Table~\ref{tab:signal_mass_RMS_compare} the RMS of especially the left
- shoulder before and after requiring b-tags on the leading 2 jets quantitatively shows the mass resolution
- improvement.
+The first strategy for recovering mass resolution is to require, as part of the cut flow,
+that the leading 2 jets in the event be $b$-tagged.  Before this cut is applied, it is
+possible to have signal events in which there is hard ISR or FSR (light jet radiation),
+and/or $b$-jets from the signal process that are high-$p_T$ but do not pass the $b$-tagging.
+The price of this cut is a loss in signal efficiency, which varies by $m_A$ but can be 
+seen in Figure~\ref{fig:combinatorics} to be about 30-40\% above $m_A$=350 GeV or so.
+However, Figure~\ref{fig:background_eff_cutflow} shows that the background also drops, 
+by a higher amount that varies based on the exact background in question, so that the net 
+effect on signal/background for this cut is neutral or favorable.
+ 
+
+Quantifying the effect of this cut on the mass resolution is a little tricky because of the
+$m_{bb}$ shape in signal, which is highly asymmetric.  In order to make some progress, though,
+we define the ``left'' and ``right'' shoulders of the distribution, where the left shoulder
+corresponds to the low-mass side of the $m_{bb}$ distribution, where the reconstructed mass 
+is below the peak for a given signal mass point,
+and the right shoulder is the part of the distribution above the peak.  Then we can define
+a threshold corresponding to 20\% of the peak height, and ask for the left-shoulder and right-shoulder
+windows where the distribution is above the threshold.  The right shoulder is much narrower,
+and any events in the high-mass tail (above the generated value for $m_A$) arise from 
+combinatorial mis-reconstructions.  The left shoulder, where FSR and combinatorics are
+at play, is significantly wider but improved by 40\% (at $m_A$=800 GeV) to 300\% (at $m_A$=250 GeV)
+once we require that the leading 2 jets in the event be $b$-tagged.  The widths of the shoulders
+for all mass points, before and after this cut is applied, can be seen in Table~\ref{tab:signal_mass_RMS_compare}.
+%The plots in Figure 39 and Figure 40 show the ect on the invariant mass distribution.
+% In order to quantify the mass resolution ect, we define the “left” and “right” shoulders of the mbb
+% distribution, which are respectively the portion of the mbb distribution that are below and above the peak.
+% go into further detail on the signal shape in Section 6.2; but in Table~\ref{tab:signal_mass_RMS_compare} the RMS of especially the left
+% shoulder before and after requiring b-tags on the leading 2 jets quantitatively shows the mass resolution
+% improvement.
 
 
 
 %----------------------------------------------
 \begin{table}
 \centering
-\caption{The RMS of the mass distribution in the left and right shoulders of the peak,
+\caption{The width of the mass distribution in the left and right shoulders of the peak,
     as explained in the text.  The left shoulder is dominated by radiation off the Higgs
     and/or the Higgs daughter jets in addition to combinatorial mis-reconstructions,
     leading to a larger RMS than the right shoulder, which
     is dominated by combinatorics only.\label{tab:signal_mass_RMS_compare}   }
   \begin{tabular}{ccccc}
      \hline \hline
-     mass (GeV) & \multicolumn{2}{c}{$b$-tags on leading jets (GeV)} & \multicolumn{2}{c}{no $b$-tags on leading jets (GeV)}  \\
+     $m_A$ (GeV) & \multicolumn{2}{c}{$b$-tags on leading jets (GeV)} & \multicolumn{2}{c}{no $b$-tags on leading jets (GeV)}  \\
         & left & right & left & right \\ \hline
      250 & 13.5 & 89.2 & 36.7 & 87.7 \\
      280 & 19.2 & 68.8 & 27.5 & 71.4 \\
@@ -226,15 +262,37 @@ The \pt-based energy recovery algorithm is based on the idea that perhaps the FS
  tail, and the high-mass tail gets a few more events as jets can be mistakenly added back in even when no
  FSR was lost.
 
-\subsection{$n_{jets}$ Dependence} 
+
+
+
+
+
+\subsection{$n_{jets}$ Dependence}
 \label{sec:n_jets_sig}
 
+The signal mass resolution also displays a large dependence on $n_{jets}$, the 
+number of jets over 25 GeV in the event.  If the event has significant FSR,
+that radiation can end up clustered into extra jets in the event, and the 
+mass resolution suffers at the same time.  In events where there are only 3 jets,
+we can say rather confidently that two of the jets come from the Higgs decay
+and the third is from the associated production; as long as we pick the jets
+properly, the mass resolution should not show major effects of FSR.  That 
+better resolution propagates through to allow the fit an easier time in distinguishing
+signal from background, and generally gives better sensitivity than 
+when the signal has poor mass resolution, all other things being equal.  
+That motivates our decision in the fitting step of the analysis to treat
+the 3-jet, 4-jet, and 5 or more jet events separately, and only combine at the
+end when computing the net sensitivity.  More details on that procedure can 
+be found in Section~\ref{subsec:fitmodel}.
+
+
+
 \begin{figure}[hbt]
-  \includegraphics[width=0.45\linewidth]{SignalKin/fsr_recovery_bAbb_250.pdf}
-  \includegraphics[width=0.45\linewidth]{SignalKin/fsr_recovery_bAbb_400.pdf}
+  \includegraphics[width=0.45\linewidth]{SignalKin/mbb_njets_bAbb_250.pdf}
+  \includegraphics[width=0.45\linewidth]{SignalKin/mbb_njets_bAbb_400.pdf}
 \newline
-  \includegraphics[width=0.45\linewidth]{SignalKin/fsr_recovery_bAbb_550.pdf}
-  \includegraphics[width=0.45\linewidth]{SignalKin/fsr_recovery_bAbb_800.pdf}
+  \includegraphics[width=0.45\linewidth]{SignalKin/mbb_njets_bAbb_550.pdf}
+  \includegraphics[width=0.45\linewidth]{SignalKin/mbb_njets_bAbb_800.pdf}
   \label{fig:mbb_njets_signal}
   \caption{The $m_{bb}$ distributions at a few representative mass points in signal MC, as a function of the number of jets in the event.  
     The 5+ jets bin contains all events with 5 jets or more.}

@@ -3,16 +3,19 @@
  
 %!TEX root =  
 
-\chapter[MonteCarlo]{Monte Carlo}
+\chapter[Monte Carlo]{Monte Carlo}
 
-In order to understand both the signal and backgrounds better, Monte Carlo (MC) datasets are computer-generated simulation events that allow a physicist to develop and validate an analysis.  The generation and refinement of MC algorithms and datasets could be a thesis in its own right, but this section will touch on some of the most relevant features of the MC datasets used in this algorithm.
+In order to understand both the signal and backgrounds better, Monte Carlo (MC) datasets are computer-
+generated simulation events that allow a physicist to develop and validate an analysis.  The generation and refinement of MC 
+algorithms and datasets could be a thesis in its own right, but this section will touch on some of 
+the most relevant features of the MC datasets used in this algorithm.
 
 
 \section{MC Creation Procedure}
 \label{sec:mc-gen-overview}
 MC events are generally created in four major steps.  
 \begin{enumerate}
-    \item First, the ``generator'' uses quantum field theory to simulate the hard scatter, generally starting with a proton and ending with all final-state particles.  
+    \item First, the generator uses quantum field theory to simulate the hard scatter, generally starting with a proton and ending with all final-state particles.  
     \item Then those particles are handed off to a dedicated algorithm that simulates how they would shower and hadronize, where appropriate.  
     \item Next, the resulting particles from the first two steps are put into a detector simulation, which uses information on the detector materials and geometry to understand how the particles evolve as they travel through the ATLAS detector.  
     \item The detector's response to the particles is simulated in a digitization and reconstruction step, so that the final output is an event that looks similar to how a ``real'' event of that type might look in the ATLAS detector. 
