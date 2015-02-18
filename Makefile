@@ -1,6 +1,6 @@
 all:
-    pdflatex Thesis.tex
-	bibtex   Thesis
-    pdflatex Thesis.tex
-    pdflatex Thesis.tex
+    pdflatex thesis.tex
+	bibtex   thesis
+    pdflatex thesis.tex
+    pdflatex thesis.tex
 #	open thesis.pdf

@@ -5,8 +5,44 @@
 
 \chapter[Fit Strategy and Results]{Fit Strategy and Results}
 
+Once the data has been sent through the trigger and cuts, it is still expected
+that a large number of QCD events will remain, in which there might be a (probably small)
+number of signal events.  The role of the fit is to mathematically describe
+the distribution of the $m_{bb}$ of all the remaining events, and to enable the
+possible extraction of a signal from the background.  
+
+This general strategy is possible because the signal events are coming from a 
+resonance, the $H/A$ particle, while the background consists of a smoothly 
+falling spectrum owing to the fact that it comes from various QCD processes.
+That means that $H/A$, if they are present, will show up as a bump in the $m_{bb}$
+spectrum.  Using the signal MC, we define what we expect for the shape of
+the signal resonance (the normalization is given to us by nature, and 
+is a free parameter that must be extracted if the presence of signal is identified),
+while the background fit is completely data-driven.  The $m_{bb}$ ranges above
+and below the signal resonance, the mass sidebands, are used to 
+fit the background distribution to a polynomial, which can then be interpolated
+into the signal region.  That allows us to test the goodness-of-fit for a 
+background-only hypothesis against the fit quality for a signal+background
+hypothesis, for various signal normalizations.  These fit results are then
+the ingredients for the limit-setting procedure, which is detailed in the next section.
+
+This chapter details the various categories that are used in the fit, and
+the parametric forms that are used to fit them.   
+
 \subsection{Fit Model and Categories}
 \label{subsec:fitmodel}
+The fit is performed in several different categories, which vary in the 
+signal/background ratio, the signal and background shapes, and the
+absolute normalizations of the signal and background.  In a situation like
+this, where there are several categories that can be defined and the
+search sensitivity varies depending on which category is being examined,
+it can benefit the overall search sensitivity to fit each category 
+separately and then combine them at the end.  While the parameteric form
+of the fit is the same in each category (background fit with a polynomial, 
+signal fit with a type of bifurcated Gaussian), the categories are fit
+separately and so the exact values of the parameters found by the fit
+will be slightly different.  
+
 
 The statistical analysis of the data employs an unbinned likelihood
 function, defined as:
@@ -30,18 +66,18 @@ regions with different signal and background enrichments:
 
 
 \begin{itemize}
-    \item bbb: one or more jets (in addition to the two triple-tagged jets) passing a tight (60\% working point)
+    \item $bbb$: one or more jets (in addition to the two triple-tagged jets) passing a tight (60\% working point)
  MV1 cut–-in effect, the full signal selection criteria
-    \item bbloose: events failing the bbb classification but which have one or more jets passing a loose (80\%
+    \item $bbloose$: events failing the bbb classification but which have one or more jets passing a loose (80\%
 working point) MV1 cut
-    \item bbanti: events that have no jets passing an 80\% MV1 cut-–effectively a veto on the presence of any
+    \item $bbanti$: events that have no jets passing an 80\% MV1 cut-–effectively a veto on the presence of any
 b-tagged jets other than those firing the trigger
 \end{itemize}
 
 When assigning events to one of these categories, we only allow $b$-tags on the leading
-five jets to count toward the bbb or bbloose categories.  In other words, if the third
+five jets to count toward the $bbb$ or $bbloose$ categories.  In other words, if the third
 $b$-tagged jet in an event is the 6th jet (in $p_T$ ordering) overall, the event 
-will be classified as bbanti.  This requirement is motivated by our physics awareness that
+will be classified as $bbanti$.  This requirement is motivated by our physics awareness that
 the $b$-jets coming from signal events should be fairly high $p_T$, so this should have
 a minimal effect of rejecting signal that would otherwise be accepted.  On the other
 hand, with high-jet-multiplicity QCD events, there is the combinatorial effect of looking across
@@ -53,7 +89,8 @@ for $b$-tags keeps this effect under control.
 The second type of categorization is based on the number of 
 jets in the event: 3, 4, or 5 or more jets.  We find that the signal
 shape can change based on the number of events, as well as the overall
-signal and background normalizations. 
+signal and background normalizations.  For more details on the effect of 
+the number of jets on the signal distributions, see Section~\ref{sec:n_jets_sig}. 
 
 
 
@@ -78,9 +115,12 @@ and there are $n+1$ polynomials of degree $n$.  Bernstein polynomials have the n
 that they are guaranteed to always have positive values, as well as a reputation for
 converging more easily than some other families of polynomials.
 
-The exact degree of the polynomial is a free parameter to be chosen.  We inspect $n$ values
-of 3, 4, and 5.
-
+The exact degree of the polynomial is a free parameter to be chosen.  There is a tradeoff
+between a degree that is too low to capture the full shape of the background, or for which
+convergence is a struggle, versus a polynomial with a degree high enough that it can 
+``fit anything'' as part of the background, including a possible signal.  For either 
+extreme, one also needs to guard carefully against the possibility of the background fit
+introducing spurious signal where there is, in fact, no signal to be found.   
 
 
 %http://www.slac.stanford.edu/econf/C0303241/proc/pres/502.PDF
@@ -141,6 +181,5 @@ of 3, 4, and 5.
 \end{table}
 
 
-\section{Expected Sensitivity}
 
 

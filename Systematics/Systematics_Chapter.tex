@@ -5,19 +5,70 @@
 
 \chapter[Systematic Errors]{Systematic Errors}
 
-\section{Trigger Efficiency}
+\section{Trigger $p_T$ Efficiency}
 \label{sec:trigger_syst}
+
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[leading jet, $m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_400_j35.eps}\end{subfigure}
+  \begin{subfigure}[sub-leading jet, $m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_400_j35.eps}\end{subfigure}
+  \begin{subfigure}[leading jet, $m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_450_j35.eps}\end{subfigure}
+  \begin{subfigure}[sub-leading jet, $m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_450_j35.eps}\end{subfigure}
+  \begin{subfigure}[leading jet, $m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_500_j35.eps}\end{subfigure}
+  \begin{subfigure}[sub-leading jet, $m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_500_j35.eps}\end{subfigure}
+  \begin{subfigure}[leading jet, $m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_550_j35.eps}\end{subfigure}
+  \begin{subfigure}[sub-leading jet, $m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_550_j35.eps}\end{subfigure}
+  \caption{The $p_T$ turn-on curves for the trigger for signal mass points 400-550 GeV.
+  Although this search uses a multi-object trigger, in which several conditions 
+  must simultaneously be true for a trigger acceptance, tight offline cuts can be used to isolate the effect 
+  of a single jet's $p_T$ on the efficiency.  The curves are fit 
+  with logistics, which are then used to extract the efficiency at the offline cut point, and to 
+  adjust for any residual effects of other trigger objects that affect the efficiency. \label{fig:trigger_turn_on_1}}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[leading jet, $m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_600_j35.eps}\end{subfigure}
+  \begin{subfigure}[sub-leading jet, $m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_600_j35.eps}\end{subfigure}
+  \begin{subfigure}[leading jet, $m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_650_j35.eps}\end{subfigure}
+  \begin{subfigure}[sub-leading jet, $m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_650_j35.eps}\end{subfigure}
+  \begin{subfigure}[leading jet, $m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_700_j35.eps}\end{subfigure}
+  \begin{subfigure}[sub-leading jet, $m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_700_j35.eps}\end{subfigure}
+  \begin{subfigure}[leading jet, $m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_800_j35.eps}\end{subfigure}
+  \begin{subfigure}[sub-leading jet, $m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_800_j35.eps}\end{subfigure}
+  \caption{The $p_T$ turn-on curves for the trigger for signal mass points 600-800 GeV.
+  Although this search uses a multi-object trigger, in which several conditions 
+  must simultaneously be true for a trigger acceptance, tight offline cuts can be used to isolate the effect 
+  of a single jet's $p_T$ on the efficiency.  The curves are fit 
+  with logistics, which are then used to extract the efficiency at the offline cut point, and to 
+  adjust for any residual effects of other trigger objects that affect the efficiency. \label{fig:trigger_turn_on_1}}
+    \end{center}
+\end{figure}
+
 
 
 \section{Jet Energy Scale and Resolution}
 \label{sec:jes}
+Hadronic particles fragment via QCD in the ATLAS detector, leaving deposits of 
+energy in the calorimeters that must be clustered and reconstructed into jets.  The
+observed jets then need some correction so that, on average, the reconstructed
+jet energy corresponds to the energy of the associated stable particles.  The
+calibration for this correction, called the jet energy scale (JES) and jet
+energy resolution (JER), is calculated using MC simulations and then checked
+in data.  The residual uncertainty on the JES and JER is then a systematic 
+error on the analysis. 
+
 The jet energy scale and its associated uncertainties are estimated using
 in situ and test-beam-based measurements of isolated hadron response \cite{jes}.  The systematic
-errors are applied via 14 independent variations, which are applied to the jet
+errors are integrated into the analysis via 14 independent variations, which are multiplicative factors applied to the jet
 4-vectors and then the adjusted 4-vectors are run through the analysis framework.
-The adjusted $m_{bb}$ distributions are propagated through the fit as systematic
+The adjusted $m_{bb}$ distributions from the new 4-vectors are propagated through the fit as systematic
 errors.  The effect of the jet energy scale varies depending on the signal mass
-point, from about 3\% per variations at 400 GeV to $<$1\% at 800 GeV.
+point, from about 3\% per variation at 400 GeV to $<$1\% at 800 GeV.
 
 
 %
@@ -57,6 +108,14 @@ When the eigenvector variations are applied and their effect propagated through 
 we can ask what the effect is on the total number of $b$, $c$, and light jets predicted.
 There are 12 variations each for $b$ and $c$ jets, and 24 variations for light jets, so
 overall there are 48 variations that need to be examined.
+
+
+
+
+
+
+
+
 
 %\begin{figure}[hbt]
 %  \includegraphics[width=0.98\linewidth]{Systematics/eigenvector_variations.pdf}
