@@ -5,9 +5,81 @@
 
 \chapter[Systematic Errors]{Systematic Errors}
 
+The last step in computing a result in experimental physics involves identifying
+and quantifying sources of systematic error.  Systematic errors arise from calibration
+errors, data/MC disagreement, detector uncertainty, noise, and other sources
+that do not decrease as the overall dataset size increases.  This is the general
+unifying feature of systematic errors: they do not decrease as one collects more data.
+
+
 \section{Trigger $p_T$ Efficiency}
 \label{sec:trigger_syst}
 
+The trigger can introduce systematic effects that must be quantified as uncertainties; 
+this can happen in two ways on this analysis.  Since the trigger efficiency is estimated
+for signal using MC simulations, it is possible that slight mismodelings in the MC 
+simulation process can over- or under-estimate the trigger efficiency as a function 
+of the $p_T$ of the jets in the event.  We call this the trigger $p_T$ efficiency,
+and we estimate and correct for it by parameterizing the turn-on curve with a logistic
+function, and using the ratio of the function between data and MC to calculate and 
+apply scale factors that get applied to the MC events falling in the turn-on curve.  
+
+The general idea behind the trigger turn-on curve is that the overall trigger efficiency
+is more volatile if one or both of the relevant jets are near the $p_T$ thresholds.
+Since there are two jets in the EF\_2b35\_j145\_j35\_a4tchad trigger, with thresholds
+of 145 and 35 GeV respectively, events with jets near these values should be studied
+and perhaps corrected.  However, since this is a multi-object trigger (requiring $b$-tags
+in addition to the two jets), the efficiency for a given event can be a complex function
+of the $p_T$ of the leading jet, the second jet, and the $b$-tagging characteristics of
+the jets in the event.  In order to factorize out these effects, we place tight offline
+cuts on all objects in the trigger \textit{except} the object under examination. For example, 
+to compute the trigger turn-on curve for the leading jet, we place the following cuts before
+computing any efficiencies: 
+\begin{itemize}
+    \item at least 60 GeV $p_T$ for the second jet
+    \item two jets in the event must pass MV1 cuts of 60\% efficiency
+\end{itemize}
+
+These cuts effectively remove inefficiencies due to the second jet or the $b$-tagging,
+since the second jet $p_T$ cut (60 GeV) is well into the efficiency plateau for that
+jet, and the 60\% MV1 requirement is generally more tight than the loose xComb tag
+that is required online.  In this discussion the same algorithm is applied to quantify
+the trigger turn-on of both the leading and sub-leading jet, but for brevity we will
+refer only to the leading jet.  The parameterized turn-on curves for the leading and 
+sub-leading jets in signal MC can be found in Figures~\ref{fig:trigger_turn_on_1} and 
+~\ref{fig:trigger_turn_on_2}.
+
+For signal MC we can then compute the efficiency as a function of the leading jet $p_T$ by
+examining the leading jet $p_T$ of events that both do and do not pass the trigger.
+Residual inefficiencies remaining from the second jet $p_T$, and the $b$-tagging requirements,
+would show up in the form of the distribution plateauing slightly below 100\% efficiency;
+the logistic function will identify the plateau efficiency and the residual error can be corrected when
+computing the trigger efficiency for a given jet $p_T$.   
+
+For the turn-on curves in the data, the procedure is slightly different.  Unlike in signal
+MC, there is no direct way of querying which events would have passed the trigger, but failed
+because the leading jet $p_T$ was not above threshold; those events are simply rejected by 
+the trigger and never recorded.  In that sense, the data collected by the trigger is biased.
+However, some heavily prescaled trigger items with minimum or zero bias are collected for 
+the express purpose of trigger calibrations.  The ones that are used in this analysis are:
+
+\begin{itemize}
+    \item EF\_rd0\_filled\_NoAlg: the L1 trigger is fired randomly, then the event proceeds
+    through the normal L2 and EF reconstruction without any decision being taken
+    \item EF\_j145\_a4tchad: the $p_T$ requirement on the leading jet is the same as in 
+    the analysis trigger, but no second jet $p_T$ or $b$-tagging requirement is in place
+    \item EF\_j35\_a4tchad: the same as EF\_j145\_a4tchad, but with the appropriate $p_T$ 
+    threshold to calibrate the second jet
+\end{itemize}
+
+Only the EF\_rd0\_filled\_NoAlg trigger is truly unbiased, but because of its heavy prescale,
+there are no events in data that are accepted by both this trigger and the EF\_2b35\_loose\_j145\_j35\_a4tchad
+analysis trigger.  However, we can do a two-step calibration using EF\_j145\_a4tchad and
+EF\_j35\_a4tchad as intermediate steps, as those have plenty of events that overlap 
+with both the analysis trigger and the zero-bias trigger.
+
+Once the turn-on curves are parameterized in both data and MC, the difference between the efficiencies
+can be computed and applied as a scale factor for events that fall in the turn-on region.  
 
 
 \begin{figure}[phtb!]
@@ -70,15 +142,16 @@ The adjusted $m_{bb}$ distributions from the new 4-vectors are propagated throug
 errors.  The effect of the jet energy scale varies depending on the signal mass
 point, from about 3\% per variation at 400 GeV to $<$1\% at 800 GeV.
 
-
+\textbf{add table here documenting the variations, their sources (i.e. what 
+source of error they quantify) and effect per mass point}
 %
 
-\subsubsection{$b$-Tagging Scale Factors}
+\section{$b$-Tagging Scale Factors}
 \label{sec:SF}
 Although every effort is made to accurately simulate the production rates and
 kinematic properties of $b$-quarks, as well as the performance of the ATLAS
 detector, it is difficult to imagine that Monte Carlo simulation perfectly represents
-the b-tagging efficiencies that might be found in data.  At the same time, it
+the $b$-tagging efficiencies that might be found in data.  At the same time, it
 is challenging to derive pure data-driven samples of $b$, $c$ and light jets to which
 the b-tagging can then be applied, and used to derive the efficiencies:
 
@@ -94,24 +167,54 @@ difference between the data and MC efficiencies.
     \end{equation}
 
 
+The scale factors are applied as events weights to the MC weight, where the value
+of the scale factor depends on the $p_T$, $\eta$, $b$-tagging working point, 
+ and truth flavor of the jet under
+examination.  In practice, this means that the scale factors are binned in $p_T$
+and $\eta$, with the $p_T$ bin edges at (), and the $\eta$ bin edges at ().
+When there are multiple jets being examined for $b$-tags in a single
+event, the net event weight is a product of all the relevant scale factors.
+In this analysis, since only the first 5 jets are relevant for determining 
+whether an event passes the analysis cuts or which $b$-tag category ($bbb$, 
+$bbloose$, or $bbanti$), no scale factors are applied for jets that are 6th
+or lower in the $p_T$ hierarchy of an event.
+
+The scale factors are calculated by comparing the $b$-tagging efficiency computed 
+in MC to the efficiency measured in carefully curated data samples, where the truth
+flavor contents of the data are relatively well-known \cite{b-tagging}.  For the $b$-jet
+scale factors, a sample of $t\bar{t}$ events is used for the data component; for 
+$c$-jets, the calibration is done with $D^*$ events.
+
+The scale factors are used to correct the MC $b$-tagging performance back to the $b$-tagging
+behavior seen in data, but the calibration process can introduce systematic uncertainties
+that have to be quantified and propagated through to the final result.  The $b$-tagging
+systematics are computed and applied using a method called the eigenvector method.
 The eigenvector method is used to derive a set of independent variations of the data-MC scale
 factors, in such a way to take the full covariance matrix of the calibration measurements
 into account, including correlations among working points and different jet $p_{T}$ regions.
-For further explanation of the eigenvector method please see section 2.3 of% ~\ref{ref:VHBTagging}. 
-%GP Soon we can reference the cont. tagging conf note (for now ATLAS-COM-CONF-2014-003).
-
-The scale factors used in this analysis are grouped by whether they are applied to jets in the
-tight, loose or anti-tagged bins.  The nominal values for the scale factors, as well as the results
-given by the eigenvector variations, and can be found in Appendix~\ref{sec:SF}.
-
-When the eigenvector variations are applied and their effect propagated through the matrix method,
-we can ask what the effect is on the total number of $b$, $c$, and light jets predicted.
-There are 12 variations each for $b$ and $c$ jets, and 24 variations for light jets, so
-overall there are 48 variations that need to be examined.
+For further explanation of the eigenvector method please see section 2.3 of \cite{VHBTagging}. 
 
 
+The presence of $b$-tagging in the trigger means the sample of data collected for this 
+analysis is already enriched in jets that look more $b$-like, so the scale factors
+are different based on how a jet is tagged (online, offline, or both). 
+The calibration procedure takes this into account, by using the following algorithm
+to compute the scale factors:
+\begin{enumerate}
+    \item Separate MC jets by whether they are $b$-tagged offline
+    \item If they are $b$-tagged offline, separate by whether they are 
+        also $b$-tagged online
+    \item Repeat these steps, but with data
+    \item In each possible permutation (online+offline, online-only, offline-only)
+        compute MC/data scale factors for the jets in that category 
+\end{enumerate}
 
 
+\textbf{add in a picture of the b-tag weight distributions}
+
+
+
+%Gto be aroundP Soon we can reference the cont. tagging conf note (for now ATLAS-COM-CONF-2014-003).
 
 
 

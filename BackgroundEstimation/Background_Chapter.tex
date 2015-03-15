@@ -45,19 +45,19 @@ uses the mass sidebands in the bbb signal region to estimate the background shap
 normalization in the signal region.  
 
 
-\section{Background Estimation Method Based on Polynomial Background Model and Sideband Fitting}
+\section{Background Estimation Method Based on Exponential Background Model and Sideband Fitting}
 The background consists almost exclusively of QCD with 2 or more real $b$-jets, which 
 fortunately has a $m_{bb}$ spectrum that does not have any peaks or other difficult
 structure above about 350 GeV.  Below that mass, the trigger turn-on curve becomes
 a major feature of the spectrum, making it difficult to fit.  Above that mass, there
-is a smoothly falling distribution that we fit with a Bernstein polynomial.
+is a smoothly falling distribution that we fit primarily with a decaying exponential.
 
 In a few words, this fit strategy proceeds in the following way:
 \begin{itemize}
     \item Start with a mass point
     \item Using the signal MC as a guide, select a window in $m_{bb}$ that encloses the
 signal peak, along with as much of the mass sideband (on either side) as possible
-    \item Fit the Bernstein polynomial within that window, in each of the 
+    \item Fit the exponential within that window, in each of the 
 tag regions (bbb, bbloose, bbanti) as well as keeping the 3, 4, and 5+ jet bins separate
     \item Use the fit result for the background long with signal templates taken from
  MC to extract the 
@@ -66,41 +66,48 @@ cross section that can be excluded at a 95\% confidence level
 \end{itemize}
 
 Although we have signal MC with $m_A$ values as low as 250 GeV, this fit strategy only
-begins to work above 350 GeV, because of the trigger turn-on curve.  
+begins to work above 400 GeV, because of the trigger turn-on curve.  The fit window
+used is \[340,900\] GeV for all signal mass points.
 
-\subsection{Mass Windows}
-A critical aspect of this strategy is selecting a mass window; large windows make for bigger
-sidebands which can help the fit result (more information for it to use in making a prediction)
-but also sometimes lead to convergence problems, since a larger window leaves more room
-for the background to fluctuate, or have shape subtleties that the polynomial has difficulty
-describing.  In fact, an early iteration of this fit strategy used the same large $m_{bb}$ 
-window \[320, 900 GeV\] but the background shape over that large region changes enough that
-the error matrix of the fit result was not positive-definite, leading to uncertainties that 
-could not be quantified reliably.   
+While the analysis was in development, it was blinded to avoid bias.  This was done 
+by removing \textit{bbb} events from the data, and replacing them with a sample of
+events with the same normalization drawn from the \textit{bbanti} distribution
+in data.  For the final search, the \textit{bbb} events were swapped back in.
 
-The final choices of mass windows are documented in Table~\ref{tab:mass_windows}.
 
-%--------------------------------------------------------
-\begin{table}
-   \caption{The mass window used when fitting each signal mass point. \label{tab:mass_windows} }
-    \begin{tabular}{ c c c }
-    mass (GeV) & lower edge & upper edge \\
-    250        & 1.68682  & \\
-    280        & 1.92318 & \\
-    310        & 2.50849 & \\
-    350        & 3.23507 & \\
-    400        & 3.93561 & \\
-    450        & 4.71906 & \\
-    500        & 5.59454 & \\
-    550        & 6.84368 & \\
-    600        & 8.11044 & \\
-    650        & 9.26688 & \\
-    700        & 10.3760 & \\
-    800        & 12.5049 & \\
-    \end{tabular}
-\end{table}
+%\subsection{Mass Windows}
+%A critical aspect of this strategy is selecting a mass window; large windows make for bigger
+%sidebands which can help the fit result (more information for it to use in making a prediction)
+%but also sometimes lead to convergence problems, since a larger window leaves more room
+%for the background to fluctuate, or have shape subtleties that the polynomial has difficulty
+%describing.  In fact, an early iteration of this fit strategy used the same large $m_{bb}$ 
+%window \[320, 900 GeV\] but the background shape over that large region changes enough that
+%the error matrix of the fit result was not positive-definite, leading to uncertainties that 
+%could not be quantified reliably.   
+
+%The final choices of mass windows are documented in Table~\ref{tab:mass_windows}.
 
 %--------------------------------------------------------
+%\begin{table}
+%   \caption{The mass window used when fitting each signal mass point. \label{tab:mass_windows} }
+%    \begin{tabular}{ c c c }
+%    mass (GeV) & lower edge & upper edge \\
+%    250        & 1.68682  & \\
+%    280        & 1.92318 & \\
+%    310        & 2.50849 & \\
+%    350        & 3.23507 & \\
+%    400        & 3.93561 & \\
+%    450        & 4.71906 & \\
+%    500        & 5.59454 & \\
+%    550        & 6.84368 & \\
+%    600        & 8.11044 & \\
+%    650        & 9.26688 & \\
+%    700        & 10.3760 & \\
+%    800        & 12.5049 & \\
+%    \end{tabular}
+%\end{table}
+
+%--------------------------------------------------------
 
 
 
@@ -109,51 +116,51 @@ The final choices of mass windows are documented in Table~\ref{tab:mass_windows}
 
 
 
-\section{Attempted (But Not Used) Background Estimation Methods}
- 
-A control-region-based binned background fit was attempted before the polynomial background fit was selected
-for the final version of the analysis.  This strategy is documented here, for the
-benefit of future analysts.  The strategy ultimately rests on having bb QCD MC for validation
-of a key assumption (that the shape of the $m_{bb}$ distribution is the same in QCD 
-regardless of the flavor of the third jet in the event).  The details of this sample
-are documented in Section~\ref{sec:bb_qcd_mc}, but unfortunately it was not produced in
-large statistics due to ATLAS-wide production problems.   
+%\section{Attempted (But Not Used) Background Estimation Methods}
+% 
+%A control-region-based binned background fit was attempted before the polynomial background fit was selected
+%for the final version of the analysis.  This strategy is documented here, for the
+%benefit of future analysts.  The strategy ultimately rests on having bb QCD MC for validation
+%of a key assumption (that the shape of the $m_{bb}$ distribution is the same in QCD 
+%regardless of the flavor of the third jet in the event).  The details of this sample
+%are documented in Section~\ref{sec:bb_qcd_mc}, but unfortunately it was not produced in
+%large statistics due to ATLAS-wide production problems.   
+%
+%For the alternative fit method documented here , we use the bbanti (and bbloose) control regions to predict the background shape in the bbb signal region.
+%The background estimation strategy is to fit the $m_{bb}$ distribution in these three tag bins together. In
+% practice, the bbanti bin dominates that fit because it has much higher statistics than the other two bins. In
+% addition, we expect the bbanti bin to be heavily dominated by events that have exactly 2 b-jets, with the
+% third jet being charm or light. Therefore, when we fit the three mbb distributions together, we are making
+% an important assumption: the $m_{bb}$ distribution of the leading 2 jets is independent of the truth flavor of the third jet.
+%
+%This assumption is validated in several ways, which are detailed in this section.
+%\begin{itemize}
+%    \item Simple tag-based data-driven shape check
+%    \item Matrix method data-driven shape check
+%    \item bb QCD MC shape check
+%\end{itemize}
+% We also apply a jet-pT -based reweighting, to correct for any biases that might be introduced when
+% b-tagging is applied to the third jet, which is also discussed in this section.
+%
+%
+%\subsection{Shape Check after Applying $b$-Tagging}
+%A simple first check of our background shape assumption is done on by plotting the mbb distribution
+% in data for the bbb, bbloose and bbanti distributions tag bins; we would expect these to have different
+% admixtures of bottom, charm and light jets in the third jet and so differences in these $m_{bb}$ distributions
+% would hint at our assumption being violated. There are 12,308 bbb events, 9,049 bbloose, and 76,123
+% bbanti events in 10\% of the 2012 data. The three mbb distributions are plotted in Figure~\ref{fig:mbb_data}, where the
+% out-of-the-box distributions are shown on the left and the distributions are normalized to the same area
+% on the right. No shape differences are apparent. Figure~\ref{fig:mbb_data} shows the distributions normalized to the
+% same area and with a logarithmic y scale for easy shape comparison; no major shape differences appear
+% there either.
 
-For the alternative fit method documented here , we use the bbanti (and bbloose) control regions to predict the background shape in the bbb signal region.
-The background estimation strategy is to fit the $m_{bb}$ distribution in these three tag bins together. In
- practice, the bbanti bin dominates that fit because it has much higher statistics than the other two bins. In
- addition, we expect the bbanti bin to be heavily dominated by events that have exactly 2 b-jets, with the
- third jet being charm or light. Therefore, when we fit the three mbb distributions together, we are making
- an important assumption: the $m_{bb}$ distribution of the leading 2 jets is independent of the truth flavor of the third jet.
-
-This assumption is validated in several ways, which are detailed in this section.
-\begin{itemize}
-    \item Simple tag-based data-driven shape check
-    \item Matrix method data-driven shape check
-    \item bb QCD MC shape check
-\end{itemize}
- We also apply a jet-pT -based reweighting, to correct for any biases that might be introduced when
- b-tagging is applied to the third jet, which is also discussed in this section.
-
-
-\subsection{Shape Check after Applying $b$-Tagging}
-A simple first check of our background shape assumption is done on by plotting the mbb distribution
- in data for the bbb, bbloose and bbanti distributions tag bins; we would expect these to have different
- admixtures of bottom, charm and light jets in the third jet and so differences in these $m_{bb}$ distributions
- would hint at our assumption being violated. There are 12,308 bbb events, 9,049 bbloose, and 76,123
- bbanti events in 10\% of the 2012 data. The three mbb distributions are plotted in Figure~\ref{fig:mbb_data}, where the
- out-of-the-box distributions are shown on the left and the distributions are normalized to the same area
- on the right. No shape differences are apparent. Figure~\ref{fig:mbb_data} shows the distributions normalized to the
- same area and with a logarithmic y scale for easy shape comparison; no major shape differences appear
- there either.
-
-\begin{figure}[hbt]
-  \includegraphics[width=0.5\linewidth]{BackgroundEstimation/images/mbb_bbb_bbloose_bbanti_r200-215.pdf}
-  \includegraphics[width=0.5\linewidth]{BackgroundEstimation/images/mbb_bbb_bbloose_bbanti_r200-215_normalized.pdf}
+%\begin{figure}[hbt]
+%  \includegraphics[width=0.5\linewidth]{BackgroundEstimation/images/mbb_bbb_bbloose_bbanti_r200-215.pdf}
+%  \includegraphics[width=0.5\linewidth]{BackgroundEstimation/images/mbb_bbb_bbloose_bbanti_r200-215_normalized.pdf}
 %  \label{fig:mbb_data}
-  \caption{$m_{bb}$ distributions in data, based on the $b$-tag status of the third jet. 
-    \label{fig:mbb_data} }
-\end{figure}
+%  \caption{$m_{bb}$ distributions in data, based on the $b$-tag status of the third jet. 
+%    \label{fig:mbb_data} }
+%\end{figure}
 
 
 
@@ -164,143 +171,7 @@ A simple first check of our background shape assumption is done on by plotting t
 
 
 
-\subsection{Shape Check Using the Matrix Method}
 
-
-
-
-
-
-
-
-\subsection{The Matrix Method}
-The matrix method is a data-driven way to use the tag distributions of the data (which can be accessed experimentally) to compute the flavor distributions (which cannot be directly found experimentally).  After the matrix method has been applied, the result are $m_{bb}$ distributions that are broken apart based on the predicted truth flavor (bottom, charm, or light) of the third jet.  Hypothetically,
-the matrix method can be used to do a completely data-driven prediction of the $m_{bb}$ distribution
-for each possible truth flavor of the third jet.  In practice, we find that the errors on the matrix
-method prediction are too large to use it as the primary background estimation strategy, or to validate
-the assumption that the $m_{bb}$ distribution is independent of the flavor of the third jet.  
-
-Recall that after the trigger and all cuts (including $b$-tagging on the third jet) the QCD background will be of two major types:
-
-\begin{itemize}
-    \item a reducible portion where one or more light or charm jets get mistagged as $b$-jets
-    \item an irreducible portion in which there are three or more true $b$-jets from the
-hard scatter and/or gluon splitting
-\end{itemize}
-
-
-The goal of the matrix method is to disentangle these backgrounds, and allow us to describe the shape of the $m_{bb}$ distribution from $bbb$ events
-in a data-driven way.  In what follows, we adopt the convention where lowercase letters indicate flavors
-that are ``known,'' either via assumption or via truth-matching using MC.  Thus $bbb$ refers to an event where the true flavor of the three jets is bottom.  Uppercase letters,
-on the other hand, denote a presumed flavor, most likely because either a jet has been $b$-tagged or reweighted by the matrix method.  An event which has a third jet
-that is $b$-tagged (but could still be a mistagged light or charm jet) would be
-denoted $bbB$.  
-
-As part of the cut chain, two jets have been ``triple-tagged'' ($b$-tagged
-at L2, EF and offline) and so, modulo a systematic which we estimate separately, 
-those events are treated as being a 100\% pure sample of events with at least 2 real $b$-jets.
-Then the issue becomes to diagnose the flavor of the third jet in the event,
-which may or may not be a $b$-jet and may or may not be $b$-tagged.  Since
-reliable QCD MC with at least 2 real $b$ quarks can be hard to generate, especially
-in high statistics once the cut chain has been applied, a data-driven method for
-estimating the flavor of the third jet provides the primary means of estimating
-the background from mistagged light or charm QCD jets.  The matrix method allows
-us to use a data-driven quantity, the MV1 distribution of the third jet
-solve for the (experimentally inaccessible) distribution of truth flavor in data events.
-
-\subsubsection{Mathematics of the Matrix Method}
-There are three unknown quantities being sought when we apply the matrix method: the amount of $bbB$, $bbC$, and $bbL$ in our sample after all cuts except the b-tag on the third jet has been applied.   Since there are three unknowns, we must write a system of three linear equations, and we must have three tag categories, which appear on the left hand side of equation \ref{eq:matrix1}.  There are three tag categories:
-	
-	\begin{itemize}
-		\item $N_{tight}$: third jet has an MV1 value that is at least as high as the 60\% efficiency working point (the same as the bbb category introduced in Section~\ref{sec:background_strategy})
-		\item $N_{loose}$: third jet has MV1 value that is at or above the 80\% efficiency working point, but below the 60\% efficiency working point (same as bbloose)
-		\item $N_{anti}$: third jet has MV1 value below the 80\% working point (same as bbanti)
-	\end{itemize}
-
-All jets being examined will fall into exactly one of these categories.
-
-        \begin{equation}
-            \begin{bmatrix} \scriptstyle
-            N_{tight} \\ \scriptstyle
-            N_{loose} \\ \scriptstyle
-            N_{total}
-            \end{bmatrix}    
-            = 
-            \begin{bmatrix} \scriptstyle
-                \epsilon^b_{tight} & \scriptstyle \epsilon^c_{tight} & \scriptstyle \epsilon^l_{tight} \\  \scriptstyle
-                \epsilon^b_{loose} - \epsilon^b_{tight} & \scriptstyle \epsilon^c_{loose} - \epsilon^c_{tight} & \scriptstyle \epsilon^l_{loose} - \epsilon^l_{tight} \\      \scriptstyle
-                1.0 - \epsilon^b_{loose} & \scriptstyle 1.0 - \epsilon^c_{loose} & \scriptstyle  1.0 - \epsilon^l_{loose}
-            \end{bmatrix}
-            \begin{bmatrix} \scriptstyle
-                N^b \\ \scriptstyle
-                N^c \\ \scriptstyle
-                N^l
-            \end{bmatrix}
-        \label{eq:matrix1} 
-        \end{equation} %\label{eq:matrix1}
-
-Once the tag counts $N_{tight}$, $N_{loose}$ and $N_{anti}$ are found in data, the equation in \ref{eq:matrix1} can be inverted to solve for the flavor composition of the sample, as shown in \ref{eq:matrix2}.
-
-
-        \begin{equation}
-            \begin{bmatrix} \scriptstyle
-                N^b \\ \scriptstyle
-                N^c \\ \scriptstyle
-                N^l
-            \end{bmatrix} 
-            = 
-            \begin{bmatrix} \scriptstyle
-                \epsilon^b_{tight} & \scriptstyle \epsilon^c_{tight} & \scriptstyle \epsilon^l_{tight} \\  \scriptstyle
-                \epsilon^b_{loose} - \epsilon^b_{tight} & \scriptstyle \epsilon^c_{loose} - \epsilon^c_{tight} & \scriptstyle \epsilon^l_{loose} - \epsilon^l_{tight} \\      \scriptstyle
-                1.0 - \epsilon^b_{loose} & \scriptstyle 1.0 - \epsilon^c_{loose} & \scriptstyle  1.0 - \epsilon^l_{loose}
-            \end{bmatrix}
-            ^{-1}
-            \begin{bmatrix} \scriptstyle
-            N_{tight} \\ \scriptstyle
-            N_{loose} \\ \scriptstyle
-            N_{total}
-            \end{bmatrix}  
-        \label{eq:matrix2} 
-        \end{equation} %\label{eq:matrix2}
-
-The b-tagging efficiencies that comprise the matrix are $p_T$ and $\eta$ dependent, so we create a 2D binning and create a different matrix and set of tag counts for each bin.  
-
-
-
-\subsection{Matrix Method Validation and Errors}
-\subsubsection{Validation Studies}
-Two aspects of the matrix method result must be validated: the overall number of $B$, $C$ and light jets predicted (i.e. the normalization) and the shape of the $m_{bb}$ distribution when reweighted by the matrix method (i.e. that any shape differences in the $m_{bb}$ distributions based on the flavor of the third jet must propagate through in the matrix method predictions).  Toy MC provides a laboratory for performing these checks.  
-
-First, we generate a Toy MC sample where the fraction of $b$, $c$, and light 
-jets is known exactly, then these samples are sent through the analysis framework for $b$-tagging and 
-then the counts in those $b$-tag categories used to predict the flavors of the original sample; 
-the input and output flavor normalizations match to within a few percent (the difference results from statistical fluctuations, 
-since the kinematic distributions of the Toy MC are allowed to have random fluctuatioons that can then propagate through to the final result).  
-%----------------------------------------------
-\begin{table}
-\centering
-\caption{Results of the matrix method normalization tests when run on a Toy MC sample of 
-    900,000 total events.  The matrix method is run with the same efficiencies that
-    are used to generate the toy MC samples, so the errors are statistical only.
-    \label{tab:mm_toy_mc}   }
-  \begin{tabular}{cccc}
-     \hline \hline
-     Flavor & Truth Events & MM Predicted Events & \% Difference  \\ \hline
-     b   & 45,000 & 45,602 & +1.3\% \\
-     c   & 90,000 & 86,938 & -3.4\% \\
-     light & 765,000 & 767,458 & +0.3\% \\
-     \hline     \end{tabular}
-\end{table}
-%----------------------------------------------
-
-A second task for the Toy MC studies is to validate the $m_{bb}$ shapes.  Even if the normalization is perfect coming out of the matrix method, a major concern is the shape of the $m_{bb}$ distribution based on the truth flavor of the third jet.  The shape prediction is validated in Toy MC, by changing the shape of the $m_{bb}$ distribution based on the truth flavor of the third jet and checking to see if the shape differences propagate through.  
-
-
-
-
-
-
-\subsection{MC-Based Validation of Shape Assumption}
 
 
 
@@ -347,27 +218,6 @@ bbb, bbloose and bbanti bins for the all-hadronic $t\bar{t}$ can be found in Fig
 
 
 
-\subsubsection{Vector Boson + Jets Background}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -378,36 +228,6 @@ bbb, bbloose and bbanti bins for the all-hadronic $t\bar{t}$ can be found in Fig
 %The b-tagging in the trigger provides a handle for controlling the mistag background.  The L2, EF and offline MV1 b-tags are independent of each other, which is to say that (for example) the EF b-tagging decision on a given jet does not take into account whether the jet was tagged in L2, so we can improve the purity of our b-jet sample by requiring that the same jet pass L2, EF and MV1 tags.  
 
 
-%  \begin{table}[hbt]
-%
-%    \begin{tabular}{l | l | c | c || c | c }
-%    \multicolumn{2}{c}{}  & \multicolumn{2}{c}{Signal MC} & \multicolumn{2}{c}{Unbiased Data} \\
-%      X         & Y         & sig-like & bkgd-like   &   sig-like & bkgd-like \\
-%      \hline
-%      EF        & L2        & 0.917    & 0.248 &   0.424       & 0.035 \\
-%      \hline
-%      L2        & MV1 (80)  & 0.675    & 0.031 &       0.510       & 0.077 \\
-%      EF        & MV1 (80)  & 0.824    & 0.090 & 0.515       & 0.050\\
-%      L2 and EF & MV1 (80)  & 0.676    & 0.036 & 0.414       & 0.031 \\
-%      MV1 (80)  & L2 and EF & 0.977    & 0.434 & 0.640       & 0.076 \\
-%      \hline
-%      L2        & MV1 (70)  & 0.716    & 0.060 & 0.652       & 0.086\\
-%      EF        & MV1 (70)  & 0.867    & 0.131 & 0.665       & 0.060 \\
-%      L2 and EF & MV1 (70)  & 0.721    & 0.060 & 0.563       & 0.038\\
-%      MV1 (70)  & L2 and EF & 0.954    & 0.340 & 0.538       & 0.034\\
-%      \hline
-%      L2        & MV1 (60)  & 0.757    & 0.101 & 0.762       & 0.095\\
-%      EF        & MV1 (60)  & 0.903    & 0.193 & 0.779       & 0.070 \\
-%      L2 and EF & MV1 (60)  & 0.765    & 0.103 & 0.692       & 0.045\\
-%      MV1 (60)  & L2 and EF & 0.902    & 0.250 & 0.429       & 0.015\\
-%    \end{tabular}
-%    \\
-%    \vspace{2mm}
-
-%\caption{  The acceptance of a cut on variable X given that the events have
-%  already passed (sig-like) or failed (bkgd-like) a cut on variable Y.}
-%  \end{table}
-  
 
 
 %The third jet in the event, however, will not be tagged by the trigger.  The jet will be tagged offline, but even after the offline tagging we expect there will be many events in which the third jet is not a b-jet, but is a mistagged light or charm jet.  The exact size of this background for light jets is given by equation \ref{eq:mistag}, and a similar equation can be written for charm jets.
@@ -422,7 +242,6 @@ bbb, bbloose and bbanti bins for the all-hadronic $t\bar{t}$ can be found in Fig
 
 
 
-%\section{Matrix Method Strategy and Mathematics}
 
 
 

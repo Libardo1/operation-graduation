@@ -330,7 +330,7 @@ lead as it travels through it, creating an electromagnetic shower, which then pr
 
 \begin{figure}
 \begin{center}
-	\includegraphics[width=0.6\textwidth]{ATLASDetector/images/LArg_accordion.pdf}	
+	\includegraphics[width=0.5\textwidth]{ATLASDetector/images/LArg_accordion.pdf}	
 	\caption{A depiction of a section of the LAr calorimeter.  The accordion structure of the towers is visible, as well as the three sampling layers. 	\label{fig:lar}}
 \end{center}
 \end{figure}
@@ -444,21 +444,19 @@ EF together are called the high level trigger, or HLT.
  
 
 The trigger has a step-type structure, where progressively smaller numbers of events are processed with progressively more 
-detailed and computationally intensive algorithms.  For example, because of the inner detector readout
-bandwidth and the complexity of track reconstruction, tracking information is not used until the Event Filter,
-whereas jet-like signatures can be used at all levels.  
-In addition, many physics analyses (including this one) look for signatures that have more than one physics object in 
+detailed and computationally intensive algorithms.  
+Many physics analyses (including this one) look for signatures that have more than one physics object in 
 them (for instance, multiple electrons, or a lepton plus jets), so multiple physics objects are often 
 required in a single trigger.  There are also single-item triggers, although typically these have higher thresholds 
-than triggers that look for multiple objects.  If all of the objects in a given trigger item are seen
-, the event is accepted for the current level and the event moves forward in the data collection process.  
+than triggers that look for multiple objects.  If all of the objects in a given trigger item are seen, 
+the event is accepted for the current level and the event moves forward in the data collection process.  
 This process repeats three times, once for each of the levels of the trigger--only those events which 
 pass L1 move onto L2, those which pass L2 move on to EF, and those that pass EF 
 are written to disk.  As the machine settings for the LHC changed over the course of 2012, resulting 
 in different conditions for data-taking, the trigger menu was adjusted periodically to keep rates under control (
 in practice, this generally means either raising thresholds or adding prescales).  
 The end result of this process is approximately 200 events 
-per second (320 GB/s of data) being written to disk; the trigger rates and latency 
+per second (320 MB/s of data) being written to disk; the trigger rates and latency 
 information can be found in Table \ref{tab:trigger_stats}.
 
   
@@ -481,8 +479,8 @@ one of the trigger chains \cite{atlas_trigger}. \label{tab:trigger_stats}}
 Of particular interest to this analysis are the jet thresholds and b-tagging applied in the trigger.  This 
 will be outlined in greater detail in Sections~\ref{sec:b-tag} and ~\ref{sec:my_trigger}, but we will introduce the ideas here.  As 
 only 200 events per second get written to disk, the bandwidth has to be carefully allocated across triggers, 
-and it is very expensive to keep a trigger that allows high rates of events to be written to data
-.  In an analysis such as this one, the physics objects coming from the signal (b-jets 
+and it is very expensive to keep a trigger that allows high rates of events to be written to disk.  
+In an analysis such as this one, the physics objects coming from the signal (b-jets 
 from a Higgs decay) are generally higher in p$_T$ than the background (continuum QCD processes
 ) so one way to keep event rates reasonable in the face of rising luminosity is to place higher p$_T$ 
 thresholds on the jets that fire the trigger.   

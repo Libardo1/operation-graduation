@@ -22,13 +22,25 @@ MC events are generally created in four major steps.
 \end{enumerate} 
 
 \section{Signal Monte Carlo}
-MadGraph \cite{MadGraph} is used to generate the signal MC, with showering and hadronization done in Pythia6 \cite{Pythia6}.  Madgraph uses a 5 flavor scheme PDF (parton distribution function), meaning that it models $b$-quarks in the proton as well as the more common light flavor (up, down, charm and strange quarks, and gluons).  In addition to the Higgs production with the associated $b$-quark and the Higgs decay, there can also be extra jets in the event from initial state radiation (ISR) and/or final state radiation (FSR).  We allow up to three additional partons per event in the signal MC; the generation and cross-section calculations tend to be more accurate for higher numbers of extra partons allowed but at the cost of exponentially slower and more complicated generation times.  We found three jets to be a reasonable cutoff where the distributions did not seem to be affected by allowing for higher numbers of extra partons, but the generation time was still acceptably quick.  
+MadGraph \cite{MadGraph} is used to generate the signal MC, with showering and 
+hadronization done in Pythia6 \cite{Pythia6}.  Madgraph uses a 5 flavor scheme PDF 
+(parton distribution function), meaning that it models $b$-quarks in the proton as 
+well as the more common light flavor (up, down, charm and strange quarks, 
+and gluons).  In addition to the Higgs production with the associated $b$-quark and 
+the Higgs decay, there can also be extra jets in the event from initial state radiation (ISR) 
+and/or final state radiation (FSR).  We allow up to three additional partons per 
+event in the signal MC; the generation and cross-section calculations tend to be more 
+accurate for higher numbers of extra partons allowed but at the cost of exponentially slower and more 
+complicated generation times.  We found three jets to be a reasonable cutoff where the distributions did 
+not seem to be affected by allowing for higher numbers of extra partons, but the generation 
+time was still acceptably quick.  
 
 %--------------------------------------------------------
 \begin{table}
    \caption{The signal MC samples and their parameters. \label{tab:sig_mc_parameters} }
-    \begin{tabular}{ c c c }
-    Dataset ID & mass (GeV) & width (GeV) \\
+    \center
+    \begin{tabular}{ c c c } \hline\hline
+    Dataset ID & mass (GeV) & width (GeV) \\ \hline
     181120     & 250        & 1.68682 \\
     181121     & 280        & 1.92318 \\
     181122     & 310        & 2.50849 \\
@@ -40,7 +52,7 @@ MadGraph \cite{MadGraph} is used to generate the signal MC, with showering and h
     181128     & 600        & 8.11044 \\
     181129     & 650        & 9.26688 \\
     181130     & 700        & 10.3760 \\
-    181131     & 800        & 12.5049 \\
+    181131     & 800        & 12.5049 \\ \hline
     \end{tabular}
 \end{table}
 
@@ -49,33 +61,103 @@ MadGraph \cite{MadGraph} is used to generate the signal MC, with showering and h
 
 
 
-The Madgraph signal generation is done for 12 different mass points, spanning 250-800 GeV. Below 250 GeV, the daughter $b$-jets from the Higgs tend to be too low-$p_T$ to fire the trigger, while above 800 GeV SUSY becomes less appealing theoretically.  Since both the production and decay of $bH\rightarrow bbb$ happen via SM interactions, with SUSY only becoming relevant for increasing the production cross section and widening the inherent width of the $A/H$ distributions, the signal generation can be done by using an SM $bH\rightarrow bbb$ production model but with a modified Higgs width.  There are 300,000 signal events generated for each mass point.
+The Madgraph signal generation is done for 12 different mass points, spanning 250-800 GeV
+. Below 250 GeV, the daughter $b$-jets from the Higgs tend to be 
+too low-$p_T$ to fire the trigger, while above 800 GeV SUSY 
+becomes less appealing theoretically.  Since both the production and decay of $bH\rightarrow bbb$ 
+happen via SM interactions, with SUSY only becoming relevant for increasing the production cross section and 
+widening the inherent width of the $A/H$ distributions, the signal generation can 
+be done by using an SM $bH\rightarrow bbb$ production model but with a 
+modified Higgs width.  There are 300,000 signal events generated for each mass point.
 
 % ATF-II source: http://iopscience.iop.org/1742-6596/396/2/022031
-The detector simulation for the signal MC was done using AtlFast-II (AFII) \cite{ATF2}, a modified version of Geant4 \cite{Geant4-1, Geant4-2} designed to cut down on the considerable time required for simulating particle interactions with the detector, especially showers in the calorimeter.  AFII does full simulation of the inner detector and tracking, but uses frozen shower shapes taken from a large collection of pre-generated samples to speed up the simulation.  After simulation, the digitization and reconstruction are handled by the ATLAS standard algorithms in the ATHENA framework, as is standard for all ATLAS MC.    
+The detector simulation for the signal MC was done using AtlFast-II (AFII) \cite{ATF2}, 
+a modified version of Geant4 \cite{Geant4-1, Geant4-2} designed 
+to cut down on the considerable time required for simulating particle interactions with the detector, especially 
+showers in the calorimeter.  AFII does full simulation of the inner detector and tracking, but 
+uses frozen shower shapes taken from a large collection of pre-generated samples to speed up 
+the simulation.  After simulation, the digitization and reconstruction are handled by the ATLAS standard algorithms 
+in the ATHENA framework, as is standard for all ATLAS MC.    
 
 \section{Background}
 \subsection{QCD Background}
-Although QCD is the largest and most important background in this analysis, fully modeling it with QCD has some important drawbacks, which motivates our decision to use a mostly data-driven background estimation method.  That having been said, MC can still be a very valuable tool for making basic estimates and validating assumptions. 
+Although QCD is the largest and most important background in this analysis, fully modeling 
+it with QCD has some important drawbacks, which motivates our decision to use a 
+mostly data-driven background estimation method.  That having been said, MC can 
+still be a very valuable tool for making basic estimates and validating assumptions. 
 
-There are two major types of QCD background in this analysis: first, when there is one or more mistakenly $b$-tagged light flavor or charm jets, which we call \textit{reducible} because, at least in theory, it could be identified and isolated/removed; and second, the \textit{irreducible} QCD background in which three real $b$-jets are present in the final state but without the intermediate resonance of the Higgs.  Both sources of background are expected to be significant but generally require different MC generation strategies.
+There are two major types of QCD background in this analysis: first, when 
+there is one or more mistakenly $b$-tagged light flavor or charm jets, 
+which we call \textit{reducible} because, at least in theory, 
+it could be identified and isolated/removed; and second, the \textit{irreducible} 
+QCD background in which three real $b$-jets are present in the final 
+state but without the intermediate resonance of the Higgs.  Both sources of background are 
+expected to be significant but generally require different MC generation strategies.
+
+
 
 \subsubsection{QCD Multijet}
-The ATLAS QCD multijet MC collection is dataset is generated using Pythia8 \cite{Pythia8}.  One of the major challenges of a truly inclusive sample like this one is that low-$p_T$ jets dominate the production cross section but generally have very low efficiency through the triggers or analysis cut flows, which is addressed by generating events several times with filtering applied based on the $p_T$ of the leading jet.  This leads to a distinctive ``slice'' structure to the sample, where 8 different slices are generated, each with a different $p_T$ range for the leading jet, and then the slices are knitted together with different relative weights to produce an inclusive spectrum with high statistics at all $p_T$ values.  
+The ATLAS QCD multijet MC collection is dataset is generated using Pythia8 \cite{Pythia8}.  
+One of the major challenges of a truly inclusive sample like this one is that 
+low-$p_T$ jets dominate the production cross section but generally have 
+very low efficiency through the triggers or analysis cut flows, which is addressed by 
+generating events several times with filtering applied based on the $p_T$ 
+of the leading jet.  This leads to a distinctive ``slice'' structure to 
+the sample, where 8 different slices are generated, each with a different $p_T$ 
+range for the leading jet, and then the slices are knitted together with different 
+relative weights to produce an inclusive spectrum with high statistics at all $p_T$ values.  
 
+\begin{table}[h]
+ \begin{center}
+\caption{Hard subprocesses simulated in the bb QCD MC event sample, along with their cross sections. Here
+$j=u,\bar{u},d,\bar{d},s,\bar{s},g$
+\label{tab:qcd_mc_parameters}}
+    \begin{tabular}{l r r r r r} \hline \hline
+    Index & Dataset ID & $p_T$ Range& Cross Section (nb)& Filter Eff   & N Events \\ \hline
+    0     &  147910    & 0-20        &  72850000.0       &      0.98557 & 1000000 \\
+    1     &  147911    & 20-80       &  72850000.0       &   0.00012909 & 999996  \\
+    2     &  147912    & 80-200      &     26359.0       &    0.0039901 & 999893 \\
+    3     &  147913    & 200-500     &      544.18       &     0.001222 & 914584 \\
+    4     &  147914    & 500-1000    &      6.4453       &   0.00070839 & 999773 \\
+    5     &  147915    & 1000-1500   &    0.039739       &    0.0021516 & 957565 \\
+    6     &  147916    & 1500-2000   &   0.0004161       &    0.0046773 & 299929 \\
+    7     &  147917    & 2000+       &  4.0636e-05       &     0.014595 & 299988 \\
+    \end{tabular}
+  \end{center}
+\end{table}
 
-ATLAS has a high-statistics inclusive QCD MC sample that is used primarily in this analysis for understanding the QCD background from mistagged charm and light flavor.  Since the sample is inclusive, there is no filtering on the flavor of the jets that are produced (although there is dedicated effort to have high-$p_T$ jets simulated with adequate statistics) and the vast majority of jets are light or charm jets.  As a result, while we use this sample to estimate the efficiency and flavor composition of the QCD production in ATLAS as a whole, a particularly important background (QCD $bbb$) is virtually absent from this sample.
+ATLAS has a high-statistics inclusive QCD MC sample that is used primarily in 
+this analysis for understanding the QCD background from 
+mistagged charm and light flavor (Table~\ref{tab:qcd_mc_parameters}.  Since 
+the sample is inclusive, there is no filtering on the flavor of the jets 
+that are produced (although there is dedicated effort to have high-$p_T$ 
+jets simulated with adequate statistics) and the vast majority of jets are light or 
+charm jets.  As a result, while we use this sample to estimate the 
+efficiency and flavor composition of the QCD production in ATLAS as a whole, a 
+particularly important background (QCD $bbb$) is virtually absent from this sample.
 
 
 \subsubsection{$b$-Enriched QCD Multijet}
 \label{sec:bb_qcd_mc}
-Since the inclusive QCD Multijet samples are inadequate for understanding the $bb$ and $bbb$ MC backgrounds, we generate a dedicated sample that undergoes filtering to enrich it in heavy flavor.  This sample is generated using Sherpa 1.4.3 \cite{Sherpa} and detector simulation is done with AFII.  This sample starts with a 5-flavor PDF that assumes massive $b$-quarks and 2, 3 or 4 final state partons; then a filter is applied that requires that the leading 2 partons in the event be true $b$-quarks as well as requiring that the leading parton have a $p_T$ of at least 55 GeV (the latter requirement helps keep an acceptable efficiency when the sample is passed through the trigger and offline cuts).
-i
+Since the inclusive QCD Multijet samples are inadequate for understanding the $bb$ and 
+$bbb$ MC backgrounds, we generate a dedicated sample that undergoes filtering to 
+enrich it in heavy flavor.  This sample is generated using Sherpa 1.4.3 
+\cite{Sherpa} and detector simulation is done with AFII.  This sample 
+starts with a 5-flavor PDF that assumes massive $b$-quarks and 
+2, 3 or 4 final state partons; then a filter is applied that 
+requires that the leading 2 partons in the event be true $b$-quarks 
+as well as requiring that the leading parton have a $p_T$ 
+of at least 55 GeV (the latter requirement helps keep an acceptable efficiency when 
+the sample is passed through the trigger and offline cuts).
+
 
 %---------------------------------------
 \begin{table}[h]
  \begin{center}
-    \begin{tabular}{l|r}
+\caption{Hard subprocesses simulated in the bb QCD MC event sample, along with their cross sections. Here
+$j=u,\bar{u},d,\bar{d},s,\bar{s},g$}
+\label{tab:sherpa_subprocesses}
+    \begin{tabular}{l|r} \hline \hline
    subprocess      & cross section (pb)\cr \hline
 
 $jj\rightarrow b\bar{b}jj$ & 58531 \cr
@@ -104,9 +186,6 @@ $b\bar{b}\rightarrow b\bar{b}$ & 37 \cr
 $bb\rightarrow bb\ \ +\ \  \bar{b}\bar{b}\rightarrow \bar{b} \bar{b}$ & 30 \cr
 \hline
    \end{tabular}
-\caption{Hard subprocesses simulated in the bb QCD MC event sample, along with their cross sections. Here
-$j=u,\bar{u},d,\bar{d},s,\bar{s},g$}
-\label{tab:sherpa_subprocesses}
   \end{center}
 \end{table}
 %---------------------------------------
@@ -115,6 +194,7 @@ $j=u,\bar{u},d,\bar{d},s,\bar{s},g$}
 
 %-----------------------------------------------                     
 \begin{figure}
+  \center
   \includegraphics[width=0.70\linewidth]{MonteCarlo/figures/mbb_bbqcd_vs_data.pdf}
   \caption{Mass of the two leading jets in events passing all cuts except the
 bbb, bbloose and bbanti classification.  Distributions for the 10,000 event bb QCD Monte Carlo validation sample
@@ -122,6 +202,7 @@ and a 2.2~fb$^{-1}$ luminosity data sample are shown.    \label{fig:mbb_bbqcd_vs
 \end{figure}
 
 \begin{figure}
+  \center
   \includegraphics[width=0.70\linewidth]{MonteCarlo/figures/mv1_jet3_bbqcd_vs_data.pdf}
   \caption{The b-tag variable MV1 for the 3rd leading $p_T$ jet in events passing all cuts except the
 bbb, bbloose and bbanti classification.     Distributions for the 10,000 event bb QCD Monte Carlo validation sample
@@ -143,22 +224,22 @@ and a 2.2~fb$^{-1}$ luminosity data sample are shown.    \label{fig:pt_eta_bbqcd
 
 
 
-\subsection{Top Background}
-Top-antitop pairs decaying all-hadronically is the largest non-QCD background.  The sample generated
-to model this background is generated in Powheg and Pythia, with Tauola and Photos also used for
-handling tau leptons and photons.  In practice, $t\bar{t}$ is a minor background, both because
-of its small cross section relative to QCD and because in the high mass ranges most relevant for
-this search, it does not show any sigificant structure or $m_{bb}$ shape differences depending
-on the flavor of the third jet.
-
-
-\begin{table}
-   \caption{Parameters of the $t\bar{t}$ MC sample used in this analysis. \label{tab:ttbar_params} }
-    \begin{tabular}{ c c c c }
-    Dataset ID & Cross Section [nb] & Filter Efficiency & N Events \\
-    117050     & 0.21085        & 0.54298    & 99930891 \\
-    \end{tabular}
-\end{table}
+%\subsection{Top Background}
+%Top-antitop pairs decaying all-hadronically is the largest non-QCD background.  The sample generated
+%to model this background is generated in Powheg and Pythia, with Tauola and Photos also used for
+%handling tau leptons and photons.  In practice, $t\bar{t}$ is a minor background, both because
+%of its small cross section relative to QCD and because in the high mass ranges most relevant for
+%this search, it does not show any sigificant structure or $m_{bb}$ shape differences depending
+%on the flavor of the third jet.
+%
+%
+%\begin{table}
+%   \caption{Parameters of the $t\bar{t}$ MC sample used in this analysis. \label{tab:ttbar_params} }
+%    \begin{tabular}{ c c c c }
+%    Dataset ID & Cross Section [nb] & Filter Efficiency & N Events \\
+%    117050     & 0.21085        & 0.54298    & 99930891 \\
+%    \end{tabular}
+%\end{table}
 
 %--------------------------------------------------------
 

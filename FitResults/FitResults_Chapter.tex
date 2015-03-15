@@ -98,32 +98,42 @@ the number of jets on the signal distributions, see Section~\ref{sec:n_jets_sig}
 \subsection{PDF Shapes and Fit Constraints}
 \label{sec:pdfs}
 
-The background is fit with Bernstein polynomial.  A Bernstein polynomial of degree $n$ is
-defined by
+\subsubsection{Exponential-Only Fit to Background}
+The background distribution is generally well-described by a decaying exponential, 
+as long as the fit window begins past the turn-on region.  An exponential has the
+additional advantages of only having one degree of freedom (the decay constant), 
+making convergence relatively straightforward, as well as a mathematical guarantee
+to be monotonically decreasing, obviating the concern that wiggles in the background
+shape could absorb a possible signal.
 
-\begin{equation}
-B_{i,n}(t) = n\choose{i} t^i (1-t)^{n-i}
-\end{equation}
 
-for $i=0,1,...,n$, where
 
-\begin{equation}
-n\choose{i} = \frac{n!}{i!(n-i)!}
-\end{equation}
 
-and there are $n+1$ polynomials of degree $n$.  Bernstein polynomials have the nice property
-that they are guaranteed to always have positive values, as well as a reputation for
-converging more easily than some other families of polynomials.
 
-The exact degree of the polynomial is a free parameter to be chosen.  There is a tradeoff
-between a degree that is too low to capture the full shape of the background, or for which
-convergence is a struggle, versus a polynomial with a degree high enough that it can 
-``fit anything'' as part of the background, including a possible signal.  For either 
-extreme, one also needs to guard carefully against the possibility of the background fit
-introducing spurious signal where there is, in fact, no signal to be found.   
 
+\subsubsection{Exponential Plus Logistic Fit to Background}
+While an exponential distribution does an admirable job of describing the bulk of the
+distribution, an examination of the residual errors shows that it systematically 
+overshoots the low end of the $m_{bb}$ distribution, and undershoots
+the high end.  These errors look like they might be well-described by a logistic
+function, so this as added as a correction in the 4-jet and 5-jet bins (the 3-jet
+bin does not seem to suffer from this bias).  
+
+
+
+
+\subsubsection{Cruijff Fit to Signal}
 
 %http://www.slac.stanford.edu/econf/C0303241/proc/pres/502.PDF
+The signal $m_{bb}$ shape is fit with a Cruijff PDF.  The Cruijff function is a bifurcated Gaussian (different widths for left and right sides of the distribution) with non-Gaussian tails: 
+
+\begin{equation}
+f(x) = exp((x-m_{bb})^2 / (2\sigma^2_{L,R} + \alpha_{L,R}(x-m)^2))
+\end{equation}
+
+The signal MC distributions and fit results can be seen in Figures
+~\ref{fig:signalPDFs_3j}-~\ref{fig:signalPDFs_5j_bbloose}. 
+
 
 \begin{figure}[phtb!]
   \begin{center}
@@ -135,7 +145,7 @@ introducing spurious signal where there is, in fact, no signal to be found.
   \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_1.png}\end{subfigure}
   \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_1.png}\end{subfigure}
   \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_1.png}\end{subfigure}
-  \caption{Signal PDFs for $m_{bb}$ in the {\it bbb} category, for events with 3 jets, for different $H/A$ masses. \label{fig:signalPDFs_3j}}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbb} category, for events with 3 jets, for different $H/A$ masses. \label{fig:signalPDFs_3j}}
     \end{center}
 \end{figure}
 
@@ -150,10 +160,9 @@ introducing spurious signal where there is, in fact, no signal to be found.
   \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_2.png}\end{subfigure}
   \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_2.png}\end{subfigure}
   \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_2.png}\end{subfigure}
-  \caption{Signal PDFs for $m_{bb}$ in the {\it bbb} category, for events with 4 jets, for different $H/A$ masses. \label{fig:signalPDFs_4j}}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbb} category, for events with 4 jets, for different $H/A$ masses. \label{fig:signalPDFs_4j}}
     \end{center}
 \end{figure}
-
 
 \begin{figure}[phtb!]
   \begin{center}
@@ -165,21 +174,97 @@ introducing spurious signal where there is, in fact, no signal to be found.
   \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_3.png}\end{subfigure}
   \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_3.png}\end{subfigure}
   \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_3.png}\end{subfigure}
-  \caption{Signal PDFs for $m_{bb}$ in the {\it bbb} category, for events with 5 or more jets, for different $H/A$ masses. \label{fig:signalPDFs_5j}}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbb} category, for events with 5 or more jets, for different $H/A$ masses. \label{fig:signalPDFs_5j}}
     \end{center}
 \end{figure}
 
 
 
-\section{Fit Yields}
-\begin{table}
-\caption{The $m_{bb}$ windows, predicted yields, and integrals for each of the
-    mass points quantified with the fit. \label{tab:bkg_fit_yields}}
-    \begin{tabular}{ c c c c c }
-        $m_A$ & window low edge & window high edge & prediction & integral \\
-    \end{tabular}
-\end{table}
 
 
 
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_4.png}\end{subfigure}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 3 jets, for different $H/A$ masses. \label{fig:signalPDFs_3j_bbloose}}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_5.png}\end{subfigure}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 3 jets, for different $H/A$ masses. \label{fig:signalPDFs_4j_bbloose}}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_6.png}\end{subfigure}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 5 or more jets, for different $H/A$ masses. \label{fig:signalPDFs_5j_bbloose}}
+    \end{center}
+\end{figure}
+
+
+
+\section{Limit Extraction}
+Once the signal and background have been fit, the CL$_s$ method is used to 
+determine the $\sigma\times BR$ that can be excluded at the 95\% confidence
+level \cite{CLS1}, \cite{CLS2}, \cite{CLS3}.  The CL$_s$ method is a
+frequentist limit-setting procedure that is designed to give upper limits that
+are greater than the true value of $\sigma\times BR$ with a probability of at
+least 95\%.
+
+Once the signal and background PDF shapes are determined in the fit,
+the limit setting procedure proceeds as follows.  The fits are used to generate
+an ensemble of toy MC datasets
+that are combined into a single representative dataset, called the ``Asimov
+The limit-setting procedure 
+dataset'' for that distribution.  Then 
+In order to obtain the nominal fit result in terms of $\mu$ and $\sigma_{\mu}$
+the likelihood function is maximized with respect to all parameters.
+This is referred to as the maximized log-likelihood value MLL.
+The test statistic $q_\mu$ is then constructed according to
+the profile likelihood:
+\begin{equation}
+q_\mu = 2 \mathrm{ln} (\mathcal{L} (\mu,
+\hat{\hat{\theta_\mu}})/\mathcal{L} (\hat{\mu}, \hat{\theta})), 
+\end{equation}
+where
+$\hat{\mu}$ and $\hat{\theta}$ are the parameters that maximize the
+likelihood (with the constraint $0 \leq \hat{\mu} \leq \mu$), and
+$\hat{\hat{\theta}}_\mu$ are the nuisance parameter values that maximize the
+likelihood for a given $\mu$. This test statistic is used to measure
+the compatibility of the background only model with the observed
+data. 
+
+Expected exlusion limits following this procedure are shown in Fig.~\ref{fig:limitSensitivity} and Table~\ref{tab:limitSensitivity}. These are obtained under the assumption that
+ a good estimate of the background parameters is given by the fit values reported in Table~\ref{tab:bkgFit}.
+
+\textbf{table of parameters returned by fit}
+
+\textbf{table of CLs limits by mass point}
 

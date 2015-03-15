@@ -78,13 +78,14 @@ within the event; we find that especially for masses above 350 GeV or so it usua
 the leading and second $b$-tagged jets in the event (with about a 70\% probability).
     
 \begin{figure}[hbt]
+  \center
   \includegraphics[width=0.78\linewidth]{SignalKin/combinatorics.pdf}
-  \label{fig:combinatorics}
   \caption{The percentage probability of the Higgs decaying to a given pair of $b$-tagged jets in signal MC,
     as a function of the generated Higgs mass.  The assumption being checked is that the majority of
     the time, the Higgs decays to the leading two $b$-tagged jets (blue line), so that reconstructing with these jets
     will yield the correct combinatorics.  That assumption is correct 60-70\% of the time for $m_A>$350 GeV,
-    with the remaining 30-40\% of events being spread out over many other combinations of jets.}
+    with the remaining 30-40\% of events being spread out over many other combinations of jets.
+    \label{fig:combinatorics}}
 \end{figure}
                                                                                                                                     
                                                                                                                                     
@@ -228,7 +229,22 @@ sections we will detail several attempts at FSR recovery.
 
 
 
-\subsection{Jet Modifications}
+\subsection{Jet Reconstruction Modifications}
+As noted in Section~\ref{sec:jet_reco}, this analysis uses anti-$k_t$ jets with a distance parameter
+of R=0.4.  It is possible that, for a signficant number of jets, some of the radiation associated
+with the jet is falling outside of the jet radius and is therefore lost during clustering and
+reconstruction.  A way to test this hypothesis is to reconstruct the signal events with R=0.6
+jets, and see if the mass resolution improves. 
+
+We find that the mass resolution does get marginally better (narrower distribution and higher mean
+for the $m_{bb}$ distribution) for high-mass signal MC events, but only by a few percent.
+Practical concerns prevent R=0.6 jets from being a serious consideration: first, the background
+would also be pushed toward higher masses as QCD jets are reconstructed with larger radii;
+second, pileup calibration and removal would be a significantly larger concern; and third,
+the $b$-tagging calibrations are created only for R=0.4 jets so the $b$-tagging systematics
+would be much more difficult to quantify.  
+
+
 \subsection{Topology-Based Energy Recovery Algorithm}
  One hypothesis for the distribution of the FSR is that, for the high-\pt jets that result from the Higgs
  daughter b-quarks, they might radiate away partons that are hard enough to be clustered into their own

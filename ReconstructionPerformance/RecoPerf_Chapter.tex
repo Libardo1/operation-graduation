@@ -34,7 +34,8 @@ second effect of pileup on tracking is indirect: the detector as a whole, and th
 particular, undergo radiation damage as luminosity accrues.  Radiation damage in silicon detectors manifests 
 itself as rising leakage current, which makes channels prone to more noise hits unless the thresholds are raised (
 but higher thresholds lowers the efficiency for legitimate hits).  As time goes on, the tracking quality can can 
-be affected by the extra noise hits and/or higher thresholds.
+be affected by the extra noise hits and/or higher thresholds.  The track reconstruction efficiency and resolution
+can be seen in Figures~\ref{fig:track_perfA} and ~\ref{fig:track_perfB}.
 
 \begin{figure}
 	\includegraphics[width=0.5\textwidth]{ReconstructionPerformance/images/track_perf1.pdf}
@@ -62,31 +63,31 @@ Measurements from the inner detector (pixel, SCT and TRT) are combined in the tr
 of properties that tracks might have, so the inner detector has to be able to measure tracks with p$_T$
  ranging from 150 MeV to 30 GeV or more.   
 
-The track reconstruction Kalman filter algorithm operates in a few steps.  It begins with track seeds, which are collections of a few hits in the pixel subsystem that could plausibly be 
-parts of tracks.  The advantage of starting with seeds, rather than attempting to find an entire track at 
-once, is that seeds allow flexibility at the beginning of the search (when the track trajectory is the 
-least known) while keeping computational costs down.  Once a seed has been identified, the Kalman fitter (
-as the ATLAS algorithm is called) projects where the next hit would be if there is truly a track 
-present, and then looks for the presence of a hit at the predicted location in the next tracker layer
-.  If a hit is found there, the predicted trajectory of the particle may be refined and the next 
-hit is predicted and sought, until all the detector layers have been traversed. If there is no hit 
-present where one is predicted, the Kalman fitter can project two layers further, to allow for the possibility 
-of a hole where the particle did not leave a hit for some reason. 
-
-In high-pileup environments, the inner detector occupancy can be high which can make for two tracks that 
-overlap, leaving a hit in the same place which must then be allocated to one or the other.  
-Dedicated ambiguity solving is implemented as a second stage in the track reconstruction, where the two candidate tracks are 
-scored against each other via a reward/penalty scheme.  A good $\chi^2/DOF$ 
-score is rewarded, a track with many holes on track or a low $\chi^2/DOF$ 
-is penalized, with subdetector-specific weighting favoring the higher-precision silicon over the the lower-precision TRT \cite{newt}. 
+%The track reconstruction Kalman filter algorithm operates in a few steps.  It begins with track seeds, which are collections of a few hits in the pixel subsystem that could plausibly be 
+%parts of tracks.  The advantage of starting with seeds, rather than attempting to find an entire track at 
+%once, is that seeds allow flexibility at the beginning of the search (when the track trajectory is the 
+%least known) while keeping computational costs down.  Once a seed has been identified, the Kalman fitter (
+%as the ATLAS algorithm is called) projects where the next hit would be if there is truly a track 
+%present, and then looks for the presence of a hit at the predicted location in the next tracker layer
+%.  If a hit is found there, the predicted trajectory of the particle may be refined and the next 
+%hit is predicted and sought, until all the detector layers have been traversed. If there is no hit 
+%present where one is predicted, the Kalman fitter can project two layers further, to allow for the possibility 
+%of a hole where the particle did not leave a hit for some reason. 
+%
+%In high-pileup environments, the inner detector occupancy can be high which can make for two tracks that 
+%overlap, leaving a hit in the same place which must then be allocated to one or the other.  
+%Dedicated ambiguity solving is implemented as a second stage in the track reconstruction, where the two candidate tracks are 
+%scored against each other via a reward/penalty scheme.  A good $\chi^2/DOF$ 
+%score is rewarded, a track with many holes on track or a low $\chi^2/DOF$ 
+%is penalized, with subdetector-specific weighting favoring the higher-precision silicon over the the lower-precision TRT \cite{newt}. 
 
 
 
 %http://iopscience.iop.org/1126-6708/2008/04/063/pdf/1126-6708_2008_04_063.pdf
 \section{Jet Reconstruction}
 \label{sec:jet_reco}
-Because of asymptotic freedom of QCD, quarks and gluons do not remain standalone particles once they're produced
-, but instead they hadronize and shower as they travel through the detector.  Hypothetically, all the particles of 
+Because of asymptotic freedom of QCD, quarks and gluons do not remain standalone particles once they're produced, 
+but instead they hadronize and shower as they travel through the detector.  Hypothetically, all the particles of 
 the shower can be added back up to approximate the energy, momentum, and angle of the original quark 
 or gluon.  Jet reconstruction is the process of assembling calorimeter deposits together into a physics object, called a 
 jet, that ideally will do a good job of representing the characteristics ($p_T$, energy, 
@@ -102,7 +103,8 @@ the jet in a way that prioritizes high energy over close proximity.  The result 
 clustered in with hard deposits, rather than clustering amongst themselves.  The distance parameter of 0.4 is 
 a cutoff as to how far away from the seed in $\eta-\phi$ space to look for 
 additional deposits.   Jets below 20 GeV or so can be difficult to distinguish from noise, so in practice, a lower limit on 
-the $p_T$ (in the case of this analysis, 25 GeV) is often applied.  
+the $p_T$ (in the case of this analysis, 25 GeV) is often applied.  A visualization of the jet reconstruction that results
+from the anti-$k_t$ algorithm can be seen in Figure~\ref{fig:anti_kt_jets}.
 
 %A critical feature of this algorithm, or any jet algorithm, is that it be infrared and collinear safe
 %.  In technical terms, that means that when additional `ghost' particles with infinitesimally small energy or infinitesimally 
@@ -161,7 +163,7 @@ calorimeter readout signal shapes.  Out-of-time pileup has the effect of adding 
 \label{sec:pv}
 Both the hard scatter collision and pileup collisions produce charged tracks; once these tracks are reconstructed, they can 
 be traced back to the interaction region of the ATLAS detector and used to figure out where collisions took place
-.  Each time a group of tracks can be clustered together into a presumed collision, we refer to it 
+.  Each time a group of tracks can be clustered together into a presumed proton-proton collision, we refer to it 
 as a primary vertex.  The reconstruction of primary vertices is one of the reasons that tracking resolution must be 
 so precise; primary vertices are often separated by only a few mm so imprecisely measured tracks can cause unintended 
 merging.  The consequence of mistakes in the primary vertex reconstruction can be physics objects that get grouped with the 
@@ -177,7 +179,7 @@ $Z\rightarrow\mu\mu$ event with 25 reconstructed primary vertices.
 %-----------------------------------------------------------------------------
 \begin{figure}
     \center
-	\includegraphics[width=0.6\textwidth]{ReconstructionPerformance/images/2012_highPileup.pdf}
+	\includegraphics[width=0.5\textwidth]{ReconstructionPerformance/images/2012_highPileup.pdf}
 	\caption{A data event taken in 2012, showing the occupancy typical of high pileup.  This particular event contains a $Z\rightarrow \mu\mu$ physics signature, mixed in with 25 primary vertices.	\label{fig:pileup_pv}  }
 \end{figure}
 %-----------------------------------------------------------------------------
@@ -204,7 +206,7 @@ ATLAS offers $b$-tagging at both the trigger level and offline; this analysis ma
 %-----------------------------------------------------------------------------
 \begin{figure}
     \center
-	\includegraphics[width=0.8\textwidth]{ReconstructionPerformance/images/secondary_vertex.pdf}
+	\includegraphics[width=0.6\textwidth]{ReconstructionPerformance/images/secondary_vertex.pdf}
 	\caption{An event from early ATLAS data-taking, with a number of tracks (in teal) leading back to the primary vertex, and a secondary vertex reconstructed with the associated tracks highlighted in purple \cite{sv}.	\label{fig:secondary_vertex}  }
 \end{figure}
 %-----------------------------------------------------------------------------

@@ -34,13 +34,48 @@ requirement is added later as an offline cut.
 \end{itemize}
 
 
-In the trigger, the L2 and EF jets are b-tagged using xComb \cite{}, a likelihood ratio of IP3D (sig
-nificance of z0 and d0 impact parameters), SV1 (mass of the secondary vertex), NVTX (the number of
+In the trigger, the L2 and EF jets are b-tagged using xComb, a likelihood ratio of IP3D 
+(significance of $z_0$ and $d_0$ impact parameters), SV1 (mass of the secondary vertex), NVTX (the number of
 vertices with two tracks), and EVTX (the energy fraction of the secondary vertex), as well as the number
 of vertices with 2 tracks. The triggers in this analysis use the medium operating point, such that L2 xComb
-$>$ 1.276 and EF xComb $>$ 1.099.
+$>$ 1.276 and EF xComb $>$ 1.099.  This is the loose working point, where the $b$-jet efficiency
+is 60\% online.
 
+Table~\ref{tab:online_offline_btag} below shows the correlations between the two levels of online
+$b$-tagging, as well as the offline (MV1) $b$-tagging for three offline working points (60\%, 70\%,
+80\%).  
 
+  \begin{table}[hbt]
+\caption{  The acceptance of a cut on variable X given that the events have
+  already passed (sig-like) or failed (bkgd-like) a cut on variable Y.\label{tab:online_offline_btag}}
+    
+    \begin{center}
+    \begin{tabular}{l | l | c | c || c | c } \hline \hline
+    \multicolumn{2}{c}{}  & \multicolumn{2}{c}{Signal MC} & \multicolumn{2}{c}{Unbiased Data} \\ \hline
+      X         & Y         & sig-like & bkgd-like   &   sig-like & bkgd-like \\
+      \hline
+      EF        & L2        & 0.917    & 0.248 &   0.424       & 0.035 \\
+      \hline
+      L2        & MV1 (80)  & 0.675    & 0.031 &       0.510       & 0.077 \\
+      EF        & MV1 (80)  & 0.824    & 0.090 & 0.515       & 0.050\\
+      L2 and EF & MV1 (80)  & 0.676    & 0.036 & 0.414       & 0.031 \\
+      MV1 (80)  & L2 and EF & 0.977    & 0.434 & 0.640       & 0.076 \\
+      \hline
+      L2        & MV1 (70)  & 0.716    & 0.060 & 0.652       & 0.086\\
+      EF        & MV1 (70)  & 0.867    & 0.131 & 0.665       & 0.060 \\
+      L2 and EF & MV1 (70)  & 0.721    & 0.060 & 0.563       & 0.038\\
+      MV1 (70)  & L2 and EF & 0.954    & 0.340 & 0.538       & 0.034\\
+      \hline
+      L2        & MV1 (60)  & 0.757    & 0.101 & 0.762       & 0.095\\
+      EF        & MV1 (60)  & 0.903    & 0.193 & 0.779       & 0.070 \\
+      L2 and EF & MV1 (60)  & 0.765    & 0.103 & 0.692       & 0.045\\
+      MV1 (60)  & L2 and EF & 0.902    & 0.250 & 0.429       & 0.015\\ \hline
+    \end{tabular}
+    \\
+    \vspace{2mm}
+    \end{center}
+  \end{table}
+  
 
 
 \section{Offline Baseline Cuts}
@@ -77,7 +112,7 @@ jets.
 The offline cut on the
 trigger-matched $b$-jets is set to the 60\% efficiency
 operating point. Due to the bias introduced by the trigger (see
-Section~\ref{sec:online_btagging}), this provides additional rejection of
+Table~\ref{tab:online_offline_btag}), this provides additional rejection of
 light jets for a relatively small decrease in signal efficiency.
 
 
@@ -96,7 +131,8 @@ place.  Further details can be found in Section~\ref{sec:combinatorics}.
 After two
 $b$-jets have been triple-tagged, a third jet is tagged using the MV1 tagger.  The third
 $b$-jet must have an MV1 value that passes a tight (60\% efficiency)
-cut.
+cut.  The light-jet efficiency for this working point is approximately 0.1\%, and the
+charm efficiency is approximately 10\%.
 
 \end{itemize}
 
@@ -104,8 +140,8 @@ cut.
 
 %------------------------------------------------------
 \begin{figure}
-	\includegraphics[width=0.5\textwidth]{TriggerCuts/cut_efficiencies_j35_signal.pdf}	
-	\includegraphics[width=0.5\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_signal.pdf}	
+	\includegraphics[width=0.4\textwidth]{TriggerCuts/cut_efficiencies_j35_signal.pdf}	
+	\includegraphics[width=0.4\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_signal.pdf}	
     \caption{The cut efficiencies in signal, cut by cut, shown on a linear (left) and logarithmic (right) vertical axis. \label{fig:signal_eff_cutflow}}
 \end{figure}
 
@@ -117,9 +153,18 @@ cut.
 
 %------------------------------------------------------
 \begin{figure}
-	\includegraphics[width=0.5\textwidth]{TriggerCuts/cut_efficiencies_j35_background.pdf}	
-	\includegraphics[width=0.5\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_background.pdf}	
+	\includegraphics[width=0.4\textwidth]{TriggerCuts/cut_efficiencies_j35_background.pdf}	
+	\includegraphics[width=0.4\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_background.pdf}	
     \caption{The cut efficiencies in background, cut by cut, shown on a linear (left) and logarithmic (right) vertical axis. \label{fig:background_eff_cutflow}}
+\end{figure}
+
+%------------------------------------------------------
+
+
+%------------------------------------------------------
+\begin{figure}
+	\includegraphics[width=0.6\textwidth]{TriggerCuts/final_efficiency_vs_mass_j35.pdf}	
+    \caption{The cut efficiencies in background, cut by cut, shown on a linear (left) and logarithmic (right) vertical axis. \label{fig:final_eff_vs_mass}}
 \end{figure}
 
 %------------------------------------------------------
