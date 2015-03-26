@@ -8,8 +8,7 @@
 The last step in computing a result in experimental physics involves identifying
 and quantifying sources of systematic error.  Systematic errors arise from calibration
 errors, data/MC disagreement, detector uncertainty, noise, and other sources
-that do not decrease as the overall dataset size increases.  This is the general
-unifying feature of systematic errors: they do not decrease as one collects more data.
+that do not decrease as the overall dataset size increases.  
 
 
 \section{Trigger $p_T$ Efficiency}
@@ -17,18 +16,22 @@ unifying feature of systematic errors: they do not decrease as one collects more
 
 The trigger can introduce systematic effects that must be quantified as uncertainties; 
 this can happen in two ways on this analysis.  Since the trigger efficiency is estimated
-for signal using MC simulations, it is possible that slight mismodelings in the MC 
+for signal using MC simulations, it is possible that detector mismodelings in the MC 
 simulation process can over- or under-estimate the trigger efficiency as a function 
 of the $p_T$ of the jets in the event.  We call this the trigger $p_T$ efficiency,
 and we estimate and correct for it by parameterizing the turn-on curve with a logistic
 function, and using the ratio of the function between data and MC to calculate and 
 apply scale factors that get applied to the MC events falling in the turn-on curve.  
+The second source of trigger mismodeling comes from the online $b$-tag that is
+included in the trigger, but because of correlations between the online and offline tagging,
+we estimate this uncertainty as part of the $b$-tagging sytematic (Section ~\ref{sec:SF}).
+
 
 The general idea behind the trigger turn-on curve is that the overall trigger efficiency
 is more volatile if one or both of the relevant jets are near the $p_T$ thresholds.
-Since there are two jets in the EF\_2b35\_j145\_j35\_a4tchad trigger, with thresholds
-of 145 and 35 GeV respectively, events with jets near these values should be studied
-and perhaps corrected.  However, since this is a multi-object trigger (requiring $b$-tags
+Since there are two jets in the EF\_2b35\_loose\_j145\_j35\_a4tchad trigger, with thresholds
+of 145 and 35 GeV respectively, events with jets near these values should be assessed
+for systematic errors.  However, since this is a multi-object trigger (requiring $b$-tags
 in addition to the two jets), the efficiency for a given event can be a complex function
 of the $p_T$ of the leading jet, the second jet, and the $b$-tagging characteristics of
 the jets in the event.  In order to factorize out these effects, we place tight offline
@@ -37,24 +40,52 @@ to compute the trigger turn-on curve for the leading jet, we place the following
 computing any efficiencies: 
 \begin{itemize}
     \item at least 60 GeV $p_T$ for the second jet
-    \item two jets in the event must pass MV1 cuts of 60\% efficiency
+    \item two jets in the event must pass L2 and EF $b$-tags
 \end{itemize}
 
 These cuts effectively remove inefficiencies due to the second jet or the $b$-tagging,
 since the second jet $p_T$ cut (60 GeV) is well into the efficiency plateau for that
-jet, and the 60\% MV1 requirement is generally more tight than the loose xComb tag
-that is required online.  In this discussion the same algorithm is applied to quantify
+jet, and the requirement of 2 jets being $b$-tagged online removes events where the
+jet $p_T$ is high enough, but the event fails to trigger because of the $b$-tagging requirement.  
+In this discussion the same algorithm is applied to quantify
 the trigger turn-on of both the leading and sub-leading jet, but for brevity we will
 refer only to the leading jet.  The parameterized turn-on curves for the leading and 
-sub-leading jets in signal MC can be found in Figures~\ref{fig:trigger_turn_on_1} and 
-~\ref{fig:trigger_turn_on_2}.
+sub-leading jets in signal MC and data can be found in Figure~\ref{fig:trigger_turn_on_1}.
 
 For signal MC we can then compute the efficiency as a function of the leading jet $p_T$ by
 examining the leading jet $p_T$ of events that both do and do not pass the trigger.
 Residual inefficiencies remaining from the second jet $p_T$, and the $b$-tagging requirements,
 would show up in the form of the distribution plateauing slightly below 100\% efficiency;
 the logistic function will identify the plateau efficiency and the residual error can be corrected when
-computing the trigger efficiency for a given jet $p_T$.   
+computing the trigger efficiency for a given jet $p_T$.  The logistic function used for 
+fitting has the mathematical form $\epsilon = \frac{b}{1+exp^{c-a*p_T}}$.  The values found
+by ROOT for the parameters of this function are as follows:
+
+\scriptsize
+\begin{verbatim}
+---------- turn-on for j145 jet -----------
+ FCN=485.311 FROM MIGRAD    STATUS=CONVERGED     229 CALLS         230 TOTAL
+ EDM=2.12809e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+ EXT PARAMETER                                   STEP         FIRST   
+ NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+ 1  a           7.02887e+01   4.79927e-01   1.69260e-04  -1.12470e-02
+ 2  b           9.32043e-01   7.98882e-04   8.34460e-06   1.40194e-01
+ 3  c           4.76427e-01   3.29985e-03   1.16262e-06   1.61881e+00
+\end{verbatim}
+
+\scriptsize
+\begin{verbatim}
+---------- turn-on for j35 jet -----------
+ FCN=105.421 FROM MIGRAD    STATUS=CONVERGED     301 CALLS         302 TOTAL
+ EDM=1.35256e-06    STRATEGY= 1      ERROR MATRIX ACCURATE 
+ EXT PARAMETER                                   STEP         FIRST   
+ NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+ 1  a           1.99255e+00   5.51635e-01   3.71390e-04  -1.54286e-02
+ 2  b           9.21239e-01   9.04154e-04   3.27515e-06  -5.97143e-01
+ 3  c           7.52208e-02   8.92003e-03   5.75177e-06   1.00384e+00
+\end{verbatim}
+
+\normalsize
 
 For the turn-on curves in the data, the procedure is slightly different.  Unlike in signal
 MC, there is no direct way of querying which events would have passed the trigger, but failed
@@ -84,42 +115,42 @@ can be computed and applied as a scale factor for events that fall in the turn-o
 
 \begin{figure}[phtb!]
   \begin{center}
-  \begin{subfigure}[leading jet, $m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_400_j35.eps}\end{subfigure}
-  \begin{subfigure}[sub-leading jet, $m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_400_j35.eps}\end{subfigure}
-  \begin{subfigure}[leading jet, $m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_450_j35.eps}\end{subfigure}
-  \begin{subfigure}[sub-leading jet, $m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_450_j35.eps}\end{subfigure}
-  \begin{subfigure}[leading jet, $m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_500_j35.eps}\end{subfigure}
-  \begin{subfigure}[sub-leading jet, $m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_500_j35.eps}\end{subfigure}
-  \begin{subfigure}[leading jet, $m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_550_j35.eps}\end{subfigure}
-  \begin{subfigure}[sub-leading jet, $m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_550_j35.eps}\end{subfigure}
-  \caption{The $p_T$ turn-on curves for the trigger for signal mass points 400-550 GeV.
+  \begin{subfigure}[leading jet, $m_{A}=400$ GeV]{0.45\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_all_j35.eps}\end{subfigure}
+  \begin{subfigure}[sub-leading jet, $m_{A}=400$ GeV]{0.45\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_all_j35.eps}\end{subfigure}
+%  \begin{subfigure}[leading jet, $m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_450_j35.eps}\end{subfigure}
+%  \begin{subfigure}[sub-leading jet, $m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_450_j35.eps}\end{subfigure}
+%  \begin{subfigure}[leading jet, $m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_500_j35.eps}\end{subfigure}
+%  \begin{subfigure}[sub-leading jet, $m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_500_j35.eps}\end{subfigure}
+%  \begin{subfigure}[leading jet, $m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_550_j35.eps}\end{subfigure}
+%  \begin{subfigure}[sub-leading jet, $m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_550_j35.eps}\end{subfigure}
+  \caption{The $p_T$ turn-on curves for the trigger for signal MC and data.
   Although this search uses a multi-object trigger, in which several conditions 
   must simultaneously be true for a trigger acceptance, tight offline cuts can be used to isolate the effect 
-  of a single jet's $p_T$ on the efficiency.  The curves are fit 
-  with logistics, which are then used to extract the efficiency at the offline cut point, and to 
+  of a single jet's $p_T$ on the efficiency.  The signal curve is fit with a
+  logistic function, which is evaluated at a given cut point to extract the trigger efficiency at that point, and to 
   adjust for any residual effects of other trigger objects that affect the efficiency. \label{fig:trigger_turn_on_1}}
     \end{center}
 \end{figure}
 
 
-\begin{figure}[phtb!]
-  \begin{center}
-  \begin{subfigure}[leading jet, $m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_600_j35.eps}\end{subfigure}
-  \begin{subfigure}[sub-leading jet, $m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_600_j35.eps}\end{subfigure}
-  \begin{subfigure}[leading jet, $m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_650_j35.eps}\end{subfigure}
-  \begin{subfigure}[sub-leading jet, $m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_650_j35.eps}\end{subfigure}
-  \begin{subfigure}[leading jet, $m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_700_j35.eps}\end{subfigure}
-  \begin{subfigure}[sub-leading jet, $m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_700_j35.eps}\end{subfigure}
-  \begin{subfigure}[leading jet, $m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_800_j35.eps}\end{subfigure}
-  \begin{subfigure}[sub-leading jet, $m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_800_j35.eps}\end{subfigure}
-  \caption{The $p_T$ turn-on curves for the trigger for signal mass points 600-800 GeV.
-  Although this search uses a multi-object trigger, in which several conditions 
-  must simultaneously be true for a trigger acceptance, tight offline cuts can be used to isolate the effect 
-  of a single jet's $p_T$ on the efficiency.  The curves are fit 
-  with logistics, which are then used to extract the efficiency at the offline cut point, and to 
-  adjust for any residual effects of other trigger objects that affect the efficiency. \label{fig:trigger_turn_on_1}}
-    \end{center}
-\end{figure}
+%\begin{figure}[phtb!]
+%  \begin{center}
+%  \begin{subfigure}[leading jet, $m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_600_j35.eps}\end{subfigure}
+%  \begin{subfigure}[sub-leading jet, $m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_600_j35.eps}\end{subfigure}
+%  \begin{subfigure}[leading jet, $m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_650_j35.eps}\end{subfigure}
+%  \begin{subfigure}[sub-leading jet, $m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_650_j35.eps}\end{subfigure}
+%  \begin{subfigure}[leading jet, $m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_700_j35.eps}\end{subfigure}
+%  \begin{subfigure}[sub-leading jet, $m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_700_j35.eps}\end{subfigure}
+%  \begin{subfigure}[leading jet, $m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet0_trigger_turn_on_bAbb_800_j35.eps}\end{subfigure}
+%  \begin{subfigure}[sub-leading jet, $m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{Systematics/images/jet1_trigger_turn_on_bAbb_800_j35.eps}\end{subfigure}
+%  \caption{The $p_T$ turn-on curves for the trigger for signal mass points 600-800 GeV.
+%  Although this search uses a multi-object trigger, in which several conditions 
+%  must simultaneously be true for a trigger acceptance, tight offline cuts can be used to isolate the effect 
+%  of a single jet's $p_T$ on the efficiency.  The curves are fit 
+%  with logistics, which are then used to extract the efficiency at the offline cut point, and to 
+%  adjust for any residual effects of other trigger objects that affect the efficiency. \label{fig:trigger_turn_on_1}}
+%    \end{center}
+%\end{figure}
 
 
 
@@ -132,7 +163,27 @@ jet energy corresponds to the energy of the associated stable particles.  The
 calibration for this correction, called the jet energy scale (JES) and jet
 energy resolution (JER), is calculated using MC simulations and then checked
 in data.  The residual uncertainty on the JES and JER is then a systematic 
-error on the analysis. 
+error on the analysis.
+
+There are a number of sources of JES uncertainty, each of which has an associated error.
+All the sources are listed here for completeness, but some are not used for reasons
+as noted:
+\begin{itemize}
+    \item 6 nuisance parameters from in-situ analyses (Z+jet balance, photon+jet balance, and
+    multi-jet balance) that are reduced from an original list of 60 that encompasses effects
+    such as uncertainties in calorimeter response, the JES calibration method, and modelling
+    in Monte Carlo generators
+    %\item 2 nuisance parameters associated with flavor composition and flavor response (not used, see next item)
+    \item 2 nuisance parameters from $\eta$ intercalibration
+    \item 4 nuisance parameters associated with pileup (relative offsets for NPV and $\mu$,
+    the $p_T$ of the pileup, and the $\rho$ topology)
+    \item 1 nuisance parameter that quantifies the flavor composition and flavor
+    response associated with $b$-jets
+    %\item 1 nuisance parameter associated with MC non-closure (not used since this 
+    %is needed to correct non-MC12a samples, but the signal MC was generated as part of MC12a)
+    %\item 1 nuisance parameter for punch-through jets (not used because the signal MC
+    %was generated using AFII for detector simulation)
+\end{itemize} 
 
 The jet energy scale and its associated uncertainties are estimated using
 in situ and test-beam-based measurements of isolated hadron response \cite{jes}.  The systematic
@@ -142,8 +193,36 @@ The adjusted $m_{bb}$ distributions from the new 4-vectors are propagated throug
 errors.  The effect of the jet energy scale varies depending on the signal mass
 point, from about 3\% per variation at 400 GeV to $<$1\% at 800 GeV.
 
-\textbf{add table here documenting the variations, their sources (i.e. what 
-source of error they quantify) and effect per mass point}
+\begin{table}
+    \scriptsize
+    \begin{tabular}{c c c c c c c c c } \hline \hline
+    JES Systematic & 400 GeV & 450 GeV & 500 GeV & 550 GeV & 600 GeV & 650 GeV & 700 GeV & 800 GeV\\ \hline
+    in-situ 1 & & & & & & & & \\
+    in-situ 2 & & & & & & & & \\
+    in-situ 3 & & & & & & & & \\
+    in-situ 4 & & & & & & & & \\
+    in-situ 5 & & & & & & & & \\
+    in-situ 6 & & & & & & & & \\
+    inter-calib model & & & & & & & &  \\
+    inter-calib stat & & & & & & & & \\
+    no. primary vertices & & & & & & & & \\
+    no. interactions pre-beamspot & & & & & & & & \\
+    pileup & & & & & & & & \\
+    rho topology (jet area) & & & & & & & &  \\
+    $b$-jet response model & & & & & & & & \\
+    \end{tabular}
+\end{table}
+
+
+
+Similarly, the jet energy resolution is measured using dijet balance measurements and 
+a dijet bisection technique \cite{jer}, in
+order to quantify the jet resolution or $\sigma p_T/p_T$.  Data and MC are 
+found to agree to within 14\% for central ($|y|<$2.8) jets with $p_T$ betweeen
+20 and 80 GeV.
+
+\textbf{there is only a single NP for JER; provide that uncertainty per mA point here}
+
 %
 
 \section{$b$-Tagging Scale Factors}
@@ -196,18 +275,13 @@ For further explanation of the eigenvector method please see section 2.3 of \cit
 
 
 The presence of $b$-tagging in the trigger means the sample of data collected for this 
-analysis is already enriched in jets that look more $b$-like, so the scale factors
-are different based on how a jet is tagged (online, offline, or both). 
-The calibration procedure takes this into account, by using the following algorithm
-to compute the scale factors:
-\begin{enumerate}
-    \item Separate MC jets by whether they are $b$-tagged offline
-    \item If they are $b$-tagged offline, separate by whether they are 
-        also $b$-tagged online
-    \item Repeat these steps, but with data
-    \item In each possible permutation (online+offline, online-only, offline-only)
-        compute MC/data scale factors for the jets in that category 
-\end{enumerate}
+analysis is already enriched in jets that look more $b$-like, which must also 
+be taken into account during the calibration process.  The scale factors
+are computed separately based on how a jet is tagged (online, offline, or both). 
+For each of these permutations, a different scale factor is retrieved (for
+example, jets that are tagged offline are separated from their non-tagged counterparts
+before the online scale factors are computed).  Then the scale factors are combined
+for an overall event weight as usual.  
 
 
 \textbf{add in a picture of the b-tag weight distributions}
