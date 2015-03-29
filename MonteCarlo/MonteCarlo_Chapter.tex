@@ -15,10 +15,16 @@ the most relevant features of the MC datasets used in this algorithm.
 \label{sec:mc-gen-overview}
 MC events are generally created in four major steps.  
 \begin{enumerate}
-    \item First, the generator uses quantum field theory to simulate the hard scatter, generally starting with a proton and ending with all final-state particles.  
-    \item Then those particles are handed off to a dedicated algorithm that simulates how they would shower and hadronize, where appropriate.  
-    \item Next, the resulting particles from the first two steps are put into a detector simulation, which uses information on the detector materials and geometry to understand how the particles evolve as they travel through the ATLAS detector.  
-    \item The detector's response to the particles is simulated in a digitization and reconstruction step, so that the final output is an event that looks similar to how a ``real'' event of that type might look in the ATLAS detector. 
+    \item First, the generator uses quantum field theory to simulate the hard 
+    scatter, generally starting with a proton and ending with all final-state particles.  
+    \item Then those particles are handed off to a dedicated algorithm that simulates 
+    how they would shower and hadronize, where appropriate.  
+    \item Next, the resulting particles from the first two steps are put 
+    into a detector simulation, which uses information on the detector materials and geometry 
+    to understand how the particles evolve as they travel through the ATLAS detector.  
+    \item The detector's response to the particles is simulated in a 
+    digitization and reconstruction step, so that the final output is an event that 
+    looks similar to how a ``real'' event of that type might look in the ATLAS detector. 
 \end{enumerate} 
 
 \section{Signal Monte Carlo}
@@ -28,12 +34,34 @@ hadronization done in Pythia6 \cite{Pythia6}.  Madgraph uses a 5 flavor scheme P
 well as the more common light flavor (up, down, charm and strange quarks, 
 and gluons).  In addition to the Higgs production with the associated $b$-quark and 
 the Higgs decay, there can also be extra jets in the event from initial state radiation (ISR) 
-and/or final state radiation (FSR).  We allow up to three additional partons per 
+and/or final state radiation (FSR).  We allow up to two additional partons per 
 event in the signal MC; the generation and cross-section calculations tend to be more 
 accurate for higher numbers of extra partons allowed but at the cost of exponentially slower and more 
-complicated generation times.  We found three jets to be a reasonable cutoff where the distributions did 
+complicated generation times (Table~\ref{tab:mg_times}).  We found two jets to be a reasonable cutoff where the distributions did 
 not seem to be affected by allowing for higher numbers of extra partons, but the generation 
-time was still acceptably quick.  
+time was still acceptably quick.  The matching scale for knitting together the hard scatter
+calculations in MadGraph with the Pythia hadronization and showering was set to 20 GeV.
+
+%--------------------------------------------------------
+\begin{table}
+   \caption{The cross sections and generation times for MadGraph signal MC as a function
+   of number of additional partons allowed, for 0-3 partons.  There is approx. 2.5\%
+   difference between the 3-parton and 4-parton cross sections, which comes at a cost
+   of hours of CPU time.  The times quoted here are for generating 10,000 events per 
+   sample, before hadronization. \label{tab:mg_times}} 
+    \center
+    \begin{tabular}{ c c c } \hline\hline
+    Process & $\sigma [pb]$ & time \\ \hline
+    $pp\rightarrow h^0b + <=0j$ & 1.843e-5 $\pm$ 4.2e-08 & seconds \\
+    $pp\rightarrow h^0b + <=1j$ & 2.555e-5 $\pm$ 7.3e-08 & seconds \\
+    $pp\rightarrow h^0b + <=2j$ & 2.762e-5 $\pm$ 8.2e-08 & minutes \\
+    $pp\rightarrow h^0b + <=3j$ & 2.83e-5 $\pm$ 9e-08 & $~$ 4 hours \\
+    \end{tabular}
+\end{table}
+
+%--------------------------------------------------------
+
+
 
 %--------------------------------------------------------
 \begin{table}
@@ -78,6 +106,69 @@ showers in the calorimeter.  AFII does full simulation of the inner detector and
 uses frozen shower shapes taken from a large collection of pre-generated samples to speed up 
 the simulation.  After simulation, the digitization and reconstruction are handled by the ATLAS standard algorithms 
 in the ATHENA framework, as is standard for all ATLAS MC.    
+
+
+
+%https://indico.cern.ch/event/235341/contribution/1/material/slides/0.pdf
+\subsection{Generator Comparisons}
+In addition to MadGraph, Sherpa and Pythia are some other signal MC generators that 
+were studied.  As an NLO generator, MadGraph has the advantage over Pythia (an LO generator) of including
+more Feynman diagrams that are important to this analysis.  Sherpa has the disadvantage that
+the Higgs is not stored in the truth table, which makes it impossible to positively
+disambiguate between Higgs daughter $b$-quarks and associated $b$-quarks.  Sherpa
+also shows kinematic differences from both MadGraph and Pythia in the $p_T$ of the truth
+jets, which of course then also propagates through to the $m_{bb}$ distribution.
+
+
+\begin{figure}
+  \center
+  \includegraphics[width=0.7\textwidth, angle=270]{MonteCarlo/figures/sig_gen_compare.pdf}
+  \caption{$p_T$ distributions for the leading 2 jets for Pythia (red), Sherpa (green) and MadGraph (black).  
+  Pythia and MadGraph show good agreement, while Sherpa jets are systematically harder.  \label{fig:sig_gen_compare}}
+\end{figure}
+
+In order to understand if this disagreement was caused, at least in part, by
+mixing up the associated $b$-jets and the Higgs daughter jets, we switched the Sherpa
+generation process to $bH\rightarrow b\tau\tau$ and examined the properties of the
+Higgs itself in addition to the jets (or $\tau$ leptons) in the event.  The $p_T$ and 
+$\eta$ distributions of the di-tau (i.e. Higgs) system are in Figures~\ref{fig:gen_compare_pt}
+and~\ref{fig:di_tau_pt}. 
+
+
+\begin{figure}
+  \center
+  \includegraphics[width=0.7\textwidth, angle=270]{MonteCarlo/figures/gen_compare_pt.pdf}
+  \caption{$p_T$ distributions for the leading (left) and sub-leading (right) jets for Pythia (red), Sherpa (green) and MadGraph (black).  
+  Pythia and MadGraph show good agreement, while Sherpa jets are systematically harder.  \label{fig:gen_compare_pt}}
+\end{figure}
+\begin{figure}
+  \center
+  \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_pt.pdf}
+  \caption{$\eta$ distributions for the leading 2 jets for Sherpa (red) and Madgraph (black) for 0 (upper
+  left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
+  The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:di_tau_pt}}
+\end{figure}
+
+
+Upon more careful examination, we found that Sherpa segfaulted when trying to produce 
+$gg\rightarrow H$ Feynman diagrams and so those diagrams had been excluded from
+the initial production, although
+an exchange with the Sherpa authors \footnote{most notably Stefan Hoche and Steffen 
+Schumann} provided a patch that enabled $gg\rightarrow H$ diagrams.  To understand
+if the absence $gg\rightarrow H$ diagrams in Sherpa were responsible for the disagreement
+with MadGraph, we generated samples of MadGraph events with and without the $gg\rightarrow H$
+diagrams and compared the $p_T$ and $\eta$ of the Higgs system (Figure ~\ref{fig:ggH}). 
+
+\begin{figure}
+  \center
+  \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/ggH.pdf}
+  \caption{$\eta$ distributions for the leading 2 jets for Sherpa (red) and Madgraph (black) for 0 (upper
+  left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
+  The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:ggH}}
+\end{figure}
+
+
+
 
 \section{Background}
 \subsection{QCD Background}

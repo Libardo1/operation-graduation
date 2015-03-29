@@ -124,7 +124,7 @@ distinguish from background than in the lower-$m_A$ cases.  However, since FSR
 occurs stochastically on an event-by-event basis, a subset of the signal events
 will have little or no FSR and will reconstruct to $m_A$--if these events 
 can be isolated from the others, they offer a chance to improve the sensitivity
-via the improved mass resolution.  
+via the improved mass resolution and signal-to-background ratio. 
 
 A simple strategy might be to apply a cut to the $p_T$ of the leading and/or 
 second jet in the event, and only accept events where the $p_T$ is above some
@@ -138,6 +138,73 @@ background-dominated \textit{bbanti} events and there is no background
 above a certain $m_{bb}$ value.  That makes modeling the background extremely 
 difficult, and any fit difficult to validate.  
 
+Adding a change of basis before the $p_T$ cuts turns out to offer the advantage
+of better signal/background separation without the cost of making the background
+difficult to model.  The basis change is a rotation away from the $p_T^1$, 
+$p_T^2$, $m_{bb}$ basis into what we call the $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$
+basis, where $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$ are the eigenvectors of 
+a matrix built out of $p_T^1$, $p_T^2$, and $m_{bb}$.  The leading eigenvector 
+\footnote{the leading eigenvector is defined as the eigenvector with the largest
+associated eigenvalue}, which we call $m_{bb}^{'}$, is an admixture of 
+$p_T^1$, $p_T^2$, and $m_{bb}$, the exact blend of which varies by signal mass
+point.  The relative contributions of $p_T^1$, $p_T^2$, and $m_{bb}$ to the $m_{bb}^{'}$
+leading eigenvector can be seen in Table~\ref{tab:eigenvector_elements}.
+
+
+\begin{table}
+    \caption{The major axis eigenvector elements, and their squares.  The
+    transformation into the eigenbasis makes use of the raw elements, but the
+    squares of the elements sum to 1.0 and can provide some physical intuition
+    for the relative contributions of $p_T^1$, $p_T^2$ and $m_{bb}$. \label{tab:eigenvector_elements}}
+    \begin{tabular}{ c c c c c c c } \hline \hline
+        $m_A$ & $m_{bb}$ & $p_T^1$ & $p_T^2$ & $m_{bb}^2$ & $(p_T^{1})^2$ & $(p_T^2)^2$ \\ \hline
+        450 & 0.87 & 0.35 & 0.35 & 0.76 & 0.12 & 0.12 \\
+        500 & 0.84 & 0.38 & 0.39 & 0.71 & 0.14 & 0.15 \\
+        550 & 0.80 & 0.40 & 0.46 & 0.64 & 0.16 & 0.21 \\
+        600 & 0.78 & 0.41 & 0.47 & 0.61 & 0.17 & 0.22 \\
+        650 & 0.72 & 0.46 & 0.52 & 0.52 & 0.21 & 0.27 \\
+        700 & 0.71 & 0.47 & 0.54 & 0.50 & 0.22 & 0.29 \\
+        800 & 0.67 & 0.50 & 0.55 & 0.45 & 0.25 & 0.30 \\ 
+        \hline
+    \end{tabular}
+\end{table} 
+
+As Table~\ref{tab:eigenvector_elements} shows, the largest component of
+$m_{bb}^{'}$ comes from $m_{bb}$, regardless of the mass point.  However,
+for higher $m_A$ values, there is the clear trend that $p_T^1$ and $p_T^2$
+components become larger, meaning that the $p_T$s of the jets becomes 
+more important as $m_A$ grows.  This is consistent with the original 
+physical hypothesis behind this strategy, which is to isolate and remove
+high-FSR events, of which there are more for the larger values of $m_A$. 
+The effect of this transformation on 800 GeV signal and background-dominated
+data can be seen in Figure ~\ref{fig:transformed_vars}.  These figures show
+the difference in the mass and $p_T$ distributions before and after the transformation,
+with the mass distribution in particular being pushed to lower values
+in the background distribution while the signal mass maintains a similar shape.  
+This background reshaping affects the signal to background ratio in the 
+neighborhood of the signal peak; before the rotation,
+a line drawn at the nominal $m_A$ value (800 GeV) shows that there is still
+significant background remaining, but after the rotation the signal is virtually
+unchanged while the background has been shifted lower.  An examination of the
+$p_T$ variables shows that before the transformation, the signal and background
+shapes are different; however, after the rotation, the signal and background
+shapes are virtually identical.  This reinforces the hypothesis that projecting
+onto the major axis is effectively concentrating all of the discriminating 
+power in $m_{bb}$, $p_T^1$, and $p_T^2$ together into the single $m_{bb}^{'}$
+variable.  
+
+\begin{figure}[hbt]
+\includegraphics[width=\linewidth]{BackgroundEstimation/images/vars_before.pdf}
+\includegraphics[width=0.45\linewidth]{BackgroundEstimation/images/vars_after.pdf}
+\caption{variables before and after the rotation\label{fig:ttbar_mbb}}
+\end{figure}
+
+However, there is one more step that optimizes the signal to background
+discrimination further, which is placing cuts on $p_T^{1'}$ and $p_T^{2'}$.
+If we require that $p_T^{1'}>-10$ GeV, and $p_T^{2'}>-50$ GeV, it 
+excludes a region of $m_{bb}^{'}$ phase space where the modeling is difficult
+and little sensitivity is gained.  
+
 
 
 
@@ -145,8 +212,62 @@ difficult, and any fit difficult to validate.
 
 \section{Mathematical Modeling of Background Shape}
 \subsection{Selection of Exponential Function}
-say a few words on merits of exponential vs. power decay series,
-bernstein polynomial, as well as 1-param vs. 2-param
+Once the rotation and cuts have been applied, the data is fed into an 
+unbinned maximum likelihood fit for mathematical modeling.  The fitting
+of both signal and background is done in RooFit.  There are a number 
+of candidate functions for the background fit, which can be evaluated
+both on their goodness-of-fit (as measured by a metric like $\chi^2/DOF$)
+and their ease of convergence.
+
+In brief, the functions given consideration include the following:
+\begin{itemize}
+    \item \textbf{Bernstein Polynomial}
+    \item \textbf{Power Decay Series}
+    \item \textbf{Decaying Exponential with 1 parameter}
+    \item \textbf{Decaying Exponential with 2 parameters}
+\end{itemize}
+
+\subsubsection{Bernstein Polynomials}
+The Bernstein polynomials are a family of polynomials that are characterized
+particularly by their attractive feature of being positive-definite, or never
+predicting a negative value for a PDF composed of them.  However, we find
+that it takes a high degree of polynomial (5 parameters or more) to fit the
+background over the full mass range (340,900 GeV), and a polynomial with a 
+degree this high struggles (and often fails) to converge.  Moreover, a
+drawback of high-degree polynomials is their capability to ``wiggle'' and
+potentially absorb a signal within the background model.
+
+\subsubsection{Power Decay Series}
+A power decay series of the form $\frac{a}{x} + \frac{b}{x^3} + \frac{c}{x^5} + ...$
+is another possibility; if all the powers of $x$ in the denominators are
+odd, this series cannot wiggle like the Bernstein polynomials.  However,
+a simple series with a few terms does not fit the background shape well 
+over the full mass range, and when many terms are added to the series then
+the fit struggles to find a global maximum of the likelihood function, leading
+to non-convergence.
+
+\subsubsection{Decaying Exponential with 1 Parameter}
+Like a decaying power series, a decaying exponential function is monotonically
+decreasing; however, unlike a power series, an exponential with a single
+parameter (i.e. a model of the form $f(x)=e^{-x/\tau}$) provides 
+a relatively good fit to the background distribution in most tag and jet
+categories, with $\chi^2/DOF$ values below 2 for all \textit{bbb} and \textit{bbloose}
+distributions \footnote{the \textit{bbanti} distributions prove harder to
+fit with a 1-parameter exponential, with $\chi^/DOF$ values between 2.8 and 3.9}.
+Additionally, the simplicity of a 1-parameter exponential means that the
+fits converge quickly and reliably over the full mass range.
+
+\subsubsection{Decaying Exponential with 2 Parameters}
+A decaying exponential with two parameters (i.e. a model of the form $f(x)=e^{-x/\tau+\omega x^2}$)
+has the same nice features of a single-parameter exponential (simple functional
+form, easy convergence, no possibility of signal-spoofing wiggles) while offering
+more flexibility than the 1-parameter exponential.  The $\chi^2/DOF$ and pulls
+for the 2-parameter exponential fits reflect this flexibility to better
+fit the data, every jet/tag category has a fit that is as good or better
+for the 2-parameter exponential as for the 1-parameter exponential.  In 
+particular, the \textit{bbanti} categories that have higher $\chi^2/DOF$ values
+in the 1-parameter fit show $\chi^2/DOF$ results of 1.0-1.2 with the 2-parameter fits. 
+
 
 
 \subsection{Background Shape and Spurious Signal}
@@ -204,26 +325,6 @@ bbb, bbloose and bbanti bins for the all-hadronic $t\bar{t}$ can be found in Fig
 
 
 
-
-
-
-%
-%The background estimate is crucial to the analysis.  The QCD cross section at a hadron machine like the LHC is quite large; only a small subset of QCD events have 3 or more b-jets, but b-tagging does not have perfect performance and we expect a large contribution from QCD events in which one or more light or charm jets are b-tagged.
-%
-%The b-tagging in the trigger provides a handle for controlling the mistag background.  The L2, EF and offline MV1 b-tags are independent of each other, which is to say that (for example) the EF b-tagging decision on a given jet does not take into account whether the jet was tagged in L2, so we can improve the purity of our b-jet sample by requiring that the same jet pass L2, EF and MV1 tags.  
-
-
-
-
-%The third jet in the event, however, will not be tagged by the trigger.  The jet will be tagged offline, but even after the offline tagging we expect there will be many events in which the third jet is not a b-jet, but is a mistagged light or charm jet.  The exact size of this background for light jets is given by equation \ref{eq:mistag}, and a similar equation can be written for charm jets.
-
-%  \begin{equation}
-%	N_{mistagged\ light\ jets} = N_{light\ jets} \times \epsilon_{light\ jet\ passing\ tag}
-%\end{equation} \label{eq:mistag}
-
-%The light mistag efficiency $\epsilon_{light\ jet\ passing\ tag}$ is computed and calibrated by the b-tagging performance group (see the b-tagging chapter for further details), so we need to compute the composition of light or charm jets in the original sample in order to estimate their contamination after b-tagging has been applied.  
-
-%The QCD background is notoriously difficult to model in MC, and we find unacceptably low statistics in MC after our analysis cuts have been applied, so we use the data-driven matrix method to compute the QCD background composition as accurately as possible.  The matrix method makes use of the known efficiencies for tagging b, c and light jets, as well as information about how many jets pass a given b-tag, to arrive at 
 
 
 
