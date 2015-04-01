@@ -33,6 +33,16 @@ requiring a third $b$-tagged jet in the event.
  $b$-tagged jets other than those firing the trigger
 \end{itemize}
 
+When assigning events to one of these categories, we only allow $b$-tags on the leading
+five jets to count toward the $bbb$ or $bbloose$ categories.  In other words, if the third
+$b$-tagged jet in an event is the 6th jet (in $p_T$ ordering) overall, the event 
+will be classified as $bbanti$.  This requirement is motivated by our physics awareness that
+the $b$-jets coming from signal events should be fairly high $p_T$, so this should have
+a minimal effect of rejecting signal that would otherwise be accepted.  On the other
+hand, with high-jet-multiplicity QCD events, there is the combinatorial effect of looking across
+more jets for $b$-tags that increases the likelihood of an event being classified as signal-like
+(bbb or bbloose) as there are more jets in the event.  Only looking at the leading 5 jets
+for $b$-tags keeps this effect under control. 
 
 
 \section{Background Estimation Method Based on Exponential Background Model and Sideband Fitting}
@@ -91,125 +101,6 @@ in data.  For the final search, the \textit{bbb} events were swapped back in.
 %model of exponential times logistic}
 
 
-\section{Eigenvector Rotation}
-\textbf{If Tim's eigen-analysis is validated and used, a description of that method goes here}
-
-\begin{itemize}
-    \item for high-mass points, we have trouble when FSR is bad (but it isn't always bad)
-    \item FSR is worst when jets are low-pT--suggests a cut or categorization based
-    on pT of the jets
-    \item However, simple cut can sculpt background b/c of correlations btwn pT1, pT2, mbb,
-    and it also reduces background to rates too low to model well
-    \item use signal MC to identify eigenvectors based on pT1, pT2 and mbb, transform
-    into this basis 
-    \item Place cuts on pT1' and pt2'
-    \item Use $mbb'$ as the discriminating variable, proceed to fit with exponential
-    \item Impact on final sensitivity in the results section
-\end{itemize}
-
-Once the events have been categorized based on $b$-tag status and the number of jets in the
-events, but before doing the final fit, we apply a change of variables based on the jet
-$p_T$ values and $m_{bb}$ in each event and a kinematic cut.  Together these analysis 
-steps effectively allow for a discriminating variable, which we call $m_{bb}'$, that
-separates signal and background better than ordinary $m_{bb}$.  Once these steps have
-been applied, the result is an analysis that is 15-50\% more sensitive
-than if no transformation were applied.  This section will 
-outline this procedure and its rationale.  
-
-The motivation for this strategy has its origins in trying to control the effect of
-FSR on the analysis sensitivity.  At high $m_A$, the jets from the Higgs (and also 
-the associated $b$-quark) have large $p_T$, which they then tend to radiate away 
-as FSR.  This causes the $m_{bb}$ peak to smear out and be more difficult to 
-distinguish from background than in the lower-$m_A$ cases.  However, since FSR
-occurs stochastically on an event-by-event basis, a subset of the signal events
-will have little or no FSR and will reconstruct to $m_A$--if these events 
-can be isolated from the others, they offer a chance to improve the sensitivity
-via the improved mass resolution and signal-to-background ratio. 
-
-A simple strategy might be to apply a cut to the $p_T$ of the leading and/or 
-second jet in the event, and only accept events where the $p_T$ is above some
-threshold optimized by comparing signal MC to \textit{bbanti} data.  
-That would isolate events with poor mass resolution (i.e. lots of FSR) from
-those with little FSR and better reconstruction properties.  However, since
-there is a correlation between $p_T^1$, $p_T^2$ and $m_{bb}$, a cut like
-this ends up sculpting the background as well.  In addition, the $p_T^1$ and
-$p_T^2$ cut thresholds that looked best on signal MC are ``too good'' on 
-background-dominated \textit{bbanti} events and there is no background
-above a certain $m_{bb}$ value.  That makes modeling the background extremely 
-difficult, and any fit difficult to validate.  
-
-Adding a change of basis before the $p_T$ cuts turns out to offer the advantage
-of better signal/background separation without the cost of making the background
-difficult to model.  The basis change is a rotation away from the $p_T^1$, 
-$p_T^2$, $m_{bb}$ basis into what we call the $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$
-basis, where $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$ are the eigenvectors of 
-a matrix built out of $p_T^1$, $p_T^2$, and $m_{bb}$.  The leading eigenvector 
-\footnote{the leading eigenvector is defined as the eigenvector with the largest
-associated eigenvalue}, which we call $m_{bb}^{'}$, is an admixture of 
-$p_T^1$, $p_T^2$, and $m_{bb}$, the exact blend of which varies by signal mass
-point.  The relative contributions of $p_T^1$, $p_T^2$, and $m_{bb}$ to the $m_{bb}^{'}$
-leading eigenvector can be seen in Table~\ref{tab:eigenvector_elements}.
-
-
-\begin{table}
-    \caption{The major axis eigenvector elements, and their squares.  The
-    transformation into the eigenbasis makes use of the raw elements, but the
-    squares of the elements sum to 1.0 and can provide some physical intuition
-    for the relative contributions of $p_T^1$, $p_T^2$ and $m_{bb}$. \label{tab:eigenvector_elements}}
-    \begin{tabular}{ c c c c c c c } \hline \hline
-        $m_A$ & $m_{bb}$ & $p_T^1$ & $p_T^2$ & $m_{bb}^2$ & $(p_T^{1})^2$ & $(p_T^2)^2$ \\ \hline
-        450 & 0.87 & 0.35 & 0.35 & 0.76 & 0.12 & 0.12 \\
-        500 & 0.84 & 0.38 & 0.39 & 0.71 & 0.14 & 0.15 \\
-        550 & 0.80 & 0.40 & 0.46 & 0.64 & 0.16 & 0.21 \\
-        600 & 0.78 & 0.41 & 0.47 & 0.61 & 0.17 & 0.22 \\
-        650 & 0.72 & 0.46 & 0.52 & 0.52 & 0.21 & 0.27 \\
-        700 & 0.71 & 0.47 & 0.54 & 0.50 & 0.22 & 0.29 \\
-        800 & 0.67 & 0.50 & 0.55 & 0.45 & 0.25 & 0.30 \\ 
-        \hline
-    \end{tabular}
-\end{table} 
-
-As Table~\ref{tab:eigenvector_elements} shows, the largest component of
-$m_{bb}^{'}$ comes from $m_{bb}$, regardless of the mass point.  However,
-for higher $m_A$ values, there is the clear trend that $p_T^1$ and $p_T^2$
-components become larger, meaning that the $p_T$s of the jets becomes 
-more important as $m_A$ grows.  This is consistent with the original 
-physical hypothesis behind this strategy, which is to isolate and remove
-high-FSR events, of which there are more for the larger values of $m_A$. 
-The effect of this transformation on 800 GeV signal and background-dominated
-data can be seen in Figure ~\ref{fig:transformed_vars}.  These figures show
-the difference in the mass and $p_T$ distributions before and after the transformation,
-with the mass distribution in particular being pushed to lower values
-in the background distribution while the signal mass maintains a similar shape.  
-This background reshaping affects the signal to background ratio in the 
-neighborhood of the signal peak; before the rotation,
-a line drawn at the nominal $m_A$ value (800 GeV) shows that there is still
-significant background remaining, but after the rotation the signal is virtually
-unchanged while the background has been shifted lower.  An examination of the
-$p_T$ variables shows that before the transformation, the signal and background
-shapes are different; however, after the rotation, the signal and background
-shapes are virtually identical.  This reinforces the hypothesis that projecting
-onto the major axis is effectively concentrating all of the discriminating 
-power in $m_{bb}$, $p_T^1$, and $p_T^2$ together into the single $m_{bb}^{'}$
-variable.  
-
-\begin{figure}[hbt]
-\includegraphics[width=\linewidth]{BackgroundEstimation/images/vars_before.pdf}
-\includegraphics[width=0.45\linewidth]{BackgroundEstimation/images/vars_after.pdf}
-\caption{variables before and after the rotation\label{fig:ttbar_mbb}}
-\end{figure}
-
-However, there is one more step that optimizes the signal to background
-discrimination further, which is placing cuts on $p_T^{1'}$ and $p_T^{2'}$.
-If we require that $p_T^{1'}>-10$ GeV, and $p_T^{2'}>-50$ GeV, it 
-excludes a region of $m_{bb}^{'}$ phase space where the modeling is difficult
-and little sensitivity is gained.  
-
-
-
-
-
-
 \section{Mathematical Modeling of Background Shape}
 \subsection{Selection of Exponential Function}
 Once the rotation and cuts have been applied, the data is fed into an 
@@ -221,10 +112,10 @@ and their ease of convergence.
 
 In brief, the functions given consideration include the following:
 \begin{itemize}
-    \item \textbf{Bernstein Polynomial}
-    \item \textbf{Power Decay Series}
-    \item \textbf{Decaying Exponential with 1 parameter}
-    \item \textbf{Decaying Exponential with 2 parameters}
+    \item Bernstein Polynomial
+    \item Power Decay Series
+    \item Decaying Exponential with 1 parameter
+    \item Decaying Exponential with 2 parameters
 \end{itemize}
 
 \subsubsection{Bernstein Polynomials}
@@ -253,12 +144,12 @@ parameter (i.e. a model of the form $f(x)=e^{-x/\tau}$) provides
 a relatively good fit to the background distribution in most tag and jet
 categories, with $\chi^2/DOF$ values below 2 for all \textit{bbb} and \textit{bbloose}
 distributions \footnote{the \textit{bbanti} distributions prove harder to
-fit with a 1-parameter exponential, with $\chi^/DOF$ values between 2.8 and 3.9}.
+fit with a 1-parameter exponential, with $\chi^2/DOF$ values between 2.8 and 3.9}.
 Additionally, the simplicity of a 1-parameter exponential means that the
 fits converge quickly and reliably over the full mass range.
 
 \subsubsection{Decaying Exponential with 2 Parameters}
-A decaying exponential with two parameters (i.e. a model of the form $f(x)=e^{-x/\tau+\omega x^2}$)
+A decaying exponential with two parameters (i.e. a model of the form  $f(x)=e^{-x/\tau+\omega x^2}$)
 has the same nice features of a single-parameter exponential (simple functional
 form, easy convergence, no possibility of signal-spoofing wiggles) while offering
 more flexibility than the 1-parameter exponential.  The $\chi^2/DOF$ and pulls
@@ -268,23 +159,58 @@ for the 2-parameter exponential as for the 1-parameter exponential.  In
 particular, the \textit{bbanti} categories that have higher $\chi^2/DOF$ values
 in the 1-parameter fit show $\chi^2/DOF$ results of 1.0-1.2 with the 2-parameter fits. 
 
+\subsection{Goodness-of-Fit Comparisons}
+After comparing all the options for the function to describe the background
+shape, the exponentials (both 1-parameter and 2-parameters) had the best
+combination of fitting the background well and converging stably over the
+full mass range.  The goodness-of-fit of these two possibilities, as measured
+by the function $\chi^2/DOF$, is in Table~\ref{tab:chi2}.
+
+\begin{table}
+    \center
+    \caption{The $\chi^2/DOF$ for the 1-parameter and 2-parameter exponential fits.
+    \label{tab:chi2}}
+    \begin{tabular}{ c p{3cm} p{3cm} } \hline \hline
+        category & 1-parameter exponential $\chi^2/DOF$ & 2-parameter exponential $\chi^2/DOF$ \\ \hline
+        \textit{bbb} 3 jet & 1.5 & 1.1 \\
+        \textit{bbb} 4 jet & 0.9  & 0.7 \\
+        \textit{bbb} 5+ jet & 0.9  & 0.7 \\
+        \textit{bbloose} 3 jet & 0.8 & 0.6 \\
+        \textit{bbloose} 4 jet & 1.2 & 0.7 \\
+        \textit{bbloose} 5+ jet & 1.5 & 1.1 \\
+        \textit{bbanti} 3 jet & 3.9 & 1.0 \\
+        \textit{bbanti} 4 jet & 3.9 & 1.2 \\
+        \textit{bbanti} 5+ jet & 2.8 & 1.2 \\
+        \hline
+    \end{tabular}
+\end{table} 
+
+As Table~\ref{tab:eigenvector_elements} shows, the largest component of
+
+
 
 
 \subsection{Background Shape and Spurious Signal}
-\cite{spurious_signal}
+Another consideration when choosing a model for the background is the possiblity
+that it could introduce bias in the form of spurious signal ($N_{sp}$), or signal that is 
+not really ``there'' but is found by the signal+background fit anyway when fitting over the 
+full mass range.  Following the prescription in the Standard Model $h\rightarrow\gamma\gamma$
+search \cite{spurious_signal}, the model must meet at least one of the following
+criteria:
+
+\begin{itemize}
+    \item $N_{sp}<$ 10\% $N_{s,exp}$
+    \item $N_{sp}<$ 20\% $\sigma_{bkg}$
+\end{itemize}
+
+$N_{s,exp}$ is the number of signal events expected to pass the event selection cuts, and 
+$\sigma_{bkg}$ is the statistical uncertainty on the number of background events when
+fitting the signal+background model to the background-only Asimov dataset.
+
+\textbf{fill in results of these tests after they have been completed}
 
 
-
-
-
-
-
-
-
-
-
-
-\subsection{Non-QCD Backgrounds}
+\subsection{Non-QCD Background}
 \label{sec:non_qcd_bkgs}
 
 \subsubsection{All-Hadronic $t\bar{t}$ Background}

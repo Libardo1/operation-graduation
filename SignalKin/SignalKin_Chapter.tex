@@ -313,3 +313,232 @@ be found in Section~\ref{subsec:fitmodel}.
   \caption{The $m_{bb}$ distributions at a few representative mass points in signal MC, as a function of the number of jets in the event.  
     The 5+ jets bin contains all events with 5 jets or more.}
 \end{figure}
+
+
+\section{Eigenvector Rotation}
+
+%\begin{itemize}
+%    \item for high-mass points, we have trouble when FSR is bad (but it isn't always bad)
+%    \item FSR is worst when jets are low-pT--suggests a cut or categorization based
+%    on pT of the jets
+%    \item However, simple cut can sculpt background b/c of correlations btwn pT1, pT2, mbb,
+%    and it also reduces background to rates too low to model well
+%    \item use signal MC to identify eigenvectors based on pT1, pT2 and mbb, transform
+%    into this basis 
+%    \item Place cuts on pT1' and pt2'
+%    \item Use $mbb'$ as the discriminating variable, proceed to fit with exponential
+%    \item Impact on final sensitivity in the results section
+%\end{itemize}
+
+Once the events have been categorized based on $b$-tag status and the number of jets in the
+events, but before doing the final fit, we apply a change of variables based on the jet
+$p_T$ values and $m_{bb}$ in each event and a kinematic cut.  Together these analysis 
+steps effectively allow for a discriminating variable, which we call $m_{bb}'$, that
+separates signal and background better than ordinary $m_{bb}$.  Once these steps have
+been applied, the result is an analysis that is 15-50\% more sensitive
+than if no transformation were applied.  This section will 
+outline this procedure and its rationale.  
+
+The motivation for this strategy has its origins in trying to control the effect of
+FSR on the analysis sensitivity.  At high $m_A$, the jets from the Higgs (and also 
+the associated $b$-quark) have large $p_T$, which they then tend to radiate away 
+as FSR.  This causes the $m_{bb}$ peak to smear out and be more difficult to 
+distinguish from background than in the lower-$m_A$ cases.  However, since FSR
+occurs stochastically on an event-by-event basis, a subset of the signal events
+will have little or no FSR and will reconstruct to $m_A$--if these events 
+can be isolated from the others, they offer a chance to improve the sensitivity
+via the improved mass resolution and signal-to-background ratio. 
+
+A simple strategy might be to apply a cut to the $p_T$ of the leading and/or 
+second jet in the event, and only accept events where the $p_T$ is above some
+threshold optimized by comparing signal MC to \textit{bbanti} data.  
+That would isolate events with poor mass resolution (i.e. lots of FSR) from
+those with little FSR and better reconstruction properties.  However, since
+there is a correlation between $p_T^1$, $p_T^2$ and $m_{bb}$, a cut like
+this ends up sculpting the background as well.  In addition, the $p_T^1$ and
+$p_T^2$ cut thresholds that looked best on signal MC are ``too good'' on 
+background-dominated \textit{bbanti} events and there is no background
+above a certain $m_{bb}$ value.  That makes modeling the background extremely 
+difficult, and any fit difficult to validate.  
+
+Adding a change of basis before the $p_T$ cuts turns out to offer the advantage
+of better signal/background separation without the cost of making the background
+difficult to model.  The basis change is a rotation away from the $p_T^1$, 
+$p_T^2$, $m_{bb}$ basis into what we call the $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$
+basis, where $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$ are the eigenvectors of 
+a matrix built out of $p_T^1$, $p_T^2$, and $m_{bb}$.  The leading eigenvector 
+\footnote{the leading eigenvector is defined as the eigenvector with the largest
+associated eigenvalue}, which we call $m_{bb}^{'}$, is an admixture of 
+$p_T^1$, $p_T^2$, and $m_{bb}$, the exact blend of which varies by signal mass
+point.  The relative contributions of $p_T^1$, $p_T^2$, and $m_{bb}$ to the $m_{bb}^{'}$
+leading eigenvector can be seen in Table~\ref{tab:eigenvector_elements}.
+
+
+\begin{table}
+    \center
+    \caption{The major axis eigenvector elements, and their squares.  The
+    transformation into the eigenbasis makes use of the raw elements, but the
+    squares of the elements sum to 1.0 and can provide some physical intuition
+    for the relative contributions of $p_T^1$, $p_T^2$ and $m_{bb}$. \label{tab:eigenvector_elements}}
+    \begin{tabular}{ c c c c c c c } \hline \hline
+        $m_A$ & $m_{bb}$ & $p_T^1$ & $p_T^2$ & $m_{bb}^2$ & $(p_T^{1})^2$ & $(p_T^2)^2$ \\ \hline
+        450 & 0.87 & 0.35 & 0.35 & 0.76 & 0.12 & 0.12 \\
+        500 & 0.84 & 0.38 & 0.39 & 0.71 & 0.14 & 0.15 \\
+        550 & 0.80 & 0.40 & 0.46 & 0.64 & 0.16 & 0.21 \\
+        600 & 0.78 & 0.41 & 0.47 & 0.61 & 0.17 & 0.22 \\
+        650 & 0.72 & 0.46 & 0.52 & 0.52 & 0.21 & 0.27 \\
+        700 & 0.71 & 0.47 & 0.54 & 0.50 & 0.22 & 0.29 \\
+        800 & 0.67 & 0.50 & 0.55 & 0.45 & 0.25 & 0.30 \\ 
+        \hline
+    \end{tabular}
+\end{table} 
+
+As Table~\ref{tab:eigenvector_elements} shows, the largest component of
+$m_{bb}^{'}$ comes from $m_{bb}$, regardless of the mass point.  However,
+for higher $m_A$ values, there is the clear trend that $p_T^1$ and $p_T^2$
+components become larger, meaning that the $p_T$s of the jets becomes 
+more important as $m_A$ grows.  This is consistent with the original 
+physical hypothesis behind this strategy, which is to isolate and remove
+high-FSR events, of which there are more for the larger values of $m_A$. 
+The effect of this transformation on 800 GeV signal and background-dominated
+data can be seen in Figure ~\ref{fig:transformed_vars}.  These figures show
+the difference in the mass and $p_T$ distributions before and after the transformation,
+with the mass distribution in particular being pushed to lower values
+in the background distribution while the signal mass maintains a similar shape.  
+This background reshaping affects the signal to background ratio in the 
+neighborhood of the signal peak; before the rotation,
+a line drawn at the nominal $m_A$ value (800 GeV) shows that there is still
+significant background remaining, but after the rotation the signal is virtually
+unchanged while the background has been shifted lower.  An examination of the
+$p_T$ variables shows that before the transformation, the signal and background
+shapes are different; however, after the rotation, the signal and background
+shapes are virtually identical.  This reinforces the hypothesis that projecting
+onto the major axis is effectively concentrating all of the discriminating 
+power in $m_{bb}$, $p_T^1$, and $p_T^2$ together into the single $m_{bb}^{'}$
+variable.  
+
+\begin{figure}[hbt]
+\includegraphics[width=0.8\linewidth, angle=270]{BackgroundEstimation/images/vars_before.pdf}
+\includegraphics[width=0.8\linewidth, angle=270]{BackgroundEstimation/images/vars_after.pdf}
+\caption{variables before and after the rotation \textbf{to be cleaned up/replaced} \label{fig:transformed_vars}}
+\end{figure}
+
+However, there is one more step that optimizes the signal to background
+discrimination further, which is placing cuts on $p_T^{1'}$ and $p_T^{2'}$.
+If we require that $p_T^{1'}>-10$ GeV, and $p_T^{2'}>-50$ GeV, it 
+excludes a region of $m_{bb}^{'}$ phase space where the modeling is difficult
+and little sensitivity is gained.  
+
+
+
+
+
+
+
+
+\subsubsection{Cruijff Fit to Signal}
+
+%http://www.slac.stanford.edu/econf/C0303241/proc/pres/502.PDF
+The signal $m_{bb}$ shape is fit with a Cruijff PDF.  The Cruijff function is a bifurcated Gaussian (different widths for left and right sides of the distribution) with non-Gaussian tails: 
+
+\begin{equation}
+f(x) = exp((x-m_{bb})^2 / (2\sigma^2_{L,R} + \alpha_{L,R}(x-m)^2))
+\end{equation}
+
+%The signal MC distributions and fit results can be seen in Figures
+%~\ref{fig:signalPDFs_3j}-~\ref{fig:signalPDFs_5j_bbloose}. 
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_1.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_1.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_1.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_1.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_1.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_1.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_1.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_1.png}\end{subfigure}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbb} category, for events with 3 jets, for different $H/A$ masses. \label{fig:signalPDFs_3j}}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_2.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_2.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_2.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_2.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_2.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_2.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_2.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_2.png}\end{subfigure}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbb} category, for events with 4 jets, for different $H/A$ masses. \label{fig:signalPDFs_4j}}
+    \end{center}
+\end{figure}
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_3.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_3.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_3.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_3.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_3.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_3.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_3.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_3.png}\end{subfigure}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbb} category, for events with 5 or more jets, for different $H/A$ masses. \label{fig:signalPDFs_5j}}
+    \end{center}
+\end{figure}
+
+
+
+
+
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_4.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_4.png}\end{subfigure}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 3 jets, for different $H/A$ masses. \label{fig:signalPDFs_3j_bbloose}}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_5.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_5.png}\end{subfigure}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 3 jets, for different $H/A$ masses. \label{fig:signalPDFs_4j_bbloose}}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_6.png}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_6.png}\end{subfigure}
+  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 5 or more jets, for different $H/A$ masses. \label{fig:signalPDFs_5j_bbloose}}
+    \end{center}
+\end{figure}
+

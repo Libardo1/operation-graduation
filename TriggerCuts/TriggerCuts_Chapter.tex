@@ -21,7 +21,8 @@ selection criteria, also called cuts.
  
 \section{Trigger}
 \label{sec:my_trigger}
-The purpose and structure of the ATLAS trigger are explained in Section~\ref{sec:atlas_trig}.  The trigger chain for this analysis is as follows: 
+The purpose and structure of the ATLAS trigger are explained in Section~\ref{sec:atlas_trig}.
+  The trigger chain for this analysis is as follows: 
 
 \begin{itemize}
     \item L1: At least one J75 RoI (region of interest), implying an L1 jet of at least 75 GeV
@@ -39,7 +40,7 @@ In the trigger, the L2 and EF jets are b-tagged using xComb, a likelihood ratio 
 vertices with two tracks), and EVTX (the energy fraction of the secondary vertex), as well as the number
 of vertices with 2 tracks. The triggers in this analysis use the medium operating point, such that L2 xComb
 $>$ 1.276 and EF xComb $>$ 1.099.  This is the loose working point, where the $b$-jet efficiency
-is 60\% online.
+is 70\% online.
 
 Table~\ref{tab:online_offline_btag} below shows the correlations between the two levels of online
 $b$-tagging, as well as the offline (MV1) $b$-tagging for three offline working points (60\%, 70\%,
@@ -76,6 +77,31 @@ $b$-tagging, as well as the offline (MV1) $b$-tagging for three offline working 
     \end{center}
   \end{table}
   
+
+
+%------------------------------------------------------
+\begin{figure}
+	\includegraphics[width=0.6\textwidth]{TriggerCuts/L2_EF.pdf}	
+    \caption{The cut efficiencies in background, cut by cut, shown on a linear (left) 
+    and logarithmic (right) vertical axis. \label{fig:L2_EF}}
+\end{figure}
+
+%------------------------------------------------------
+\begin{figure}
+	\includegraphics[width=0.6\textwidth]{TriggerCuts/EF_MV1.pdf}	
+    \caption{The cut efficiencies in background, cut by cut, shown on a linear (left) 
+    and logarithmic (right) vertical axis. \label{fig:EF_MV1}}
+\end{figure}
+
+%------------------------------------------------------
+
+
+
+
+
+
+
+
 
 
 \section{Offline Baseline Cuts}
@@ -160,7 +186,6 @@ charm efficiency is approximately 10\%.
 
 %------------------------------------------------------
 
-
 %------------------------------------------------------
 \begin{figure}
 	\includegraphics[width=0.6\textwidth]{TriggerCuts/final_efficiency_vs_mass_j35.pdf}	
@@ -168,6 +193,7 @@ charm efficiency is approximately 10\%.
 \end{figure}
 
 %------------------------------------------------------
+
 
 
 

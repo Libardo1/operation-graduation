@@ -117,7 +117,8 @@ more Feynman diagrams that are important to this analysis.  Sherpa has the disad
 the Higgs is not stored in the truth table, which makes it impossible to positively
 disambiguate between Higgs daughter $b$-quarks and associated $b$-quarks.  Sherpa
 also shows kinematic differences from both MadGraph and Pythia in the $p_T$ of the truth
-jets, which of course then also propagates through to the $m_{bb}$ distribution.
+jets (Figure~\ref{fig:sig_gen_compare}), which of course then also propagates through to the $m_{bb}$ distribution
+(Figure~\ref{fig:mbb_sherpa_pythia_madgraph}).
 
 
 \begin{figure}
@@ -126,27 +127,42 @@ jets, which of course then also propagates through to the $m_{bb}$ distribution.
   \caption{$p_T$ distributions for the leading 2 jets for Pythia (red), Sherpa (green) and MadGraph (black).  
   Pythia and MadGraph show good agreement, while Sherpa jets are systematically harder.  \label{fig:sig_gen_compare}}
 \end{figure}
+\begin{figure}
+  \center
+  \includegraphics[width=0.7\textwidth]{MonteCarlo/figures/mbb_sherpa_pythia_madgraph.pdf}
+  \caption{$m_{bb}$ distributions for the leading 2 jets for Pythia (red), Sherpa (green) and MadGraph (black).  
+  Pythia and MadGraph show good agreement, while the Sherpa $m_{bb}$ distribution is higher and more sharply peaked. \label{fig:mbb_sherpa_pythia_madgraph}}
+\end{figure}
 
 In order to understand if this disagreement was caused, at least in part, by
 mixing up the associated $b$-jets and the Higgs daughter jets, we switched the Sherpa
 generation process to $bH\rightarrow b\tau\tau$ and examined the properties of the
 Higgs itself in addition to the jets (or $\tau$ leptons) in the event.  The $p_T$ and 
-$\eta$ distributions of the di-tau (i.e. Higgs) system are in Figures~\ref{fig:gen_compare_pt}
-and~\ref{fig:di_tau_pt}. 
+$\eta$ distributions of the di-tau (i.e. Higgs) system are in Figures~\ref{fig:di_tau_eta}
+and~\ref{fig:di_tau_pt}, and the $m_{\tau\tau}$ distribution is in Figure~\ref{fig:di_tau_mass}.
 
 
-\begin{figure}
-  \center
-  \includegraphics[width=0.7\textwidth, angle=270]{MonteCarlo/figures/gen_compare_pt.pdf}
-  \caption{$p_T$ distributions for the leading (left) and sub-leading (right) jets for Pythia (red), Sherpa (green) and MadGraph (black).  
-  Pythia and MadGraph show good agreement, while Sherpa jets are systematically harder.  \label{fig:gen_compare_pt}}
-\end{figure}
+
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_pt.pdf}
-  \caption{$\eta$ distributions for the leading 2 jets for Sherpa (red) and Madgraph (black) for 0 (upper
+  \caption{$p_T$ distributions for the 2 $\tau$ leptons for Sherpa (red) and Madgraph (black) for 0 (upper
   left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
   The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:di_tau_pt}}
+\end{figure}
+\begin{figure}
+  \center
+  \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_eta.pdf}
+  \caption{$\eta$ distributions for the 2 $\tau$ leptons for Sherpa (red) and Madgraph (black) for 0 (upper
+  left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
+  The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:di_tau_eta}}
+\end{figure}
+\begin{figure}
+  \center
+  \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_mass.pdf}
+  \caption{$m_{\tau\tau}$ distributions for the 2 $\tau$ leptons for Sherpa (red) and Madgraph (black) for 0 (upper
+  left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
+  The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:di_tau_mass}}
 \end{figure}
 
 
@@ -154,17 +170,21 @@ Upon more careful examination, we found that Sherpa segfaulted when trying to pr
 $gg\rightarrow H$ Feynman diagrams and so those diagrams had been excluded from
 the initial production, although
 an exchange with the Sherpa authors \footnote{most notably Stefan Hoche and Steffen 
-Schumann} provided a patch that enabled $gg\rightarrow H$ diagrams.  To understand
+Schumann, who we thank for their helpful advice throughout this analysis} provided 
+a patch that enabled $gg\rightarrow H$ diagrams.  To understand
 if the absence $gg\rightarrow H$ diagrams in Sherpa were responsible for the disagreement
 with MadGraph, we generated samples of MadGraph events with and without the $gg\rightarrow H$
-diagrams and compared the $p_T$ and $\eta$ of the Higgs system (Figure ~\ref{fig:ggH}). 
+diagrams and compared the $p_T$ and $\eta$ of the Higgs system (Figure ~\ref{fig:ggH}).
+The Higgs $p_T$ and $\eta$ do not show a bias depending on whether the gluon diagrams
+are included or not, so it is not clear that including the gluon diagrams in Sherpa would
+resolve the disagreement that we see. 
 
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/ggH.pdf}
   \caption{$\eta$ distributions for the leading 2 jets for Sherpa (red) and Madgraph (black) for 0 (upper
   left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
-  The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:ggH}}
+  The Higgs system is more forward (larger $|\eta|$) in Sherpa than in MadGraph.  \label{fig:ggH}}
 \end{figure}
 
 
