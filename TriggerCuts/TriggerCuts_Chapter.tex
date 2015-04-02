@@ -81,16 +81,11 @@ $b$-tagging, as well as the offline (MV1) $b$-tagging for three offline working 
 
 %------------------------------------------------------
 \begin{figure}
-	\includegraphics[width=0.6\textwidth]{TriggerCuts/L2_EF.pdf}	
-    \caption{The cut efficiencies in background, cut by cut, shown on a linear (left) 
-    and logarithmic (right) vertical axis. \label{fig:L2_EF}}
-\end{figure}
-
-%------------------------------------------------------
-\begin{figure}
-	\includegraphics[width=0.6\textwidth]{TriggerCuts/EF_MV1.pdf}	
-    \caption{The cut efficiencies in background, cut by cut, shown on a linear (left) 
-    and logarithmic (right) vertical axis. \label{fig:EF_MV1}}
+    \center
+	\includegraphics[width=0.7\textwidth]{TriggerCuts/L2_EF.pdf}\\	
+	\includegraphics[width=0.7\textwidth]{TriggerCuts/EF_MV1.pdf}	
+    \caption{The correlation between the $b$-tagging in Level 2 of the
+    trigger and the trigger Event Filter. \label{fig:L2_EF}}
 \end{figure}
 
 %------------------------------------------------------
@@ -153,12 +148,37 @@ place.  Further details can be found in Section~\ref{sec:combinatorics}.
 
 
 \item
-\textbf{Third jet passing offline $b$-tag}
+\textbf{Categorization based on $b$-tagging of a 3rd jet}
 After two
-$b$-jets have been triple-tagged, a third jet is tagged using the MV1 tagger.  The third
-$b$-jet must have an MV1 value that passes a tight (60\% efficiency)
-cut.  The light-jet efficiency for this working point is approximately 0.1\%, and the
-charm efficiency is approximately 10\%.
+$b$-jets have been triple-tagged, the event is categorized based on whether
+a third $b$-tagged jet is present.  The most signal-enriched region is where
+a third jet passes a tight (60\% efficiency) MV1 $b$-tag; the next most
+signal-enriched region is when no jets in the event pass a 60\% $b$-tag
+but there is at least one jet passing a loose (80\% efficiency) $b$-tag;
+the least sensitive region has no additional jets passing either 60\% or 
+80\% $b$-tags (besides the triple-tagged jets).  These tag categories are
+mutually exclusive and all have different signal enrichments, kinematics, 
+and provide varying levels of sensitivity when used in the fit (Section~\ref{sec:background_strategy}).
+
+\item
+\textbf{Categorization based on the number of jets in the event}
+Similarly, the events are categorized into 3-jet, 4-jet, and 5 (or more) jet
+categories, primarily because the varying signal resolution in the different
+jet bins leads to different signal to background ratios, and separating
+the categories allows for extra sensitivity to be extracted (Section~\ref{sec:n_jets_sig}).
+%The light-jet efficiency for this working point is approximately 0.1\%, and the
+%charm efficiency is approximately 10\%.
+
+\item 
+\textbf{Rotation into Eigenbasis, and $p_T^{'}$ cuts}
+After all the preceding precuts and categorizations are applied, the events
+are rotated into a new basis based on the eigenvectors of the matrix composed of the
+signal $m_{bb}$ and the $p_T$s of the leading 2 jets in the event.  Then cuts
+based on the new (rotated) $p_T$s of the jets are applied, and the rotated $m_{bb}$
+is used as the final discriminating variable.  Much more detail about this procedure,
+its motivation and results, can be found in Section~\ref{sec:rotation}).
+
+
 
 \end{itemize}
 
@@ -166,8 +186,9 @@ charm efficiency is approximately 10\%.
 
 %------------------------------------------------------
 \begin{figure}
-	\includegraphics[width=0.4\textwidth]{TriggerCuts/cut_efficiencies_j35_signal.pdf}	
-	\includegraphics[width=0.4\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_signal.pdf}	
+    \center
+	\includegraphics[width=0.45\textwidth]{TriggerCuts/cut_efficiencies_j35_signal.pdf}	
+	\includegraphics[width=0.45\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_signal.pdf}	
     \caption{The cut efficiencies in signal, cut by cut, shown on a linear (left) and logarithmic (right) vertical axis. \label{fig:signal_eff_cutflow}}
 \end{figure}
 
@@ -179,8 +200,9 @@ charm efficiency is approximately 10\%.
 
 %------------------------------------------------------
 \begin{figure}
-	\includegraphics[width=0.4\textwidth]{TriggerCuts/cut_efficiencies_j35_background.pdf}	
-	\includegraphics[width=0.4\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_background.pdf}	
+    \center
+	\includegraphics[width=0.45\textwidth]{TriggerCuts/cut_efficiencies_j35_background.pdf}	
+	\includegraphics[width=0.45\textwidth]{TriggerCuts/cut_efficiencies_logy_j35_background.pdf}	
     \caption{The cut efficiencies in background, cut by cut, shown on a linear (left) and logarithmic (right) vertical axis. \label{fig:background_eff_cutflow}}
 \end{figure}
 
@@ -188,6 +210,7 @@ charm efficiency is approximately 10\%.
 
 %------------------------------------------------------
 \begin{figure}
+    \center
 	\includegraphics[width=0.6\textwidth]{TriggerCuts/final_efficiency_vs_mass_j35.pdf}	
     \caption{The cut efficiencies in background, cut by cut, shown on a linear (left) and logarithmic (right) vertical axis. \label{fig:final_eff_vs_mass}}
 \end{figure}
