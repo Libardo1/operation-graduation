@@ -82,10 +82,20 @@ $b$-tagging, as well as the offline (MV1) $b$-tagging for three offline working 
 %------------------------------------------------------
 \begin{figure}
     \center
-	\includegraphics[width=0.7\textwidth]{TriggerCuts/L2_EF.pdf}\\	
-	\includegraphics[width=0.7\textwidth]{TriggerCuts/EF_MV1.pdf}	
-    \caption{The correlation between the $b$-tagging in Level 2 of the
-    trigger and the trigger Event Filter. \label{fig:L2_EF}}
+	\begin{subfigure}[L2 and EF $b$-tags]{0.45\textwidth}\includegraphics[width=\textwidth]{TriggerCuts/L2_EF.pdf}\end{subfigure}
+	\begin{subfigure}[EF and MV1 $b$-tags]{0.45\textwidth}\includegraphics[width=\textwidth]{TriggerCuts/EF_MV1.pdf}\end{subfigure}
+%  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_6.png}\end{subfigure}
+    \caption{The $b$-tagging in Level 2 and 
+    the Event Filter (in the trigger) and the MV1 $b$-tagging algorithm
+    (offline) are exploited in the cut flow by requiring that at least
+    2 jets in the event be ``triple tagged'', or $b$-tagged in both
+    stages of the triggers as well as offline.  The figure on the
+    left shows the L2 and EF $b$-tag distributions, on the right are the
+    EF and MV1 distributions.  The cut points are noted with vertical
+    and horizontal lines.  Most of the events (more than 80\%) fall
+    in regions where the $b$-tagging cuts agree on whether a jet is 
+    a $b$-jet or not, but a significant subsample of jets are tagged by 
+    on $b$-tagging level/algorithm but not the other(s). \label{fig:L2_EF}}
 \end{figure}
 
 %------------------------------------------------------
