@@ -45,12 +45,13 @@ more jets for $b$-tags that increases the likelihood of an event being classifie
 for $b$-tags keeps this effect under control. 
 
 
-\section{Background Estimation Method Based on Exponential Background Model and Sideband Fitting}
+\section{Background Estimation Method Based on Parameterized Histogram Fitting}
 The background consists almost exclusively of QCD with 2 or more real $b$-jets, which 
 fortunately has a $m_{bb}$ spectrum that does not have any peaks or other difficult
 structure above about 350 GeV.  Below that mass, the trigger turn-on curve becomes
 a major feature of the spectrum.  Above that mass, there
-is a smoothly falling distribution that we fit primarily with a decaying exponential.
+is a smoothly falling distribution that we fit to an RhhBinnedPdf, which is a parameterized
+histogram PDF that is also used for fitting the signal.
 
 In a few words, the background fit strategy proceeds in the following way:
 \begin{itemize}
@@ -59,21 +60,38 @@ In a few words, the background fit strategy proceeds in the following way:
     the signal MC, as calculated using $m_{bb}$, $p_{T}^1$ and $p_T^2$; call 
     the components of this rotated basis $m_{bb}'$, $p_T^{1'}$ and $p_T^{2'}$
     \item Apply cuts to $p_T^{1'}$ and $p_T^{2'}$, and use $m_{bb}^{'}$ as the final 
-    discriminating variable 
+    discriminating variable (Section~\ref{sec:rotation}). 
+    \item Fit the $m_{bb}^{'}$ distributions within the range -50 GeV $<m_{bb}^{'}<$350
+    with a parameterized histogram, separately for each $b$-tag and $n_{jets}$ category
+    in signal MC.
+    \item Fit the data in the same $m_{bb}^{'}$ range, also with a parameterized histogram,
+    but fit all tag categories together.  In other words, all 3-jet events (whether in the
+    $bbb$, $bbloose$, or $bbanti$ tag category) are fit with the same histogram in data.
+    This has the practical effect of $bbanti$ dominating the fit result because of its
+    higher statistics, so the resulting
+    histogram is dominated by the $m_{bb}^{'}$ distribution in background tag categories.
+    \item Fix the signal shape to the fits found in MC
+    \item Create a composite PDF that is the sum of the background and signal components
+    \item Initialize the parameters of the background component to the final parameter values
+    found in the background-only fit, but allow the background parameters to float in 
+    the fitting procedure
+    \item Fit the data in the signal region, allowing the background shape, background
+    normalization, and signal normalization to float
 %    \item Using the signal MC as a guide, select a window in $m_{bb}$ that encloses the
 %signal peak, along with as much of the mass sideband (on either side) as possible
-    \item Fit an exponential function to the $m_{bb}^{'}$ distribution, allowing each of the 
-tag regions (\textit{bbb}, \textit{bbloose}, \textit{bbanti}) to float relative to each other
- as well as keeping the 3, 4, and 5+ jet categories separate
-    \item As part of the limit-setting procedure, use the fit result for the 
-    background along with signal shapes taken from MC to extract the 
-signal cross section that can be excluded at a 95\% confidence level
+%    \item Fit an exponential function to the $m_{bb}^{'}$ distribution, allowing each of the 
+%tag regions (\textit{bbb}, \textit{bbloose}, \textit{bbanti}) to float relative to each other
+% as well as keeping the 3, 4, and 5+ jet categories separate
+%    \item As part of the limit-setting procedure, use the fit result for the 
+%    background along with signal shapes taken from MC to extract the 
+%signal cross section that can be excluded at a 95\% confidence level
     \item Repeat for the next mass point
 \end{itemize}
 
 Although we have signal MC with $m_A$ values as low as 250 GeV, this fit strategy only
-begins to work above 400 GeV, because of the trigger turn-on curve.  The fit window
-used is [340,900] GeV for all signal mass points.
+begins to work above 400 GeV, because of the trigger turn-on curve.  The signal mass 
+points to which we would have sensitivity range from 400 to 800 GeV (potentially higher,
+but 800 GeV is our highest signal MC point). 
 
 While the analysis was in development, it was blinded to avoid bias.  This was done 
 by removing \textit{bbb} events from the data, and replacing them with a sample of
@@ -101,16 +119,37 @@ in data.  For the final search, the \textit{bbb} events were swapped back in.
 %model of exponential times logistic}
 
 
-\section{Mathematical Modeling of Background Shape}
+\section{Modeling of Background Shape}
 \subsection{Selection of Exponential Function}
 Once the rotation and cuts have been applied, the data is fed into an 
-unbinned maximum likelihood fit for mathematical modeling.  The fitting
+binned maximum likelihood fit for mathematical modeling.  The fitting
 of both signal and background is done in RooFit.  There are a number 
-of candidate functions for the background fit, which can be evaluated
+of candidate models for the background fit, which can be evaluated
 both on their goodness-of-fit (as measured by a metric like $\chi^2/DOF$)
 and their ease of convergence.
 
-In brief, the functions given consideration include the following:
+A number of mathematical functions were attempted in fitting the
+background, but in the final analysis, a parameterized histogram was
+used in part because of its easier convergence on background, and
+in part it allowed us to avoid an unstable functional fit to the signal.
+
+However, the important compromize of fitting to a histogram for the
+background is that it removes some of the constraints that a functional
+fit provides (for example, a decaying exponential imposes the constraint
+that the background is always decreasing as $m_{bb}$ increases, 
+but a histogram could fluctuate up in the case of an excess).  That 
+means that we must rely on our background-dominated $bbanti$ region
+to understand the shape of the background, and then extrapolate that
+shape to the $bbb$ signal region in order to look for deviations from
+the background-only hypothesis.  The extrapolation must be validated in 
+background MC: the assumption this method makes is that the $m_{bb}$
+distribution is the same regardless of the flavor of the third jet 
+in the event.  If that assumption holds, this extrapolation method is a
+valid way to predict the background shape in the signal region.
+
+Although the final fit model was a histogram, the following functions were
+also considered and we discuss below the behavior they exhibited:
+%In brief, the functions given consideration include the following:
 \begin{itemize}
     \item Bernstein Polynomial
     \item Power Decay Series
@@ -150,64 +189,98 @@ fits converge quickly and reliably over the full mass range.
 
 \subsubsection{Decaying Exponential with 2 Parameters}
 A decaying exponential with two parameters (i.e. a model of the form  $f(x)=e^{-x/\tau+\omega x^2}$)
-has the same nice features of a single-parameter exponential (simple functional
-form, easy convergence, no possibility of signal-spoofing wiggles) while offering
+has some of the same nice features of a single-parameter exponential (simple functional
+form, no possibility of signal-spoofing wiggles) while offering
 more flexibility than the 1-parameter exponential.  The $\chi^2/DOF$ and pulls
 for the 2-parameter exponential fits reflect this flexibility to better
 fit the data, every jet/tag category has a fit that is as good or better
 for the 2-parameter exponential as for the 1-parameter exponential.  In 
 particular, the \textit{bbanti} categories that have higher $\chi^2/DOF$ values
 in the 1-parameter fit show $\chi^2/DOF$ results of 1.0-1.2 with the 2-parameter fits. 
-
-\subsection{Goodness-of-Fit Comparisons}
-After comparing all the options for the function to describe the background
-shape, the exponentials (both 1-parameter and 2-parameters) had the best
-combination of fitting the background well and converging stably over the
-full mass range.  The goodness-of-fit of these two possibilities, as measured
-by the function $\chi^2/DOF$, is in Table~\ref{tab:chi2}.
-
-\begin{table}
-    \center
-    \caption{The $\chi^2/DOF$ for the 1-parameter and 2-parameter exponential fits.
-    \label{tab:chi2}}
-    \begin{tabular}{ c p{3cm} p{3cm} } \hline \hline
-        category & 1-parameter exponential $\chi^2/DOF$ & 2-parameter exponential $\chi^2/DOF$ \\ \hline
-        \textit{bbb} 3 jet & 1.5 & 1.1 \\
-        \textit{bbb} 4 jet & 0.9  & 0.7 \\
-        \textit{bbb} 5+ jet & 0.9  & 0.7 \\
-        \textit{bbloose} 3 jet & 0.8 & 0.6 \\
-        \textit{bbloose} 4 jet & 1.2 & 0.7 \\
-        \textit{bbloose} 5+ jet & 1.5 & 1.1 \\
-        \textit{bbanti} 3 jet & 3.9 & 1.0 \\
-        \textit{bbanti} 4 jet & 3.9 & 1.2 \\
-        \textit{bbanti} 5+ jet & 2.8 & 1.2 \\
-        \hline
-    \end{tabular}
-\end{table} 
-
-As Table~\ref{tab:eigenvector_elements} shows, the largest component of
+However, the convergence of this model (especially when it is used in a composite
+model that can also include signal) can be tricky, and we found that in practice
+the parameters need to be initialized and constrained very precisely to get
+good results.  We also found that this model was prone to introducing spurious
+signal when used in combination with our signal, so that even when running in 
+configurations where no signal was present, the fit was prone to returning
+a nonzero signal cross section.
 
 
+%\subsection{Goodness-of-Fit Comparisons}
+%After comparing all the options for the function to describe the background
+%shape, the exponentials (both 1-parameter and 2-parameters) had the best
+%combination of fitting the background well and converging stably over the
+%full mass range.  The goodness-of-fit of these two possibilities, as measured
+%by the function $\chi^2/DOF$, is in Table~\ref{tab:chi2}.
+%
+%\begin{table}
+%    \center
+%    \caption{The $\chi^2/DOF$ for the 1-parameter and 2-parameter exponential fits.
+%    \label{tab:chi2}}
+%    \begin{tabular}{ c p{3cm} p{3cm} } \hline \hline
+%        category & 1-parameter exponential $\chi^2/DOF$ & 2-parameter exponential $\chi^2/DOF$ \\ \hline
+%        \textit{bbb} 3 jet & 1.5 & 1.1 \\
+%        \textit{bbb} 4 jet & 0.9  & 0.7 \\
+%        \textit{bbb} 5+ jet & 0.9  & 0.7 \\
+ %       \textit{bbloose} 3 jet & 0.8 & 0.6 \\
+%        \textit{bbloose} 4 jet & 1.2 & 0.7 \\
+%        \textit{bbloose} 5+ jet & 1.5 & 1.1 \\
+%        \textit{bbanti} 3 jet & 3.9 & 1.0 \\
+%        \textit{bbanti} 4 jet & 3.9 & 1.2 \\
+%        \textit{bbanti} 5+ jet & 2.8 & 1.2 \\
+ %       \hline
+%    \end{tabular}
+%\end{table} 
 
 
-\subsection{Background Shape and Spurious Signal}
-Another consideration when choosing a model for the background is the possiblity
-that it could introduce bias in the form of spurious signal ($N_{sp}$), or signal that is 
-not really ``there'' but is found by the signal+background fit anyway when fitting over the 
-full mass range.  Following the prescription in the Standard Model $h\rightarrow\gamma\gamma$
-search \cite{spurious_signal}, the model must meet at least one of the following
-criteria:
 
-\begin{itemize}
-    \item $N_{sp}<$ 10\% $N_{s,exp}$
-    \item $N_{sp}<$ 20\% $\sigma_{bkg}$
-\end{itemize}
+\subsection{Validation of Background Shape Extrapolation}
+A critical assumption of this fit method is that the shape of the $m_{bb}$ distribution
+in background does not vary based on the flavor (or, semi-equivalently, $b$-tag status)
+of the third jet in the event.  We validate this assumption in $b$-jet enriched 
+QCD MC.
 
-$N_{s,exp}$ is the number of signal events expected to pass the event selection cuts, and 
-$\sigma_{bkg}$ is the statistical uncertainty on the number of background events when
-fitting the signal+background model to the background-only Asimov dataset.
+As detailed in Section~\ref{sec:rotation}, our final discriminating variable is actually
+not $m_{bb}$ but a variable we call $m_{bb}^{'}$, which is a linear combination of $m_{bb}$, $p_{T,1}$ and $p_{T,2}$.  So while we
+do check that the $m_{bb}$ distributions are not biased by the flavor of the third jet,
+the real figure of merit lies in showing that $m_{bb}^{'}$ is not biased by the
+flavor of the third jet either.  The plots in Figure~\ref{fig:bkg_shape_compare}
+show $m_{bb}^{'}$ in the $bbb$ and $bbanti$ tag categories, with a ratio plot drawn below
+to see any shape differences more clearly.  There is no sign of a bias in the 3-jet
+or 4-jet categories; the 5-jet category shows a slight shape difference at high values
+of $m_{bb}^{'}$ for which we assign a systematic error.
 
-\textbf{fill in results of these tests after they have been completed}
+\begin{figure}[hbt]
+\includegraphics[width=0.45\linewidth]{BackgroundEstimation/mbb_bbb_3jets_rotated.eps}
+\includegraphics[width=0.45\linewidth]{BackgroundEstimation/mbb_bbb_4jets_rotated.eps}\\
+\includegraphics[width=0.45\linewidth]{BackgroundEstimation/mbb_bbb_5jets_rotated.eps}
+\caption{The distributions of the final discriminating variable, $m_{bb}^{'}$, 
+in background MC for the $bbanti$ and $bbb$ tag categories.  The three different plots
+compare the 3-jet, 4-jet, and 5-or-more jet categories.  No signs of major shape
+differences are seen.
+\label{fig:bkg_shape_compare}}
+\end{figure}
+
+
+
+
+ 
+
+
+%Following the prescription in the Standard Model $h\rightarrow\gamma\gamma$
+%search \cite{spurious_signal}, the model must meet at least one of the following
+%criteria:
+
+%\begin{itemize}
+%    \item $N_{sp}<$ 10\% $N_{s,exp}$
+%    \item $N_{sp}<$ 20\% $\sigma_{bkg}$
+%\end{itemize}
+
+%$N_{s,exp}$ is the number of signal events expected to pass the event selection cuts, and 
+%$\sigma_{bkg}$ is the statistical uncertainty on the number of background events when
+%fitting the signal+background model to the background-only Asimov dataset.
+
+%\textbf{fill in results of these tests after they have been completed}
 
 
 \subsection{Non-QCD Background}

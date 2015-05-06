@@ -414,29 +414,41 @@ physical hypothesis behind this strategy, which is to isolate and remove
 high-FSR events, of which there are more for the larger values of $m_A$. 
 The effect of this transformation on 800 GeV signal and background-dominated
 data can be seen in Figure ~\ref{fig:transformed_vars}.  These figures show
-the difference in the mass and $p_T$ distributions before and after the transformation,
-with the mass distribution in particular being pushed to lower values
+the difference in the $m_{bb}$ distributions %and $p_T$ distributions 
+before and after the transformation,
+with the mass distribution being pushed to lower values
 in the background distribution while the signal mass maintains a similar shape.  
 This background reshaping affects the signal to background ratio in the 
 neighborhood of the signal peak; before the rotation,
-a line drawn at the nominal $m_A$ value (800 GeV) shows that there is still
-significant background remaining, but after the rotation the signal is virtually
-unchanged while the background has been shifted lower.  An examination of the
-$p_T$ variables shows that before the transformation, the signal and background
-shapes are different; however, after the rotation, the signal and background
-shapes are virtually identical.  This reinforces the hypothesis that projecting
-onto the major axis is effectively concentrating all of the discriminating 
-power in $m_{bb}$, $p_T^1$, and $p_T^2$ together into the single $m_{bb}^{'}$
-variable.  These effects are visualized in Figure~\ref{fig:transformed_vars}
-\textbf{(NB: these plots will be reformatted/replaced}. 
+significant background remaining in the neighborhood of the signal peak, 
+but after the rotation the signal is virtually
+unchanged while the background has been shifted lower.  
+%An examination of the
+%$p_T$ variables shows that before the transformation, the signal and background
+%shapes are different; however, after the rotation, the signal and background
+%shapes are virtually identical.  This reinforces the hypothesis that projecting
+%onto the major axis is effectively concentrating all of the discriminating 
+%power in $m_{bb}$, $p_T^1$, and $p_T^2$ together into the single $m_{bb}^{'}$
+%variable.  These effects are visualized in Figure~\ref{fig:transformed_vars}
+%\textbf{(NB: these plots will be reformatted/replaced}. 
 
 \begin{figure}[hbt]
-\includegraphics[width=0.8\linewidth, angle=270]{BackgroundEstimation/images/vars_before.pdf}
-\includegraphics[width=0.8\linewidth, angle=270]{BackgroundEstimation/images/vars_after.pdf}
-\caption{variables before and after the rotation \textbf{to be cleaned up/replaced} \label{fig:transformed_vars}}
+\includegraphics[width=0.45\linewidth]{SignalKin/h_mass_bAbb_450_unrotated.eps}
+\includegraphics[width=0.45\linewidth]{SignalKin/h_mass_bAbb_450_rotated.eps} \\
+\includegraphics[width=0.45\linewidth]{SignalKin/h_mass_bAbb_800_unrotated.eps}
+\includegraphics[width=0.45\linewidth]{SignalKin/h_mass_bAbb_800_rotated.eps} \\
+\caption{ Comparisons of the signal and background $m_{bb}$ distributions
+    before and after the rotation.  The left two plots show 450 GeV and 800 GeV
+    Higgs mass points before the rotation. The signal is extremely small compared to the background, whereas the 
+    same distributions (including the same signal normalization) after the rotation
+    are on the right, for the same two mass points.  The rotation pushes the
+    background events to lower values of $m_{bb}^{'}$ than the signal, yielding
+    better signal/background separation, especially for higher mass Higgs candidates.
+    \textbf{need to check signal normalization used to make these plots}
+     \label{fig:transformed_vars}}
 \end{figure}
 
-However, there is one more step that optimizes the signal to background
+There is one more step that optimizes the signal to background
 discrimination further, which is placing cuts on $p_T^{1'}$ and $p_T^{2'}$.
 If we require that $p_T^{1'}>-10$ GeV, and $p_T^{2'}>-50$ GeV, it 
 excludes a region of $m_{bb}^{'}$ phase space where the modeling is difficult
@@ -449,112 +461,172 @@ and little sensitivity is gained.
 
 
 
-\subsubsection{Cruijff Fit to Signal}
+\subsubsection{Binned Fit to Signal}
+
+The signal shape is fit using an RhhBinnedPdf in RooFit, a form of parameterized
+histogram where the parameterization helps the fit converge more reliably and allows
+a single parameter to capture the integral (i.e. signal yield) of the distribution.
+Once the full analysis cut chain has been applied, including the rotation, the 
+signal $m_{bb}$ distributions are fit in signal MC and then the shapes are fixed.
+The mass range for the signal fits (and also the background fits) is -50 GeV $< m_{bb}^{'}<$ 350 GeV,
+and the bins are 40 GeV wide in a compromise between trying to capture as much
+shape information as possible while also dealing with limited signal MC statistics.
+
+The choice of a parameterized histogram was taken after it was found that 
+the signal distribution is a difficult one to fit to a function, since the shape can vary
+widely by jet bin and $b$-tag category.  Attempts to fit the distributions with e.g. a 
+Cruijff function (a bifurcated Gaussian function with non-Gaussian tails) would work
+well for some categories and signal mass points, but fail to give good shape descriptions
+for other categories and signal mass points.  By fitting to a histogram, we are able
+to fit trickier shapes than could be reliably fit with a function, and the fits are
+more stable under the addition of perturbations from systematic errors.
+
 
 %http://www.slac.stanford.edu/econf/C0303241/proc/pres/502.PDF
-The signal $m_{bb}$ shape is fit with a Cruijff PDF.  The Cruijff function is a bifurcated Gaussian (different widths for left and right sides of the distribution) with non-Gaussian tails: 
+%The signal $m_{bb}$ shape is fit with a Cruijff PDF.  The Cruijff function is a 
+%bifurcated Gaussian (different widths for left and right sides of the distribution) with non-Gaussian tails: 
 
-\begin{equation}
-f(x) = exp((x-m_{bb})^2 / (2\sigma^2_{L,R} + \alpha_{L,R}(x-m)^2))
-\end{equation}
+%\begin{equation}
+%f(x) = exp((x-m_{bb})^2 / (2\sigma^2_{L,R} + \alpha_{L,R}(x-m)^2))
+%\end{equation}
 
 %The signal MC distributions and fit results can be seen in Figures
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_400_bbb_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_450_bbb_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_500_bbb_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_550_bbb_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_600_bbb_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_650_bbb_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_700_bbb_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_800_bbb_3jets_formatted.eps}\end{subfigure}
+  \caption{Signal MC distributions and RhhBinnedPdf PDFs for $m_{bb}$ in the {\it bbb} category, for events with 3 jets, for different $H/A$ masses after the rotation has been applied.\label{fig:signalPDFs_3j_bbb}} 
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_400_bbb_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_450_bbb_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_500_bbb_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_550_bbb_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_600_bbb_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_650_bbb_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_700_bbb_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_800_bbb_4jets_formatted.eps}\end{subfigure}
+  \caption{Signal MC distributions and RhhBinnedPdf PDFs for $m_{bb}$ in the {\it bbb} category, for events with 4 jets, for different $H/A$ masses after the rotation has been applied.\label{fig:signalPDFs_4j_bbb}} 
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_400_bbb_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_450_bbb_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_500_bbb_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_550_bbb_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_600_bbb_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_650_bbb_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_700_bbb_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_800_bbb_5jets_formatted.eps}\end{subfigure}
+  \caption{Signal MC distributions and RhhBinnedPdf PDFs for $m_{bb}$ in the {\it bbb} category, for events with 5 jets, for different $H/A$ masses after the rotation has been applied.\label{fig:signalPDFs_4j_bbb}} 
+    \end{center}
+\end{figure}
+
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_400_bbloose_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_450_bbloose_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_500_bbloose_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_550_bbloose_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_600_bbloose_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_650_bbloose_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_700_bbloose_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_800_bbloose_3jets_formatted.eps}\end{subfigure}
+  \caption{Signal MC distributions and RhhBinnedPdf PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 3 jets, for different $H/A$ masses after the rotation has been applied.\label{fig:signalPDFs_3j_bbloose}} 
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_400_bbloose_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_450_bbloose_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_500_bbloose_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_550_bbloose_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_600_bbloose_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_650_bbloose_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_700_bbloose_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_800_bbloose_4jets_formatted.eps}\end{subfigure}
+  \caption{Signal MC distributions and RhhBinnedPdf PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 4 jets, for different $H/A$ masses after the rotation has been applied.\label{fig:signalPDFs_4j_bbloose}} 
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_400_bbloose_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_450_bbloose_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_500_bbloose_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_550_bbloose_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_600_bbloose_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_650_bbloose_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_700_bbloose_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_800_bbloose_5jets_formatted.eps}\end{subfigure}
+  \caption{Signal MC distributions and RhhBinnedPdf PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 5 jets, for different $H/A$ masses after the rotation has been applied.\label{fig:signalPDFs_5j_bbloose}} 
+    \end{center}
+\end{figure}
+
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_400_bbanti_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_450_bbanti_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_500_bbanti_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_550_bbanti_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_600_bbanti_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_650_bbanti_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_700_bbanti_3jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_800_bbanti_3jets_formatted.eps}\end{subfigure}
+  \caption{Signal MC distributions and RhhBinnedPdf PDFs for $m_{bb}$ in the {\it bbanti} category, for events with 3 jets, for different $H/A$ masses after the rotation has been applied.\label{fig:signalPDFs_3j_bbanti}} 
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_400_bbanti_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_450_bbanti_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_500_bbanti_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_550_bbanti_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_600_bbanti_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_650_bbanti_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_700_bbanti_4jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_800_bbanti_4jets_formatted.eps}\end{subfigure}
+  \caption{Signal MC distributions and RhhBinnedPdf PDFs for $m_{bb}$ in the {\it bbanti} category, for events with 4 jets, for different $H/A$ masses after the rotation has been applied.\label{fig:signalPDFs_4j_bbanti}} 
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[phtb!]
+  \begin{center}
+  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_400_bbanti_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_450_bbanti_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_500_bbanti_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_550_bbanti_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_600_bbanti_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_650_bbanti_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_700_bbanti_5jets_formatted.eps}\end{subfigure}
+  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{SignalKin/fitMC_bAbb_800_bbanti_5jets_formatted.eps}\end{subfigure}
+  \caption{Signal MC distributions and RhhBinnedPdf PDFs for $m_{bb}$ in the {\it bbanti} category, for events with 5 jets, for different $H/A$ masses after the rotation has been applied.\label{fig:signalPDFs_5j_bbanti}} 
+    \end{center}
+\end{figure}
+
 %~\ref{fig:signalPDFs_3j}-~\ref{fig:signalPDFs_5j_bbloose}. 
-
-
-\begin{figure}[phtb!]
-  \begin{center}
-  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_1.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_1.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_1.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_1.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_1.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_1.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_1.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_1.png}\end{subfigure}
-  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbb} category, for events with 3 jets, for different $H/A$ masses. \textbf{to be reformatted/replaced with rotated plots}\label{fig:signalPDFs_3j}}
-    \end{center}
-\end{figure}
-
-
-\begin{figure}[phtb!]
-  \begin{center}
-  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_2.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_2.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_2.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_2.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_2.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_2.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_2.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_2.png}\end{subfigure}
-  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbb} category, for events with 4 jets, for different $H/A$ masses. \textbf{to be reformatted/replaced with rotated plots}\label{fig:signalPDFs_4j}}
-    \end{center}
-\end{figure}
-
-\begin{figure}[phtb!]
-  \begin{center}
-  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_3.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_3.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_3.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_3.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_3.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_3.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_3.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_3.png}\end{subfigure}
-  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbb} category, for events with 5 or more jets, for different $H/A$ masses. \textbf{to be reformatted/replaced with rotated plots} \label{fig:signalPDFs_5j}}
-    \end{center}
-\end{figure}
-
-
-
-
-
-
-
-\begin{figure}[phtb!]
-  \begin{center}
-  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_4.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_4.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_4.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_4.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_4.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_4.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_4.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_4.png}\end{subfigure}
-  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 3 jets, for different $H/A$ masses. \textbf{TO BE REPLACED WITH ROTATED PLOTS} \label{fig:signalPDFs_3j_bbloose}}
-    \end{center}
-\end{figure}
-
-
-\begin{figure}[phtb!]
-  \begin{center}
-  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_5.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_5.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_5.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_5.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_5.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_5.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_5.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_5.png}\end{subfigure}
-  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbloose} category, 
-  for events with 3 jets, for different $H/A$ masses. 
-      \textbf{TO BE REPLACED WITH ROTATED PLOTS}  \label{fig:signalPDFs_4j_bbloose}}
-    \end{center}
-\end{figure}
-
-\begin{figure}[phtb!]
-  \begin{center}
-  \begin{subfigure}[$m_{A}=400$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb400_6.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=450$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb450_6.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=500$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb500_6.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=550$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb550_6.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=600$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb600_6.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=650$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb650_6.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=700$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb700_6.png}\end{subfigure}
-  \begin{subfigure}[$m_{A}=800$ GeV]{0.4\textwidth}\includegraphics[width=\textwidth]{FitResults/images/fitMC_bAbb800_6.png}\end{subfigure}
-  \caption{Signal MC distributions and Cruijff PDFs for $m_{bb}$ in the {\it bbloose} category, for events with 5 or more jets, for different $H/A$ masses. 
-\textbf{TO BE REPLACED WITH ROTATED PLOTS} \label{fig:signalPDFs_5j_bbloose}}
-    \end{center}
-\end{figure}
-
-
