@@ -248,9 +248,7 @@ difference between the data and MC efficiencies.
 
 The scale factors are applied as events weights to the MC weight, where the value
 of the scale factor depends on the $p_T$, $\eta$, $b$-tagging working point, 
- and truth flavor of the jet under
-examination.  In practice, this means that the scale factors are binned in $p_T$
-and $\eta$, with the $p_T$ bin edges at (), and the $\eta$ bin edges at ().
+and truth flavor of the jet under examination.  
 When there are multiple jets being examined for $b$-tags in a single
 event, the net event weight is a product of all the relevant scale factors.
 In this analysis, since only the first 5 jets are relevant for determining 
@@ -258,6 +256,7 @@ whether an event passes the analysis cuts or which $b$-tag category ($bbb$,
 $bbloose$, or $bbanti$), no scale factors are applied for jets that are 6th
 or lower in the $p_T$ hierarchy of an event.
 
+\subsection{Offline $b$-Tagging}
 The scale factors are calculated by comparing the $b$-tagging efficiency computed 
 in MC to the efficiency measured in carefully curated data samples, where the truth
 flavor contents of the data are relatively well-known \cite{b-tagging}.  For the $b$-jet
@@ -273,7 +272,7 @@ factors, in such a way to take the full covariance matrix of the calibration mea
 into account, including correlations among working points and different jet $p_{T}$ regions.
 For further explanation of the eigenvector method please see section 2.3 of \cite{VHBTagging}. 
 
-
+\subsection{$b$-Tagging in the Trigger}
 The presence of $b$-tagging in the trigger means the sample of data collected for this 
 analysis is already enriched in jets that look more $b$-like, which must also 
 be taken into account during the calibration process.  The scale factors
@@ -289,51 +288,30 @@ for an overall event weight as usual.
 
 
 %Gto be aroundP Soon we can reference the cont. tagging conf note (for now ATLAS-COM-CONF-2014-003).
+\begin{figure}
+    \center
+  \includegraphics[width=0.85\linewidth]{Systematics/online_SFs.pdf}
+  \caption{The online $b$-tagging scale factors\label{fig:online_sfs}}    
+\end{figure}                                                                                                                        
 
 
 
 
 
-%\begin{figure}[hbt]
-%  \includegraphics[width=0.98\linewidth]{Systematics/eigenvector_variations.pdf}
-%  \caption{The changes in flavor predictions in data due to eigenvector variations.  Th
-%    colored line in each subplot shows the nominal prediction given by the matrix method;
-%    each point is the prediction generated when a different eigenvector variation is applied.
-%    The variations are labeled on the x axis.  The colored dotted lines show the +\- 2\%
-%    envelope for the nominal prediction.}
-%  \label{fig:eigenvector_variations}
-%\end{figure}
+
+
+
+\subsection{Systematic Errors on Data-Driven Background Estimates}
+\begin{figure}
+    \center
+  \includegraphics[width=0.3\linewidth]{Systematics/shape_check_mbb_bbb_3jets_rotated.eps}
+  \includegraphics[width=0.3\linewidth]{Systematics/online_SFs.pdf}
+  \includegraphics[width=0.3\linewidth]{Systematics/online_SFs.pdf}
+  \caption{The online $b$-tagging scale factors\label{fig:online_sfs}}    
+\end{figure}                                                                                                                        
 
 
 
 
 
-%\subsection{Systematic Errors on Data-Driven Background Estimates}
-%Validating the matrix method predictions of the $m_{bb}$ shap is a bit more subtle. 
-%Since we use the matrix method to help validate our assumption that mbb of the leading 2 jets is independent of the truth
-% flavor of the third jet, we need to demonstrate that the matrix method reweighting does not distort the
-% mbb shape. We test this by generating toy MC distributions where our assumption is incorrect (by design,
-% we make the mbb distribution dependent on the truth flavor of the 3rd jet) and then run those toy events
-% through the matrix method to check if the different distributions are projected out correctly.
-% Using the $m_{bb}$ distribution in data as a template, we generate three $m_{bb}$ distributions that have different
-% shapes (the $m_{bb}$ values are scaled down by 7\% for light jets, left unchanged for charm jets, and scaled
-% up by 15\% for bottom jets), and draw an $m_{bb}$ value at random from one of those distributions depending
-% on the truth flavor. These different $m_{bb}$ distributions are not meant to model the data in any physically
-% relevant way, but rather to guarantee that if there are systematic differences in $m_{bb}$ that are correlated
-% with the flavor of the third jet, the matrix method will get the $m_{bb}$ shape correct.
-% The results of this study can be seen in Figure~\ref{fig:mbb_compare_truth_mm_toy}; it is clear that the 
-%shape differences in the original distributions propagate through to the matrix method predictions.
-
-
-
-%\begin{figure}
-%    \centering
-%    \includegraphics[width=0.3\linewidth]{Systematics/mm_shape_check_b.pdf}
-%    \includegraphics[width=0.3\linewidth]{Systematics/mm_shape_check_c.pdf}
-%    \includegraphics[width=0.3\linewidth]{Systematics/mm_shape_check_light.pdf}
-%    \caption{A comparison of the toy $m_{bb}$ distributions for the different flavors of the
-%        third jet, as shown in Figure~\ref{fig:mbb_compare_truth_spectra}, with the matrix
-%        method predictions overlaid.  }
-%    \label{fig:mbb_compare_truth_mm_toy}
-%\end{figure}
 

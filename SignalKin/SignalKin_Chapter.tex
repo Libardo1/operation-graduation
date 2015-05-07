@@ -373,17 +373,52 @@ background-dominated \textit{bbanti} events and there is no background
 above a certain $m_{bb}$ value.  That makes modeling the background extremely 
 difficult, and any fit difficult to validate.  
 
-Adding a change of basis before the $p_T$ cuts turns out to offer the advantage
-of better signal/background separation without the cost of making the background
-difficult to model.  The basis change is a rotation away from the $p_T^1$, 
-$p_T^2$, $m_{bb}$ basis into what we call the $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$
-basis, where $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$ are the eigenvectors of 
-a matrix built out of $p_T^1$, $p_T^2$, and $m_{bb}$.  The leading eigenvector 
-\footnote{the leading eigenvector is defined as the eigenvector with the largest
-associated eigenvalue}, which we call $m_{bb}^{'}$, is an admixture of 
-$p_T^1$, $p_T^2$, and $m_{bb}$, the exact blend of which varies by signal mass
-point.  The relative contributions of $p_T^1$, $p_T^2$, and $m_{bb}$ to the $m_{bb}^{'}$
-leading eigenvector can be seen in Table~\ref{tab:eigenvector_elements}.
+The rotation is performed as follows:
+\begin{itemize}
+    \item For $m_{bb}$, $p_T^1$ and $p_T^2$ calculate the center of gravity
+    of all signal MC simulation events, and subtract it from each event
+    \item For each event, fill a 3$\times$3 tensor with the following components
+    \begin{equation}
+        \begin{bmatrix}
+        m_{bb}m_{bb} & m_{bb}p_T^1 & m_{bb}p_T^2 \\
+                     & p_T^1 p_T^1 & p_T^1 p_T^2 \\
+                     &             & p_T^2 p_T^2 \\ 
+        \end{bmatrix}
+    \end{equation}
+    (the matrix is symmetric, so we write only the elements above the diagonal for
+    brevity and clarity)
+    \item Sum these tensor matrices for all signal events in a given tag/jet category
+    (the resulting tensor will also be 3$\times$3)
+    \item Find the leading eigenvector\footnote{where the leading eigenvector is the
+    eigenvector associated with the largest eigenvalue} of the tensor matrix
+    \item Define the $m_{bb}^{'}$ variable as follows:
+    \begin{equation}
+        m_{bb}^{'} = [m_{bb}\ p_T^1\ p_T^2] \cdot [e_1\ e_2\ e_3]
+    \end{equation}
+    where the latter vector is the leading eigenvector of the tensor matrix
+\end{itemize}
+
+After this rotation, $m_{bb}^{'}$ is an admixture of $m_{bb}$, $p_T^1$, and 
+$p_T^2$.  The exact contribution from each of these variables changes on a mass-point-by-mass-point
+basis, as the correlations between them change.  At lower masses, $m_{bb}$ provides
+most of the basis for $m_{bb}^{'}$, with 76\% of the $m_{bb}^{'}$ coming from 
+$m_{bb}$.  At higher masses, where FSR is more of an issue, the correlations between 
+$m_{bb}$ and the leading jets' $p_T$s are more important and for $m_A$=800 GeV,
+over half of $m_{bb}^{'}$ (55\%) comes from $p_T^1$ and $p_T^2$.  The full set 
+of $m_{bb}^{'}$ components can be found in Table~\ref{tab:eigenvector_elements}.
+
+
+%Adding a change of basis before the $p_T$ cuts turns out to offer the advantage
+%of better signal/background separation without the cost of making the background
+%difficult to model.  The basis change is a rotation away from the $p_T^1$, 
+%$p_T^2$, $m_{bb}$ basis into what we call the $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$
+%basis, where $p_T^{1'}$, $p_T^{2'}$, $m_{bb}^{'}$ are the eigenvectors of 
+%a matrix built out of $p_T^1$, $p_T^2$, and $m_{bb}$.  The leading eigenvector 
+%\footnote{the leading eigenvector is defined as the eigenvector with the largest
+%associated eigenvalue}, which we call $m_{bb}^{'}$, is an admixture of 
+%$p_T^1$, $p_T^2$, and $m_{bb}$, the exact blend of which varies by signal mass
+%point.  The relative contributions of $p_T^1$, $p_T^2$, and $m_{bb}$ to the $m_{bb}^{'}$
+%leading eigenvector can be seen in Table~\ref{tab:eigenvector_elements}.
 
 
 \begin{table}
@@ -405,14 +440,7 @@ leading eigenvector can be seen in Table~\ref{tab:eigenvector_elements}.
     \end{tabular}
 \end{table} 
 
-As Table~\ref{tab:eigenvector_elements} shows, the largest component of
-$m_{bb}^{'}$ comes from $m_{bb}$, regardless of the mass point.  However,
-for higher $m_A$ values, there is the clear trend that $p_T^1$ and $p_T^2$
-components become larger, meaning that the $p_T$s of the jets becomes 
-more important as $m_A$ grows.  This is consistent with the original 
-physical hypothesis behind this strategy, which is to isolate and remove
-high-FSR events, of which there are more for the larger values of $m_A$. 
-The effect of this transformation on 800 GeV signal and background-dominated
+The effect of this transformation on 450 and 800 GeV signal and background-dominated
 data can be seen in Figure ~\ref{fig:transformed_vars}.  These figures show
 the difference in the $m_{bb}$ distributions %and $p_T$ distributions 
 before and after the transformation,
@@ -423,14 +451,6 @@ neighborhood of the signal peak; before the rotation,
 significant background remaining in the neighborhood of the signal peak, 
 but after the rotation the signal is virtually
 unchanged while the background has been shifted lower.  
-%An examination of the
-%$p_T$ variables shows that before the transformation, the signal and background
-%shapes are different; however, after the rotation, the signal and background
-%shapes are virtually identical.  This reinforces the hypothesis that projecting
-%onto the major axis is effectively concentrating all of the discriminating 
-%power in $m_{bb}$, $p_T^1$, and $p_T^2$ together into the single $m_{bb}^{'}$
-%variable.  These effects are visualized in Figure~\ref{fig:transformed_vars}
-%\textbf{(NB: these plots will be reformatted/replaced}. 
 
 \begin{figure}[hbt]
 \includegraphics[width=0.45\linewidth]{SignalKin/h_mass_bAbb_450_unrotated.eps}
@@ -444,9 +464,14 @@ unchanged while the background has been shifted lower.
     are on the right, for the same two mass points.  The rotation pushes the
     background events to lower values of $m_{bb}^{'}$ than the signal, yielding
     better signal/background separation, especially for higher mass Higgs candidates.
-    \textbf{need to check signal normalization used to make these plots}
      \label{fig:transformed_vars}}
 \end{figure}
+
+
+While the $m_{bb}^{'}$ variable is derived using the leading eigenvector of the
+tensor matrix, the second and third eigenvectors can also be used in an analagous
+way and we refer to the resulting transformed variables as $p_T^{1'}$ and $p_{T}^{2'}$.
+
 
 There is one more step that optimizes the signal to background
 discrimination further, which is placing cuts on $p_T^{1'}$ and $p_T^{2'}$.
