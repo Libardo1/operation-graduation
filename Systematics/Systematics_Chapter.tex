@@ -10,6 +10,42 @@ and quantifying sources of systematic error.  Systematic errors arise from calib
 errors, data/MC disagreement, detector uncertainty, noise, and other sources
 that do not decrease as the overall dataset size increases.  
 
+Since we use a data-driven background estimate, most of the systematic errors
+are only relevant for the signal shape and normalization, which we study using 
+MC simulations.  For example, $b$-tagging systematics, jet energy systematics, 
+and trigger turn-on systematics only apply to signal and not to background.  
+However, the shape extrapolation from the \textit{bbanti} control region to the
+\textit{bbb} signal region is one important source of background uncertainty;
+we validate the extrapolation and compute systematic errors for it using QCD MC simulations.
+
+\section{Background Shape Extrapolation Systematics}
+The background shape is data-driven, since it comes from the \textit{bbanti} $m^{'}_{bb}$ distribution in data, but the
+extrapolation from the \textit{bbanti} background control region to the \textit{bbb} signal region needs to be validated
+in MC. In general, these validation studies show clearly that the $m^{'}_{bb}$ shape agrees closely between the
+\textit{bbanti} and \textit{bbb} regions (validation plots can be found in Section 2.1.2), but any small differences must
+be estimated as systematics.
+
+In order to compare the shapes, we calculate the ratio between the $m^{'}_{bb}$ distributions in the \textit{bbb} and
+\textit{bbanti} samples in QCD MC. Then we fit these ratios with a linear function, looking at the slope of the
+line to see if it is significantly different from zero, indicating a systematic shape difference. These fitted ′
+ratio plots can be seen in Figure~\ref{fig:shape_checks_bg}.
+
+
+\begin{figure}
+    \center
+  \includegraphics[width=0.5\linewidth]{Systematics/shape_check_mbb_bbb_3jets_rotated.eps}
+  \includegraphics[width=0.5\linewidth]{Systematics/shape_check_mbb_bbb_4jets_rotated.eps}
+  \includegraphics[width=0.5\linewidth]{Systematics/shape_check_mbb_bbb_5jets_rotated.eps}
+  \caption{\label{fig:shape_checks_bg}}    
+\end{figure}                                                                                                                        
+
+In the 3 jet and 4 jet categories, the slope of the best fit line is statistically consistent
+with zero, indicating that the extrapolation from \textit{bbanti} to \textit{bbb} in these
+categories is not expected to introduce any background shape biases.  In the 5+ jet category,
+the slope of the best fit line is not consistent with zero, meaning that the $m^{'}_{bb}$
+distribution in the \textit{bbb} category tends toward slightly higher values than in the
+\textit{bbanti} category, and the extrapolation from the latter to the former has a
+shape uncertainty as a result.  
 
 \section{Trigger $p_T$ Efficiency}
 \label{sec:trigger_syst}
@@ -299,16 +335,6 @@ for an overall event weight as usual.
 
 
 
-
-
-\subsection{Systematic Errors on Data-Driven Background Estimates}
-\begin{figure}
-    \center
-  \includegraphics[width=0.3\linewidth]{Systematics/shape_check_mbb_bbb_3jets_rotated.eps}
-  \includegraphics[width=0.3\linewidth]{Systematics/online_SFs.pdf}
-  \includegraphics[width=0.3\linewidth]{Systematics/online_SFs.pdf}
-  \caption{The online $b$-tagging scale factors\label{fig:online_sfs}}    
-\end{figure}                                                                                                                        
 
 
 

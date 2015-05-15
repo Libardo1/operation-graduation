@@ -14,12 +14,12 @@ might be the scope and collaborative nature of the work.  This thesis is one of 
 been produced at the ATLAS dectector at CERN, and makes use of the dedicated work of many
 physicists to build and maintain the experimental apparatus and data processing pipeline.
 The Large Hadron Collider is the first major piece of this, where beams of protons are accelerated to
-tremendous energies and the smashed into each other inside the cavernous detectors, including ATLAS.
+tremendous energies and the smashed into each other inside the cathedral-size detectors, including ATLAS.
 It is the collisions
 between individual pairs of protons that underpin the entire scientific mission: in this environment,
 interesting and rare physics can result from the interactions between the protons.  It is the mission of the
 LHC to generate large numbers of high-energy proton-proton collisions, and then the mission of the detectors
-to record and analyze the data that results from the collisions.  
+to record and analyze the data that result from the collisions.  
 
 
 
@@ -32,9 +32,9 @@ Collider (LHC), and it has a long and storied history of producing particle disc
 advances.
 
 The LHC is the particle accelerator that serves as the centerpiece of CERN's scientific program.  The accelerator is 
-an RF-driven circular sychrotron located in an underground tunnel with a circumference of 27 km, and when 
-it is running, accelerates and collides two proton beams (sometimes two lead ion beams, but we will 
-focus on the protons in this thesis) at four interaction points around the accelerator ring.  Each of proton beam 
+an RF-driven circular synchrotron located in an underground tunnel with a circumference of 27 km, and when 
+it is running, it accelerates and collides two proton beams (sometimes two lead ion beams, but we will 
+focus on the protons in this thesis) at four interaction points around the accelerator ring.  Each of the proton beams 
 contains thousands of bunches of protons which are very deliberately spaced so that every 50 ns, two 
 of those bunches going opposite directions will overlap at one of the interaction points.  In 2012, the energy
 of the proton beams was 4 TeV each, making for a total of 8 TeV of energy when the beams are collided head-on.
@@ -43,15 +43,17 @@ collisions is a scientific and engineering endeavor completely in its own right,
 the physics insights that we get as a result.
 
 
-There are two major figures of merit for any particle accelerator: energy and luminosity.  Energy is typically limited 
+There are two major figures of merit for any particle accelerator: energy and luminosity.  In a
+proton accelerator\footnote{energy in electron-electron or electron-positron colliders is limited
+by synchrotron radiation losses}, energy is typically limited 
 by the circumference of the accelerator and by the magnetic field strength of the accelerator's bending magnets.  
 The record-breaking energy of the LHC is a function of its tremendous size (27 km in circumference) as 
 well as 1232 8.4 tesla superconducting dipole magnets that keep the beams in place within the accelerator.  Luminosity 
  is a measure of how many collisions the accelerator can produce, with higher luminosities meaning that more 
-interesting events (and non-interesting events!) can be generated.  Since different processes happen at different rates
-, the rate at which a given process occurs is usually stated in terms of its production cross section.  
-Cross sections are measured in units of barns (or fractions thereof), with one barn being equal to 10
-$^{-28}$ $m^2$.  Luminosity is measured in inverse barns, so that he cross section 
+interesting events (and non-interesting events!) can be generated.  Since different processes happen at different rates, 
+the rate at which a given process occurs is usually stated in terms of its production cross section.  
+Cross sections are measured in units of barns (or fractions thereof), with one barn being equal to 10$^{-28}$ m$^2$.  
+Luminosity is measured in inverse barns, so that the cross section 
 can be multiplied by the luminosity to give a total number of events for that type of event.  Luminosity 
 is usually limited by the intensity and focus of the beam, and the bunch crossing rate.
 
@@ -63,14 +65,14 @@ is usually limited by the intensity and focus of the beam, and the bunch crossin
 	\caption{Cross sections for various processes as a function of center-of-mass energy
             of the original collision.  The ``skip'' at 4 TeV occurs because below that
             value, the cross sections are for proton-antiproton collisions like those
-            made at the Tevatron, while higher energy collisions are being produced
+            made at the Tevatron, while higher energy proton-proton collisions are being produced
             at the LHC. \label{fig:cross_sections}}
 \end{figure}
 
 
 Energy and luminosity go hand-in-hand to push back the frontiers of physics.  One of the 
 major goals of the LHC is to discover new particles, and by conservation of energy the higher the LHC 
-can go in energy, the heavier it can go in new particles to potentially create.  Another important fact 
+can go in energy, the heavier the new particles it can potentially create.  Another important fact 
 is that, while cross sections for all types of processes typically go up as the collision energy increases, 
 many new physics models have production cross sections that go up faster than the backgrounds as a function of center
 -of-mass energy.  In other words, for a given process, the signal-to-
@@ -82,9 +84,9 @@ since sensitivity to a signal is typically defined as $s/\sqrt{b}$--for example,
 10-fold increase in luminosity means a $\sqrt{10}$-fold increase in a search's sensitivity.  
 Luminosity can be increased by either tuning the accelerator to have a higher instantaneous luminosity, with a more focused 
 beam or higher beam current for example, or by simply running the machine for a longer time.  In 
-practice, increasing instantaneous luminosity at the LHC also means increasing the number of lower
--energy collisions that, while not of physical interest, still get picked up in the detector (pileup
-).  The removal of pileup is an intense and dedicated effort that will be addressed in Section~\ref{sec:pileup}.
+practice, increasing instantaneous luminosity at the LHC also means increasing the number of simultaneous 
+lower-energy collisions that, while not of physical interest, still get picked up in the detector (pileup).  
+The removal of pileup is an intense and dedicated effort that will be addressed in Section~\ref{sec:pileup}.
 
 
 
@@ -98,9 +100,9 @@ practice, increasing instantaneous luminosity at the LHC also means increasing t
 
 
 The LHC is only the last in a chain of accelerators, which all work together to create the high 
-energy and luminosity that we associate with the LHC.  The first step in the process is the proton source
-, where hydrogen atoms are subjected to an electric field that separates the protons from the electrons.  Then the 
-protons are accelerated by a 90kV field and focused, and fed into a linear accelerator.  From this point 
+energy and luminosity that we associate with the LHC.  The first step in the process is the proton source, 
+where hydrogen atoms are subjected to an electric field that separates the protons from the electrons.  Then the 
+protons are accelerated by a 90kV electric field and focused, and fed into a linear accelerator.  From this point 
 forward, all the accelerators use radio frequency (RF) electromagnetic waves to impart energy to the protons.  
 
 The linear accelerator brings the protons up to an energy of 50 MeV, then they go to the Proton 
@@ -121,9 +123,9 @@ Figure ~\ref{fig:accelerator_complex} shows all the major accelerators at the CE
 
 
 Once the beams are in the LHC, they are accelerated up to the full collision energy of 4 TeV 
-per beam.  Then the beams are focused  and carefully steered into position so that head-on collisions commence
-.  The protons are arranged in bunches within the beams, with each bunch 50 ns away from its neighbors
-, so that the collision frequency within the detectors is 20 MHz.  The data-taking is organized into 
+per beam.  Then the beams are focused  and carefully steered into position so that head-on collisions commence.  
+The protons are arranged in bunches within the beams, with each bunch 50 ns away from its neighbors, 
+so that the collision frequency within the detectors is 20 MHz.  The data-taking is organized into 
 runs, where collisions are created continuously for up to 16 or so hours at a time.  A run 
 typically ends either when enough of the beam gets burned away by the collisions that the instantaneous luminosity drops and 
 it becomes worthwhile to refill, or when a technical glitch causes the beams to be dumped.
@@ -131,10 +133,10 @@ it becomes worthwhile to refill, or when a technical glitch causes the beams to 
 The history of the LHC is a dramatic one.  The LHC first turned on in 2008, but within 
 days had to shut down following a catastrophic failure of the bus bar between superconducting magnets.  It restarted in 
 2009 at 7 TeV, half the design energy of 14 TeV (a repercussion of the accident), and 
-the first run for physics was performed in 2010, with a total dataset size of 36 inverse picobarns.  
+the first run for physics was performed in 2010, with a total ATLAS dataset size of 45 inverse picobarns.  
 The progress in 2011 was dramatic, as the beam intensity was steadily increased over the course of the run 
 to create an exponential increase of the luminosity recorded, and at the end of 2011 the total dataset size 
-was about 5 inverse femtobarns (a factor of more than 1000 greater than the data recorded in 2010).  
+was about five inverse femtobarns (a factor of more than 100 greater than the data recorded in 2010).  
 The progress continued in 2012, with a slightly increased energy of 8 TeV and about 20 $fb^{-1}$ 
 collected, culminating in the 4 July 2012 announcement of the discovery of a new particle, later confirmed to 
 be the long-sought Higgs boson.  The total collected luminosity is illustrated in Figure~\ref{fig:lumi_vs_year}.  
@@ -146,29 +148,39 @@ records are broken by the upgraded machine.
 
 
 \section{The ATLAS Coordinate System}
-The ATLAS detector is situated at Point 1 of the LHC ring.  Since the detector has a cylindrical shape
-, polar coordinates are the most natural basis for describing its geometry.  The radial direction (usually notated ``r'') 
+The ATLAS detector is situated at Point 1 of the LHC ring.  Since the detector has a cylindrical shape, 
+polar coordinates are the most natural basis for describing its geometry.  The radial direction (usually notated \textit{``r''}) 
 is defined as the vector originating at the interaction point, in the middle of the detector, and pointing 
 transverse to the beamline.  The azimuthal angle $\phi$ and the polar angle $\theta$ complete the 
 coordinate system, although in practice it is more common to use pseudorapidity $\eta$ instead of $\theta$.  
-Pseudorapidity has the advantage of being a quantity that is Lorentz-invariant under boosts longitudinal to the incoming beams 
-(in a hadron collider, the longitudinal component of the momentum of the incoming partons is not known).  
+  
+%a quantity that is Lorentz-invariant under boosts longitudinal to the incoming beams 
+%(in a hadron collider, the longitudinal component of the momentum of the incoming partons is not known).  
 The definition of pseudorapidity $\eta$ is
 
 \begin{equation}
-\eta = -ln(tan( \frac{\theta}{2} ))
+\eta = -\ln(\tan( \frac{\theta}{2} ))
+\end{equation}
+Pseudorapidity has the advantage of shifting additively under changes in the longitudinal boosts with velocity
+$\beta$:
+
+\begin{equation}
+\eta \approx \eta+\ln\sqrt{\frac{1-\beta}{1+\beta}} \footnote{This statement is an equality when referring to the
+rapidity $y$, and an approximation when referring to the pseudorapidity $\eta$.  In highly relativistic regimes,
+like those experienced by particles in the LHC, $y\simeq \eta$}
 \end{equation}
 
-Since the proton is a composite particle, made of three valence quarks and an indeterminate number of gluons, even 
+Since the proton is a composite particle, made of three valence quarks and an indeterminate number of gluons, 
+and sea quarks, even 
 if the proton has a known energy, its constituent partons can have a wide range of energies.  In 
-general, then, the exact collision energy can vary from event to event, and outgoing particles can be 
+general, then, the exact partonic collision energy can vary from event to event, and outgoing particles can be 
 boosted forward in $\eta$.  However, energy is conserved in the $\phi$ dimension, so transverse 
-energy and momentum ($E_T$ and $p_T$, respectively) should add up to zero in events where there are no particles escaping detection.
+momentum ($\vec{p_T}$) should add up to zero in events where there are no particles escaping detection.
 
 \section{The ATLAS Detector}
 The ATLAS detector is like an onion: it has layers, and it makes you cry.  There are 
-several main subsystems, each of which is designed to measure a certain characteristic (charge, momentum, energy
-, etc.) of a particular type of particle (quark, electron, muon, etc.).  The subsystems 
+several main subsystems, each of which is designed to measure a certain characteristic (charge, momentum, energy, 
+etc.) of a particular type of particle (quark, electron, muon, etc.).  The subsystems 
 work hand-in-hand with the trigger and data acquisition system, which handles the decision-making 
 of which events to record and goes about writing those events to disk.  
 
@@ -179,12 +191,12 @@ small electrical signals that can be amplified and read out by the system.  Thes
 are combined during reconstruction into tracks, which represent the paths of particles like electrons, muons, and charged 
 pions in the detector.
 
-The information from the tracker is used in particular to determine the transverse momentum (p$_T$) of 
+The information from the tracker is used in particular to determine the transverse momentum ($p_T$) of 
 charged particles, and to perform particle identification.  The tracker consists of three primary subsystems: the pixels, 
 semiconductor tracker (SCT), and transition radiation tracker (TRT).  A charged particle created at or near the 
 interaction point would typically travel through all three subsystems, creating some number of hits in each one.  On 
-average, a track has 3 pixel hits, 8 hits in the SCT (4 double-sided hits
-) and about 34 hits in the TRT, with all the inner detector subsystems enclosed by a 2 tesla solenoidal magnetic field. 
+average, a track has 3 pixel hits, 8 hits in the SCT (4 double-sided hits) 
+and about 34 hits in the TRT.  All the inner detector subsystems are enclosed by a 2 tesla solenoidal magnetic field. 
 
 
 \begin{figure}
@@ -198,8 +210,8 @@ average, a track has 3 pixel hits, 8 hits in the SCT (4 double-sided hits
 \subsubsection{Pixel System}
 \label{sec:pixel}
 The pixel system sits physically closest to the beam line and interaction point.  It is built of silicon pixels 
-that measure 50 x 400 micrometers each, which are organized into sensors.  Each sensor contains 46,080 
-pixels, and then there are 16 sensors organized onto a pixel module.  The pixels as a whole contain 1744 
+that measure 50 $\times$ 400 micrometers each, which are organized into sensors.  Each sensor contains 46,080 
+pixels, and then there are 16 sensors organized onto a pixel module.  The pixel system as a whole contain 1744 
 modules, organized into 3 layers each in the barrel and the two endcaps.  
 The pixel system in aggregate contains 80 million channels and measures about 1.4 meters long by 0.4 meters in diameter.
 
@@ -212,17 +224,18 @@ The pixel system in aggregate contains 80 million channels and measures about 1.
 The pixel technology is designed to give high-precision measurements of the location and momentum of charged tracks.  
 A pixel module has two main components, the silicon sensor and the front-end chip, which are 
 bump-bonded together.  When a charged particle traverses the sensor it ionizes silicon atoms, creating 
-electron-hole pairs, and then a bias voltage applied across the sensor causes the electrons and holes 
+electron-hole pairs. A bias voltage applied across the sensor causes the electrons and holes 
 to drift to opposite sides of the sensor, where they can be read out by the front-end chips.  
 
-The pixel readout is based on detecting and quantifying this ionization current.  A particle with greater momentum will create 
-more electron-hole pairs and thus a longer readout pulse, which passes through a preamplifier and then a 
-discriminator.  The discriminator is set with a tunable threshold number of electrons, typically a few thousand, and 
-the signal metric is then the length of time for which the pulse was above that value (called ``
-time over threshold'', or TOT).  Having a threshold in place helps distinguish ionization current from leakage current, 
+The pixel readout is based on detecting and quantifying this ionization current.  When the ionization
+current reads out, it creates an electric pulse in the pixel electronics that serves as the input
+to a discriminator.  
+The discriminator is set with a tunable threshold number of electrons, typically 3000, and 
+the signal metric is then the length of time for which the pulse was above that value (called ``time 
+over threshold'', or TOT).  Having a threshold in place helps distinguish ionization current from leakage current, 
 which occurs when the silicon does not have robust insulator characteristics and current begins to flow across the sensor even 
 when there is no ionizing particle present.  One important effect of radiation damage to the pixel detector is that 
-it damages the silicon, allowing for increases in leakage current up to 100 nA, so over the course 
+it damages the silicon, allowing for increases in leakage current up to 100 nA, so that over the course 
 of large radiation doses to the detector the thresholds sometimes have to be raised to compensate for the damaged material.  
 
 
@@ -231,7 +244,10 @@ of large radiation doses to the detector the thresholds sometimes have to be rai
   \begin{center}
 %\begin{figure}
 	\includegraphics[width=0.45\textwidth]{ATLASDetector/images/id_material_budget.pdf}
-	\label{fig:id_material}
+    \caption{The material budget of the inner detector, in units of radiation
+    lengths, as a function of $\eta$, showing how the material in the central part of
+    the detector (especially in the pixel subsystem) is kept at a minimum to mitigate
+    multiple scattering.  \label{fig:id_material}}
 	\end{center}
 %\end{figure}
 \end{wrapfigure}
@@ -247,18 +263,19 @@ electronics, in more forward regions so that they are not in the path of central
 two figures of merit when evaluating the material budget of a system: the radiation length is the distance an 
 electromagnetically interacting particle (such as an electron, positron or photon) travels before losing 1/$e$ 
 of its energy to bremsstrahlung, while the interaction length is the mean distance traveled by a hadronically-interacting 
-particle (such as a proton, neutron or pion) before undergoing an inelastic nuclear interaction.  Figure ~\ref{fig:id_material} 
-of the material volume, in units of radiation length vs. $\eta$, shows that the material budget 
-(especially pixels) is minimized in the most central regions.
+particle (such as a proton, neutron or pion) before undergoing an inelastic nuclear interaction.  Figure~\ref{fig:id_material} 
+shows the material volume, in units of radiation length vs. $\eta$; clearly, the material budget 
+(especially pixels) is minimized in the most central regions ($|\eta|<$1.4).
 
 
 %https://cds.cern.ch/record/1445527/files/ATL-COM-PHYS-2012-471.pdf
-The pixel system all together provides fine resolution of the beamspot and surrounding area, which serves several important purposes
-.  First, since there are typically many hard p-p collisions in each bunch crossing, the pixels 
-system has longitudinal resolution $z_0\sin\theta\approx$0.05-0.3 mm 
-enables the reconstruction of multiple primary vertices that are typically separated by a few millimeters \cite{pixel_res}.  This 
+The pixel system all together provides fine resolution of the beamspot and surrounding area, 
+which serves several important purposes.  First, since there are typically many hard 
+p-p collisions in each bunch crossing, the pixel 
+system's longitudinal resolution of $z_0\sin\theta\approx$0.05-0.3 mm 
+enables the reconstruction of multiple primary vertices, which are typically separated by a few millimeters \cite{pixel_res}.  This 
 is critical for controlling pileup in the high-luminosity LHC environment.  Second, the transverse resolution of 0.01-0.1 mm 
-enables the track resolution required to allow precision b-tagging for identification of bottom quarks.  More details
+enables the track resolution required to allow precision $b$-tagging for identification of bottom quarks.  More details
 on both the track reconstruction and the $b$-tagging methodology can be found in Sections~\ref{sec:trk_reco} and ~\ref{sec:b-tag}. 
 
 
@@ -269,12 +286,13 @@ Like the pixels, the silicon microstrip tracker (SCT) is a silicon detector, alt
 distinctly different from the pixel geometry.  Since the SCT is at a farther radius from the interaction point than 
 the pixels, it experiences a lower occupancy.  This allows for substantially larger detector elements, at a lower 
 cost and using less material in the detector than if the same coverage were implemented in pixels, while maintaining 
-16 $\mu$m resolution of tracks in r$\Phi$ and 580 $\mu$m resolution in Z ~\cite{sct_res}.   
+16 $\mu$m resolution of tracks in $r\phi$ and 580 $\mu$m resolution in $z$ ~\cite{sct_res}.   
 
-The SCT geometry has some notable features.  The SCT consists of 8 layers of microstrips organized into 4 double
--sided pairs, where the two members of each pair have an offset angle of 40 mrad.  The 
-SCT has 4 barrel layers and 9 endcap disks, and the barrel modules are oriented with a tilt angle 
-of about 11$^\circ$ angle relative to being perfectly tangential to $r\phi$ ~\cite{tdr}.  Whereas the 
+The SCT geometry has some notable features.  The SCT consists of 8 layers of microstrips organized into four 
+double-sided pairs, where the two members of each pair have an offset angle of 40 mrad.  The 
+SCT has four barrel layers and nine endcap disks, and the barrel modules are oriented with a tilt angle 
+of about 11$^\circ$ angle relative to being perfectly tangential to a circle of constant $r$ in the 
+$r\phi$ plane ~\cite{tdr}.  Whereas the 
 pixel reads out the TOT of a hit, the SCT has a binary readout: a hit is either recorded or not.
 
 
@@ -284,7 +302,7 @@ pixel reads out the TOT of a hit, the SCT has a binary readout: a hit is either 
 \label{sec:trt}
 The outermost inner detector layer is the transition radiation tracker, or TRT.  
 
-The TRT uses gold-plated tungsten wires embedded in straw tubes of 4mm diameter filled with an Xe/O$_2$/Co$_2$ 
+The TRT uses gold-plated tungsten wires embedded in straw tubes of 4mm diameter filled with an Xe/O$_2$/CO$_2$ 
 gas mixture, with a total of about 350,000 readout channels covering a pseudorapidity range out to $|\eta|<$2.0.
   For a typical particle, the TRT will have about 30-35 hits with a hit precision of about 130$\mu m$ ~\cite{trt}.
 
@@ -299,17 +317,14 @@ from hadrons by the presence of many high threshold hits along the track.
 
 \subsection{Calorimeters}
 The ATLAS calorimeters measure the energy of particles.  There are two main calorimeter
-subsystems, one for electromagnetic particles and the other for hadronically-decaying particles.
+subsystems, one for electromagnetic particles such as photons and electrons, 
+and the other for hadrons, jets, $\tau$ leptons, and missing transverse energy.
 In addition to energy measurements, though, information from the calorimeters also is used
 for particle identification, finding the direction of electromagnetic and hadronic jets, 
 identifying and measuring missing transverse energy or MET, and selecting jets as part of the
 trigger.
 
 
-
-The ATLAS detector has two calorimeter systems: the electromagnetic (EM) calorimeter, designed to measure the energy 
-of electrons and photons, and the hadronic calorimeter, for measuring the energy of hadrons, jets, tau 
-leptons and missing transverse energy.  
 
 %http://www-library.desy.de/preparch/desy/proc/proc10-01/meng.pdf
 %http://iopscience.iop.org/1742-6596/110/9/092007/pdf/jpconf8_110_092007.pdf
@@ -322,10 +337,10 @@ the value where the particle was actually found, $m_h$=126 GeV), the most sensit
 electromagnetic particles (electrons and photons) in the final state. 
 
 Nicknamed the LAr 
-calorimeter for its liquid argon technology,  the calorimeter is a sampling calorimeter, with the passive showering material (
-lead) interleaved with active energy measurement material (liquid argon).  An electron or photon will interact with the 
-lead as it travels through it, creating an electromagnetic shower, which then propagates to the adjacent LAr layer
-, where it is measured and read out.
+calorimeter for its liquid argon technology,  the calorimeter is a sampling calorimeter, with the passive showering material 
+(lead) interleaved with active energy measurement material (liquid argon).  An electron or photon will interact with the 
+lead as it travels through it, creating an electromagnetic shower, which then propagates to the adjacent LAr layer, 
+where it is measured and read out.
 
 
 \begin{figure}
@@ -355,7 +370,7 @@ produces an electromagnetic shower where the drift time of the particles in the 
 roughly triangular in shape and typically 400 ns long.  This pulse is shaped by the readout electronics and the 
 signal shape is simulated with Monte Carlo and calibrated using precisely known test pulses deposited into the readout chain.  
 However, as detailed below, the presence of multiple interactions per bunch crossing, known as pileup, has 
-a significant effect in the calorimeters and is an important task for understanding jet energy.
+a significant effect in the calorimeters and is an important issue for understanding jet energy.
 
 %http://cds.cern.ch/record/1478440/files/ATL-TILECAL-PROC-2012-008.pdf
 %http://arxiv.org/pdf/1305.0550v1.pdf
@@ -365,7 +380,8 @@ a significant effect in the calorimeters and is an important task for understand
 Like the EM calorimeter, the hadronic calorimeter was designed with an eye toward Higgs discovery, that it would
 have the resolution needed to find Higgs decays to $b\bar{b}$ and $\tau\tau$ pairs.  This is important and complementary
 to the EM calorimeter because, although the most sensitive decay channels of the Higgs are to photons and electrons,
-the decay modes with the highest branching fractions ($b\bar{b}$ and a large subset of $W^+W^-$) are hadronic.
+the decay modes with the highest branching fractions ($b\bar{b}$ and a large subset of $W^+W^-$\footnote{in particular,
+decay modes where one W boson decays to a lepton and a neutrino, and the other decays to quarks}) are hadronic.
 For the physics in this thesis, with three $b$-jets in the final state, the hadronic calorimeter does the crucial
 jet energy detection and measurement. 
 
@@ -374,13 +390,15 @@ energy from hadrons, jets, taus and allows for a measurement of missing transver
 is a sampling calorimeter, nicknamed the tile calorimeter because of its composition of scintillating tiles (active material) 
 interleaved with steel plates (showering material) in the barrel.  When a strongly-interacting particle hits the steel it creates a 
 spray of particles, called a shower, which then enters the scintillator and creates a light signal that is 
-proportional to the energy .  This process repeats until the full energy of the original particle is measured, and 
+proportional to the energy.  This process repeats until the full energy of the original particle is measured, and 
 usually the calorimeter cells are reconstructed into an object called a jet which aims to cluster the energy together in 
 a way that accurately represents the energy of the original particle.  Much more on hadronic jet reconstruction will follow in Section~\ref{sec:jet_reco}.
 
 The hadronic calorimeter is partitioned into four major subsections, two barrel sections and two extended barrel sections, allowing 
-for measurements out to $|\eta|<$1.7.  In the forward regions, hadronic coverage is provided by the liquid argon system and the high-density forward calorimeter \cite{cal_tdr}. In order to stop all remaining particles from the collision, 
-with the notable exception of muons, the hadronic calorimeter is about 7.4 radiation lengths ($\lambda$) thick.
+for measurements out to $|\eta|<$1.7.  In the forward regions, hadronic coverage is provided 
+by the liquid argon system and the high-density forward calorimeter \cite{cal_tdr}. 
+In order to stop all remaining particles from the collision, 
+with the notable exception of muons, the hadronic calorimeter is about 7.4 interaction lengths thick.
 
 \begin{figure}
 	\includegraphics[width=0.8\textwidth]{ATLASDetector/images/tile_cal.pdf}
@@ -403,11 +421,11 @@ important role in the future since muons can be used to help trigger on and iden
 
 
 The ATLAS muon system is composed of four different detector systems located within and around an air-core toroid 
-magnet with a field of 1 Tesla.  Precision tracking in the barrel is done by Monitored Drift Tubes (
-MDT) and in the endcap by Cathode Strip Chambers (CSC).  Quick-readout triggering is done in 
+magnet with a field of 1 Tesla.  Precision tracking in the barrel is done by Monitored Drift Tubes (MDT) 
+and in the endcap by Cathode Strip Chambers (CSC).  Quick-readout triggering is done in 
 the barrel by Resistive Plate Chambers (RPC) and in the endcap by Thin Gap Chambers (TGC).   
 The system is designed to measure the $p_T$ of muons with $p_T>$
-3 GeV, with 3\% resolution up to $p_T<$250 GeV and 10\% resolution up to 1TeV.  
+3 GeV, with 3\% resolution up to $p_T<$250 GeV and 10\% resolution up to 1 TeV.  
 
 
 
@@ -447,14 +465,14 @@ The trigger has a step-type structure, where progressively smaller numbers of ev
 detailed and computationally intensive algorithms.  
 Many physics analyses (including this one) look for signatures that have more than one physics object in 
 them (for instance, multiple electrons, or a lepton plus jets), so multiple physics objects are often 
-required in a single trigger.  There are also single-item triggers, although typically these have higher thresholds 
+required in a single trigger.  There are also single-item triggers, although typically these have higher $p_T$ thresholds 
 than triggers that look for multiple objects.  If all of the objects in a given trigger item are seen, 
 the event is accepted for the current level and the event moves forward in the data collection process.  
 This process repeats three times, once for each of the levels of the trigger--only those events which 
 pass L1 move onto L2, those which pass L2 move on to EF, and those that pass EF 
 are written to disk.  As the machine settings for the LHC changed over the course of 2012, resulting 
-in different conditions for data-taking, the trigger menu was adjusted periodically to keep rates under control (
-in practice, this generally means either raising thresholds or adding prescales).  
+in different conditions for data-taking, the trigger menu was adjusted periodically to keep rates under control (in 
+practice, this generally means either raising thresholds or adding prescales).  
 The end result of this process is approximately 200 events 
 per second (320 MB/s of data) being written to disk; the trigger rates and latency 
 information can be found in Table \ref{tab:trigger_stats}.
@@ -476,7 +494,7 @@ one of the trigger chains \cite{atlas_trigger}. \label{tab:trigger_stats}}
 \end{table}
 
 
-Of particular interest to this analysis are the jet thresholds and b-tagging applied in the trigger.  This 
+Of particular interest to this analysis are the jet $p_T$ thresholds and $b$-tagging applied in the trigger.  This 
 will be outlined in greater detail in Sections~\ref{sec:b-tag} and ~\ref{sec:my_trigger}, but we will introduce the ideas here.  As 
 only 200 events per second get written to disk, the bandwidth has to be carefully allocated across triggers, 
 and it is very expensive to keep a trigger that allows high rates of events to be written to disk.  
@@ -485,21 +503,22 @@ from a Higgs decay) are generally higher in p$_T$ than the background (continuum
 ) so one way to keep event rates reasonable in the face of rising luminosity is to place higher p$_T$ 
 thresholds on the jets that fire the trigger.   
 
-The thresholds increase with each trigger level, as more information is read out of the detector, so that 
-a jet which is reconstructed with 75 GeV of p$_T$ at L1 
+The thresholds increase with each trigger level, as more detector subsystems read out and more
+computationally intensive reconstruction algorithms are applied, so that 
+a jet which is reconstructed with a minimum of 75 GeV of $p_T$ at L1 
 might be required to have 145 GeV at EF in order to pass the full trigger chain.  Once the event 
 is written to disk, it is subject to the full offline reconstruction and calibration so that the final p$_T$ 
 of the jet might not be exactly the number measured at the trigger EF.  There is therefore a range 
 of p$_T$ values, called the turn-on curve, where the trigger goes from rejecting 
 all events to accepting all events.  Within the turn-on curve even a small change in the p$_T$
-of a jet can have a dramatic difference in whether the jet fires a trigger accept, so this 
+of a jet can have a dramatic difference in whether the jet fires a trigger accept.  This 
 instability is mitigated by placing p$_T$ cuts on the trigger jets that require that their respective p$_T$ 
 values are above the turn-on curve.  Details on the associated systematic errors in this analysis 
 can be found in Section~\ref{sec:trigger_syst}.  
 
 The ATLAS trigger also allows for $b$-tagging of jets at L2 and EF.  For analyses that have 
-b-jets in the final state, $b$-tagging in the trigger provides a tool for keeping rates 
-low without pushing up jet p$_T$ thresholds.  More details are in Section~\ref{sec:b-tag}.
+$b$-jets in the final state, $b$-tagging in the trigger provides a tool for keeping rates 
+low without pushing up jet $p_T$ thresholds.  More details are in Section~\ref{sec:b-tag}.
 
 %B-tagging in the trigger introduces several challenges
 %, though.  First, the online b-tagging algorithms have less time and information than the offline algorithms

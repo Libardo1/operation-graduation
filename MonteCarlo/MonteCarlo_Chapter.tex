@@ -3,12 +3,12 @@
  
 %!TEX root =  
 
-\chapter[Monte Carlo]{Monte Carlo}
+\chapter[Monte Carlo Simulation]{Monte Carlo Simulation Events}
 
-In order to understand both the signal and backgrounds better, Monte Carlo (MC) datasets are computer-
+In order to understand both the signal and backgrounds better, Monte Carlo (MC) simulation datasets are computer-
 generated simulation events that allow a physicist to develop and validate an analysis.  The generation and refinement of MC 
 algorithms and datasets could be a thesis in its own right, but this section will touch on some of 
-the most relevant features of the MC datasets used in this algorithm.
+the most relevant features of the MC datasets used in this analysis.
 
 
 \section{MC Creation Procedure}
@@ -27,35 +27,42 @@ MC events are generally created in four major steps.
     looks similar to how a ``real'' event of that type might look in the ATLAS detector. 
 \end{enumerate} 
 
-\section{Signal Monte Carlo}
-MadGraph \cite{MadGraph} is used to generate the signal MC, with showering and 
-hadronization done in Pythia6 \cite{Pythia6}.  Madgraph uses a 5 flavor scheme PDF 
-(parton distribution function), meaning that it models $b$-quarks in the proton as 
+\section{Signal Monte Carlo Simulations}
+MadGraph 5 \cite{MadGraph} is used to generate the signal MC simulation events, with showering and 
+hadronization done in Pythia6 \cite{Pythia6}.  The generation processuses a 5 flavor scheme PDF 
+(parton distribution function), meaning that MadGraph models $b$-quarks in the proton as 
 well as the more common light flavor (up, down, charm and strange quarks, 
 and gluons).  In addition to the Higgs production with the associated $b$-quark and 
 the Higgs decay, there can also be extra jets in the event from initial state radiation (ISR) 
 and/or final state radiation (FSR).  We allow up to two additional partons per 
-event in the signal MC; the generation and cross-section calculations tend to be more 
-accurate for higher numbers of extra partons allowed but at the cost of exponentially slower and more 
-complicated generation times (Table~\ref{tab:mg_times}).  We found two jets to be a reasonable cutoff where the distributions did 
-not seem to be affected by allowing for higher numbers of extra partons, but the generation 
+event in the signal MC simulations\footnote{this statement refers to extra partons being
+generated at the level of the Feynman diagrams; the later hadronization and parton showering step can generate additional
+partons in the final state and events must be matched between the two steps}; 
+the cross-section calculations tend to be more 
+accurate for higher numbers of extra partons allowed (again, at the Feynman diagram level), 
+but at the cost of exponentially slower 
+generation times (Table~\ref{tab:mg_times}).  We found two additional partons to be a reasonable cutoff where the kinematic
+distributions and cross section calculations were only minimally 
+affected by allowing for higher numbers of extra partons, but the generation 
 time was still acceptably quick.  The matching scale for knitting together the hard scatter
 calculations in MadGraph with the Pythia hadronization and showering was set to 20 GeV.
 
 %--------------------------------------------------------
 \begin{table}
-   \caption{The cross sections and generation times for MadGraph signal MC as a function
+   \caption{The cross sections and generation times for MadGraph signal MC simulations as a function
    of number of additional partons allowed, for 0-3 partons.  There is approx. 2.5\%
-   difference between the 3-parton and 4-parton cross sections, which comes at a cost
-   of hours of CPU time.  The times quoted here are for generating 10,000 events per 
-   sample, before hadronization. \label{tab:mg_times}} 
+   difference between the 2-parton and 3-parton cross sections, which comes at a cost
+   of hours of CPU time per batch of 10,000 events.  The times quoted here are for generating 10,000 events per 
+   sample, before hadronization.  The generation process imposes a $p_T$ cut of 5 GeV on all jets,
+   no further $p_T$ cut on $b$-jets, a minimum $dR$ of 0.4 between jets (no minimum between
+   $b$-jets), and a maximum $|\eta|$ of 5.0. \label{tab:mg_times}} 
     \center
     \begin{tabular}{ c c c } \hline\hline
     Process & $\sigma [pb]$ & time \\ \hline
-    $pp\rightarrow h^0b + <=0j$ & 1.843e-5 $\pm$ 4.2e-08 & seconds \\
-    $pp\rightarrow h^0b + <=1j$ & 2.555e-5 $\pm$ 7.3e-08 & seconds \\
-    $pp\rightarrow h^0b + <=2j$ & 2.762e-5 $\pm$ 8.2e-08 & minutes \\
-    $pp\rightarrow h^0b + <=3j$ & 2.83e-5 $\pm$ 9e-08 & $~$ 4 hours \\  \hline
+    $pp\rightarrow h^0b + \leq 0j$ & 1.843e-5 $\pm$ 4.2e-08 & seconds \\
+    $pp\rightarrow h^0b + \leq 1j$ & 2.555e-5 $\pm$ 7.3e-08 & seconds \\
+    $pp\rightarrow h^0b + \leq 2j$ & 2.762e-5 $\pm$ 8.2e-08 & minutes \\
+    $pp\rightarrow h^0b + \leq 3j$ & 2.83e-5 $\pm$ 9e-08 & $~$ 4 hours \\  \hline
     \end{tabular}
 \end{table}
 
@@ -65,10 +72,10 @@ calculations in MadGraph with the Pythia hadronization and showering was set to 
 
 %--------------------------------------------------------
 \begin{table}
-   \caption{The signal MC samples and their parameters. \label{tab:sig_mc_parameters} }
+   \caption{The signal MC samples and their parameters. These widths were generated with a $\tan\beta$ value of 30.\label{tab:sig_mc_parameters} }
     \center
     \begin{tabular}{ c c c } \hline\hline
-    Dataset ID & mass (GeV) & width (GeV) \\ \hline
+    Dataset ID & physical mass (GeV) & width (GeV) \\ \hline
     181120     & 250        & 1.68682 \\
     181121     & 280        & 1.92318 \\
     181122     & 310        & 2.50849 \\
@@ -89,14 +96,18 @@ calculations in MadGraph with the Pythia hadronization and showering was set to 
 
 
 
-The Madgraph signal generation is done for 12 different mass points, spanning 250-800 GeV
-. Below 250 GeV, the daughter $b$-jets from the Higgs tend to be 
-too low-$p_T$ to fire the trigger, while above 800 GeV SUSY 
-becomes less appealing theoretically.  Since both the production and decay of $bH\rightarrow bbb$ 
+The Madgraph signal generation is done for 12 different mass points, spanning physical
+Higgs masses of 250-800 GeV. 
+Below 250 GeV, the daughter $b$-jets from the Higgs tend to be 
+too low-$p_T$ to fire the trigger, while above 800 GeV it would require very 
+high values of $\tan\beta$, above 60, to have a signal cross section large enough
+for experimental detection in this analysis, and perturbativity starts to break
+down for such large values of $\tan\beta$.
+Since both the production and decay of $bH\rightarrow b\bar{b}b$ 
 happen via SM interactions, with SUSY only becoming relevant for increasing the production cross section and 
 widening the inherent width of the $A/H$ distributions, the signal generation can 
-be done by using an SM $bH\rightarrow bbb$ production model but with a 
-modified Higgs width.  There are 300,000 signal events generated for each mass point.
+be done by using an SM $bH\rightarrow b\bar{b}bb$ production model but with a 
+modified $Hb\bar{b}$ coupling and Higgs width.  There are 300,000 signal events generated for each mass point.
 
 % ATF-II source: http://iopscience.iop.org/1742-6596/396/2/022031
 The detector simulation for the signal MC was done using AtlFast-II (AFII) \cite{ATF2}, 
@@ -112,62 +123,70 @@ in the ATHENA framework, as is standard for all ATLAS MC.
 %https://indico.cern.ch/event/235341/contribution/1/material/slides/0.pdf
 \subsection{Generator Comparisons}
 In addition to MadGraph, Sherpa and Pythia are some other signal MC generators that 
-were studied.  As an NLO generator, MadGraph has the advantage over Pythia (an LO generator) of including
-more Feynman diagrams that are important to this analysis.  Sherpa has the disadvantage that
+were studied.  Pythia does not include Feynman diagrams that include extra partons 
+in the final state, but instead gets events with additional partons from the showering
+that happens after the ``base process'' \footnote{Pythia has the additional disadvantage
+that Pythia6 was being phased out by ATLAS as this analysis was starting, and Pythia8 
+had not been validated for this signal process or any closely related ones}.  
+Sherpa has the disadvantage that
 the Higgs is not stored in the truth table, which makes it impossible to positively
 disambiguate between Higgs daughter $b$-quarks and associated $b$-quarks.  Sherpa
 also shows kinematic differences from both MadGraph and Pythia in the $p_T$ of the truth
-jets (Figure~\ref{fig:sig_gen_compare}), which of course then also propagates through to the $m_{bb}$ distribution
+jets (Figure~\ref{fig:sig_gen_compare}), which of course then also propagates through to the $m_{b\bar{b}}$ distribution
 (Figure~\ref{fig:mbb_sherpa_pythia_madgraph}).
 
 
 \begin{figure}
   \center
   \includegraphics[width=0.7\textwidth, angle=270]{MonteCarlo/figures/sig_gen_compare.pdf}
-  \caption{$p_T$ distributions for the leading 2 jets for Pythia (red), Sherpa (green) and MadGraph (black).  
+  \caption{$p_T$ distributions for the leading two jets 
+  for Pythia (red), Sherpa (green) and MadGraph (black) for a 
+  physical Higgs mass of 380 GeV.  
   Pythia and MadGraph show good agreement, while Sherpa jets are systematically harder.  \label{fig:sig_gen_compare}}
 \end{figure}
 \begin{figure}
   \center
   \includegraphics[width=0.7\textwidth]{MonteCarlo/figures/mbb_sherpa_pythia_madgraph.pdf}
-  \caption{$m_{bb}$ distributions for the leading 2 jets for Pythia (red), Sherpa (green) and MadGraph (black).  
+  \caption{$m_{bb}$ distributions for the leading two jets 
+  for Pythia (red), Sherpa (green) and MadGraph (black) for a physical Higgs mass of 380 GeV.  
   Pythia and MadGraph show good agreement, while the Sherpa $m_{bb}$ distribution is higher and more sharply peaked. \label{fig:mbb_sherpa_pythia_madgraph}}
 \end{figure}
 
 In order to understand if this disagreement was caused, at least in part, by
-mixing up the associated $b$-jets and the Higgs daughter jets, we switched the Sherpa
+mixing up the associated $b$-jets and the Higgs daughter jets, we changed the Sherpa
 generation process to $bH\rightarrow b\tau\tau$ and examined the properties of the
 Higgs itself in addition to the jets (or $\tau$ leptons) in the event.  The $p_T$ and 
-$\eta$ distributions of the di-tau (i.e. Higgs) system are in Figures~\ref{fig:di_tau_eta}
-and~\ref{fig:di_tau_pt}, and the $m_{\tau\tau}$ distribution is in Figure~\ref{fig:di_tau_mass}.
+$\eta$ distributions of the di-tau (i.e. Higgs) system are in Figures~\ref{fig:di_tau_pt}
+and~\ref{fig:di_tau_eta}, and the $m_{\tau\tau}$ distribution is in Figure~\ref{fig:di_tau_mass}.
 
 
 
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_pt.pdf}
-  \caption{$p_T$ distributions for the 2 $\tau$ leptons for Sherpa (red) and Madgraph (black) for 0 (upper
-  left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
+  \caption{$p_T$ distributions for the two $\tau$ leptons for Sherpa (red) and Madgraph (black) for zero (upper
+  left), one (upper right), two (lower left), and three (lower right) jets per event. 
   The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:di_tau_pt}}
 \end{figure}
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_eta.pdf}
-  \caption{$\eta$ distributions for the 2 $\tau$ leptons for Sherpa (red) and Madgraph (black) for 0 (upper
-  left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
-  The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:di_tau_eta}}
+  \caption{$\eta$ distributions for the 2 $\tau$ leptons for Sherpa (red) and Madgraph (black) for zero (upper
+  left), one (upper right), two (lower left), and three (lower right) jets per event. 
+  The leptons from the Higgs are more forward (larger $|\eta|$) in Sherpa than in MadGraph.  \label{fig:di_tau_eta}}
 \end{figure}
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_mass.pdf}
-  \caption{$m_{\tau\tau}$ distributions for the 2 $\tau$ leptons for Sherpa (red) and Madgraph (black) for 0 (upper
-  left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
-  The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:di_tau_mass}}
+  \caption{$m_{\tau\tau}$ distributions for the two $\tau$ leptons for Sherpa (red) and Madgraph (black) 
+  for a 380 GeV Higgs particle.  
+  \label{fig:di_tau_mass}}
 \end{figure}
 
 
-Upon more careful examination, we found that Sherpa segfaulted when trying to produce 
-$gg\rightarrow H$ Feynman diagrams and so those diagrams had been excluded from
+Upon more careful examination, we found that Sherpa would fail with a segmentation fault
+when trying to produce 
+$gg\rightarrow H$ Feynman diagrams, and so those diagrams had been excluded from
 the initial production, although
 an exchange with the Sherpa authors \footnote{most notably Stefan Hoche and Steffen 
 Schumann, who we thank for their helpful advice throughout this analysis} provided 
@@ -182,9 +201,9 @@ resolve the disagreement that we see.
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/ggH.pdf}
-  \caption{$\eta$ distributions for the leading 2 jets for Sherpa (red) and Madgraph (black) for 0 (upper
-  left), 1 (upper right), 2 (lower left), and 3 (lower right) jets per event. 
-  The Higgs system is more forward (larger $|\eta|$) in Sherpa than in MadGraph.  \label{fig:ggH}}
+  \caption{The $m_{\tau\tau}$ distribution (left) and for $bH\rightarrow b\tau\tau$ events in Sherpa,
+  with and without gluon fusion diagrams being included.
+  \label{fig:ggH}}
 \end{figure}
 
 
@@ -193,7 +212,7 @@ resolve the disagreement that we see.
 \section{Background}
 \subsection{QCD Background}
 Although QCD is the largest and most important background in this analysis, fully modeling 
-it with QCD has some important drawbacks, which motivates our decision to use a 
+it with MC simulation has some important drawbacks, which motivates our decision to use a 
 mostly data-driven background estimation method.  That having been said, MC can 
 still be a very valuable tool for making basic estimates and validating assumptions. 
 
@@ -220,8 +239,9 @@ relative weights to produce an inclusive spectrum with high statistics at all $p
 
 \begin{table}[h]
  \begin{center}
-\caption{Hard subprocesses simulated in the bb QCD MC event sample, along with their cross sections. Here
-$j=u,\bar{u},d,\bar{d},s,\bar{s},g$
+\caption{Hard subprocesses simulated in the inclusive QCD MC event sample, along with their cross sections. Here
+$j=u,\bar{u},d,\bar{d},s,\bar{s},c\bar{c},g$.  The QCD slices are defined by the $p_T$ cut placed
+on the leading jet in the event, which is documented in the ``$p_T$ range'' column.
 \label{tab:qcd_mc_parameters}}
     \begin{tabular}{l r r r r r} \hline \hline
     Index & Dataset ID & $p_T$ Range& Cross Section (nb)& Filter Eff   & N Events \\ \hline
@@ -239,32 +259,36 @@ $j=u,\bar{u},d,\bar{d},s,\bar{s},g$
 
 ATLAS has a high-statistics inclusive QCD MC sample that is used primarily in 
 this analysis for understanding the QCD background from 
-mistagged charm and light flavor (Table~\ref{tab:qcd_mc_parameters}.  Since 
+mistagged charm and light flavor (Table~\ref{tab:qcd_mc_parameters}).  Since 
 the sample is inclusive, there is no filtering on the flavor of the jets 
 that are produced (although there is dedicated effort to have high-$p_T$ 
 jets simulated with adequate statistics) and the vast majority of jets are light or 
 charm jets.  As a result, while we use this sample to estimate the 
 efficiency and flavor composition of the QCD production in ATLAS as a whole, a 
-particularly important background (QCD $bbb$) is virtually absent from this sample.
+particularly important background (QCD $b\bar{b}b$) is virtually absent from this sample.
 
 
 \subsubsection{$b$-Enriched QCD Multijet}
 \label{sec:bb_qcd_mc}
-Since the inclusive QCD Multijet samples are inadequate for understanding the $bb$ and 
-$bbb$ MC backgrounds, we generate a dedicated sample that undergoes filtering to 
+Since the inclusive QCD Multijet samples are inadequate for understanding the $b\bar{b}$ and 
+$b\bar{b}b$ QCD backgrounds, we generate a dedicated sample that undergoes filtering to 
 enrich it in heavy flavor.  This sample is generated using Sherpa 1.4.3 
 \cite{Sherpa} and detector simulation is done with AFII.  This sample 
 starts with a 5-flavor PDF that assumes massive $b$-quarks and 
 2, 3 or 4 final state partons; then a filter is applied that 
-requires that the leading 2 partons in the event be true $b$-quarks 
+requires that the leading 2 partons in the event be true $b$-quarks, 
 as well as requiring that the leading parton have a $p_T$ 
-of at least 55 GeV (the latter requirement helps keep an acceptable efficiency when 
-the sample is passed through the trigger and offline cuts).
+of at least 10 GeV and the leading (subleading) jet have a $p_T$ of
+130 (45) GeV and the $b$-hadrons and jets must have $|\eta|<$2.9 
+\footnote{These kinematic requirements help keep an acceptable efficiency when 
+the sample is passed through the trigger and offline cuts}.  We further enhance
+the $b\bar{b}$ contribution to the generation process by setting a flag (called enhance\_factor
+in the Sherpa job options) that enhances $g\rightarrow b\bar{b}$ splitting.
 
 A scale factor of 2.07 was applied to the MC to  
 reach the same normalization as the full 2012 data (after the trigger and cuts are 
 applied).  This scale factor is based on the calculated total cross section and
-filter efficiency of the bb QCD MC (Table~\ref{tab:sherpa_subprocesses}), as well
+filter efficiency of the $b\bar{b}$ QCD MC (Table~\ref{tab:sherpa_subprocesses}), as well
 as the number of MC events that were generated and the 2012 luminosity. 
 In addition, the MC has pileup reweighting and $b$-tagging scale factors
 applied.  The number of weighted MC (data) events in each of the jet and tag
@@ -300,7 +324,7 @@ that is still a difference of about 22,000 events.
 \begin{table}[h]
  \begin{center}
 \caption{Hard subprocesses simulated in the bb QCD MC event sample, along with their cross sections. Here
-$j=u,\bar{u},d,\bar{d},s,\bar{s},g$}
+$j=u,\bar{u},d,\bar{d},s,\bar{s},c,\bar{c},g$}.  Kinematic cuts on these samples are detailed in Section~\ref{sec:bb_qcd_mc}.
 \label{tab:sherpa_subprocesses}
     \begin{tabular}{l|r} \hline \hline
    subprocess      & cross section (pb)\cr \hline
@@ -336,19 +360,19 @@ $bb\rightarrow bb\ \ +\ \  \bar{b}\bar{b}\rightarrow \bar{b} \bar{b}$ & 30 \cr
 %---------------------------------------
 
 
-The kinematics of the leading 3 jets are compared between data and bb QCD MC in 
+The kinematics of the leading 3 jets are compared between data and bb QCD MC simulations in 
 Figures~\ref{fig:bb_qcd_mc_pt0}-~\ref{fig:bb_qcd_mc_eta2}.  The kinematics are
 generally in good (but not perfect) agreement, with the notable exception of the
-$p_T$ distribution of the second leading jet in the \textbf{bbb} 3-jet category.
+$p_T$ distribution of the second leading jet in the \textit{bbb} 3-jet category.
 We also compare the $m_{bb}$ distributions for background events where we 
 examine the truth flavor of the third jet in the event, to see if the irreducible
-\textbf{BBB} background (where the capital letters here indicate truth flavor
+\textit{BBB} background (where the capital letters here indicate truth flavor
 of the jets, rather than whether they are $b$-tagged or not) has a different
 $m_{bb}$ shape than the reducible $BBC$ and/or $BBL$.  There appears to be
 no dependence of the $m_{bb}$ shape on the truth flavor of the third jet, which
 opens the door in future iterations of this analysis to using the 
-\textbf{bbloose} and \textbf{bbanti} $m_{bb}$ distributions in data to 
-model the shape of the \textbf{bbb} $m_{bb}$ distribution, which would remove
+\textit{bbloose} and \textit{bbanti} $m_{bb}$ distributions in data to 
+model the shape of the \textit{bbb} $m_{bb}$ distribution, which would remove
 some of the complications of a parameterized fit.  For the present version of the analysis, though,
 these MC studies are only used to understand the background composition
 and to validate the parameterized background fitting procedure.
@@ -580,22 +604,22 @@ and to validate the parameterized background fitting procedure.
 
 
 
-%\subsection{Top Background}
-%Top-antitop pairs decaying all-hadronically is the largest non-QCD background.  The sample generated
-%to model this background is generated in Powheg and Pythia, with Tauola and Photos also used for
-%handling tau leptons and photons.  In practice, $t\bar{t}$ is a minor background, both because
-%of its small cross section relative to QCD and because in the high mass ranges most relevant for
-%this search, it does not show any sigificant structure or $m_{bb}$ shape differences depending
-%on the flavor of the third jet.
-%
-%
-%\begin{table}
-%   \caption{Parameters of the $t\bar{t}$ MC sample used in this analysis. \label{tab:ttbar_params} }
-%    \begin{tabular}{ c c c c }
-%    Dataset ID & Cross Section [nb] & Filter Efficiency & N Events \\
-%    117050     & 0.21085        & 0.54298    & 99930891 \\
-%    \end{tabular}
-%\end{table}
+\subsection{Top Background}
+Top-antitop pairs decaying all-hadronically is the largest non-QCD background.  The sample generated
+to model this background is generated in Powheg and Pythia, with Tauola and Photos also used for
+handling tau leptons and photons.  In practice, $t\bar{t}$ is a minor background, both because
+of its small cross section relative to QCD and because in the high mass ranges most relevant for
+this search, it does not show any sigificant structure or $m_{bb}$ shape differences depending
+on the flavor of the third jet.
+
+
+\begin{table}
+   \caption{Parameters of the $t\bar{t}$ MC sample used in this analysis. \label{tab:ttbar_params} }
+    \begin{tabular}{ c c c c }
+    Dataset ID & Cross Section [nb] & Filter Efficiency & N Events \\
+    117050     & 0.21085        & 0.54298    & 99930891 \\
+    \end{tabular}
+\end{table}
 
 %--------------------------------------------------------
 

@@ -8,11 +8,11 @@ Once the physics data has been created by the LHC, detected by the ATLAS detecto
 disk by the ATLAS trigger and data acquisition system, it is reconstructed into physics events.  This process has 
 many interacting steps.  First, hits in the inner detector are algorithmically combined into tracks, which approximate the 
 trajectory of charged particles, while energy clusters in the calorimeters are grouped together into jets, which seek to 
-capture the energy of the particle that originated the jet.  
+capture the energy of the parton that originated the jet.  
 
 Higher-order quantities and corrections also come into play.  Two of the most important are the calibration and removal of 
-pileup, other lower-energy interactions from the same or adjacent bunch crossings, and $b$-tagging
-, which primarily uses tracks to identify jets that are likely originated by $b$-quarks.  Additionally, 
+pileup, other lower-energy interactions from the same or adjacent bunch crossings, and $b$-tagging, 
+which primarily uses tracks to identify jets that are likely originated by $b$-quarks.  Additionally, 
 there are jet energy corrections that account for jet radiation that could by lost by the jet clustering algorithms, 
 $b$-tagging efficiency corrections, and uncertainties on the total luminosity collected. 
 
@@ -21,7 +21,8 @@ $b$-tagging efficiency corrections, and uncertainties on the total luminosity co
 \section{Track Reconstruction}
 \label{sec:trk_reco}
 %https://twiki.cern.ch/twiki/pub/AtlasPublic/EventDisplayStandAlone/2012_highPileup.png
-Track reconstruction takes place in the inner detector and allows crucial measurements such as the primary and secondary vertices.  
+Track reconstruction uses measurements taken in the inner detector and 
+to perform crucial tasks such as reconstructing the locations of the primary and secondary vertices.  
 When a charged particle traverses the layers of the inner detector, it leaves typically 8-11 hits in 
 silicon (counting one double-sided layer of SCT silicon as capable of seeing 2 hits) and about 
 35 in the TRT.  The track reconstruction algorithm  
@@ -32,16 +33,15 @@ Track reconstruction performance can be impacted by pileup, as more pileup (and 
 more opportunities for incorrectly assigned hits and fake tracks from random hits being falsely associated with each other.  A 
 second effect of pileup on tracking is indirect: the detector as a whole, and the silicon detectors in 
 particular, undergo radiation damage as luminosity accrues.  Radiation damage in silicon detectors manifests 
-itself as rising leakage current, which makes channels prone to more noise hits unless the thresholds are raised (
-but higher thresholds lowers the efficiency for legitimate hits).  As time goes on, the tracking quality can can 
+itself as rising leakage current, which makes channels prone to more noise hits unless the thresholds are raised 
+(but higher thresholds lower the efficiency for legitimate hits).  As time goes on, the tracking quality can can 
 be affected by the extra noise hits and/or higher thresholds.  The track reconstruction efficiency and resolution
 can be seen in Figures~\ref{fig:track_perfA} and ~\ref{fig:track_perfB}.
 
 \begin{figure}
 	\includegraphics[width=0.5\textwidth]{ReconstructionPerformance/images/track_perf1.pdf}
 	\includegraphics[width=0.5\textwidth]{ReconstructionPerformance/images/track_perf2.pdf}
-	\label{fig:track_perfA}  
-	\caption{The efficiency of the track reconstruction, projected in $p_T$ and $\eta$, as computed in Monte Carlo.}
+	\caption{The efficiency of the track reconstruction, projected in $p_T$ and $\eta$, as computed in Monte Carlo.\label{fig:track_perfA}}
 \end{figure}
 
 
@@ -49,8 +49,7 @@ can be seen in Figures~\ref{fig:track_perfA} and ~\ref{fig:track_perfB}.
 \begin{figure}
 	\includegraphics[width=0.5\textwidth]{ReconstructionPerformance/images/track_perf3.pdf}
 	\includegraphics[width=0.5\textwidth]{ReconstructionPerformance/images/track_perf4.pdf}
-	\label{fig:track_perfB}  
-	\caption{The track resolution in mm the $x$ and $z$ directions, comparing minimum bias simulation to data taken with a random trigger.}
+	\caption{The track resolution in mm in the $x$ and $z$ directions, comparing minimum bias simulation to data taken with a random trigger. \label{fig:track_perfB}}
 \end{figure}
 
 Good tracking performance enters this analysis most directly in its impact on the tagging of $b$-jets, as detailed in Section~\ref{sec:b-tag}.  Well-reconstructed tracks allow for the identification of a secondary vertex, which is one of the fundamental features of the ATLAS $b$-jet tagging algorithms.
@@ -86,9 +85,11 @@ of properties that tracks might have, so the inner detector has to be able to me
 %http://iopscience.iop.org/1126-6708/2008/04/063/pdf/1126-6708_2008_04_063.pdf
 \section{Jet Reconstruction}
 \label{sec:jet_reco}
-Because of asymptotic freedom of QCD, quarks and gluons do not remain standalone particles once they're produced, 
-but instead they hadronize and shower as they travel through the detector.  Hypothetically, all the particles of 
-the shower can be added back up to approximate the energy, momentum, and angle of the original quark 
+Because of asymptotic freedom of QCD, quarks and gluons do not remain standalone particles once they are produced;
+first they undergo parton showering before hadronization, followed by hadronic showering 
+when they reach the calorimeters. 
+Hypothetically, all the particles of 
+the hadronic shower can be added back up to approximate the energy, momentum, and angle of the original quark 
 or gluon.  Jet reconstruction is the process of assembling calorimeter deposits together into a physics object, called a 
 jet, that ideally will do a good job of representing the characteristics ($p_T$, energy, 
 flavor) of the quark or gluon that originated the jet.  There are a number of clustering algorithms for 
@@ -101,7 +102,7 @@ has an energy deposit at least $4\sigma$ higher in energy than the ambient and p
 and then the surrounding cells with at least $2\sigma$ more energy than noise are grouped into 
 the jet in a way that prioritizes high energy over close proximity.  The result is that soft deposits get 
 clustered in with hard deposits, rather than clustering amongst themselves.  The distance parameter of 0.4 is 
-a cutoff as to how far away from the seed in $\eta-\phi$ space to look for 
+roughly a cutoff as to how far away from the seed in $\eta-\phi$ space to look for 
 additional deposits.   Jets below 20 GeV or so can be difficult to distinguish from noise, so in practice, a lower limit on 
 the $p_T$ (in the case of this analysis, 25 GeV) is often applied.  A visualization of the jet reconstruction that results
 from the anti-$k_t$ algorithm can be seen in Figure~\ref{fig:anti_kt_jets}.
@@ -131,7 +132,7 @@ from the anti-$k_t$ algorithm can be seen in Figure~\ref{fig:anti_kt_jets}.
 
 \section{Pileup Calibration and Removal}
 \label{sec:pileup}
-All the detector subsystems are affected by the presence of pileup, which are collisions other than the hard scatter 
+All the detector subsystems are affected by the presence of pileup, which are proton-proton collisions other than the hard scatter 
 collision.  As the LHC delivers higher luminosity for a given number of proton bunches, the luminosity increase comes 
 at the price of many interactions per bunch crossing, and these softer interactions create extra activity in the detector 
 that tends to make events noisier and more challenging to reconstruct accurately.  In 2012, the mean number of 
@@ -139,22 +140,23 @@ interactions per crossing ranged from about 10 up to about 40.
 
 The inner detector and tracking provide an important tool for understanding in-time pileup.  In-time pileup 
 is additional soft interactions in the same bunch crossing as the hard scatter.  The tracking allows primary vertex reconstruction 
-with a resolution fine enough in z$_0$, for the pixels typically $z_0\sin\theta$, 
+with a resolution fine enough in $z_0$, for the pixels typically $z_0\sin\theta$, 
 to resolve separate primary vertices from each other \cite{pileup_tracks}.   The calorimeters cannot resolve individual primary vertices with such precision, 
 though, so a constant struggle in ATLAS is to measure the calorimeter deposits that come from pileup interactions, 
-and where possible to apply corrections that subtract away pileup contributions to jets from the hard scatter.  On average
-, each additional pileup vertex in an event adds 370(850) \cite{pileup} MeV to the p$_T$ of a jet reconstructed with the anti-$k_t$ algorithm with R=0.4(0.6).
+and where possible to apply corrections that subtract away pileup contributions to jets from the hard scatter.  On average,
+each additional pileup vertex in an event adds 370(850) \cite{pileup} 
+MeV to the p$_T$ of a jet reconstructed with the anti-$k_t$ algorithm with R=0.4(0.6).
 
 In addition to in-time pileup, the calorimeters are prone to out-of-time pileup where 
-the signal in a given in event can be affected by the energy flow of previous collisions because of the 
+the signal in a given event can be affected by the energy flow of previous collisions because of the 
 calorimeter readout signal shapes.  Out-of-time pileup has the effect of adding an average of 60
-(210) MeV to central jets, and decreasing the forward jets by 350(470) MeV.  
+(210) MeV to central jets, and decreasing the forward jets' $p_T$ by 350(470) MeV.  
 
 
 \begin{figure}
     \center
 	\includegraphics[width=0.6\textwidth]{ReconstructionPerformance/images/mu_2012-dec.pdf}
-	\caption{A distribution of the mean number of interactions per crossing, also called $\mu$ seen in 2012 data-taking.  Larger $\mu$ values are characterized by more challenging reconstruction. 	\label{fig:mu_2012}  }
+	\caption{A distribution of the mean number of interactions per crossing, also called $\mu$, seen in 2012 data-taking.  Larger $\mu$ values are characterized by more challenging reconstruction. 	\label{fig:mu_2012}  }
 \end{figure}
 
 % http://cds.cern.ch/record/1435196/files/ATLAS-CONF-2012-042.pdf
@@ -162,8 +164,8 @@ calorimeter readout signal shapes.  Out-of-time pileup has the effect of adding 
 \section{Primary Vertex Identification}
 \label{sec:pv}
 Both the hard scatter collision and pileup collisions produce charged tracks; once these tracks are reconstructed, they can 
-be traced back to the interaction region of the ATLAS detector and used to figure out where collisions took place
-.  Each time a group of tracks can be clustered together into a presumed proton-proton collision, we refer to it 
+be traced back to the interaction region of the ATLAS detector and used to figure out where collisions took place.  
+Each time a group of tracks can be clustered together into a presumed proton-proton collision, we refer to it 
 as a primary vertex.  The reconstruction of primary vertices is one of the reasons that tracking resolution must be 
 so precise; primary vertices are often separated by only a few mm so imprecisely measured tracks can cause unintended 
 merging.  The consequence of mistakes in the primary vertex reconstruction can be physics objects that get grouped with the 
@@ -193,10 +195,13 @@ Although the LHC produces huge numbers of hadronic jets, those jets that arise f
 especially for this thesis where all the final state particles are $b$-quarks and so the 
 experimental signature consists entirely of $b$-jets.
 Once they are produced, $b$-quarks hadronize nearly instantaneously, but then
-the $b$-hadrons have lifetimes that are typically on the order of 1ps before
+the $b$-hadrons have lifetimes that are typically on the order of 1 ps\footnote{for a lifetime of 1 ps, $c\tau\approx$300$\mu$m} before
 decaying to other particles. 
-Since $b$-quarks are often created in high-p$_T$ collisions or come from the decay 
-of heavy particles, the resulting $b$-hadrons and $b$-mesons can have considerable $p_T$ and travel a few millimeters to a few centimeters before decaying.
+Since $b$-quarks are often created in high-$p_T$ collisions or come from the decay 
+of heavy particles, the resulting $b$-hadrons and $b$-mesons can have considerable $p_T$ and 
+travel a few millimeters to a few centimeters before decaying\footnote{to reconcile the 
+apparent contradiction between the $b$-hadron lifetime and these large decay lengths, recall
+that many of these $b$-hadrons are highly relativistic and undergo significant time dilation}.
 When they do decay, there is often a reconstructible secondary vertex that is offset from
 the primary vertex and can be used to identify, or tag, the jet as coming from a $b$-quark.  
 %There are several $b$-tagging algorithms that look for particular characteristics of $b$-jets:
@@ -207,7 +212,8 @@ ATLAS offers $b$-tagging at both the trigger level and offline; this analysis ma
 \begin{figure}
     \center
 	\includegraphics[width=0.6\textwidth]{ReconstructionPerformance/images/secondary_vertex.pdf}
-	\caption{An event from early ATLAS data-taking, with a number of tracks (in teal) leading back to the primary vertex, and a secondary vertex reconstructed with the associated tracks highlighted in purple \cite{sv}.	\label{fig:secondary_vertex}  }
+	\caption{An event from early ATLAS data-taking, with a number of tracks (teal, in the zoomed-in view) 
+    leading back to the primary vertex, and a secondary vertex reconstructed with the associated tracks highlighted in purple \cite{sv}.	\label{fig:secondary_vertex}  }
 \end{figure}
 %-----------------------------------------------------------------------------
 
@@ -216,7 +222,7 @@ ATLAS offers $b$-tagging at both the trigger level and offline; this analysis ma
 \subsection{Online $b$-Tagging}
 The first opportunity for $b$-tagging occurs in the trigger.  The challenge of trigger (also called online)
 $b$-tagging is that it requires secondary vertex identification, which in turn requires track reconstruction,
-which requires the full readout of the inner detector and is also computationally expensive.  The upside,
+which requires the full readout of the inner detector and is also computationally expensive.  The advantage,
 however, is that $b$-jets occur at a much lower rate than light flavor jets in background, and are an important
 part of many search signatures, so being able to identify $b$-jets in the trigger allows for lower
 thresholds than could otherwise be supported.  The trigger in this analysis uses online $b$-tagging to keep
@@ -230,7 +236,7 @@ Like its offline counterpart, the online $b$-tagging algorithm has three major s
     (Figure ~\ref{fig:ip_sig}) for the reconstructed tracks and the properties of secondary vertices
 \end{itemize}
 
-These steps are repeated both at L2 and EF; so there are two independent layers of $b$-tagging applied by the
+These steps are repeated both at L2 and EF, so there are two independent layers of $b$-tagging applied by the
 trigger.
 
 %https://twiki.cern.ch/twiki/bin/view/AtlasPublic/BJetTriggerPublicResults
@@ -269,8 +275,8 @@ Each of these features/algorithms can independently give discriminating power fo
 Additionally, though, if a jet truly comes from a $b$-quark, then several of these features can arise in the 
 same jet and the correlation can be used to further increase the accuracy of the tagger.  That idea gives 
 rise to the MV1 tagger (where the MV stands for ``multivariate''), a neural-net-based 
-$b$-tagging algorithm that uses three other $b$-tagging algorithms (SV1, IP3D, JetFitter
-) as inputs.   The performance curve for the MV1 algorithm can be seen in Figure~\ref{fig:mv1_roc}; 
+$b$-tagging algorithm that uses three other $b$-tagging algorithms (SV1, IP3D, JetFitter) 
+as inputs.   The performance curve for the MV1 algorithm can be seen in Figure~\ref{fig:mv1_roc}; 
 for a typical $b$-jet efficiency of 70\% (meaning that 70\% of real $b$-jets 
 are positively tagged by the algorithm), the light-jet rejection is about 99.5\% and the 
 charm rejection is about 90\% \cite{b-tagging}.

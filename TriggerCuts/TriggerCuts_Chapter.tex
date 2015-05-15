@@ -25,17 +25,25 @@ The purpose and structure of the ATLAS trigger are explained in Section~\ref{sec
   The trigger chain for this analysis is as follows: 
 
 \begin{itemize}
-    \item L1: At least one J75 RoI (region of interest), implying an L1 jet of at least 75 GeV
+    \item L1: At least one J75 RoI\footnote{RoI stands for region of interest, an ATLAS acronym
+    for a physical area in the calorimeter which has a large number of adjacent firing calorimeter
+    cells, which collectively serve as a jumping-off point for a jet clustering algorithm}, implying an L1 jet of at least 75 GeV
     \item L2: least two 30 GeV jets, of which one must be at least 140 GeV. Additionally, at least two
-jets must satisfy a medium b-tag (L2 xComb $>$ 1.276)
+jets must satisfy a medium b-tag (L2 xComb\footnote{xComb is the name of the $b$-tagging algorithm
+that is used in the trigger; L2 refers to the version of xComb being run at L2 of the trigger} $>$ 1.276)
     \item EF: At least two 35 GeV jets, of which one must be at least 145 GeV. Additionally, at least two
-jets must satisfy a medium b-tag (EF xComb $>$ 1.099). There is no explicit requirement that the
-b-tagged jets from L2 correspond with the b-tagged jets from EF. However, as detailed later, this
+jets must satisfy a medium $b$-tag (EF xComb\footnote{xComb is used in both L2 and EF of the trigger;
+the values of the inputs to the algorithm can change between L2 and EF as more computationally intensive
+reconstruction techniques are used in EF compared to L2} $>$ 1.099). There is no explicit requirement that the
+b-tagged jets from L2 correspond with the $b$-tagged jets from EF. However, as detailed later, this
 requirement is added later as an offline cut.
 \end{itemize}
 
 
-In the trigger, the L2 and EF jets are b-tagged using xComb, a likelihood ratio of IP3D 
+In the trigger, the L2 and EF jets are b-tagged using xComb, a likelihood ratio of IP3D\footnote{IP3D, like
+the other algorithms described here, uses statistical learning algorithms trained on a large sample
+of Monte Carlo simulation events to predict whether a given jet is a $b$-jet or not.  The various $b$-taggers
+vary in the algorithm and input features, which are very briefly summarized in this list. } 
 (significance of $z_0$ and $d_0$ impact parameters), SV1 (mass of the secondary vertex), NVTX (the number of
 vertices with two tracks), and EVTX (the energy fraction of the secondary vertex), as well as the number
 of vertices with 2 tracks. The triggers in this analysis use the medium operating point, such that L2 xComb
