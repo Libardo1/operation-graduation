@@ -72,7 +72,8 @@ calculations in MadGraph with the Pythia hadronization and showering was set to 
 
 %--------------------------------------------------------
 \begin{table}
-   \caption{The signal MC samples and their parameters. These widths were generated with a $\tan\beta$ value of 30.\label{tab:sig_mc_parameters} }
+   \caption{The signal MC samples and their parameters. These widths were generated with 
+   a $\tan\beta$ value of 30.  The dataset ID is for internal ATLAS bookkeeping.\label{tab:sig_mc_parameters} }
     \center
     \begin{tabular}{ c c c } \hline\hline
     Dataset ID & physical mass (GeV) & width (GeV) \\ \hline
@@ -130,7 +131,12 @@ that Pythia6 was being phased out by ATLAS as this analysis was starting, and Py
 had not been validated for this signal process or any closely related ones}.  
 Sherpa has the disadvantage that
 the Higgs is not stored in the truth table, which makes it impossible to positively
-disambiguate between Higgs daughter $b$-quarks and associated $b$-quarks.  Sherpa
+disambiguate between Higgs daughter $b$-quarks and associated $b$-quarks.  This is not
+a bug per se, but rather reflects the fact that it can be indeterminate on a quantum mechanical level
+which $b$-quarks come from the Higgs decay vs. associated production.  However, between
+the time that the signal generator studies were conducted and the writing of this thesis,
+a patch has been written that records the Higgs in the truth table, and might be 
+deployed in future Sherpa releases.  Sherpa
 also shows kinematic differences from both MadGraph and Pythia in the $p_T$ of the truth
 jets (Figure~\ref{fig:sig_gen_compare}), which of course then also propagates through to the $m_{b\bar{b}}$ distribution
 (Figure~\ref{fig:mbb_sherpa_pythia_madgraph}).
@@ -149,10 +155,12 @@ jets (Figure~\ref{fig:sig_gen_compare}), which of course then also propagates th
   \includegraphics[width=0.7\textwidth]{MonteCarlo/figures/mbb_sherpa_pythia_madgraph.pdf}
   \caption{$m_{bb}$ distributions for the leading two jets 
   for Pythia (red), Sherpa (green) and MadGraph (black) for a physical Higgs mass of 380 GeV.  
-  Pythia and MadGraph show good agreement, while the Sherpa $m_{bb}$ distribution is higher and more sharply peaked. \label{fig:mbb_sherpa_pythia_madgraph}}
+  Pythia and MadGraph show good agreement, while the Sherpa $m_{bb}$ distribution is higher and more sharply peaked. 
+  \label{fig:mbb_sherpa_pythia_madgraph}}
 \end{figure}
 
-In order to understand if this disagreement was caused, at least in part, by
+In order to understand if the disagreement between Sherpa and MadGraph/Pythia 
+in the $m_{bb}$ distribution was caused, at least in part, by
 mixing up the associated $b$-jets and the Higgs daughter jets, we changed the Sherpa
 generation process to $bH\rightarrow b\tau\tau$ and examined the properties of the
 Higgs itself in addition to the jets (or $\tau$ leptons) in the event.  The $p_T$ and 
@@ -188,7 +196,7 @@ Upon more careful examination, we found that Sherpa would fail with a segmentati
 when trying to produce 
 $gg\rightarrow H$ Feynman diagrams, and so those diagrams had been excluded from
 the initial production, although
-an exchange with the Sherpa authors \footnote{most notably Stefan Hoche and Steffen 
+an exchange with the Sherpa authors \footnote{most notably Stefan H\"{o}che and Steffen 
 Schumann, who we thank for their helpful advice throughout this analysis} provided 
 a patch that enabled $gg\rightarrow H$ diagrams.  To understand
 if the absence $gg\rightarrow H$ diagrams in Sherpa were responsible for the disagreement
@@ -201,13 +209,21 @@ resolve the disagreement that we see.
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/ggH.pdf}
-  \caption{The $m_{\tau\tau}$ distribution (left) and for $bH\rightarrow b\tau\tau$ events in Sherpa,
-  with and without gluon fusion diagrams being included.
+  \caption{The $m_{\tau\tau}$ ($m_A$=380 GeV) distribution (left) and $\eta$ of the $\tau$ leptons (right)
+  for $bH\rightarrow b\tau\tau$ events in Sherpa,
+  with and without gluon fusion diagrams being included.  The ratio plots in the lower part of the
+  figures show that the inclusion of the gluon fusion diagrams does not change the kinematics of the
+  Higgs and its daughters. 
   \label{fig:ggH}}
 \end{figure}
 
-
-
+As a result of these studies, we conclude that the likely cause of the Sherpa 
+disagreement is ambiguity in the selection of the Higgs daughter $b$-jets, since
+the agreement between Sherpa and MadGraph improves substantially when looking
+at Higgs events decaying to $\tau\tau$ (where the combinatorics are trivial).
+MadGraph is also the generator of choice for the $H/A$ searches in the $\tau\tau$ 
+decay channel, which makes combinations or comparisons of those searches
+more straightforward than it would be if they use different generators.
 
 \section{Background}
 \subsection{QCD Background}
@@ -241,7 +257,8 @@ relative weights to produce an inclusive spectrum with high statistics at all $p
  \begin{center}
 \caption{Hard subprocesses simulated in the inclusive QCD MC event sample, along with their cross sections. Here
 $j=u,\bar{u},d,\bar{d},s,\bar{s},c\bar{c},g$.  The QCD slices are defined by the $p_T$ cut placed
-on the leading jet in the event, which is documented in the ``$p_T$ range'' column.
+on the leading jet in the event, which is documented in the ``$p_T$ range'' column.  The dataset
+ID is used for internal ATLAS bookkeeping.
 \label{tab:qcd_mc_parameters}}
     \begin{tabular}{l r r r r r} \hline \hline
     Index & Dataset ID & $p_T$ Range& Cross Section (nb)& Filter Eff   & N Events \\ \hline
@@ -324,7 +341,8 @@ that is still a difference of about 22,000 events.
 \begin{table}[h]
  \begin{center}
 \caption{Hard subprocesses simulated in the bb QCD MC event sample, along with their cross sections. Here
-$j=u,\bar{u},d,\bar{d},s,\bar{s},c,\bar{c},g$}.  Kinematic cuts on these samples are detailed in Section~\ref{sec:bb_qcd_mc}.
+$j=u,\bar{u},d,\bar{d},s,\bar{s},c,\bar{c},g$}.  Kinematic cuts 
+on these samples are detailed in Section~\ref{sec:bb_qcd_mc}.
 \label{tab:sherpa_subprocesses}
     \begin{tabular}{l|r} \hline \hline
    subprocess      & cross section (pb)\cr \hline
@@ -507,8 +525,8 @@ and to validate the parameterized background fitting procedure.
 
 \begin{figure}[phtb!]
   \begin{center}
-  \begin{subfigure}[$BBB$ vs $BBC$, 3 jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_3jets_bbB_bbC.eps}\end{subfigure}
-  \begin{subfigure}[$BBB$ vs $BBL$, 3 jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_3jets_bbB_bbL.eps}\end{subfigure}
+  \begin{subfigure}[$BBB$ vs $BBC$, 3 jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_3jets_bbB_bbC.pdf}\end{subfigure}
+  \begin{subfigure}[$BBB$ vs $BBL$, 3 jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_3jets_bbB_bbL.pdf}\end{subfigure}
   \caption{The $m_{bb}$ distributions in the 3 jet category, where the third jet in the event has been 
   truth-matched as bottom versus charm (left) or light (right).  The distributions have been normalized to 
   the same integral, and the lower subplots show the ratio of charm (light) to bottom.  Errors on the MC
@@ -527,8 +545,8 @@ and to validate the parameterized background fitting procedure.
 
 \begin{figure}[phtb!]
   \begin{center}
-  \begin{subfigure}[$BBB$ vs $BBC$, 4 jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_4jets_bbB_bbC.eps}\end{subfigure}
-  \begin{subfigure}[$BBB$ vs $BBL$, 4 jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_4jets_bbB_bbL.eps}\end{subfigure}
+  \begin{subfigure}[$BBB$ vs $BBC$, 4 jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_4jets_bbB_bbC.pdf}\end{subfigure}
+  \begin{subfigure}[$BBB$ vs $BBL$, 4 jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_4jets_bbB_bbL.pdf}\end{subfigure}
   \caption{The $m_{bb}$ distributions in the 4 jet category, where the third jet in the event has been 
   truth-matched as bottom versus charm (left) or light (right).  The distributions have been normalized to 
   the same integral, and the lower subplots show the ratio of charm (light) to bottom.  Errors on the MC
@@ -545,8 +563,8 @@ and to validate the parameterized background fitting procedure.
 
 \begin{figure}[phtb!]
   \begin{center}
-  \begin{subfigure}[$BBB$ vs $BBC$, 5+ jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_5jets_bbB_bbC.eps}\end{subfigure}
-  \begin{subfigure}[$BBB$ vs $BBL$, 5+ jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_5jets_bbB_bbL.eps}\end{subfigure}
+  \begin{subfigure}[$BBB$ vs $BBC$, 5+ jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_5jets_bbB_bbC.pdf}\end{subfigure}
+  \begin{subfigure}[$BBB$ vs $BBL$, 5+ jet category]{0.45\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/mbb_bbB_5jets_bbB_bbL.pdf}\end{subfigure}
   \caption{The $m_{bb}$ distributions in the 5 or more jet category, where the third jet in the event has been 
   truth-matched as bottom versus charm (left) or light (right).  The distributions have been normalized to 
   the same integral, and the lower subplots show the ratio of charm (light) to bottom.  Errors on the MC
@@ -565,61 +583,28 @@ and to validate the parameterized background fitting procedure.
 
 
 
-
-
-
-
-
-
-
-
-%\begin{figure}
-%  \center
-%  \includegraphics[width=0.70\linewidth]{MonteCarlo/figures/mbb_bbqcd_vs_data.pdf}
-%  \caption{Mass of the two leading jets in events passing all cuts except the
-%bbb, bbloose and bbanti classification.  Distributions for the 10,000 event bb QCD Monte Carlo validation sample
-%and a 2.2~fb$^{-1}$ luminosity data sample are shown.    \label{fig:mbb_bbqcd_vs_data}}
-%\end{figure}
-
-%\begin{figure}
-%  \center
-%  \includegraphics[width=0.70\linewidth]{MonteCarlo/figures/mv1_jet3_bbqcd_vs_data.pdf}
-%  \caption{The b-tag variable MV1 for the 3rd leading $p_T$ jet in events passing all cuts except the
-%bbb, bbloose and bbanti classification.     Distributions for the 10,000 event bb QCD Monte Carlo validation sample
-%and a 2.2~fb$^{-1}$ luminosity data sample are shown.    \label{fig:mv1_jet3_bbqcd_vs_data}}
-%\end{figure}
-
-
-
-
-%\begin{figure}
-%  \includegraphics[width=0.85\linewidth]{MonteCarlo/figures/pt_eta_jet1_bbqcd_vs_data.pdf}
-%  \includegraphics[width=0.85\linewidth]{MonteCarlo/figures/pt_eta_jet2_bbqcd_vs_data.pdf}
-%  \includegraphics[width=0.85\linewidth]{MonteCarlo/figures/pt_eta_jet3_bbqcd_vs_data.pdf}
-%  \caption{$p_T$ and $\eta$ for the three leading $p_T$ jets in events passing all cuts except the
-%bbb, bbloose and bbanti classification.     Distributions for the 10,000 event bb QCD Monte Carlo validation sample                 
-%and a 2.2~fb$^{-1}$ luminosity data sample are shown.    \label{fig:pt_eta_bbqcd_vs_data}}                                          
-%\end{figure}                                                                                                                        
 %-----------------------------------------------                     
 
 
 
-\subsection{Top Background}
-Top-antitop pairs decaying all-hadronically is the largest non-QCD background.  The sample generated
-to model this background is generated in Powheg and Pythia, with Tauola and Photos also used for
-handling tau leptons and photons.  In practice, $t\bar{t}$ is a minor background, both because
-of its small cross section relative to QCD and because in the high mass ranges most relevant for
-this search, it does not show any sigificant structure or $m_{bb}$ shape differences depending
-on the flavor of the third jet.
-
-
-\begin{table}
-   \caption{Parameters of the $t\bar{t}$ MC sample used in this analysis. \label{tab:ttbar_params} }
-    \begin{tabular}{ c c c c }
-    Dataset ID & Cross Section [nb] & Filter Efficiency & N Events \\
-    117050     & 0.21085        & 0.54298    & 99930891 \\
-    \end{tabular}
-\end{table}
+%\subsection{Top Background}
+%Top-antitop pairs decaying all-hadronically is the largest non-QCD background.  The sample generated
+%to model this background is generated in Powheg and Pythia, with Tauola and Photos also used for
+%handling tau leptons and photons.  In practice, $t\bar{t}$ is a minor background, both because
+%of its small cross section relative to QCD and because in the high mass ranges most relevant for
+%this search, it does not show any sigificant structure or $m_{bb}$ shape differences depending
+%on the flavor of the third jet.
+%
+%
+%\begin{table}
+%%    \begin{center}
+%   \caption{Parameters of the $t\bar{t}$ MC sample used in this analysis. \label{tab:ttbar_params} }
+%    \begin{tabular}{ c c c c }
+%    Dataset ID & Cross Section [nb] & Filter Efficiency & N Events \\
+%    117050     & 0.21085        & 0.54298    & 99930891 \\
+%    \end{tabular}
+%    \end{center}
+%\end{table}
 
 %--------------------------------------------------------
 
