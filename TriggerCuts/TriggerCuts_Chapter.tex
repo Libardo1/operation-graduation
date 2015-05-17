@@ -22,20 +22,21 @@ selection criteria, also called cuts.
 \section{Trigger}
 \label{sec:my_trigger}
 The purpose and structure of the ATLAS trigger are explained in Section~\ref{sec:atlas_trig}.
-  The trigger chain for this analysis is as follows: 
+Most importantly for this section, recall that the ATLAS trigger has three levels, called L1,
+L2, and EF.  The trigger chain for this analysis is as follows: 
 
 \begin{itemize}
     \item L1: At least one J75 RoI\footnote{RoI stands for region of interest, an ATLAS acronym
     for a physical area in the calorimeter which has a large number of adjacent firing calorimeter
     cells, which collectively serve as a jumping-off point for a jet clustering algorithm}, implying an L1 jet of at least 75 GeV
     \item L2: least two 30 GeV jets, of which one must be at least 140 GeV. Additionally, at least two
-jets must satisfy a medium b-tag (L2 xComb\footnote{xComb is the name of the $b$-tagging algorithm
-that is used in the trigger; L2 refers to the version of xComb being run at L2 of the trigger} $>$ 1.276)
+jets must satisfy a medium $b$-tag (L2 xComb\footnote{xComb is the name of the $b$-tagging algorithm
+that is used in the trigger} $>$ 1.276)
     \item EF: At least two 35 GeV jets, of which one must be at least 145 GeV. Additionally, at least two
 jets must satisfy a medium $b$-tag (EF xComb\footnote{xComb is used in both L2 and EF of the trigger;
 the values of the inputs to the algorithm can change between L2 and EF as more computationally intensive
 reconstruction techniques are used in EF compared to L2} $>$ 1.099). There is no explicit requirement that the
-b-tagged jets from L2 correspond with the $b$-tagged jets from EF. However, as detailed later, this
+$b$-tagged jets from L2 correspond with the $b$-tagged jets from EF. However, as detailed later, this
 requirement is added later as an offline cut.
 \end{itemize}
 
@@ -46,9 +47,10 @@ of Monte Carlo simulation events to predict whether a given jet is a $b$-jet or 
 vary in the algorithm and input features, which are very briefly summarized in this list. } 
 (significance of $z_0$ and $d_0$ impact parameters), SV1 (mass of the secondary vertex), NVTX (the number of
 vertices with two tracks), and EVTX (the energy fraction of the secondary vertex), as well as the number
-of vertices with 2 tracks. The triggers in this analysis use the medium operating point, such that L2 xComb
-$>$ 1.276 and EF xComb $>$ 1.099.  This is the loose working point, where the $b$-jet efficiency
-is 70\% online.
+of vertices with 2 tracks. 
+The online $b$-tagging cuts used in the trigger for this analysis operate at the so-called ``loose''
+working point, where the $b$-jet efficiency
+is 70\%.
 
 Table~\ref{tab:online_offline_btag} below shows the correlations between the two levels of online
 $b$-tagging, as well as the offline (MV1) $b$-tagging for three offline working points (60\%, 70\%,
@@ -117,8 +119,10 @@ $b$-tagging, as well as the offline (MV1) $b$-tagging for three offline working 
 
 
 
-\section{Offline Baseline Cuts}
+\section{Offline Cuts}
 
+Once an event has fulfilled the trigger requirements and been written to disk,
+it must pass a series of offline cuts before being used in the final fit and search. 
 
 \begin{itemize}
 \item
@@ -132,6 +136,12 @@ A third jet is not required by the trigger, but is required by
 the offline cuts, and it must have a \pt greater than 25 GeV.  There is
 no veto on additional jets.  Further details on the jet cuts can be found
 in Section~\ref{sec:jet_reco}.
+\item
+\textbf{$\eta$ cuts on the leading 3 jets}
+The leading three jets must be central, with $|\eta|<$2.5.  This is strongly
+motivated by the $b$-tagging requirements downstream; the inner tracker only 
+provides precision tracking out to $|\eta|<$2.5, which propagates through
+to where $b$-tags can be computed and applied.
 \item
 \textbf{Two jets passing online (L2 and EF in trigger) and offline (MV1) $b$-tags}
 As part of the trigger, two jets are required to be $b$-tagged at L2 and at EF.  It
@@ -156,7 +166,7 @@ light jets for a relatively small decrease in signal efficiency.
 
 
 \item\textbf{Leading 2 jets must pass tight MV1 $b$-tag}
-It is also required that the two jets in the event with the highest \pt be $b$-tagged
+We also require that the two jets in the event with the highest \pt be $b$-tagged
 offline by the MV1 algorithm.  There is no explicit requirement that the leading
 two jets be trigger-tagged or triple-tagged.
   In addition to preferentially keeping signal events at a higher rate than
@@ -170,13 +180,20 @@ place.  Further details can be found in Section~\ref{sec:combinatorics}.
 After two
 $b$-jets have been triple-tagged, the event is categorized based on whether
 a third $b$-tagged jet is present.  The most signal-enriched region is where
-a third jet passes a tight (60\% efficiency) MV1 $b$-tag; the next most
+a third jet passes a tight (60\% efficiency) MV1 $b$-tag (\textit{bbb} category); the next most
 signal-enriched region is when no jets in the event pass a 60\% $b$-tag
-but there is at least one jet passing a loose (80\% efficiency) $b$-tag;
+but there is at least one jet passing a loose (80\% efficiency) $b$-tag (\textit{bbloose} category);
 the least sensitive region has no additional jets passing either 60\% or 
-80\% $b$-tags (besides the triple-tagged jets).  These tag categories are
+80\% $b$-tags (besides the triple-tagged jets, \textit{bbanti} category).  These tag categories are
 mutually exclusive and all have different signal enrichments, kinematics, 
 and provide varying levels of sensitivity when used in the fit (Section~\ref{sec:background_strategy}).
+If there are more than three jets in an event, the event is categorized
+by the most $b$-like (highest $b$-tag-weighted) jet in the event\footnote{for
+example, an event with four jets total, three of which pass tight $b$-tags,
+will be categorized as \textit{bbb}}).  If there are more than five
+jets in an event, only the leading five are considered when assigning that event
+to a $b$-tag category.
+
 
 \item
 \textbf{Categorization based on the number of jets in the event}
@@ -184,6 +201,7 @@ Similarly, the events are categorized into 3-jet, 4-jet, and 5 (or more) jet
 categories, primarily because the varying signal resolution in the different
 jet bins leads to different signal to background ratios, and separating
 the categories allows for extra sensitivity to be extracted (Section~\ref{sec:n_jets_sig}).
+Only jets with $p_T>$25 GeV and $|\eta|<$2.5 are considered when counting jets.
 %The light-jet efficiency for this working point is approximately 0.1\%, and the
 %charm efficiency is approximately 10\%.
 
@@ -233,7 +251,7 @@ its motivation and results, can be found in Section~\ref{sec:rotation}).
 %------------------------------------------------------
 \begin{figure}
     \center
-	\includegraphics[width=0.6\textwidth]{TriggerCuts/final_efficiency_vs_mass_j35.pdf}	
+	\includegraphics[width=0.98\textwidth]{TriggerCuts/final_efficiency_vs_mass_j35.pdf}	
     \caption{The final efficiency, after all cuts, of the signal as a function of
     the physical mass of the generated Higgs particle.  The signal efficiency grows as a
     function of $m_A$, although at the high mass values, the efficiency levels off at around 6\%.\label{fig:final_eff_vs_mass}}

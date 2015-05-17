@@ -41,7 +41,7 @@ can be seen in Figures~\ref{fig:track_perfA} and ~\ref{fig:track_perfB}.
 \begin{figure}
 	\includegraphics[width=0.5\textwidth]{ReconstructionPerformance/images/track_perf1.pdf}
 	\includegraphics[width=0.5\textwidth]{ReconstructionPerformance/images/track_perf2.pdf}
-	\caption{The efficiency of the track reconstruction, projected in $p_T$ and $\eta$, as computed in Monte Carlo.\label{fig:track_perfA}}
+	\caption{The efficiency of the track reconstruction, projected in $p_T$ and $\eta$, as computed in Monte Carlo simulations.\label{fig:track_perfA}}
 \end{figure}
 
 
@@ -85,7 +85,7 @@ of properties that tracks might have, so the inner detector has to be able to me
 %http://iopscience.iop.org/1126-6708/2008/04/063/pdf/1126-6708_2008_04_063.pdf
 \section{Jet Reconstruction}
 \label{sec:jet_reco}
-Because of asymptotic freedom of QCD, quarks and gluons do not remain standalone particles once they are produced;
+Because of asymptotic freedom of QCD, quarks and gluons do not remain stand-alone particles once they are produced;
 first they undergo parton showering before hadronization, followed by hadronic showering 
 when they reach the calorimeters. 
 Hypothetically, all the particles of 
@@ -98,12 +98,14 @@ subtraction, energy calibrations, grooming, and trimming, to name a few.
 
 The default jet clustering algorithm in ATLAS is the anti-$k_t$ algorithm \cite{antikt}
 with a distance parameter of 0.4.  Roughly summarized, this algorithm starts with a calorimeter cell that 
-has an energy deposit at least $4\sigma$ higher in energy than the ambient and pileup noise, 
+has an energy deposit at least $4\sigma$\footnote{in this context, $\sigma$ is the spread in the
+noise in the calorimeter}
+higher in energy than the ambient and pileup noise, 
 and then the surrounding cells with at least $2\sigma$ more energy than noise are grouped into 
 the jet in a way that prioritizes high energy over close proximity.  The result is that soft deposits get 
 clustered in with hard deposits, rather than clustering amongst themselves.  The distance parameter of 0.4 is 
 roughly a cutoff as to how far away from the seed in $\eta-\phi$ space to look for 
-additional deposits.   Jets below 20 GeV or so can be difficult to distinguish from noise, so in practice, a lower limit on 
+additional deposits.   Jets with $p_T$ below 20 GeV or so can be difficult to distinguish from noise, so in practice, a lower limit on 
 the $p_T$ (in the case of this analysis, 25 GeV) is often applied.  A visualization of the jet reconstruction that results
 from the anti-$k_t$ algorithm can be seen in Figure~\ref{fig:anti_kt_jets}.
 
@@ -156,7 +158,7 @@ calorimeter readout signal shapes.  Out-of-time pileup has the effect of adding 
 \begin{figure}
     \center
 	\includegraphics[width=0.6\textwidth]{ReconstructionPerformance/images/mu_2012-dec.pdf}
-	\caption{A distribution of the mean number of interactions per crossing, also called $\mu$, seen in 2012 data-taking.  Larger $\mu$ values are characterized by more challenging reconstruction. 	\label{fig:mu_2012}  }
+	\caption{Distribution of the mean number of interactions per crossing, also called $\mu$, seen in 2012 data-taking.  Larger $\mu$ values are characterized by more challenging reconstruction. 	\label{fig:mu_2012}  }
 \end{figure}
 
 % http://cds.cern.ch/record/1435196/files/ATLAS-CONF-2012-042.pdf
@@ -171,8 +173,8 @@ so precise; primary vertices are often separated by only a few mm so imprecisely
 merging.  The consequence of mistakes in the primary vertex reconstruction can be physics objects that get grouped with the 
 wrong primary vertex, and lead to incorrect event reconstruction and either signal loss or undesired background acceptance.
 
-The reconstruction errors on the primary vertex are generally within 0.02 mm in the x/y directions 
-(transverse to the beam direction) and 0.1 mm in the z direction (longitudinal to the  
+The reconstruction errors on the primary vertex are generally within 20 $\mu$m in the x/y directions 
+(transverse to the beam direction) and 100 $\mu$m in the z direction (longitudinal to the  
 beam) \cite{pileup_tracks}.   This resolution can be seen in Figure~\ref{fig:pileup_pv}, a 2012 
 $Z\rightarrow\mu\mu$ event with 25 reconstructed primary vertices.
 
@@ -224,7 +226,7 @@ The first opportunity for $b$-tagging occurs in the trigger.  The challenge of t
 $b$-tagging is that it requires secondary vertex identification, which in turn requires track reconstruction,
 which requires the full readout of the inner detector and is also computationally expensive.  The advantage,
 however, is that $b$-jets occur at a much lower rate than light flavor jets in background, and are an important
-part of many search signatures, so being able to identify $b$-jets in the trigger allows for lower
+part of many search signatures, so being able to identify $b$-jets in the trigger allows for lower $p_T$
 thresholds than could otherwise be supported.  The trigger in this analysis uses online $b$-tagging to keep
 thresholds low. 
 
@@ -236,7 +238,8 @@ Like its offline counterpart, the online $b$-tagging algorithm has three major s
     (Figure ~\ref{fig:ip_sig}) for the reconstructed tracks and the properties of secondary vertices
 \end{itemize}
 
-These steps are repeated both at L2 and EF, so there are two independent layers of $b$-tagging applied by the
+These steps are repeated both at L2 and EF\footnote{for a full explication of the trigger structure,
+see section~\ref{sec:atlas_trig}}, so there are two independent layers of $b$-tagging applied by the
 trigger.
 
 %https://twiki.cern.ch/twiki/bin/view/AtlasPublic/BJetTriggerPublicResults
@@ -265,16 +268,17 @@ information about whether a secondary vertex might be present.  There are severa
 that are each designed to exploit a specific feature of decays associated with $b$-jets:
 
 \begin{itemize}
-	\item large significance of the impact parameter, $d_0$ (IP3D \cite{ip3d})
-	\item large ratio between the sum of $p_T$ of all tracks associated with the secondary vertex to the sum of all tracks in the jet (SV1 \cite{ip3d})
+	\item large significance of the impact parameter, $d_0$ (called IP3D within ATLAS \cite{ip3d})
+	\item large ratio between the sum of $p_T$ of all tracks associated with the secondary vertex to the sum of all tracks in the jet (called SV1 within ATLAS \cite{ip3d})
 	\item large secondary vertex mass (SV1 \cite{ip3d})
-	\item evidence of a decay chain including both a secondary vertex (from the $b$ decay) and a tertiary vertex (from the $c$ quark daughter of the $b$ quark) along the same line of flight (JetFitter \cite{jet_fitter}) 
+	\item evidence of a decay chain including both a secondary vertex (from the $b$ decay) and a tertiary vertex (from the $c$ quark daughter of the $b$ quark) along the same line of flight (called JetFitter within ATLAS\cite{jet_fitter}) 
 \end{itemize}
 
 Each of these features/algorithms can independently give discriminating power for tagging $b$-jets.
 Additionally, though, if a jet truly comes from a $b$-quark, then several of these features can arise in the 
 same jet and the correlation can be used to further increase the accuracy of the tagger.  That idea gives 
-rise to the MV1 tagger (where the MV stands for ``multivariate''), a neural-net-based 
+rise to the MV1\footnote{MV1 is the internal ATLAS name for this $b$-tagging algorithm} 
+tagger (where the MV stands for ``multivariate''), a neural-net-based 
 $b$-tagging algorithm that uses three other $b$-tagging algorithms (SV1, IP3D, JetFitter) 
 as inputs.   The performance curve for the MV1 algorithm can be seen in Figure~\ref{fig:mv1_roc}; 
 for a typical $b$-jet efficiency of 70\% (meaning that 70\% of real $b$-jets 

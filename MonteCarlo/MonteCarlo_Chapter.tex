@@ -24,12 +24,12 @@ MC events are generally created in four major steps.
     to understand how the particles evolve as they travel through the ATLAS detector.  
     \item The detector's response to the particles is simulated in a 
     digitization and reconstruction step, so that the final output is an event that 
-    looks similar to how a ``real'' event of that type might look in the ATLAS detector. 
+    has characteristics similar to those of a ``real'' event of that type in the ATLAS detector. 
 \end{enumerate} 
 
 \section{Signal Monte Carlo Simulations}
 MadGraph 5 \cite{MadGraph} is used to generate the signal MC simulation events, with showering and 
-hadronization done in Pythia6 \cite{Pythia6}.  The generation processuses a 5 flavor scheme PDF 
+hadronization done in Pythia6 \cite{Pythia6}.  The generation process uses a 5 flavor scheme PDF 
 (parton distribution function), meaning that MadGraph models $b$-quarks in the proton as 
 well as the more common light flavor (up, down, charm and strange quarks, 
 and gluons).  In addition to the Higgs production with the associated $b$-quark and 
@@ -37,7 +37,7 @@ the Higgs decay, there can also be extra jets in the event from initial state ra
 and/or final state radiation (FSR).  We allow up to two additional partons per 
 event in the signal MC simulations\footnote{this statement refers to extra partons being
 generated at the level of the Feynman diagrams; the later hadronization and parton showering step can generate additional
-partons in the final state and events must be matched between the two steps}; 
+partons in the final state and events must be matched to the hard scatter diagrams to avoid double-counting}; 
 the cross-section calculations tend to be more 
 accurate for higher numbers of extra partons allowed (again, at the Feynman diagram level), 
 but at the cost of exponentially slower 
@@ -73,7 +73,7 @@ calculations in MadGraph with the Pythia hadronization and showering was set to 
 %--------------------------------------------------------
 \begin{table}
    \caption{The signal MC samples and their parameters. These widths were generated with 
-   a $\tan\beta$ value of 30.  The dataset ID is for internal ATLAS bookkeeping.\label{tab:sig_mc_parameters} }
+   a $\tan\beta$ value of 30.  The dataset ID is a reference for internal ATLAS bookkeeping.\label{tab:sig_mc_parameters} }
     \center
     \begin{tabular}{ c c c } \hline\hline
     Dataset ID & physical mass (GeV) & width (GeV) \\ \hline
@@ -172,22 +172,24 @@ and~\ref{fig:di_tau_eta}, and the $m_{\tau\tau}$ distribution is in Figure~\ref{
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_pt.pdf}
-  \caption{$p_T$ distributions for the two $\tau$ leptons for Sherpa (red) and Madgraph (black) for zero (upper
-  left), one (upper right), two (lower left), and three (lower right) jets per event. 
-  The Higgs system is more forward (larger $|\eta|$ in Sherpa than in MadGraph.  \label{fig:di_tau_pt}}
+  \caption{$p_T$ distributions for the two $\tau$ leptons (i.e. the Higgs $p_T$) for Sherpa (red) and Madgraph (black) for zero (upper
+  left), one (upper right), two (lower left), and three (lower right) additional jets per event. 
+  \label{fig:di_tau_pt}}
 \end{figure}
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_eta.pdf}
-  \caption{$\eta$ distributions for the 2 $\tau$ leptons for Sherpa (red) and Madgraph (black) for zero (upper
-  left), one (upper right), two (lower left), and three (lower right) jets per event. 
-  The leptons from the Higgs are more forward (larger $|\eta|$) in Sherpa than in MadGraph.  \label{fig:di_tau_eta}}
+  \caption{$\eta$ distributions for the 2 $\tau$ leptons (i.e. the Higgs $\eta$) for Sherpa (red) and Madgraph (black) for zero (upper
+  left), one (upper right), two (lower left), and three (lower right) additional jets per event. 
+  The Higgs is more forward (larger $|\eta|$) in Sherpa than in MadGraph.  \label{fig:di_tau_eta}}
 \end{figure}
 \begin{figure}
   \center
   \includegraphics[width=0.8\textwidth, angle=270]{MonteCarlo/figures/di_tau_mass.pdf}
   \caption{$m_{\tau\tau}$ distributions for the two $\tau$ leptons for Sherpa (red) and Madgraph (black) 
-  for a 380 GeV Higgs particle.  
+  for a 380 GeV Higgs particle.  Although the agreement is not perfect in the tails of the distribution,
+  the agreement is much better than in the $m_{bb}$ distributions, suggesting that the challenges
+  of correctly identifying the Higgs daughters in Sherpa is a major factor. 
   \label{fig:di_tau_mass}}
 \end{figure}
 
@@ -196,7 +198,7 @@ Upon more careful examination, we found that Sherpa would fail with a segmentati
 when trying to produce 
 $gg\rightarrow H$ Feynman diagrams, and so those diagrams had been excluded from
 the initial production, although
-an exchange with the Sherpa authors \footnote{most notably Stefan H\"{o}che and Steffen 
+an exchange with the Sherpa authors\footnote{most notably Stefan H\"{o}che and Steffen 
 Schumann, who we thank for their helpful advice throughout this analysis} provided 
 a patch that enabled $gg\rightarrow H$ diagrams.  To understand
 if the absence $gg\rightarrow H$ diagrams in Sherpa were responsible for the disagreement
@@ -219,7 +221,7 @@ resolve the disagreement that we see.
 
 As a result of these studies, we conclude that the likely cause of the Sherpa 
 disagreement is ambiguity in the selection of the Higgs daughter $b$-jets, since
-the agreement between Sherpa and MadGraph improves substantially when looking
+the reconstructed Higgs mass agreement between Sherpa and MadGraph improves substantially when looking
 at Higgs events decaying to $\tau\tau$ (where the combinatorics are trivial).
 MadGraph is also the generator of choice for the $H/A$ searches in the $\tau\tau$ 
 decay channel, which makes combinations or comparisons of those searches
@@ -258,18 +260,18 @@ relative weights to produce an inclusive spectrum with high statistics at all $p
 \caption{Hard subprocesses simulated in the inclusive QCD MC event sample, along with their cross sections. Here
 $j=u,\bar{u},d,\bar{d},s,\bar{s},c\bar{c},g$.  The QCD slices are defined by the $p_T$ cut placed
 on the leading jet in the event, which is documented in the ``$p_T$ range'' column.  The dataset
-ID is used for internal ATLAS bookkeeping.
+ID is noted as a reference for internal ATLAS bookkeeping.
 \label{tab:qcd_mc_parameters}}
     \begin{tabular}{l r r r r r} \hline \hline
     Index & Dataset ID & $p_T$ Range& Cross Section (nb)& Filter Eff   & N Events \\ \hline
-    0     &  147910    & 0-20        &  72850000.0       &      0.98557 & 1000000 \\
-    1     &  147911    & 20-80       &  72850000.0       &   0.00012909 & 999996  \\
-    2     &  147912    & 80-200      &     26359.0       &    0.0039901 & 999893 \\
-    3     &  147913    & 200-500     &      544.18       &     0.001222 & 914584 \\
-    4     &  147914    & 500-1000    &      6.4453       &   0.00070839 & 999773 \\
-    5     &  147915    & 1000-1500   &    0.039739       &    0.0021516 & 957565 \\
-    6     &  147916    & 1500-2000   &   0.0004161       &    0.0046773 & 299929 \\
-    7     &  147917    & 2000+       &  4.0636e-05       &     0.014595 & 299988 \\ \hline
+    0     &  147910    & 0-20        &  7.285$\times$10$^7$    &   0.98557 & 1000000 \\
+    1     &  147911    & 20-80       &  7.285$\times$10$^7$    &   0.00012909 & 999996  \\
+    2     &  147912    & 80-200      &  2.6359$\times$10$^4$   &   0.0039901 & 999893 \\
+    3     &  147913    & 200-500     &  5.442$\times$10$^2$    &     0.001222 & 914584 \\
+    4     &  147914    & 500-1000    &  6.4435                 &   0.00070839 & 999773 \\
+    5     &  147915    & 1000-1500   &  3.9739$\times$10$^{-2}$&    0.0021516 & 957565 \\
+    6     &  147916    & 1500-2000   &  4.161$\times$10$^{-4}$ &    0.0046773 & 299929 \\
+    7     &  147917    & 2000+       &  4.0636$\times$10$^{-5}$&     0.014595 & 299988 \\ \hline
     \end{tabular}
   \end{center}
 \end{table}
@@ -296,7 +298,7 @@ starts with a 5-flavor PDF that assumes massive $b$-quarks and
 requires that the leading 2 partons in the event be true $b$-quarks, 
 as well as requiring that the leading parton have a $p_T$ 
 of at least 10 GeV and the leading (subleading) jet have a $p_T$ of
-130 (45) GeV and the $b$-hadrons and jets must have $|\eta|<$2.9 
+130 (45) GeV; additionally, the $b$-hadrons and jets must have $|\eta|<$2.9 
 \footnote{These kinematic requirements help keep an acceptable efficiency when 
 the sample is passed through the trigger and offline cuts}.  We further enhance
 the $b\bar{b}$ contribution to the generation process by setting a flag (called enhance\_factor
@@ -308,10 +310,28 @@ applied).  This scale factor is based on the calculated total cross section and
 filter efficiency of the $b\bar{b}$ QCD MC (Table~\ref{tab:sherpa_subprocesses}), as well
 as the number of MC events that were generated and the 2012 luminosity. 
 In addition, the MC has pileup reweighting and $b$-tagging scale factors
-applied.  The number of weighted MC (data) events in each of the jet and tag
+applied.  
+
+%%% START HERE
+As is detailed much more thoroughly in Sections~\ref{sec:background_strategy}
+and~\ref{sec:n_jets_sig}, the final analysis is categorized by the $b$-tag
+status of the third jet in each event, and the number of jets in each event.
+The $b$-tag categorization splits the sample based on whether the third jet 
+in the event has a third tight-tagged $b$-jet (called the \textit{bbb} category),
+a third jet that passes a loose $b$-tag but not a tight one (called \textit{bbloose})
+or there is no third $b$-tagged jet present (\textit{bbanti}).  Events are
+also categorized based on whether they have three, four, or five or more jets.
+%Each of these features has three different categories, so there are nine categories
+%overall when performing the final fit and search.  When validating the bb QCD MC sample,
+%we categorize the events in the same way (three categories in $b$-tag, and three
+%categories in $n_{jets}$) so that we do not miss any kinematic differences 
+%that might be category-specific.  
+
+First we check the relative normalization of the nine categories.
+The number of weighted MC (data) events in each of the jet and tag
 categories can be seen in Table~\ref{tab:bb_qcd_mc_categories}.  The MC
 generally underestimates the number of data events in each category,
-with the notable exception of the \textbf{bbanti} 3-jet category, where 
+with the notable exception of the \textit{bbanti} 3-jet category, where 
 the data has fewer events than the MC predicts.  The discrepancy is about
 3.2\%, but as this category has the highest statistics of any category,
 that is still a difference of about 22,000 events.
@@ -319,17 +339,17 @@ that is still a difference of about 22,000 events.
 \begin{table}
     \begin{center}
     \caption{In addition to examining the shapes of the kinematic distributions
-    in data vs. in bb QCD MC, the relative normalization of the different categories
-    is computed and compiled.  The data and bb QCD MC are passed through the analysis
+    in data vs. in bb QCD MC simulation events, the relative normalization of the different categories
+    is computed and compiled.  The data and bb QCD MC events are passed through the analysis
     framework, applying the trigger and cuts, and then a scale factor of 2.07 is applied
-    to the bb QCD MC to bring the overall number of events to the same as the number of
+    to the bb QCD MC simulations to bring the overall number of events to the same as the number of
     events in data.  Then the bb QCD MC (data) events are categorized by the tag status
     and number of jets in the event. \label{tab:bb_qcd_mc_categories}}
         \begin{tabular}{ c c c c }
                          & 3 jets            & 4 jets            & 5+ jets \\
-        \textbf{bbb}     & 77,288 (92,853)   & 70,289 (74,060)   & 52,998 (54,753) \\
-        \textbf{bbloose} & 59,189 (56,826)   & 46,521 (49,502)   & 30,491 (34,725) \\
-        \textbf{bbanti}  & 693,518 (671,412) & 276,593 (285,076) & 122,354 (128,712) \\
+        \textit{bbb}     & 77,288 (92,853)   & 70,289 (74,060)   & 52,998 (54,753) \\
+        \textit{bbloose} & 59,189 (56,826)   & 46,521 (49,502)   & 30,491 (34,725) \\
+        \textit{bbanti}  & 693,518 (671,412) & 276,593 (285,076) & 122,354 (128,712) \\
         \end{tabular}
     \end{center}
 \end{table}
@@ -378,22 +398,19 @@ $bb\rightarrow bb\ \ +\ \  \bar{b}\bar{b}\rightarrow \bar{b} \bar{b}$ & 30 \cr
 %---------------------------------------
 
 
-The kinematics of the leading 3 jets are compared between data and bb QCD MC simulations in 
+The kinematics of the leading three jets are compared between data and bb QCD MC simulations in 
 Figures~\ref{fig:bb_qcd_mc_pt0}-~\ref{fig:bb_qcd_mc_eta2}.  The kinematics are
 generally in good (but not perfect) agreement, with the notable exception of the
 $p_T$ distribution of the second leading jet in the \textit{bbb} 3-jet category.
 We also compare the $m_{bb}$ distributions for background events where we 
 examine the truth flavor of the third jet in the event, to see if the irreducible
-\textit{BBB} background (where the capital letters here indicate truth flavor
-of the jets, rather than whether they are $b$-tagged or not) has a different
+\textit{BBB} background\footnote{where the capital letters here indicate truth flavor
+of the jets, rather than whether they are $b$-tagged or not} has a different
 $m_{bb}$ shape than the reducible $BBC$ and/or $BBL$.  There appears to be
-no dependence of the $m_{bb}$ shape on the truth flavor of the third jet, which
-opens the door in future iterations of this analysis to using the 
+no dependence of the $m_{bb}$ shape on the truth flavor or $b$-tag status of the third jet, which
+is critical to the analysis strategy of using the
 \textit{bbloose} and \textit{bbanti} $m_{bb}$ distributions in data to 
-model the shape of the \textit{bbb} $m_{bb}$ distribution, which would remove
-some of the complications of a parameterized fit.  For the present version of the analysis, though,
-these MC studies are only used to understand the background composition
-and to validate the parameterized background fitting procedure.
+model the shape of the \textit{bbb} $m_{bb}$ distribution.
 
 
 %-----------------------------------------------                     
@@ -408,7 +425,7 @@ and to validate the parameterized background fitting procedure.
   \begin{subfigure}[$bbanti$ 3 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/pt0_bbanti_3jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 4 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/pt0_bbanti_4jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 5+ jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/pt0_bbanti_5jets.eps}\end{subfigure}
-  \caption{The $p_T$ distributions for the leading jet, comparing bb QCD MC to data.  The MC has been normalized
+  \caption{The $p_T$ distributions for the leading jet, comparing bb QCD MC events to data.  The MC has been normalized
   to the same total number of events as the data (over the entire sample, not on a category-by-category basis)
   and the MC/data ratio is plotted in the lower subplots.  The errors on the MC are statistical only.
   \label{fig:bb_qcd_mc_pt0}}
@@ -428,7 +445,7 @@ and to validate the parameterized background fitting procedure.
   \begin{subfigure}[$bbanti$ 3 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/eta0_bbanti_3jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 4 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/eta0_bbanti_4jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 5+ jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/eta0_bbanti_5jets.eps}\end{subfigure}
-  \caption{The $\eta$ distributions for the leading jet, comparing bb QCD MC to data.  The MC has been normalized
+  \caption{The $\eta$ distributions for the leading jet, comparing bb QCD MC events to data.  The MC has been normalized
   to the same total number of events as the data (over the entire sample, not on a category-by-category basis)
   and the MC/data ratio is plotted in the lower subplots.  The errors on the MC are statistical only.
   \label{fig:bb_qcd_mc_eta0}}
@@ -448,7 +465,7 @@ and to validate the parameterized background fitting procedure.
   \begin{subfigure}[$bbanti$ 3 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/pt1_bbanti_3jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 4 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/pt1_bbanti_4jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 5+ jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/pt1_bbanti_5jets.eps}\end{subfigure}
-  \caption{The $p_T$ distributions for the second-leading jet, comparing bb QCD MC to data.  The MC has been normalized
+  \caption{The $p_T$ distributions for the second-leading jet, comparing bb QCD MC events to data.  The MC has been normalized
   to the same total number of events as the data (over the entire sample, not on a category-by-category basis)
   and the MC/data ratio is plotted in the lower subplots.  The errors on the MC are statistical only.
   \label{fig:bb_qcd_mc_pt1}}
@@ -466,7 +483,7 @@ and to validate the parameterized background fitting procedure.
   \begin{subfigure}[$bbanti$ 3 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/eta1_bbanti_3jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 4 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/eta1_bbanti_4jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 5+ jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/eta1_bbanti_5jets.eps}\end{subfigure}
-  \caption{The $\eta$ distributions for the second-leading jet, comparing bb QCD MC to data.  The MC has been normalized
+  \caption{The $\eta$ distributions for the second-leading jet, comparing bb QCD MC events to data.  The MC has been normalized
   to the same total number of events as the data (over the entire sample, not on a category-by-category basis)
   and the MC/data ratio is plotted in the lower subplots.  The errors on the MC are statistical only.
   \label{fig:bb_qcd_mc_eta1}}
@@ -489,7 +506,7 @@ and to validate the parameterized background fitting procedure.
   \begin{subfigure}[$bbanti$ 3 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/pt2_bbanti_3jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 4 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/pt2_bbanti_4jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 5+ jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/pt2_bbanti_5jets.eps}\end{subfigure}
-  \caption{The $p_T$ distributions for the third-leading jet, comparing bb QCD MC to data.  The MC has been normalized
+  \caption{The $p_T$ distributions for the third-leading jet, comparing bb QCD MC events to data.  The MC has been normalized
   to the same total number of events as the data (over the entire sample, not on a category-by-category basis)
   and the MC/data ratio is plotted in the lower subplots.  The errors on the MC are statistical only.
   \label{fig:bb_qcd_mc_pt2}}
@@ -509,7 +526,7 @@ and to validate the parameterized background fitting procedure.
   \begin{subfigure}[$bbanti$ 3 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/eta2_bbanti_3jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 4 jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/eta2_bbanti_4jets.eps}\end{subfigure}
   \begin{subfigure}[$bbanti$ 5+ jet category]{0.3\textwidth}\includegraphics[width=\textwidth]{MonteCarlo/figures/eta2_bbanti_5jets.eps}\end{subfigure}
-  \caption{The $\eta$ distributions for the third-leading jet, comparing bb QCD MC to data.  The MC has been normalized
+  \caption{The $\eta$ distributions for the third-leading jet, comparing bb QCD MC events to data.  The MC has been normalized
   to the same total number of events as the data (over the entire sample, not on a category-by-category basis)
   and the MC/data ratio is plotted in the lower subplots.  The errors on the MC are statistical only.
   \label{fig:bb_qcd_mc_eta2}}

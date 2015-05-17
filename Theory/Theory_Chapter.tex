@@ -10,16 +10,16 @@
 
 \section{Introduction}
 The goal of particle physics is to understand the fundamental particles of the universe and 
-their interactions. It's a field that is simultaneously impressively advanced but 
+their interactions. It is a field that is simultaneously impressively advanced but 
 with tantalizingly unresolved aspects; in general, progress in the field is a team 
 effort between theorists who propose new physics possibilities and the experimentalists who build 
-large accelerators and detectors and analyze the resulting data for hints of new physics.  The project of this thesis is 
+large accelerators and detectors and analyze the resulting data for hints of new physics. This thesis details 
 an experimental search for two new particles, the Supersymmetric Higgs bosons $H$ 
 and $A$, at the ATLAS detector at the Large Hadron Collider.
 
 In order to understand the relevance of this search, and how it is performed, 
 we must first understand the Standard Model of particle physics, including the Higgs mechanism, 
-and its extensions in Supersymmetry.  The Standard Model is the outcome of decades of 
+and its extensions in Supersymmetry.  The Standard Model (SM) is the outcome of decades of 
 experimental and theoretical work in particle physics; it describes all the known particles and 
 their interactions.  It is one of the most thoroughly tested theories in all of 
 science, and it has yet to give a prediction that is not experimentally borne 
@@ -27,12 +27,12 @@ out--an impressive feat.  At the same time, there are known blind
 spots in the Standard Model, since it does not include gravity, explain dark 
 matter or dark energy, or account for the origin of the baryon asymmetry of the universe
 \footnote{in other words, why the universe is made of matter instead of antimatter}.   The shortcomings of the 
-Standard Model motivate searches for Beyond-Standard-Model (BSM) physics, including Supersymmetry.  
+Standard Model motivate searches for Beyond-Standard-Model (BSM) physics, including Supersymmetry (SUSY).  
 
 
 \section{The Standard Model}
 The Standard Model of particle physics was painstakingly constructed over the 20th century and stands 
-as one of the most thoroughly-verified theories in science.  The Standard Model 
+as one of the most thoroughly verified theories in science.  The Standard Model 
 (SM) is a quantum field theory that incorporates two different types of matter 
 particles, the quarks and the leptons, as well as three fundamental forces and 
 their corresponding particles.  However, as we will see, it has several notable 
@@ -44,9 +44,9 @@ are the particles that make up matter.  For example, a hydrogen atom is
 composed of a proton (three quarks) and an electron (a lepton).  
 There are six quarks total, three ``up-type'' with an electric 
 charge of +2/3 and three ``down-type'' with charge 
-of -1/3.  There are also three leptons, which are electrically 
-charged and massive (the electron, muon and tau), and three neutrinos, 
-which are electrically neutral and nearly massless (the electron, muon and tau neutrinos).  
+of -1/3.  There are also three leptons 
+(the electron, muon and tau) that are electrically charged, and three neutrinos (also technically leptons) 
+that are electrically neutral and nearly massless (the electron, muon and tau neutrinos).  
 We can classify the quarks and leptons according to ``generation'', where each generation 
 is composed of one up-type quark, one down-type quark, 
 one lepton, and one neutrino.  The quarks and leptons are summarized in Table \ref{tab:QLTable}.
@@ -57,7 +57,7 @@ one lepton, and one neutrino.  The quarks and leptons are summarized in Table \r
     and EM is the electromagnetic force.  As is customary in particle physics, 
     the mass is measured in units of energy divided by the speed of light squared 
     (since $E=mc^2$), although in practice the $c^2$ is often 
-    dropped and masses expressed simply in units of energy, typically electron-volts (eV) or multiples thereof. 	\label{tab:QLTable}}
+    dropped and masses expressed simply in units of energy, typically electron-volts (eV) or multiples thereof\cite{PDG-Review}. 	\label{tab:QLTable}}
 	\begin{tabular}{| c || c | c | c | p{2cm} |}
 %		\multicolumn{3}{c}{Quarks} \\
 		\hline
@@ -114,7 +114,7 @@ field can extend infinitely far.  The weak force is carried by W$^+$,
 W$^-$ and Z$^0$ bosons.  These particles are massive, which 
 means that they are limited in how far they can travel and thus the weak 
 force is confined to distance scales approximately the size of an atomic nucleus.  The 
-weak force is involved when one type of fermion changes into another type of fermion, 
+weak force is involved when one type of fermion changes into another type of fermion; 
 for example, when a neutron decays or a nucleus fissions.  The strong force 
 is carried by gluons, which are massless but because of confinement, the strong 
 force is restricted to the nuclear scale.  The strong force is responsible for holding 
@@ -122,15 +122,20 @@ quarks together into protons, neutrons and other hadrons. Last, there is the
 gravitational force, which we will neglect as it is many orders of magnitude weaker 
 than the other forces under discussion.
 
-The electromagnetic and weak forces, as it turns out, can be unified into a single ``electroweak'' force, as discovered in the middle part of the 20th century \cite{Weinberg}.  The vector bosons acquire mass, which is known as electroweak symmetry breaking, via the Higgs mechanism \cite{Higgs-1} \cite{Englert_Brout} \cite{Guralnik_Hagen_Kibble}.  The Higgs mechanism, and the particle which conveys the Higgs field (the Higgs boson), are explained in more detail in further sections.  Further unification of forces, between the electroweak and strong forces, remains an unfinished project in physics but a topic of much research.  
+The electromagnetic and weak forces, as it turns out, can be unified into a single 
+``electroweak'' force, as discovered in the middle part of the 20th century \cite{Weinberg}.  
+The vector bosons acquire mass, which is known as electroweak symmetry breaking, via 
+the Higgs mechanism \cite{Higgs-1} \cite{Englert_Brout} \cite{Guralnik_Hagen_Kibble}.  
+The Higgs mechanism, and the particle which conveys the Higgs field (the Higgs boson), 
+are explained in more detail in further sections.  Further unification of forces, between 
+the electroweak and strong forces, remains an unfinished project in physics but a topic of much research.  
 
 \section{Electroweak Symmetry Breaking and the Higgs Mechanism in the Standard Model}
 The Standard Model is defined by its Lagrangian, which is a mathematical formula that 
 encodes all the Standard Model particles and their interactions.  The SM Lagrangian was built 
 piece by piece over many decades, starting with classical field theory and later being 
 generalized to account for relativity, electromagnetism, the strong and weak forces, and 
-the unification of the weak and EM forces (this is not an exhaustive list 
-of the features of the SM Lagrangian, of course).  
+the unification of the weak and EM forces (among many other things).  
 
 Different terms in the SM Lagrangian account for different types of particles.  The fermions, 
 which have spin 1/2, are governed by the Dirac Lagrangian:
@@ -140,18 +145,18 @@ which have spin 1/2, are governed by the Dirac Lagrangian:
 \end{equation}
 
 (Similarly, the Klein-Gordon Lagrangian is used for spin-0 particles, 
-and the Proca Lagrangian for spin-1.)  When the Dirac Lagrangian is plugged 
-into the Euler-Lagrange equations, the equation that results is a quantum field 
+and the Proca Lagrangian for spin-1.)  When the Dirac Lagrangian is operated upon 
+by the Euler-Lagrange equations, the equation that results is a quantum field 
 theory equation describing a particle of mass $m$ and spin $\frac{1}{2}$.  
 
 One problem with simply using the Dirac Lagrangian as-is arises because 
 the Dirac Lagrangian is not invariant under local phase transformations.  In other 
 words, if the field $\psi$ is multiplied by an exponential term with 
 a space-dependent (``local'') phase, $\psi \rightarrow e^{iq\theta(x)} \psi$, 
-then plugging the new $\psi$ into the Euler-Lagrange equations will result 
+then substituting the new $\psi$ into the Euler-Lagrange equations will result 
 in an extra term because of the derivative of $\theta(x)$.  This 
-is what we mean by saying that as it is written, the Dirac Lagrangian 
-is not invariant under local phase transformations.  The fix for this problem is to 
+is what we mean by saying that, as it is written, the Dirac Lagrangian 
+is not invariant under local phase transformations.  To make it locally invariant, we 
 replace the ordinary derivative with the covariant derivative:
 
 \begin{equation}
@@ -256,7 +261,10 @@ and introduce additional terms to the mass, namely
 \end{equation}
 
 The ultraviolet cutoff $\Lambda_{UV}$ enters again here, this time with 
-the opposite sign, so that the two terms end up largely canceling when the Higgs mass is computed. 
+the opposite sign.  If $\lambda_s = 2\lambda_f$, which is the relationship 
+imposed by SUSY, then the terms proportional to $\Lambda_{UV}$ cancel and the
+mass divergence is averted.
+
 If the scalar particle in Figure 1.1(b) is the superpartner of the fermion in 1.1(a),
 the Yukawa couplings $\lambda_s$ and $\lambda_f$ could quite elegantly have very 
 similar values and the large correction terms cancel, leaving us with a Higgs mass
@@ -316,7 +324,7 @@ In short, the neutralinos of supersymmetry are candidates for dark matter,
 which serves as an attractive feature of the theory. 
 
 
-One less appealing feature of SUSY is that it's a very unconstrained set 
+One less appealing feature of SUSY is that it is a very unconstrained set 
 of theories--depending on the details of the SUSY version involved, there can 
 be dozens of new supersymmetric particles that might enter 
 the picture.  Similarly, SUSY Lagrangians can have many free parameters governing the masses, 
@@ -346,7 +354,7 @@ special cases of a more general framework called Two Higgs Doublet Models, or 2H
 
 Both Higgs doublets acquire a vacuum expectation value (VEV) with values $v_1$ 
 and $v_2$ respectively.  The interaction strength associated with
-muon decay $G_F$i=1.16639 $\times$ 10$^{-5}$ GeV$^{-2}$ 
+muon decay $G_F$=1.16639 $\times$ 10$^{-5}$ GeV$^{-2}$ 
 provides an important constraint on the value of $v_1$ and $v_2$, namely that 
 
 \begin{equation}
@@ -391,7 +399,7 @@ of limits (or signal) are presented in terms of the $m_A$/tan$\beta$ phase space
 
 
 \subsection{H/A Searches in the $b\bar{b}b$ Final State}
-The $H/A$ search being performed in this thesis has two important experimental features:
+The $H/A$ search being performed in this thesis is based on two important experimental choices:
 
 \begin{itemize}
     \item The Higgs boson $H$ or $A$ is produced in association with one or more $b$-quarks
@@ -405,8 +413,8 @@ The $H/A$ search being performed in this thesis has two important experimental f
 \end{figure}
 
 Technically speaking, there is not a Feynman diagram for $H/A$ 
-production that occurs in association with exactly one $b$-quark; even in 
-the second set of diagrams in Figure~\ref{fig:fd} there 
+production that occurs with exactly additional one $b$-quark from associated production; even in 
+the third and fourth diagrams in Figure~\ref{fig:fd} there 
 is a second $b$-quark that comes from the PDF (parton distribution 
 function) of the second proton.  In practice, the fourth $b$-quark 
 tends to be both soft in \pt and far forward in the detector, 
@@ -417,22 +425,23 @@ coming from the $H/A$ decay, which makes for a $b\bar{b}b$ final state.
 
 
 While the behavior of the Higgs system can be complicated to fully map out, 
-there are several general trends that emerge when one examines these parameters:
+there are several general trends that emerge when one examines the parameters $m_A$ and $\tan\beta$:
 
 \begin{itemize}
 	\item The cross section for $H/A$ production in association 
         with $b$-quarks increases for higher values of $\tan\beta$ (Figure~\ref{fig:xsec_vs_mass})
-	\item The branching fraction of $H/A$ to $b$-quarks increases for higher values of $tan\beta$ (Figure~\ref{fig:br_vs_mass})
-	\item At high $\tan\beta$, the $H/A\rightarrow b\bar{b}$ branching 
+	\item The branching fraction of $H/A$ to $b$-quarks increases with $tan\beta$ (Figure~\ref{fig:br_vs_mass})
+	\item At high $\tan\beta$\footnote{in this context, 30 (and above) would be an example of a high
+        $\tan\beta$ value}, the $H/A\rightarrow b\bar{b}$ branching 
         fraction is nearly constant across a wide range of $m_A$ (Figure~\ref{fig:br_vs_mass})
-	\item For a given $\tan\beta$, the production cross section falls for higher $m_A$ (Figure~\ref{fig:xsec_vs_mass})
+	\item For a given $\tan\beta$, the production cross section falls for high $m_A$ (Figure~\ref{fig:xsec_vs_mass})
 	\item The masses of $H$ and $A$, their kinematics, 
         and the $H/A\rightarrow b\bar{b}$ 
         branching fractions are nearly the same, so that for search purposes, one 
         can treat them as one particle with $\sigma \times BR$ twice 
         that of $H$ or $A$ individually (Figures~\ref{fig:xsec_vs_mass},
         ~\ref{fig:br_vs_mass},~\ref{fig:width},~\ref{fig:TB_width})
-	\item The inherent width of $H$ and $A$ increase as $m_A$ and $\tan\beta$ increase (Figures~\ref{fig:width},~\ref{fig:TB_width})
+	\item The inherent width of $H$ and $A$ increase as with $m_A$ and $\tan\beta$ (Figures~\ref{fig:width},~\ref{fig:TB_width})
 \end{itemize}
 
 
@@ -443,8 +452,8 @@ there are several general trends that emerge when one examines these parameters:
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{Theory/figures/mssm_xsec/AH_xsec_vs_mass.pdf}
-	\caption{The cross section for $b$-quark associated production of 
-    $A$, $H$ and $h$ as a function of $m_A$ for several different values of $tan\beta$. 
+	\caption{The cross section for $b$-quark associated production for
+    $A$, $H$ and $h$ as a function of $m_A$ for several different values of $tan\beta$ (denoted ``tb'' in the legend). 
     Figures made using FeynHiggs \cite{feynhiggs_1, feynhiggs_2, feynhiggs_3, feynhiggs_4, feynhiggs_5}.
     \label{fig:xsec_vs_mass} }
 \end{figure}
@@ -457,7 +466,7 @@ there are several general trends that emerge when one examines these parameters:
 	\includegraphics[width=0.7\textwidth]{Theory/figures/mssm_xsec/AH_br_vs_mass.pdf}
 	\caption{The branching ratio to $b\bar{b}$ of $A$, $H$ 
     and $h$ as a function of $m_A$ for 
-    several different values of $tan\beta$. The trend of higher branching 
+    several different values of $tan\beta$ (tb). The trend of higher branching 
     ratios for higher values of $tan\beta$ comes from the Higgs-to-$b$-quark 
     decay vertex carrying an enhancement factor that scales with $tan\beta$.
     Figures made using FeynHiggs \cite{feynhiggs_1, feynhiggs_2, feynhiggs_3, feynhiggs_4, feynhiggs_5}. 
@@ -516,18 +525,21 @@ there are several general trends that emerge when one examines these parameters:
 
 An important and subtle point worth highlighting is that, while 
 $A$, $H$, and $H^\pm$ are often called the ``SUSY Higgs bosons'', 
-they are SM particles in the sense that they have R-parity of 1.  
+they do not carry R-parity and experimentally decay to SM particles
+\footnote{in contrast, direct SUSY searches are often characterized
+by missing energy in the final state, as SUSY particles in the 
+final state will fail to interact with the detector}
 The Feynman diagrams for the production of $H$ and $A$ 
 in association with $b$-quarks can also be drawn for 
 $b$-quark associated production of the SM Higgs boson $h$; 
 the most important contribution of SUSY is that, when $tan\beta$ 
-is large, it provides an enhancement factor to the vertices that 
+is large, it provides an enhancement factor to the $Hbb$ and $Abb$ vertices that 
 drives the production cross section up to a magnitude that could be 
 large enough to see in 20 $fb^{-1}$ of proton-proton collisions at $\sqrt{s}$=8 TeV.
 
 However, that does not mean that the SUSY Higgs sector is 
 independent of the details of the supersymmetric parameters.  In particular, 
-it is possible that H/A decay to a pair of 
+it is possible that $H/A$ decay to a pair of 
 SUSY particles, such as charginos or neutralinos.  Depending on the 
 scenario, the branching fraction to SUSY particles could be substantial.  
 With the large number of free parameters, it is impractical to 
@@ -560,7 +572,7 @@ femtobarns at the LHC \cite{Gori}.
 
 
 
-\subsection{Constraints on $H/A$}
+\subsection{Constraints on $H/A$ Existence and Kinematics}
 The discovery in July 2012 of an SM-like Higgs boson provides important constraints of the MSSM Higgs sector,
  but leaves other aspects of the theory tantalizingly unconstrained.  On the one hand, 
 for many values of $m_h$, measuring the exact value of $m_h$ 
@@ -650,7 +662,7 @@ them, the $p_T$ of the resulting particles can be tens
 to hundreds of GeV, which creates a striking signal in the detector and provides 
 an experiment handle when trying to understand the event.
 
-The main challenges of this particular search arise from several features of the search.  
+The main challenges of this particular search arise from several kinematic features. 
 First, the final state is all-hadronic, where reconstruction is difficult and 
 the QCD background is large.  Second, since the mass of $H$ 
 and $A$ are relatively unconstrained, a search has to span a large 
