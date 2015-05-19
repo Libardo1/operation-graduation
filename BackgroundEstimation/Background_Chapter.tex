@@ -7,27 +7,32 @@
 
 Once the background has been reduced as much as practical using the trigger and kinematic cuts,
 a reliable estimate of the shape and size of the remaining background is critical to optimizing
-the exclusion limits.  In particular, since the reconstructed mass peak of the $b$-jets is so
+the exclusion limits.  As detailed in Section~\ref{sec:mass_res}, since the reconstructed mass peak 
+of the leading two $b$-jets is so
 broad in signal, a mis-estimation of the background shape can lead to systematic errors that
 could wash out any possible signal (or worse, be mistaken for a signal where there is none).  
 
 At the same time, the backgrounds in this analysis are challenging to estimate, either in Monte
-Carlo or using data-driven methods.  Therefore, much of the work of this analysis is dedicated
-to validating the background estimation and providing uncertainties for especially the shape 
+Carlo simulations or using data-driven methods.  Therefore, much of the work of this analysis is dedicated
+to validating the background, especially its shape in jet $p_T$, $m_{bb}$, and so on.
 of the background.  
 
 \section{Background Estimation Strategy}
 \label{sec:background_strategy}
 As QCD is the dominant background in this analysis, it is important to understand
 what flavors of QCD jets compose the population of events that survive the cut
-chain.  In order to do this, we apply the trigger and all cuts up to (but not including)
-requiring a third $b$-tagged jet in the event.
+chain.  In order to do this, we apply the trigger and cut chain detailed in Chapter~\ref{chap:trig_cuts}.
 
- The signal and background are then split into 3 exclusive regions, defined as follows:
+Once the events have been passed through the cut chain, 
+the signal and background are split into 3 exclusive regions based on the $b$-tag weight of the
+third jet in the event\footnote{as noted below, the ``third jet'' moniker does not strictly
+mean the third-highest $p_T$ jet in the event; rather, it is the jet with the highest $b$-tag weight
+that is \textit{not} one of the leading two jets in $p_T$, which are already $b$-tagged coming
+out of the cut chain}:
 \begin{itemize}
-    \item \textit{bbb}: one or more jets (in addition to the two triple-tagged jets) passing a tight (60\% working point)
- MV1 cut–-in effect, the full signal selection criteria
-    \item \textit{bbloose}: events failing the bbb classification but which have one or more jets passing a loose (80\%
+    \item \textit{bbb}: one or more jets (in addition to the two triple-tagged jets) passing a tight (60\% $b$-jet efficiency working point)
+ MV1\footnote{recall that MV1 is the name of the offline $b$-tagging algorithm used in most ATLAS analyses} cut
+    \item \textit{bbloose}: events failing the \textit{bbb} classification but which have one or more jets passing a loose (80\% efficiency
  working point) MV1 cut
     \item \textit{bbanti}: events that have no jets passing an 80\% MV1 cut-–effectively a veto on the presence of any
  $b$-tagged jets other than those firing the trigger
@@ -41,13 +46,25 @@ the $b$-jets coming from signal events should be fairly high $p_T$, so this shou
 a minimal effect of rejecting signal that would otherwise be accepted.  On the other
 hand, with high-jet-multiplicity QCD events, there is the combinatorial effect of looking across
 more jets for $b$-tags that increases the likelihood of an event being classified as signal-like
-(bbb or bbloose) as there are more jets in the event.  Only looking at the leading 5 jets
+(\textit{bbb} or \textit{bbloose}) as there are more jets in the event.  Only looking at the leading 5 jets
 for $b$-tags keeps this effect under control. 
 
+Once all the events have been categorized, the search proceeds by fitting the background
+in the \textit{bbanti} region, which we sometimes refer to as the \textit{bbanti}
+control region.  The events in this category will be mostly QCD background, especially
+$b\bar{b}$ QCD, although about 20\% of the signal might fall into this category.  The 
+\textit{bbb} category will be enriched in $b\bar{b}b$ events, either from signal
+or QCD background, although 60\% of the signal falls into this category and the QCD 
+backgrounds are much lower when a third $b$-jet is required.  The background estimation
+strategy for this analysis is to fit the $m_{bb}$ distribution in the background-dominated
+\textit{bbanti} category, and use that shape to predict the background shape in the \textit{bbb}
+signal region.   The extrapolation from \textit{bbanti} to \textit{bbb} is validated using the 
+bb QCD MC sample described in Section~\ref{sec:bb_qcd_mc}.
 
 \section{Background Estimation Method Based on Parameterized Histogram Fitting}
 The background consists almost exclusively of QCD with 2 or more real $b$-jets, which 
-fortunately has a $m_{bb}$ spectrum that does not have any peaks or other difficult
+fortunately has a $m^{'}_{bb}$\footnote{the $m^{'}_{bb}$ variable is described in more detail
+immediately below, and in Section~\ref{sec:rotation}} spectrum that does not have any peaks or other difficult
 structure above about 350 GeV.  Below that mass, the trigger turn-on curve becomes
 a major feature of the spectrum.  Above that mass, there
 is a smoothly falling distribution that we fit to an RhhBinnedPdf, which is a parameterized
@@ -55,12 +72,15 @@ histogram PDF that is also used for fitting the signal.
 
 In a few words, the background fit strategy proceeds in the following way:
 \begin{itemize}
-    \item Start with a mass point
+    \item Start with a signal mass point
     \item Apply a mass-point-specific rotation based on the the eigenvectors of 
-    the signal MC, as calculated using $m_{bb}$, $p_{T}^1$ and $p_T^2$; call 
-    the components of this rotated basis $m_{bb}'$, $p_T^{1'}$ and $p_T^{2'}$
-    \item Apply cuts to $p_T^{1'}$ and $p_T^{2'}$, and use $m_{bb}^{'}$ as the final 
-    discriminating variable (Section~\ref{sec:rotation}). 
+    the signal MC sample of that mass point, as calculated using $m_{bb}$, $p_{T,1}$ and $p_{T,2}$; we call 
+    the components of this rotated basis $m_{bb}'$, $p_T^{1'}$ and $p_T^{2'}$ (more
+    details in Section~\ref{sec:rotation}).  Briefly, the $m^{'}_{bb}$ variable
+    is a linear combination of $m_{bb}$, $p_{T,1}$ and $p_{T,2}$, which has a shape
+    similar to $m_{bb}$ but exploits correlations in the signal to suppress the backgrounds.
+    \item Apply cuts to $p^{'}_{T,1}$ and $p^{'}_{T,2}$, and use $m_{bb}^{'}$ as the final 
+    discriminating variable 
     \item Fit the $m_{bb}^{'}$ distributions within the range -50 GeV $<m_{bb}^{'}<$350
     with a parameterized histogram, separately for each $b$-tag and $n_{jets}$ category
     in signal MC.
@@ -77,26 +97,18 @@ In a few words, the background fit strategy proceeds in the following way:
     the fitting procedure
     \item Fit the data in the signal region, allowing the background shape, background
     normalization, and signal normalization to float
-%    \item Using the signal MC as a guide, select a window in $m_{bb}$ that encloses the
-%signal peak, along with as much of the mass sideband (on either side) as possible
-%    \item Fit an exponential function to the $m_{bb}^{'}$ distribution, allowing each of the 
-%tag regions (\textit{bbb}, \textit{bbloose}, \textit{bbanti}) to float relative to each other
-% as well as keeping the 3, 4, and 5+ jet categories separate
-%    \item As part of the limit-setting procedure, use the fit result for the 
-%    background along with signal shapes taken from MC to extract the 
-%signal cross section that can be excluded at a 95\% confidence level
-    \item Repeat for the next mass point
+    \item Repeat for the next signal mass point
 \end{itemize}
 
 Although we have signal MC with $m_A$ values as low as 250 GeV, this fit strategy only
-begins to work above 400 GeV, because of the trigger turn-on curve.  The signal mass 
+begins to work above $m_A=$400 GeV, because of the trigger turn-on curve.  The signal mass 
 points to which we would have sensitivity range from 400 to 800 GeV (potentially higher,
 but 800 GeV is our highest signal MC point). 
 
 While the analysis was in development, it was blinded to avoid bias.  This was done 
 by removing \textit{bbb} events from the data, and replacing them with a sample of
 events with the same normalization drawn from the \textit{bbanti} distribution
-in data.  For the final search, the \textit{bbb} events were swapped back in.
+in data.  For the final search, the \textit{bbb} events were substituted back in.
 
 
 
@@ -120,7 +132,7 @@ in data.  For the final search, the \textit{bbb} events were swapped back in.
 
 
 \section{Modeling of Background Shape}
-\subsection{Selection of Exponential Function}
+\subsection{Selection of Parameterized Histogram}
 Once the rotation and cuts have been applied, the data is fed into an 
 binned maximum likelihood fit for mathematical modeling.  The fitting
 of both signal and background is done in RooFit.  There are a number 
@@ -133,19 +145,50 @@ background, but in the final analysis, a parameterized histogram was
 used in part because of its easier convergence on background, and
 in part it allowed us to avoid an unstable functional fit to the signal.
 
-However, the important compromize of fitting to a histogram for the
+The important compromise of fitting to a histogram for the
 background is that it removes some of the constraints that a functional
 fit provides (for example, a decaying exponential imposes the constraint
-that the background is always decreasing as $m_{bb}$ increases, 
+that the background is always decreasing as $m^{'}_{bb}$ increases, 
 but a histogram could fluctuate up in the case of an excess).  That 
 means that we must rely on our background-dominated $bbanti$ region
 to understand the shape of the background, and then extrapolate that
 shape to the $bbb$ signal region in order to look for deviations from
 the background-only hypothesis.  The extrapolation must be validated in 
-background MC: the assumption this method makes is that the $m_{bb}$
+background MC: the assumption this method makes is that the $m^{'}_{bb}$
 distribution is the same regardless of the flavor of the third jet 
 in the event.  If that assumption holds, this extrapolation method is a
 valid way to predict the background shape in the signal region.
+
+
+The probability density functions (PDFs) for $m^{'}_{bb}$ are based on a parameterized step function,
+which is equivalent to parameterizing a normalized histogram in terms of the content of each
+bin. The number of needed parameters correspond to the number of bins minus one
+(because of the normalization). Using directly the bin content in each bin
+$b_{i}$ would induce an unstable behavior, since the last bin
+content would need to be parameterized as $1-\sum_{i=1}{(N_{bins}-1)} b_{i}$
+and the fit would easily converge to configurations where the last bin is negative,
+and at that point convergence is spoiled. Instead, the values of $p_{i}$
+are re-parameterized in terms of another set of parameters
+$b_{i}$\footnote{This nice trick was introduced for the first time by Aaron Roodman (SLAC) in the BaBar experiment}.
+
+\begin{itemize}
+\item $b_{1} = p_{1}$
+\item $b_{2} = p_{2} \left(1-p_{1}\right)$
+\item $b_{3} = p_{3} \left(1-p_{2} \right) \left( 1-p_{3}) \right)$
+\item $....$
+\end{itemize}
+With this choice all parameters $p_{i}$ with $i$ from 
+1 to $N-1$ can be limited to $[0,1]$, without loss of generality, 
+and the fit will always converge reliably, provided the dataset the fit is applied 
+to has at least one event in each bin of the PDF.
+
+In the final fit to the data sample the following parameters are extracted:
+\begin{itemize}
+\item The signal strength $\mu$;
+\item The background normalizations $N_{bkg,l}$, separately in each category;
+\item The  background $PDF_{bkg}(m_{bb})$, which is allowed to vary across categories (both in shape and normalization).
+\end{itemize} 
+
 
 Although the final fit model was a histogram, the following functions were
 also considered and we discuss below the behavior they exhibited:
@@ -162,7 +205,7 @@ The Bernstein polynomials are a family of polynomials that are characterized
 particularly by their attractive feature of being positive-definite, or never
 predicting a negative value for a PDF composed of them.  However, we find
 that it takes a high degree of polynomial (5 parameters or more) to fit the
-background over the full mass range (340,900 GeV), and a polynomial with a 
+background over the full mass range, and a polynomial with a 
 degree this high struggles (and often fails) to converge.  Moreover, a
 drawback of high-degree polynomials is their capability to ``wiggle'' and
 potentially absorb a signal within the background model.
@@ -206,53 +249,30 @@ configurations where no signal was present, the fit was prone to returning
 a nonzero signal cross section.
 
 
-%\subsection{Goodness-of-Fit Comparisons}
-%After comparing all the options for the function to describe the background
-%shape, the exponentials (both 1-parameter and 2-parameters) had the best
-%combination of fitting the background well and converging stably over the
-%full mass range.  The goodness-of-fit of these two possibilities, as measured
-%by the function $\chi^2/DOF$, is in Table~\ref{tab:chi2}.
-%
-%\begin{table}
-%    \center
-%    \caption{The $\chi^2/DOF$ for the 1-parameter and 2-parameter exponential fits.
-%    \label{tab:chi2}}
-%    \begin{tabular}{ c p{3cm} p{3cm} } \hline \hline
-%        category & 1-parameter exponential $\chi^2/DOF$ & 2-parameter exponential $\chi^2/DOF$ \\ \hline
-%        \textit{bbb} 3 jet & 1.5 & 1.1 \\
-%        \textit{bbb} 4 jet & 0.9  & 0.7 \\
-%        \textit{bbb} 5+ jet & 0.9  & 0.7 \\
- %       \textit{bbloose} 3 jet & 0.8 & 0.6 \\
-%        \textit{bbloose} 4 jet & 1.2 & 0.7 \\
-%        \textit{bbloose} 5+ jet & 1.5 & 1.1 \\
-%        \textit{bbanti} 3 jet & 3.9 & 1.0 \\
-%        \textit{bbanti} 4 jet & 3.9 & 1.2 \\
-%        \textit{bbanti} 5+ jet & 2.8 & 1.2 \\
- %       \hline
-%    \end{tabular}
-%\end{table} 
-
+%%% START HERE
 
 
 \subsection{Validation of Background Shape Extrapolation}
 A critical assumption of this fit method is that the shape of the $m_{bb}$ distribution
-in background does not vary based on the flavor (or, semi-equivalently, $b$-tag status)
-of the third jet in the event.  We validate this assumption in $b$-jet enriched 
-QCD MC.
+in background does not vary based on the flavor (or, relatedly, $b$-tag status)
+of the third jet in the event.  We validate this assumption in the $b$-jet enriched 
+QCD MC sample detailed in Section~\ref{sec:bb_qcd_mc}
 
 As detailed in Section~\ref{sec:rotation}, our final discriminating variable is actually
-not $m_{bb}$ but a variable we call $m_{bb}^{'}$, which is a linear combination of $m_{bb}$, $p_{T,1}$ and $p_{T,2}$.  So while we
+not $m_{bb}$ but a variable we call $m_{bb}^{'}$, 
+which is a linear combination of $m_{bb}$, $p_{T,1}$ and $p_{T,2}$.  So while we
 do check that the $m_{bb}$ distributions are not biased by the flavor of the third jet,
 the real figure of merit lies in showing that $m_{bb}^{'}$ is not biased by the
 flavor of the third jet either.  The plots in Figure~\ref{fig:bkg_shape_compare}
 show $m_{bb}^{'}$ in the $bbb$ and $bbanti$ tag categories, with a ratio plot drawn below
-to see any shape differences more clearly.  There is no sign of a bias in the 3-jet
+to see any shape differences more clearly.  Although not all the bins agree 
+exactly between the \textit{bbb} and \textit{bbanti} categories, there is little sign of a bias in the 3-jet
 or 4-jet categories; the 5-jet category shows a slight shape difference at high values
-of $m_{bb}^{'}$ for which we assign a systematic error.
+of $m_{bb}^{'}$ for which we assign a systematic error (more details in Section~\ref{sec:background_syst}).
 
 \begin{figure}[hbt]
 \includegraphics[width=0.45\linewidth]{BackgroundEstimation/mbb_bbb_3jets_rotated.eps}
-\includegraphics[width=0.45\linewidth]{BackgroundEstimation/mbb_bbb_4jets_rotated.eps}\\
+\includegraphics[width=0.45\linewidth]{BackgroundEstimation/mbb_bbb_4jets_rotated.eps}
 \includegraphics[width=0.45\linewidth]{BackgroundEstimation/mbb_bbb_5jets_rotated.eps}
 \caption{The distributions of the final discriminating variable, $m_{bb}^{'}$, 
 in background MC for the $bbanti$ and $bbb$ tag categories.  The three different plots
@@ -288,14 +308,16 @@ differences are seen.
 
 \subsubsection{All-Hadronic $t\bar{t}$ Background}
 When $t\bar{t}$ decays all-hadronically, it can create events with several high-$p_T$
-jets and 2 or more $b$-tagged jets (where the $b$-tags come from both real $b$-quarks
+jets and two or more $b$-tagged jets (where the $b$-tags come from both real $b$-quarks
 and from mistagged light flavor).  We anticipate that, because it has a production
-cross section that is much smaller than QCD, $t\bar{t}$ will not be a major background.
+cross section that is much smaller than QCD\footnote{this statement depends somewhat
+on cuts, $b$-tagging, etc., but as explained below it does turn out to be the case
+in the relevant region in phase space for this analysis}, $t\bar{t}$ will not be a major background.
 We confirm this assumption in MC by using the all-hadronic $t\bar{t}$ sample summarized
 in Table~\ref{tab:ttbar_params}.
 
 
-We find that in MC, all-hadronic $t\bar{t}$ has an efficiency of 7.5\% after
+We find that in Pythia MC simulations, all-hadronic $t\bar{t}$ has an efficiency of 7.5\% after
 the EF\_2j35\_loose\_j145\_j35\_a4tchad trigger, and approximately 2\% efficiency
 in the offline cuts relative to the trigger.  Estimating the $t\bar{t}$ cross section
 as 165 pb, and a 44\% branching ratio in the all-hadronic decay channel, this gives

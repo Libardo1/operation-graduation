@@ -141,7 +141,7 @@ Different terms in the SM Lagrangian account for different types of particles.  
 which have spin 1/2, are governed by the Dirac Lagrangian:
 
 \begin{equation}
-\mathscr{L}= i bar{\psi} \gamma^\mu \partial_\mu \psi -m \bar{\psi}\psi \footnote{we use the physics notation custom of $\hbar=c=$1 in this section}
+\mathscr{L}= i \bar{\psi} \gamma^\mu \partial_\mu \psi -m \bar{\psi}\psi \footnote{we use the physics notation custom of $\hbar=c=$1 in this section}
 \end{equation}
 
 (Similarly, the Klein-Gordon Lagrangian is used for spin-0 particles, 
@@ -163,47 +163,81 @@ replace the ordinary derivative with the covariant derivative:
 \mathscr{D}_\mu \equiv \partial_\mu - iqA_\mu
 \end{equation}
 
-The second term in the covariant derivative cancels the extra term from the derivative of 
-$\theta(x)$, and local phase invariance is reinstated.  However, when 
-we added the second term, we added in a new field $A_\mu$ 
-which must also show up in the Lagrangian but be massless ($m_A$=0) 
-in order to preserve the local gauge invariance that we have so carefully constructed.  
-The trouble here is that, when we think about this formalism being used to 
-describe the weak force, the corresponding $W$ and $Z$ bosons 
-are definitely \textit{not} massless.  What we need is a modification 
-to this procedure that will leave us with at least two massive degrees of freedom, 
-which we can interpret as the $W$ and $Z$, and no massless particle corresponding to $A_\mu$.
+and $A_{\mu}$ transforms according to 
 
-Let's now consider what happens when the Lagrangian has a slightly different functional 
-form: instead of a quadratic term $-mc^2\bar{\psi}\psi$, 
-it's perfectly valid to have a quartic term also: $-\mu^2\psi^2+\lambda^2 \psi^4$.  
-In this case, however, ground state of the field $\psi$ does 
-not occur when $\psi=0$, but rather when $\psi$ takes 
-on a value of $\psi = \pm \mu^2/\lambda$.  
-There is a symmetry as to whether $\psi$ takes on the positive or 
-negative solution to the equation; the fact that the system must pick one solution 
-or the other means that it undergoes \textit{spontaneous symmetry breaking}.
+\begin{equation}
+A_\mu \rightarrow A_\mu + \partial_\mu\Theta
+\end{equation}
 
-The Higgs mechanism is the powerful combination of local gauge invariance and spontaneous symmetry 
-breaking, which achieves our goal of getting rid of the massless $A_\mu$ 
-term while allowing $W$ and $Z$ to be massive.  The 
-field $\psi$ is a complex field, with both a real and imaginary 
-part $\psi=\psi_1+i\psi_2$, which we can make locally invariant 
-by the same trick as before (replace the derivative with the covariant derivative, 
-and add in a new field $A_\mu$).  If, however, 
-the Lagrangian has a form that allows for spontaneous symmetry breaking, the field 
-$\psi$ can undergo a change of variables $\eta\equiv \psi_1 - \mu/\lambda$, 
-$\xi\equiv \psi_2$ and the Lagrangian can be rewritten 
-in a way that the massless gauge field $A_\mu$ has now 
-acquired a mass.  The massless particle we first encountered when trying to write a 
-locally-invariant Lagrangian is represented by the $\xi$ term.  A transformation 
-of the $\psi$ field $\psi \rightarrow \psi' = (cos\theta + i sin\theta)(\psi_1+i\psi_2)$, 
-with $\theta=tan^{-1}(\frac{\psi_2}{\psi_1})$ 
-makes $\psi_2'=0$, which gets rid of the massless particle 
-that was troubling us before.  If we generalize this analysis to a  complex scalar 
-doublet, which has four degrees of freedom (this example had 2), we 
-will have 4 massive particles.  Three of these are the gauge bosons, 
-$W^\pm$ and $Z$; the fourth is a new massive scalar particle which we call the Higgs boson.
+and using $F^{\mu\nu}\equiv \partial_\nu A_\mu - \partial_\mu A_\nu$, the Lagrangian
+to analyze is 
+
+\begin{equation}
+L = [(\partial_\mu - iqA_\mu)\phi^{\dagger}][(\partial^\mu + iqA^\mu)\phi] - V(\phi^{\dagger}\phi) - \frac{1}{4}F^{\mu\nu}F_{\mu\nu}
+\end{equation}
+
+
+
+%The second term in the covariant derivative cancels the extra term from the derivative of 
+%$\theta(x)$, and local phase invariance is reinstated.  However, when 
+%we added the second term, we added in a new field $A_\mu$ 
+%which must also show up in the Lagrangian but be massless ($m_A$=0) 
+%in order to preserve the local gauge invariance that we have so carefully constructed.  
+%The trouble here is that, when we think about this formalism being used to 
+%describe the weak force, the corresponding $W$ and $Z$ bosons 
+%are definitely \textit{not} massless.  What we need is a modification 
+%to this procedure that will leave us with at least two massive degrees of freedom, 
+%which we can interpret as the $W$ and $Z$, and no massless particle corresponding to $A_\mu$.
+
+%Let's now consider what happens when the Lagrangian has a slightly different functional 
+%form: instead of a quadratic term $-mc^2\bar{\psi}\psi$, 
+The functional form of the potential $V(\phi)$ is now worth exploring.
+Consider the ``Mexican Hat'' potential of the form $V(\phi^{\dagger}\phi)=\mu^2(\phi\dagger\phi)+\lambda(\phi\dagger\phi)^2$, with $\mu^2<$0 and $\lambda>$0. In this case, the minimum of the potential
+does not occur when $\phi$=0, but rather when $|\phi|^2=\mu^2/2\lambda$.
+There are a continua of solutions at this minimum potential, analagous to 
+the way that a marble in the brim of a Mexican hat can roll in a circle;
+this degree of freedom corresponds to a (massless) Goldstone boson.
+Three more degrees of freedom
+are ``eaten'' by the massive $W^\pm$ and $Z$ upon gauge transformations on $\phi$ 
+and the gauge fields of the Lagrangian\footnote{for a nice explanation of this
+process, see e.g.\cite{ellis}}.
+
+The gauge transformation that leads to masses for $W^\pm$ and $Z$ also ``rotates
+away'' the Goldstone boson associated with the extra degree of freedom, which
+is a nice feature since experimentally we see no such particle.  What is left
+in its place, however, is a massive scalar field, and we call the associated
+particle the Higgs boson.  The Higgs field also endows mass upon the fermions,
+which it iteracts with via the Yukawa couplings.
+
+
+%it's perfectly valid to have a quartic term also: $-\mu^2\psi^2+\lambda^2 \psi^4$.  
+%In this case, however, ground state of the field $\psi$ does 
+%not occur when $\psi=0$, but rather when $\psi$ takes 
+%on a value of $\psi = \pm \mu^2/\lambda$.  
+%There is a symmetry as to whether $\psi$ takes on the positive or 
+%negative solution to the equation; the fact that the system must pick one solution 
+%or the other means that it undergoes \textit{spontaneous symmetry breaking}.
+
+%The Higgs mechanism is the powerful combination of local gauge invariance and spontaneous symmetry 
+%breaking, which achieves our goal of getting rid of the massless $A_\mu$ 
+%term while allowing $W$ and $Z$ to be massive.  The 
+%field $\psi$ is a complex field, with both a real and imaginary 
+%part $\psi=\psi_1+i\psi_2$, which we can make locally invariant 
+%by the same trick as before (replace the derivative with the covariant derivative, 
+%and add in a new field $A_\mu$).  If, however, 
+%the Lagrangian has a form that allows for spontaneous symmetry breaking, the field 
+%$\psi$ can undergo a change of variables $\eta\equiv \psi_1 - \mu/\lambda$, 
+%$\xi\equiv \psi_2$ and the Lagrangian can be rewritten 
+%in a way that the massless gauge field $A_\mu$ has now 
+%acquired a mass.  The massless particle we first encountered when trying to write a 
+%locally-invariant Lagrangian is represented by the $\xi$ term.  A transformation 
+%of the $\psi$ field $\psi \rightarrow \psi' = (cos\theta + i sin\theta)(\psi_1+i\psi_2)$, 
+%with $\theta=tan^{-1}(\frac{\psi_2}{\psi_1})$ 
+%makes $\psi_2'=0$, which gets rid of the massless particle 
+%that was troubling us before.  If we generalize this analysis to a  complex scalar 
+%doublet, which has four degrees of freedom (this example had 2), we 
+%will have 4 massive particles.  Three of these are the gauge bosons, 
+%$W^\pm$ and $Z$; the fourth is a new massive scalar particle which we call the Higgs boson.
 
 
 
