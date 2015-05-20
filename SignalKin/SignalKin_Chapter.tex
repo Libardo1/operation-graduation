@@ -6,20 +6,28 @@
 \chapter[Signal Kinematics]{Signal Kinematics}
 
  
-\section{Signal Jet Kinematics}
-
 Once the trigger and cuts have been applied to the data, the events that remain can be signal, background, or a mixture of the two.  
 It then falls to understanding the kinematics of the signal and background to look for features that can
 provide enough discrimination to detect the presence of the signal.  In this case, that means reconstructing
-the invariant mass of the leading 2 jets in the event, which will create a smoothly falling power
+the invariant mass of the leading two jets in the event, which will create a smoothly falling power
 law distribution in QCD background but a resonance structure in signal.  The kinematics of the signal
-distribution then come into play in a few major ways
+distribution then come into play in a few major ways:
 \begin{itemize}
-    \item Signal Jet \pt Distributions:  By examining the \pt distributions of the Higgs daughters, and the associated $b$-jet(s), we can get a better understanding of what might be optimal jet \pt cuts for future iterationsof this analysis 
-    \item Signal Jet Combinatorics: A perfectly good signal event can be inadvertently turned into a type of background if the associated $b$-jet is chosen when reconstructing the Higgs; unfortunately these combinatorial mistakes can arise easily when there are 3 $b$-jets but only two jets being used for reconstruction
-    \item Mass Resolution: The Higgs resonance width is $m_A$/tan$\beta$ dependent, with inherent widths
-up to a few tens of GeV; however, if energy is lost to FSR, the resonance can be much wider and this makes
-the signal much more difficult to distinguish from the background
+    \item Signal Jet \pt Distributions:  By examining the \pt distributions 
+    of the Higgs daughters, and the associated $b$-jet(s), 
+    we can get a better understanding of what might be optimal jet \pt cuts for future iterations of this analysis. 
+    \item Signal Jet Combinatorics: A perfectly good signal event can be inadvertently 
+    turned into a type of background if the associated $b$-jet is 
+    chosen when reconstructing the Higgs; unfortunately these combinatorial mistakes can arise easily when 
+    there are 3 $b$-jets but only two jets being used for reconstruction.
+    \item Mass Resolution: The Higgs resonance width depends on $m_A$/tan$\beta$, with inherent widths
+of up to a few tens of GeV; however, if energy is lost to FSR, the resonance can be much wider and this makes
+the signal much more difficult to distinguish from the background.
+    \item Eigenvector Rotation: In signal events, especially those with low FSR and good mass resolution,
+    there is a correlation between $m_{bb}$, $p_{T,1}$ and $p_{T,2}$ that is not present in the resonance-less
+    background.  By constructing a 3x3 tensor out of these three variables in signal, and rotating the analysis so the
+    discriminating variable falls along the leading eigenvector of that tensor, we can take advantage of the correlations
+    in signal and boost the signal-to-background ratio.
 \end{itemize}
 
 
@@ -30,7 +38,7 @@ and cuts have been applied.  Using truth-matching in the Monte Carlo, we can ide
 which jets are daughters of the Higgs and which are associated $b$-jet(s).  Since
 the Higgs is a heavy particle, its decay jets tend to have higher \pt than the associated
 $b$-jet(s), which can be seen in Figure~\ref{fig:pt_higgs_and_associated_jets}. 
-However, in this plot, there has been $b$-tagging applied so an important potential
+However, in this plot, $b$-tagging has been applied so an important potential
 component is missing: how does the event topology change when we also include 
 non-$b$-jets, which can potentially be high \pt as well.   
 
@@ -54,7 +62,8 @@ non-$b$-jets, which can potentially be high \pt as well.
     \caption{The \pt of the two jets from the Higgs (classified as ``first'' and ``second'' based
     on which one has more \pt in the event), and all other $b$-tagged jet(s) in the event.
     The peaks at about 155 GeV and 55 GeV is a result of the trigger turn-on points and
-    associated cut(s).  \label{fig:pt_higgs_and_associated_jets}}
+    associated cut(s).  Each plot corresponds to a different Higgs mass point, which are 
+    indicated in the titles immediately above the plots.\label{fig:pt_higgs_and_associated_jets}}
 \end{figure}
 %----------------------------------------------
 
@@ -68,8 +77,8 @@ analysis.
 
 \section{Signal Jet Combinatorics}
 \label{sec:combinatorics}
-An important point when trying to reconstruct the Higgs is which 2 $b$-tagged jets (of the
-three available) should be used in reconstruction.  If the associated $b$-jet is accidentally
+An important point when trying to reconstruct the Higgs is which two $b$-tagged jets (of the
+three or more available) should be used in reconstruction.  If the associated $b$-jet is accidentally
 selected, then the Higgs will be mis-reconstructed and the sensitivity will suffer.  At the same time,
 since the mass of the Higgs is not known, tools like a kinematic fit are not available to
 help with the combinatorics.  In Figure~\ref{fig:combinatorics}, we use the MC truth
@@ -101,14 +110,84 @@ the leading and second $b$-tagged jets in the event (with about a 70\% probabili
 \end{figure}
                                                                                                                                                                  
                                                                                                                                     
-If we require only that the leading 2 $b$-tagged jets be used in reconstruction, there can                                          
-still be events in our sample where the leading 2 $b$-tagged jets in the event are not                                              
-the leading 2 jets overall--for example, there can be a very hard light jet, and the $b$-tagged                                     
+If we require only that the leading two $b$-tagged jets be used in reconstruction, there can                                          
+still be events in our sample where the leading two $b$-tagged jets in the event are not                                              
+the leading two jets overall--for example, there can be a very hard light jet, and the $b$-tagged                                     
 jets are the second and third jets in $p_T$.  When we introduce a cut that eliminates these events,                                 
-by requiring that the leading 2 jets in the event be $b$-tagged, both the signal to background                                      
+by requiring that the leading two jets in the event be $b$-tagged, both the signal to background                                      
 ratio improves (this cut is about 25\% efficient in background, and over 90\% efficient                                             
 in signal) and the mass resolution is improved in signal as the events that rejected have                                           
 hard FSR present and the reconstructed $m_{bb}$ is far from the generated $m_A$.    
+
+%The first strategy for recovering mass resolution is to require, as part of the cut flow,
+%that the leading 2 jets in the event be $b$-tagged.  Before this cut is applied, it is
+%possible to have signal events in which there is hard ISR or FSR (light jet radiation),
+%and/or $b$-jets from the signal process that are high-$p_T$ but do not pass the $b$-tagging.
+%The price of this cut is a loss in signal efficiency, which varies by $m_A$ but can be 
+%seen in Figure~\ref{fig:combinatorics} to be about 30-40\% above $m_A$=350 GeV or so.
+%However, Figure~\ref{fig:background_eff_cutflow} shows that the background also drops, 
+%by a higher amount that varies based on the exact background in question, so that the net 
+%effect on signal/background for this cut is neutral or favorable.
+ 
+
+Quantifying the effect of this cut on the mass resolution is a little tricky because of the
+$m_{bb}$ shape in signal, which is highly asymmetric.  In order to make some progress, though,
+we define the ``left'' and ``right'' shoulders of the distribution, where the left shoulder
+corresponds to the low-mass side of the $m_{bb}$ distribution, where the reconstructed mass 
+is below the peak for a given signal mass point,
+and the right shoulder is the part of the distribution above the peak.  Then we can define
+a threshold corresponding to 20\% of the peak height, and ask for the left-shoulder and right-shoulder
+windows where the distribution is above the threshold (a schematic illustrating the ``shoulder''
+definition can be seen in Figure~\ref{fig:shoulders}, for a low-mass and high-mass example).  
+The right shoulder is much narrower,
+and any events in the high-mass tail (above the generated value for $m_A$) arise from 
+combinatorial mis-reconstructions.  The left shoulder, where FSR and combinatorics are
+at play, is significantly wider but improved by 40\% (at $m_A$=800 GeV) to 300\% (at $m_A$=250 GeV)
+once we require that the leading two jets in the event be $b$-tagged.  The widths of the shoulders
+for all mass points, before and after this cut is applied, can be seen in Table~\ref{tab:signal_mass_RMS_compare}.
+
+\begin{figure}[hbt]
+  \includegraphics[width=0.5\linewidth]{SignalKin/shoulder_400.pdf}
+  \includegraphics[width=0.5\linewidth]{SignalKin/shoulder_800.pdf}
+  \caption{A schematic diagram showing how the shoulders are defined,
+  for the purposes of parameterizing the width of the signal distribution.
+  The left shoulder especially is affected when FSR is present, as the
+  Higgs reconstructs to a lower mass than its ``true'' mass.  \label{fig:shoulders}}
+\end{figure}
+
+
+
+%----------------------------------------------
+\begin{table}
+\centering
+\caption{The width of the mass distribution in the left and right shoulders of the peak,
+    as explained in the text.  The left shoulder is dominated by radiation off the Higgs
+    and/or the Higgs daughter jets in addition to combinatorial mis-reconstructions,
+    leading to a larger RMS than the right shoulder, which
+    is dominated by combinatorics only.\label{tab:signal_mass_RMS_compare}   }
+  \begin{tabular}{ccccc}
+     \hline \hline
+     $m_A$ (GeV) & \multicolumn{2}{c}{$b$-tags on leading jets (GeV)} & \multicolumn{2}{c}{no $b$-tags on leading jets (GeV)}  \\
+        & left & right & left & right \\ \hline
+     250 & 13.5 & 89.2 & 36.7 & 87.7 \\
+     280 & 19.2 & 68.8 & 27.5 & 71.4 \\
+     310 & 19.2 & 58.3 & 31.8 & 58.1 \\
+     350 & 28.3 & 34.5 & 33.9 & 36.2 \\
+     400 & 33.4 & 26.1 & 45.1 & 26.5 \\
+     450 & 39.5 & 25.7 & 62.2 & 25.9 \\
+     500 & 48.6 & 29.3 & 81.1 & 29.8 \\
+     550 & 54.9 & 31.1 & 93.1 & 33.3 \\
+     600 & 73.0 & 26.0 & 117.6 & 30.5 \\
+     650 & 75.4 & 31.7 & 130.8 & 31.8 \\
+     700 & 75.7 & 40.3 & 143.4 & 40.7 \\
+     800 & 100.9 & 36.2 & 177.4 & 36.3 \\
+     \hline     \end{tabular}
+\end{table}
+%----------------------------------------------
+
+
+
+
 
 
 
@@ -149,72 +228,6 @@ With this in mind, it’s clear that other effects drive the mass resolution.  T
 and the tactics documented in them that attempt to recover lost mass resolution, focus mainly 
 on two hypotheses: that the lost mass resolution arises from final state radiation (FSR), and/or
 that it arises from incorrectly picking the jets when reconstructing (combinatorics). 
-
-
-
-
-\subsection{Mass Resolution Improvement after Requiring that Leading Two Jets be $b$-Tagged}
-The first strategy for recovering mass resolution is to require, as part of the cut flow,
-that the leading 2 jets in the event be $b$-tagged.  Before this cut is applied, it is
-possible to have signal events in which there is hard ISR or FSR (light jet radiation),
-and/or $b$-jets from the signal process that are high-$p_T$ but do not pass the $b$-tagging.
-The price of this cut is a loss in signal efficiency, which varies by $m_A$ but can be 
-seen in Figure~\ref{fig:combinatorics} to be about 30-40\% above $m_A$=350 GeV or so.
-However, Figure~\ref{fig:background_eff_cutflow} shows that the background also drops, 
-by a higher amount that varies based on the exact background in question, so that the net 
-effect on signal/background for this cut is neutral or favorable.
- 
-
-Quantifying the effect of this cut on the mass resolution is a little tricky because of the
-$m_{bb}$ shape in signal, which is highly asymmetric.  In order to make some progress, though,
-we define the ``left'' and ``right'' shoulders of the distribution, where the left shoulder
-corresponds to the low-mass side of the $m_{bb}$ distribution, where the reconstructed mass 
-is below the peak for a given signal mass point,
-and the right shoulder is the part of the distribution above the peak.  Then we can define
-a threshold corresponding to 20\% of the peak height, and ask for the left-shoulder and right-shoulder
-windows where the distribution is above the threshold.  The right shoulder is much narrower,
-and any events in the high-mass tail (above the generated value for $m_A$) arise from 
-combinatorial mis-reconstructions.  The left shoulder, where FSR and combinatorics are
-at play, is significantly wider but improved by 40\% (at $m_A$=800 GeV) to 300\% (at $m_A$=250 GeV)
-once we require that the leading 2 jets in the event be $b$-tagged.  The widths of the shoulders
-for all mass points, before and after this cut is applied, can be seen in Table~\ref{tab:signal_mass_RMS_compare}.
-%The plots in Figure 39 and Figure 40 show the ect on the invariant mass distribution.
-% In order to quantify the mass resolution ect, we define the “left” and “right” shoulders of the mbb
-% distribution, which are respectively the portion of the mbb distribution that are below and above the peak.
-% go into further detail on the signal shape in Section 6.2; but in Table~\ref{tab:signal_mass_RMS_compare} the RMS of especially the left
-% shoulder before and after requiring b-tags on the leading 2 jets quantitatively shows the mass resolution
-% improvement.
-
-
-
-%----------------------------------------------
-\begin{table}
-\centering
-\caption{The width of the mass distribution in the left and right shoulders of the peak,
-    as explained in the text.  The left shoulder is dominated by radiation off the Higgs
-    and/or the Higgs daughter jets in addition to combinatorial mis-reconstructions,
-    leading to a larger RMS than the right shoulder, which
-    is dominated by combinatorics only.\label{tab:signal_mass_RMS_compare}   }
-  \begin{tabular}{ccccc}
-     \hline \hline
-     $m_A$ (GeV) & \multicolumn{2}{c}{$b$-tags on leading jets (GeV)} & \multicolumn{2}{c}{no $b$-tags on leading jets (GeV)}  \\
-        & left & right & left & right \\ \hline
-     250 & 13.5 & 89.2 & 36.7 & 87.7 \\
-     280 & 19.2 & 68.8 & 27.5 & 71.4 \\
-     310 & 19.2 & 58.3 & 31.8 & 58.1 \\
-     350 & 28.3 & 34.5 & 33.9 & 36.2 \\
-     400 & 33.4 & 26.1 & 45.1 & 26.5 \\
-     450 & 39.5 & 25.7 & 62.2 & 25.9 \\
-     500 & 48.6 & 29.3 & 81.1 & 29.8 \\
-     550 & 54.9 & 31.1 & 93.1 & 33.3 \\
-     600 & 73.0 & 26.0 & 117.6 & 30.5 \\
-     650 & 75.4 & 31.7 & 130.8 & 31.8 \\
-     700 & 75.7 & 40.3 & 143.4 & 40.7 \\
-     800 & 100.9 & 36.2 & 177.4 & 36.3 \\
-     \hline     \end{tabular}
-\end{table}
-%----------------------------------------------
-
 
 
 

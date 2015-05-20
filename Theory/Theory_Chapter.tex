@@ -154,26 +154,26 @@ the Dirac Lagrangian is not invariant under local phase transformations.  In oth
 words, if the field $\psi$ is multiplied by an exponential term with 
 a space-dependent (``local'') phase, $\psi \rightarrow e^{iq\theta(x)} \psi$, 
 then substituting the new $\psi$ into the Euler-Lagrange equations will result 
-in an extra term because of the derivative of $\theta(x)$.  This 
-is what we mean by saying that, as it is written, the Dirac Lagrangian 
-is not invariant under local phase transformations.  To make it locally invariant, we 
+in an extra term because of the derivative of $\theta(x)$.  
+ To make it locally invariant, we 
 replace the ordinary derivative with the covariant derivative:
 
 \begin{equation}
 \mathscr{D}_\mu \equiv \partial_\mu - iqA_\mu
 \end{equation}
 
-and $A_{\mu}$ transforms according to 
+and $A_{\mu}$\footnote{$A_\mu$ is the field associated with the U(1)$_Y$ gauge field of the 
+Standard Model} transforms according to 
 
 \begin{equation}
-A_\mu \rightarrow A_\mu + \partial_\mu\Theta
+A_\mu \rightarrow A_\mu + \partial_\mu\theta
 \end{equation}
 
 and using $F^{\mu\nu}\equiv \partial_\nu A_\mu - \partial_\mu A_\nu$, the Lagrangian
 to analyze is 
 
 \begin{equation}
-L = [(\partial_\mu - iqA_\mu)\phi^{\dagger}][(\partial^\mu + iqA^\mu)\phi] - V(\phi^{\dagger}\phi) - \frac{1}{4}F^{\mu\nu}F_{\mu\nu}
+\mathscr{L} = [(\partial_\mu - iqA_\mu)\phi^{\dagger}][(\partial^\mu + iqA^\mu)\phi] - V(\phi^{\dagger}\phi) - \frac{1}{4}F^{\mu\nu}F_{\mu\nu}
 \end{equation}
 
 
@@ -192,7 +192,7 @@ L = [(\partial_\mu - iqA_\mu)\phi^{\dagger}][(\partial^\mu + iqA^\mu)\phi] - V(\
 %Let's now consider what happens when the Lagrangian has a slightly different functional 
 %form: instead of a quadratic term $-mc^2\bar{\psi}\psi$, 
 The functional form of the potential $V(\phi)$ is now worth exploring.
-Consider the ``Mexican Hat'' potential of the form $V(\phi^{\dagger}\phi)=\mu^2(\phi\dagger\phi)+\lambda(\phi\dagger\phi)^2$, with $\mu^2<$0 and $\lambda>$0. In this case, the minimum of the potential
+Consider the ``Mexican Hat'' potential of the form $V(\phi^{\dagger}\phi)=\mu^2(\phi^\dagger\phi)+\lambda(\phi^\dagger\phi)^2$, with $\mu^2<$0 and $\lambda>$0. In this case, the minimum of the potential
 does not occur when $\phi$=0, but rather when $|\phi|^2=\mu^2/2\lambda$.
 There are a continua of solutions at this minimum potential, analagous to 
 the way that a marble in the brim of a Mexican hat can roll in a circle;
@@ -207,7 +207,7 @@ away'' the Goldstone boson associated with the extra degree of freedom, which
 is a nice feature since experimentally we see no such particle.  What is left
 in its place, however, is a massive scalar field, and we call the associated
 particle the Higgs boson.  The Higgs field also endows mass upon the fermions,
-which it iteracts with via the Yukawa couplings.
+which it interacts with via the Yukawa couplings.
 
 
 %it's perfectly valid to have a quartic term also: $-\mu^2\psi^2+\lambda^2 \psi^4$.  
@@ -426,13 +426,13 @@ the CP-odd $A$; the CP-even $h$ is
 assumed to be the Higgs particle found at 126 GeV \cite{PDG-Review}.  
 The masses of $H/A$ are not known.  While there are several free parameters in the MSSM, the SUSY Higgs sector is 
 (at first order) governed by only two: $m_A$ 
-and $tan\beta$.  As a direct result of this, most interpretations 
+and $\tan\beta$.  As a direct result of this, most interpretations 
 of limits (or signal) are presented in terms of the $m_A$/tan$\beta$ phase space favored or excluded.  
 
 
 
 
-\subsection{H/A Searches in the $b\bar{b}b$ Final State}
+\subsection{$H/A$ Searches in the $b\bar{b}b$ Final State}
 The $H/A$ search being performed in this thesis is based on two important experimental choices:
 
 \begin{itemize}
@@ -464,7 +464,7 @@ there are several general trends that emerge when one examines the parameters $m
 \begin{itemize}
 	\item The cross section for $H/A$ production in association 
         with $b$-quarks increases for higher values of $\tan\beta$ (Figure~\ref{fig:xsec_vs_mass})
-	\item The branching fraction of $H/A$ to $b$-quarks increases with $tan\beta$ (Figure~\ref{fig:br_vs_mass})
+	\item The branching fraction of $H/A$ to $b$-quarks increases with $\tan\beta$ (Figure~\ref{fig:br_vs_mass})
 	\item At high $\tan\beta$\footnote{in this context, 30 (and above) would be an example of a high
         $\tan\beta$ value}, the $H/A\rightarrow b\bar{b}$ branching 
         fraction is nearly constant across a wide range of $m_A$ (Figure~\ref{fig:br_vs_mass})
@@ -487,7 +487,7 @@ there are several general trends that emerge when one examines the parameters $m
 	\centering
 	\includegraphics[width=0.8\textwidth]{Theory/figures/mssm_xsec/AH_xsec_vs_mass.pdf}
 	\caption{The cross section for $b$-quark associated production for
-    $A$, $H$ and $h$ as a function of $m_A$ for several different values of $tan\beta$ (denoted ``tb'' in the legend). 
+    $A$, $H$ and $h$ as a function of $m_A$ for several different values of $\tan\beta$ (denoted ``tb'' in the legend). 
     Figures made using FeynHiggs \cite{feynhiggs_1, feynhiggs_2, feynhiggs_3, feynhiggs_4, feynhiggs_5}.
     \label{fig:xsec_vs_mass} }
 \end{figure}
@@ -500,9 +500,9 @@ there are several general trends that emerge when one examines the parameters $m
 	\includegraphics[width=0.7\textwidth]{Theory/figures/mssm_xsec/AH_br_vs_mass.pdf}
 	\caption{The branching ratio to $b\bar{b}$ of $A$, $H$ 
     and $h$ as a function of $m_A$ for 
-    several different values of $tan\beta$ (tb). The trend of higher branching 
-    ratios for higher values of $tan\beta$ comes from the Higgs-to-$b$-quark 
-    decay vertex carrying an enhancement factor that scales with $tan\beta$.
+    several different values of $\tan\beta$ (tb). The trend of higher branching 
+    ratios for higher values of $\tan\beta$ comes from the Higgs-to-$b$-quark 
+    decay vertex carrying an enhancement factor that scales with $\tan\beta$.
     Figures made using FeynHiggs \cite{feynhiggs_1, feynhiggs_2, feynhiggs_3, feynhiggs_4, feynhiggs_5}. 
     \label{fig:br_vs_mass} }
 \end{figure}
@@ -512,7 +512,7 @@ there are several general trends that emerge when one examines the parameters $m
 	\centering
 	\includegraphics[width=0.7\textwidth]{Theory/figures/gamma.pdf}
 	\caption{The inherent width of $A$, $H$, and $h$ 
-    as a function of $m_A$ for tan$\beta$=20.  
+    as a function of $m_A$ for tan$\beta$=20 in the $m_h^{max}$ scenario.  
     In practice, the inherent width of the particle is dwarfed by the experimental 
     resolution, which can be up to hundreds of GeV.  
     Figures made using FeynHiggs \cite{feynhiggs_1, feynhiggs_2, feynhiggs_3, feynhiggs_4, feynhiggs_5}. \label{fig:width}}
@@ -523,7 +523,7 @@ there are several general trends that emerge when one examines the parameters $m
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\textwidth]{Theory/figures/TB_gamma.pdf}
-	\caption{The inherent width of $A$, $H$, and $h$ as a function of tan$\beta$ when $m_A$=500 GeV. 
+	\caption{The inherent width of $A$, $H$, and $h$ as a function of tan$\beta$ in the $m_h^{max}$ scenario when $m_A$=500 GeV. 
     Figure made using FeynHiggs \cite{feynhiggs_1, feynhiggs_2, feynhiggs_3, feynhiggs_4, feynhiggs_5}. \label{fig:TB_width}}
 \end{figure}
 %-------------------------------------------------
@@ -539,7 +539,7 @@ there are several general trends that emerge when one examines the parameters $m
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\textwidth]{Theory/figures/mh_mod.pdf}
+	\includegraphics[width=\textwidth]{Theory/figures/mh_mod.pdf}
 	\caption{The favored (green) and excluded (red/blue) regions in 
     $m_A/tan\beta$ in the $m_h^{mod}$ scenario, where the green 
     region shows the phase space that is consistent with $m_h$=126 GeV.  
@@ -555,6 +555,12 @@ there are several general trends that emerge when one examines the parameters $m
 
 
 
+As might be apparent, this analysis is 
+most advantaged in a regime when $\tan\beta$ is large, since both
+the production cross-section with associated $b$-quarks and the
+branching fraction to $b\bar{b}$ benefit from the enhanced coupling.
+A low $\tan\beta$ search would be more suited for a $H/A\rightarrow t\bar{t}$
+final state, or for lower masses, $H\rightarrow hh$ or $A\rightarrow Zh$.
 
 
 An important and subtle point worth highlighting is that, while 
@@ -590,8 +596,12 @@ in this scenario, $m_h$ is predicted to
 be around 140 GeV, while the experimentally found value is known 
 to be around 126 GeV.  In order to reconcile these numbers, 
 the updated $m_h^{mod}$ scenario has become 
-the more useful benchmark, since it does allow for $m_h$=126 GeV.  
+the more useful benchmark, since it does allow for $m_h$=126 GeV. 
+There are two types of $m_h^{mod}$ scenarios, called $m_h^{mod+}$ and
+$m_h^{mod-}$, that differ by the sign of higher-order correction terms. 
 A comparison of the scenarios can be seen in Figures~\ref{fig:mh_max} and ~\ref{fig:mh_mod}.
+
+
 
 Other non-MSSM scenarios also have final states with a Higgs boson
 decaying to $b$-quarks and produced in association with $b$-quarks,
@@ -631,13 +641,12 @@ parameter $\mu$ is large, above several hundred GeV
     \item $B_s^0\rightarrow\mu\mu$ appears consistent with the Standard Model predictions,
 placing strong constraints on the possibility of nonstandard Higgs contributions
 to that decay at loop level \cite{bs_to_mumu}
-\end{itemize}
-
-Searches for the charged Higgs bosons, $H^+$ and $H^-$, also provide constraints.
-In the MSSM, $H^+$ and $H^-$ are very close to $H$ and $A$ in mass, so searches
+    \item In the MSSM, $H^+$ and $H^-$ are very close to $H$ and $A$ in mass, so searches
 for $H^\pm$ can constrain the likely MSSM phase space available for $H$ and $A$ (Figure~\ref{fig:susy_higgs_masses}).
-Outside of the MSSM, when some of the assumptions of the MSSM are be relaxed,
-it is still possible to have different masses for the heavy Higgs particles.
+    In practice, the mass regime probed by this analysis (400-800 GeV) is not
+    constrained by searches such as e.g.~\cite{charged_higgs_search}
+%Outside of the MSSM, when some of the assumptions of the MSSM are be relaxed,
+\end{itemize}
 
 
 \begin{figure}
