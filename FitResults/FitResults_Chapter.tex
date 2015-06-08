@@ -9,7 +9,7 @@
 Once the data has been sent through the trigger and cuts, it is still expected
 that a large number of QCD events will remain, in which there might be a (probably comparatively small)
 number of signal events.  The role of the fit is to mathematically describe
-the distribution of the $m_{bb}$ of all the remaining events, and to enable the
+the distribution of the $m_{bb}^{'}$ of all the remaining events, and to enable the
 possible extraction of a signal from the background.  
 
 This general strategy is possible because the signal events are coming from a 
@@ -18,13 +18,16 @@ falling spectrum owing to the fact that it comes from various QCD processes.
 That means that $H/A$, if they are present, will show up as a bump in the $m_{bb}$
 spectrum.  Using the signal MC, we define what we expect for the shape of
 the signal resonance (the normalization is given to us by nature, and 
-is a free parameter that must be extracted if the presence of signal is identified),
+is a free parameter that must be extracted, potentially with a value of zero
+indicating no sign of a signal-like excess found) 
 while the background fit is completely data-driven. The $m_{bb}^{'}$ distribution 
-is fit in the background-dominated $bbanti$ region, and then those shapes 
-are used as starting templates when fitting the background in the $bbb$ signal 
+is fit in the background-dominated $bbanti$ control region, and then those shapes 
+are used as templates when fitting the background in the $bbb$ signal 
 search region.  That templating process is tested in background MC to verify
-that it does not introduce any bias from the $m_{bb}^{'}$ shapes differing
-in the $bbb$ and $bbanti$ regions.
+that it does not introduce a major bias from the $m_{bb}^{'}$ shapes differing
+in the $bbb$ and $bbanti$ regions, and an extrapolation systematic uncertainty
+is added to account for any residual disagreements between the signal region
+and control region.
     
     
 %The $m_{bb}$ ranges above
@@ -37,8 +40,6 @@ in the $bbb$ and $bbanti$ regions.
 These fit results are then
 the ingredients for the limit-setting procedure, which is detailed in the next section.
 
-This chapter details the various categories that are used in the fit, and
-the parametric forms that are used to fit them.   
 
 \subsection{Fit Model and Categories}
 \label{subsec:fitmodel}
@@ -49,8 +50,8 @@ this, where there are several categories that can be defined and the
 search sensitivity varies depending on which category is being examined,
 it can benefit the overall search sensitivity to fit each category 
 separately and then combine them at the end.  While the parameteric form
-of the fit (for both signal and background) is the same in each category (histograms fit over the range
--50$<m_{bb}^{'}<$350 GeV, in bins of 40 GeV), the signal is fit separately
+of the fit (for both signal and background) is the same in each category (histograms fit over the ranges
+shown in Table~\ref{tab:mass_windows}), the signal is fit separately
 in each $n_{jets}$ and $b$-tag category.  The background is fit
 separately in bins of $n_{jets}$, but the shape is constrained to be the
 same in all $b$-tag categories for a given number of jets.  This constraint
@@ -65,7 +66,7 @@ function, defined as:
 \end{equation}
 where:
 \begin{itemize}
-\item the product is over the $b$-tag categories $l$, the n$_{jets}$ categores $k$, and over the events in each category $i$;
+\item the product is over the $b$-tag categories $l$, the $n_{jets}$ categories $k$, and over the events in each category $i$;
 \item $N_{S,l}$ and $N_{B,l}$ are the expected signal and background yield in each category;
 \item $PDF_{sig,l}(m_{bb})$ and $PDF_{bkg}(m_{bb})$ are the signal and background probability density functions for  the different categories;
 \item $\mu$ is a signal strength which multiplies the overall signal prediction.
@@ -73,8 +74,9 @@ where:
 
 
 The $b$-tag fit categories $l$ are the three exclusive categories to which events are assigned
-based on the $b$-tag value of the third-most $b$-jet-like jet in the event (the two most
-$b$-like jets have already been $b$-tagged in the trigger, and are assumed to be true
+based on the $b$-tag value of the third $b$-jet jet in the event (we call it
+the third $b$-jet because two
+$b$-jets have already been $b$-tagged in the trigger, and are assumed to be true
 $b$-jets).  These are the categories outline in Section~\ref{sec:background_strategy}: 
 \textit{bbb}, \textit{bbloose}, and \textit{bbanti}. 
 
@@ -94,12 +96,39 @@ An important cross-check is that the signal+background model returns the correct
 and, especially, signal yields that are present in the dataset that is being fit.
 We need to check both the zero-signal case, verifying that the signal yield found
 by the fit is consistent with zero, and a number of nonzero signal cross sections,
-checking that the cross-section found by the fit comes back bias-free. 
+checking that the cross-section found by the fit comes back with minimal or
+no bias.  The fit is checked by running toy MC simulations, where a signal
+of a given cross section is injected, a PDF\footnote{probability distribution function} is built out of the background
+plus signal, a dataset is generated using that PDF which is then re-fit with the 
+signal histogram.  We repeat this process 50 times for each signal mass point, 
+and record the pull in a histogram (where pull is defined as ($sig_{injected}-sig_{fit}$)/$\sigma_{stat, fit}$.
+For a bias-free fit, the pull histogram should have a mean of zero and an RMS of one.
 
-The zero-signal results are tabulated in Table~\ref{tab:spurious_signal}; the 
-signal yields returned by the fit are extremely close to zero (when restricting
-ourselves to 3 or fewer significant figures, they round to 0.0 for all mass points)
-with a statistical error that decreases with $m_A$.
+\begin{table}
+    \center
+    \caption{The mean and RMS of the pull histograms from running 50 toy MC
+    simulations per point of two mass points (450 and 700 GeV) and four signal cross sections
+    (0, 0.1, 1.0, and 10.0 pb).  To within the statistical error on the toy studies, which
+    is about 15\%, the toy MC studies do not point toward any major biases in the fitting process. \label{tab:pulls}}
+    \begin{tabular}{c c c}\hline \hline
+    mass point & cross section injected & pull mean/RMS \\
+    \hline
+    450 & 0 pb & 0.190$\pm$1.008 \\
+    450 & 0.1 pb & 0.012$\pm$0.9506 \\
+    450 & 1 pb & 0.059$\pm$0.9103 \\
+    450 & 10 pb & 0.016$\pm$1.028 \\
+    700 & 0 pb & 0.156$\pm$1.047 \\
+    700 & 0.1 pb & 0.008$\pm$1.108 \\
+    700 & 1 pb & -0.151$\pm$0.998 \\
+    700 & 10 pb & -0.104$\pm$1.093 \\
+    \hline
+    \end{tabular}
+\end{table}
+
+%The zero-signal results are tabulated in Table~\ref{tab:spurious_signal}; the 
+%signal yields returned by the fit are extremely close to zero (when restricting
+%ourselves to 3 or fewer significant figures, they round to 0.0 for all mass points)
+%with a statistical error that decreases with $m_A$.
 
 %that it could introduce bias in the form of spurious signal ($N_{sp}$), or signal that is 
 %not really ``there'' but is found by the signal+background fit anyway when fitting over the 
@@ -108,95 +137,58 @@ with a statistical error that decreases with $m_A$.
 %returns a signal yield that is consistent with zero.  Those results are tabulated
 %in Table~\ref{tab:spurious_signal}.
 
- 
+\section{Search Results} 
+
 \begin{table}
     \center
-    \caption{The signal cross sections (in pb) returned by the signal+background fit
-    to a background-only distribution
-    \label{tab:spurious_signal}}
+    \caption{The signal cross sections found by the fit to maximize
+    the overall likelihood across all tag and $n_{jets}$ categories, 
+    and the statistical error on the cross section. \label{tab:muReturned}} 
     \begin{tabular}{ c c } \hline \hline
-        $m_A$ & signal returned (pb) \\ \hline
-        400 GeV & 0.0$\pm$0.86 \\
-        450 GeV & 0.0$\pm$0.87 \\
-        500 GeV & 0.0$\pm$0.63 \\
-        550 GeV & 0.0$\pm$0.50 \\
-        600 GeV & 0.0$\pm$0.38 \\
-        650 GeV & 0.0$\pm$0.29 \\
-        700 GeV & 0.0$\pm$0.17 \\
-        800 GeV & 0.0$\pm$0.12 \\
-        \hline
+    mass point & $\sigma\times$ BR returned by fit \\ \hline
+    450 GeV & -0.216$\pm$0.988 \\
+    500 GeV & -0.165$\pm$0.596 \\
+    550 GeV & -0.0135$\pm$0.514 \\
+    600 GeV & -0.324$\pm$0.426 \\
+    650 GeV & -0.0394$\pm$0.356 \\
+    700 GeV & -0.0832$\pm$0.216 \\ 
+    800 GeV & -0.165$\pm$0.171 \\
     \end{tabular}
-\end{table} 
+\end{table}
 
 
-We similarly try injecting signals of various cross sections, to see if 
-the fit still returns the correct cross section when signal is present.
-\textbf{those tests are ongoing, but looking very encouraging.  Testing
-cross sections of 1-10 pb, we see biases of approx. 20\% but believe
-those come from an approximation in how some errors are computed.
-We are currently building an series of tests based on toy MC generation
-to verify that the fit is not, in fact, biased when the errors are
-treated correctly, which they would be in data and also toy MC. Once
-those tests are complete, we'll tabulate them here. }
-
-
-Some example results of these fits, with injected signals of 0, 3, and 10 pb, can 
-be seen for 450 GeV and 700 GeV mass points in Figures~\ref{fig:signal_injection_450}
-and ~\ref{fig:signal_injection_700}.
-
-
-\begin{figure}[hbt]
+\begin{table}
     \center
-    \includegraphics[width=0.3\linewidth]{FitResults/images/fitData_bAbb_450_log_3jets_bbb_hipt_0sig.eps}
-    \includegraphics[width=0.3\linewidth]{FitResults/images/fitData_bAbb_450_log_3jets_bbb_hipt_3sig.eps}
-    \includegraphics[width=0.3\linewidth]{FitResults/images/fitData_bAbb_450_log_3jets_bbb_hipt_10sig.eps}
-    \caption{Examples of a signal+background fit when looking for a 450 GeV Higgs boson,
-    when signal events are injected with a cross section $\times$ branching ratio of 0, 3, and 10 pb.
-    The ``data'', including background and injected signal, is the data points with the error bars,
-    while the background component of the fit is visible in orange and the signal component of fit
-    is the blue histogram.  The bin-by-bin pull plots compare the background-only fit to the ``data''
-    distribution. \textbf{known bug with the error bars on the signal fit, so errors on the pulls aren't
-    to be trusted right now}
-    \label{fig:signal_injection_450}}
-\end{figure}
+    \caption{\label{tab:Slopes_bbb}}
+    \begin{tabular}{ c c c c } \hline \hline
+        mass point & 3 jets $bbb$ & 4 jets $bbb$ & 5+ jets $bbb$ \\ \hline
+        450 GeV & -1.93e-2$\pm$2.75e-02 & 4.66e-02 $\pm$ 2.45e-02 & 4.96e-02$\pm$2.53e-02 \\
+        500 GeV & 4.25e-4$\pm$2.89e-02 & 5.58e-02$\pm$2.53e-02 & 9.38e-02$\pm$2.59e-02 \\
+        550 GeV & 1.47e-02$\pm$3.17e-02 & 6.97e-02$\pm$2.66e-02 & 1.13e-01$\pm$2.57e-02 \\
+        600 GeV & 5.05e-02$\pm$3.95e-02 & 7.62e-02$\pm$3.33e-02 & 1.16e-01$\pm$3.03e-02 \\
+        650 GeV & 6.04e-02$\pm$4.14e-02 & 6.75e-02$\pm$3.52e-02 & 1.16e-01$\pm$3.03e-02 \\
+        700 GeV & 1.08e-01$\pm$3.97e-02 & 5.93e-02$\pm$3.60e-02 & 1.10e-01$\pm$3.03e-02 \\
+        800 GeV & 3.22e-01$\pm$3.79e-02 & 5.08e-01$\pm$2.19e-02 & 6.84e-01$\pm$1.41e-02 \\
+    \end{tabular}
+\end{table}
 
-\begin{figure}[hbt]
+
+
+
+\begin{table}
     \center
-    \includegraphics[width=0.3\linewidth]{FitResults/images/fitData_bAbb_700_log_3jets_bbb_hipt_0sig.eps}
-    \includegraphics[width=0.3\linewidth]{FitResults/images/fitData_bAbb_700_log_3jets_bbb_hipt_3sig.eps}
-    \includegraphics[width=0.3\linewidth]{FitResults/images/fitData_bAbb_700_log_3jets_bbb_hipt_10sig.eps}
-    \caption{Examples of a signal+background fit when looking for a 700 GeV Higgs boson,
-    when signal events are injected with a cross section $\times$ branching ratio of 0, 3, and 10 pb.
-    The ``data'', including background and injected signal, is the data points with the error bars,
-    while the background component of the fit is visible in orange and the signal component of fit
-    is the blue histogram.  The bin-by-bin pull plots compare the background-only fit to the ``data''
-    distribution. \textbf{known bug with the error bars on the signal fit, so errors on the pulls aren't
-    to be trusted right now}
-    \label{fig:signal_injection_700}}
-\end{figure}
-
-
-%\begin{table}
-%    \center
-%    \caption{The best-fit parameter values for the 2-parameter exponential background
-%    function, of the form $f(x)=e^{-x/\tau+\omega x^2}$, for the each of the 9 
-%    fit categories (3 tag categories times 3 jet categories).  
-%    \label{tab:bkgFit}}
-%    \begin{tabular}{ c p{3cm} p{3cm} } \hline \hline
-%        category & 1-parameter exponential $\chi^2/DOF$ & 2-parameter exponential $\chi^2/DOF$ \\ \hline
-%        \textit{bbb} 3 jet & 1.5 & 1.1 \\
-%        \textit{bbb} 4 jet & 0.9  & 0.7 \\
-%        \textit{bbb} 5+ jet & 0.9  & 0.7 \\
-%        \textit{bbloose} 3 jet & 0.8 & 0.6 \\
-%        \textit{bbloose} 4 jet & 1.2 & 0.7 \\
-%        \textit{bbloose} 5+ jet & 1.5 & 1.1 \\
-%        \textit{bbanti} 3 jet & 3.9 & 1.0 \\
-%        \textit{bbanti} 4 jet & 3.9 & 1.2 \\
-%        \textit{bbanti} 5+ jet & 2.8 & 1.2 \\
-%        \hline
-%    \end{tabular}
-%\end{table} 
-
+    \caption{\label{tab:Slopes_bbloose}}
+    \begin{tabular}{ c c c c } \hline \hline
+        mass point & 3 jets $bbb$ & 4 jets $bbb$ & 5+ jets $bbb$ \\ \hline
+        450 GeV & 2.04e-03$\pm$3.13e-02 & 1.90e-02$\pm$2.98e-02 & -4.85e-02$\pm$3.23e-02 \\
+        500 GeV & -1.88e-02$\pm$3.40e-02 & 2.08e-02$\pm$3.05e-02 & -5.17e-02$\pm$3.53e-02 \\
+        550 GeV & -2.83e-02$\pm$3.78e-02 & 1.34e-02$\pm$3.30e-02 & -4.93e-02$\pm$3.59e-02 \\
+        600 GeV & 3.50e-02$\pm$4.64e-02 & -3.47e-02$\pm$4.34e-02 & -1.08e-02$\pm$4.08e-02 \\
+        650 GeV & 4.50e-02$\pm$4.84e-02 & -1.94e-02$\pm$4.54e-02 & -1.06e-02$\pm$4.12e-02 \\
+        700 GeV & 5.97e-03$\pm$5.21e-02 & -3.08e-02$\pm$4.67e-02 & -1.25e-02$\pm$4.11e-02 \\
+        800 GeV & 1.10e-01$\pm$5.88e-02 & 3.34e-01$\pm$3.85e-02 & 8.62e-01$\pm$8.07e-03 \\
+    \end{tabular}
+\end{table}
 
 
 
@@ -215,7 +207,9 @@ the limit setting procedure proceeds as follows.  The fits are used to generate
 an ensemble of toy MC datasets
 that are combined into a single representative dataset, called the ``Asimov
 dataset'' for that distribution.  Then 
-in order to obtain the nominal fit result in terms of $\mu$ and $\sigma_{\mu}$
+in order to obtain the nominal fit result in terms of $\mu$\footnote{$\mu$ is the 
+parameter of interest, in this case the signal cross section} and $\sigma_{\mu}$,\footnote{$\sigma_{\mu}$
+is the uncertainty on $\mu$}
 the likelihood function is maximized with respect to all parameters.
 This is referred to as the maximized log-likelihood value MLL.
 The test statistic $q_\mu$ is then constructed according to
@@ -229,30 +223,32 @@ $\hat{\mu}$ and $\hat{\theta}$ are the parameters that maximize the
 likelihood (with the constraint $0 \leq \hat{\mu} \leq \mu$), and
 $\hat{\hat{\theta}}_\mu$ are the nuisance parameter values that maximize the
 likelihood for a given $\mu$. This test statistic is used to measure
-the compatibility of the background only model with the observed
+the compatibility of the background-only model with the observed
 data. 
 
-Expected exlusion limits following this procedure are shown in Fig.~\ref{fig:limitSensitivity} and Table
-~\ref{tab:limitSensitivity}. %These are obtained under the assumption that
+Expected and observed exclusion limits following this procedure are shown in Fig.~\ref{fig:limitSensitivity} and Table
+~\ref{tab:limitSensitivity}. The signal cross sections that were found by the fit to maximize
+the global likelihood are compiled in Table~\ref{tab:muReturned}.
+
+
+
+%These are obtained under the assumption that
 % a good estimate of the background parameters is given by the fit values reported in Table~\ref{tab:bkgFit}. 
-\textbf{these are preliminary plots, which will change a bit as the 
-systematics get more fully integrated into the fits}
+%\textbf{these are preliminary plots, which will change a bit as the %systematics get more fully integrated into the fits}
 
 \begin{table}
-    \center
-    \caption{The expected production cross sections times branching ratios
+    \caption{The expected and observed production cross sections times branching ratios
         to be excluded at 95\% CL, along with the 1-sigma and 2-sigma statistical uncertainties 
     \label{tab:limitSensitivity}}
-    \begin{tabular}{ c c c c c c } \hline \hline
-        mass point & expected limit (pb) & -2$\sigma$ & -1$\sigma$ & +1$\sigma$ & +2$\sigma$ \\ \hline 
-        400 GeV & 1.68 & 0.92 & 1.21 & 2.33 & 3.13 \\
-        450 GeV & 1.79 & 0.96 & 1.29 & 2.48 & 3.33 \\
-        500 GeV & 1.30 & 0.69 & 0.93 & 1.81 & 2.42 \\
-        550 GeV & 0.97 & 0.53 & 0.70 & 1.36 & 1.82 \\
-        600 GeV & 0.75 & 0.40 & 0.54 & 1.03 & 1.39 \\
-        650 GeV & 0.57 & 0.30 & 0.41 & 0.79 & 1.05 \\
-        700 GeV & 0.49 & 0.27 & 0.36 & 0.69 & 0.92 \\
-        800 GeV & 0.37 & 0.20 & 0.27 & 0.51 & 0.69 \\
+    \begin{tabular}{ c p{3.5cm} p{3.5cm} c c  } \hline \hline
+        mass point & expected limit (pb) & observed limit (pb) & stat error [pb] & syst error [pb] \\ \hline 
+        450 GeV & 1.910 & 1.797 & 0.92 & 0.21  \\
+        500 GeV & 1.105 & 1.097 & 0.50 & 0.09  \\
+        550 GeV & 0.910 & 0.990 & 0.34 & 0.21 \\
+        600 GeV & 0.767 & 1.114 & 0.27 & 0.25 \\
+        650 GeV & 0.588 & 0.659 & 0.19 & 0.19 \\
+        700 GeV & 0.505 & 0.406 & 0.13 & 0.17 \\
+        800 GeV & 0.335 & 0.250 & 0.10 & 0.10 \\
 
 
 %        \textit{bbb} 3 jet & 1.5 & 1.1 \\
@@ -271,11 +267,26 @@ systematics get more fully integrated into the fits}
 
 
 
+
+
+
+
 \begin{figure}[hbt]
 \center
 \includegraphics[width=0.9\linewidth]{FitResults/SMHiggs_ZH_v62.eps}
-\caption{The expected 95\% excluded $\sigma\times$BR as a function of $m_A$, 
-for 400$<m_A<$800 GeV.
+\caption{The expected 95\% excluded $(H+A)$ $\sigma\times$BR as a function of $m_A$, 
+for 450$<m_A<$800 GeV.
 \label{fig:limitSensitivity}}
 \end{figure}
+
+
+
+
+
+
+
+
+
+
+
 

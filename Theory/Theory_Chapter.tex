@@ -26,7 +26,10 @@ science, and it has yet to give a prediction that is not experimentally borne
 out--an impressive feat.  At the same time, there are known blind 
 spots in the Standard Model, since it does not include gravity, explain dark 
 matter or dark energy, or account for the origin of the baryon asymmetry of the universe
-\footnote{in other words, why the universe is made of matter instead of antimatter}.   The shortcomings of the 
+\footnote{in other words, why the universe contains more matter than antimatter--
+the question is not why the universe \textit{isn't} made of antimatter, but why matter and antimatter
+do not exist in equal proportion (if they did, there would not be much of either, as they 
+annihilate when brought into contact)}. The shortcomings of the 
 Standard Model motivate searches for Beyond-Standard-Model (BSM) physics, including Supersymmetry (SUSY).  
 
 
@@ -169,10 +172,14 @@ Standard Model} transforms according to
 A_\mu \rightarrow A_\mu + \partial_\mu\theta
 \end{equation}
 
-and using $F^{\mu\nu}\equiv \partial_\nu A_\mu - \partial_\mu A_\nu$, the Lagrangian
+Similarly, we can study the Lagrangian for a charged scalar field coupled to electromagnetism.
+Using $F^{\mu\nu}\equiv \partial_\nu A_\mu - \partial_\mu A_\nu$, the Lagrangian\footnote{this is 
+the Lagrangian of quantum electrodynamics, a spin-0 field that is covered by the Klein-Gordon
+Lagrangian rather than the Dirac Lagrangian}
 to analyze is 
 
 \begin{equation}
+\label{eq:QED_lagrangian}
 \mathscr{L} = [(\partial_\mu - iqA_\mu)\phi^{\dagger}][(\partial^\mu + iqA^\mu)\phi] - V(\phi^{\dagger}\phi) - \frac{1}{4}F^{\mu\nu}F_{\mu\nu}
 \end{equation}
 
@@ -194,13 +201,14 @@ to analyze is
 The functional form of the potential $V(\phi)$ is now worth exploring.
 Consider the ``Mexican Hat'' potential of the form $V(\phi^{\dagger}\phi)=\mu^2(\phi^\dagger\phi)+\lambda(\phi^\dagger\phi)^2$, with $\mu^2<$0 and $\lambda>$0. In this case, the minimum of the potential
 does not occur when $\phi$=0, but rather when $|\phi|^2=\mu^2/2\lambda$.
-There are a continua of solutions at this minimum potential, analagous to 
+There are a continua of solutions at this minimum potential, analogous to 
 the way that a marble in the brim of a Mexican hat can roll in a circle;
-this degree of freedom corresponds to a (massless) Goldstone boson.
-Three more degrees of freedom
+this degree of freedom corresponds to a (massless) Goldstone boson~\cite{broken_symmetries}.
+In the generalization of Equation~\ref{eq:QED_lagrangian} to the electroweak
+theory with four gauge fields (gauge group SU(2)$\times$U(1)), three degrees of freedom
 are ``eaten'' by the massive $W^\pm$ and $Z$ upon gauge transformations on $\phi$ 
-and the gauge fields of the Lagrangian\footnote{for a nice explanation of this
-process, see e.g.\cite{ellis}}.
+and the gauge fields of the Lagrangian\cite{glashow}\footnote{for a nice explanation of this
+process, see e.g.\cite{ellis}}.  The photon remains massless.
 
 The gauge transformation that leads to masses for $W^\pm$ and $Z$ also ``rotates
 away'' the Goldstone boson associated with the extra degree of freedom, which
@@ -252,8 +260,10 @@ which it interacts with via the Yukawa couplings.
     \caption{The radiative corrections to the Higgs mass can be seen
     in these Feynman diagrams, with a fermionic correction to the mass shown on the left and 
     the correction from a scalar particle on the right.  One problem with the bare Standard Model
-    is that corrections such as these need to cancel to an incredible
-    degree of precision, one part in $10^{30}$, to allow the Higgs to have a mass of 126 GeV. \cite{martin}
+    is that if it is valid up to the Planck scale, $10^{17}$ GeV,  
+    corrections such as these need to cancel to an incredible
+    degree of precision, one part in $10^{30}$, to allow the Higgs to have a mass of 126 GeV. 
+    This suggests to us that new physics at sub-Planck-scale energies might be well-motivated.\cite{martin}
     \label{fig:higgs_mass_corrections}}
     \end{figure}
 \end{centering}
@@ -291,13 +301,14 @@ has a SUSY boson.  These SUSY particles would also couple to the Higgs,
 and introduce additional terms to the mass, namely
 
 \begin{equation}
-	\delta m_H^2 = \frac{|\lambda_s |^2}{16\pi^2}[\Lambda_{UV}^2-2m_s^2ln(\Lambda_{UV}/m_s)+\ldots]
+	\delta m_H^2 = \frac{|\lambda_S |^2}{16\pi^2}[\Lambda_{UV}^2-2m_s^2ln(\Lambda_{UV}/m_s)+\ldots]
 \end{equation}
 
 The ultraviolet cutoff $\Lambda_{UV}$ enters again here, this time with 
-the opposite sign.  If $\lambda_s = 2\lambda_f$, which is the relationship 
+the opposite sign.  $\lambda_S$ is the quartic coupling of the Higgs boson
+to a generic scalar $S$.  If $\lambda_S = \sqrt{2}\lambda_f$, which is the relationship 
 imposed by SUSY, then the terms proportional to $\Lambda_{UV}$ cancel and the
-mass divergence is averted.
+mass divergence is averted\cite{ellis,martin}.
 
 If the scalar particle in Figure 1.1(b) is the superpartner of the fermion in 1.1(a),
 the Yukawa couplings $\lambda_s$ and $\lambda_f$ could quite elegantly have very 
@@ -310,7 +321,7 @@ have seen the SUSY particles already--they would have been produced at experimen
 at the Tevatron and LEP, to say nothing of the LHC.
 The lack of SUSY particles with the same masses as their SM counterparts 
 leads us to say that supersymmetry is ``broken'' (in the sense 
-that is is not a symmetry of the vacuum, not in the sense that 
+that it is not a symmetry of the vacuum, not in the sense that 
 it does not hold theoretically).  When we consider broken supersymmetric theories, the 
 masses of the SUSY particles can become large, and indeed the mass limits for 
 SUSY particles now require that most of them are at least several hundred GeV, up 
@@ -322,14 +333,14 @@ phase space below a few TeV, it becomes harder to find SUSY scenarios that
 elegantly solve the hierarchy problem and SUSY becomes less appealing in that sense. 
 
 SUSY has additional motivations, however.  Another appealing feature of SUSY is that it 
-changes the logartihmic evolution of the coupling constants of the three SM forces.  At very high energies the 
+changes the logarithmic evolution of the coupling constants of the three SM forces.  At very high energies the 
 coupling constants come close to the same value, but do not quite match up, 
 a theoretically unsatisfying fact that SUSY addresses.  When SUSY enters the picture, the 
 running values of the coupling constants change such that they unify at a high energy scale.
 
 \begin{figure}
     \center
-	\includegraphics[width=0.8\textwidth,angle=270]{Theory/figures/kazakov_coupling.pdf}
+	\includegraphics[width=\textwidth]{Theory/figures/kazakov_coupling.pdf}
     \caption{The coupling constants for the three fundamental forces of the Standard Model, as a 
     function of energy.  On the left, the coupling constants almost unify 
     (but don't quite meet) in the SM-only framework, 
@@ -351,7 +362,7 @@ which can be heavy, and thus provide the gravitational interaction of dark matte
 At the same time, most SUSY scenarios preserve a quantity called R-parity, 
 which effectively means that the lightest supersymmetric particle is stable and thus 
 would not decay away to Standard Model particles, nor interact via the strong or 
-weak force.  Additionally, the supersymmetric dark matter particles can be ``thermal
+electromagnetic force.  Additionally, the supersymmetric dark matter particles can be ``thermal
 relics,'' meaning their annihilation in the early universe stops at about the right
 point to give them the mass density that we see in the astronomical dark matter.
 In short, the neutralinos of supersymmetry are candidates for dark matter, 
@@ -367,7 +378,7 @@ impossible, to probe all the SUSY phase space.  Phenomenologists address this pr
 a number of ways, the most important of which for this thesis is the 
 proposal of the MSSM, or Minimally Supersymmetric Standard Model.  The MSSM makes a 
 number of assumptions about the SUSY parameters and their relationships so as to constrain the 
-number of free parameters to 5\footnote{fully unconstrained SUSY has 119 free parameters; for
+number of free parameters to 119\footnote{in
 contrast, the Standard Model has 19}.  
 
 % https://indico.cern.ch/getFile.py/access?contribId=4&resId=1&materialId=slides&confId=282042
@@ -412,7 +423,7 @@ constrains their sum, the ratio of the two values is a free parameter of
 the system and is denoted by $\tan\beta$:
 
 \begin{equation}
-	\tan(\beta) = \frac{v_d}{v_u} = \frac{v_2}{v_1}
+	\tan(\beta) = \frac{v_u}{v_d} = \frac{v_1}{v_2}
 \end{equation}
 
 
@@ -475,7 +486,7 @@ there are several general trends that emerge when one examines the parameters $m
         can treat them as one particle with $\sigma \times BR$ twice 
         that of $H$ or $A$ individually (Figures~\ref{fig:xsec_vs_mass},
         ~\ref{fig:br_vs_mass},~\ref{fig:width},~\ref{fig:TB_width})
-	\item The inherent width of $H$ and $A$ increase as with $m_A$ and $\tan\beta$ (Figures~\ref{fig:width},~\ref{fig:TB_width})
+	\item The intrinsic width of $H$ and $A$ increase as with $m_A$ and $\tan\beta$ (Figures~\ref{fig:width},~\ref{fig:TB_width})
 \end{itemize}
 
 
@@ -487,8 +498,10 @@ there are several general trends that emerge when one examines the parameters $m
 	\centering
 	\includegraphics[width=0.8\textwidth]{Theory/figures/mssm_xsec/AH_xsec_vs_mass.pdf}
 	\caption{The cross section for $b$-quark associated production for
-    $A$, $H$ and $h$ as a function of $m_A$ for several different values of $\tan\beta$ (denoted ``tb'' in the legend). 
+    $A$, $H$ and $h$ in proton-proton collisions at $\sqrt{s}=$8 TeV 
+    as a function of $m_A$ for several different values of $\tan\beta$ (denoted ``tb'' in the legend). 
     Figures made using FeynHiggs \cite{feynhiggs_1, feynhiggs_2, feynhiggs_3, feynhiggs_4, feynhiggs_5}.
+    There are no additional cuts on the associated $b$-quark $p_T$ beyond the default cuts in FeynHiggs.
     \label{fig:xsec_vs_mass} }
 \end{figure}
 
@@ -511,9 +524,9 @@ there are several general trends that emerge when one examines the parameters $m
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\textwidth]{Theory/figures/gamma.pdf}
-	\caption{The inherent width of $A$, $H$, and $h$ 
+	\caption{The intrinsic width of $A$, $H$, and $h$ 
     as a function of $m_A$ for tan$\beta$=20 in the $m_h^{max}$ scenario.  
-    In practice, the inherent width of the particle is dwarfed by the experimental 
+    In practice, the intrinsic width of the particle is dwarfed by the experimental 
     resolution, which can be up to hundreds of GeV.  
     Figures made using FeynHiggs \cite{feynhiggs_1, feynhiggs_2, feynhiggs_3, feynhiggs_4, feynhiggs_5}. \label{fig:width}}
 \end{figure}
@@ -523,7 +536,8 @@ there are several general trends that emerge when one examines the parameters $m
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\textwidth]{Theory/figures/TB_gamma.pdf}
-	\caption{The inherent width of $A$, $H$, and $h$ as a function of tan$\beta$ in the $m_h^{max}$ scenario when $m_A$=500 GeV. 
+	\caption{The intrinsic width of $A$ and $H$ as a function of 
+    tan$\beta$ in the $m_h^{max}$ scenario when $m_A$=500 GeV. 
     Figure made using FeynHiggs \cite{feynhiggs_1, feynhiggs_2, feynhiggs_3, feynhiggs_4, feynhiggs_5}. \label{fig:TB_width}}
 \end{figure}
 %-------------------------------------------------
@@ -542,12 +556,12 @@ there are several general trends that emerge when one examines the parameters $m
 	\includegraphics[width=\textwidth]{Theory/figures/mh_mod.pdf}
 	\caption{The favored (green) and excluded (red/blue) regions in 
     $m_A/tan\beta$ in the $m_h^{mod}$ scenario, where the green 
-    region shows the phase space that is consistent with $m_h$=126 GeV.  
+    region shows the parameter space that is consistent with $m_h$=126 GeV.  
     After the discovery of $h$ at 126 GeV, the $m_h^{mod}$ 
     scenario is favored because it allows for $m_h$ to have 
     this relatively low value ($m_n^{max}$, on the other 
     hand, pushes $m_h$ more toward 140 GeV).  The 
-    left and right plots show the topology for $m_h^{mod+}$ 
+    left and right plots show the parameter space for $m_h^{mod+}$ 
     and $m_h^{mod-}$, respectively, the details of which 
     can be found in \cite{Carena-2}. Clearly in this 
     scenario, many values of $m_A$ are open, potentially with large cross-sections. \label{fig:mh_mod}}
@@ -599,7 +613,7 @@ the updated $m_h^{mod}$ scenario has become
 the more useful benchmark, since it does allow for $m_h$=126 GeV. 
 There are two types of $m_h^{mod}$ scenarios, called $m_h^{mod+}$ and
 $m_h^{mod-}$, that differ by the sign of higher-order correction terms. 
-A comparison of the scenarios can be seen in Figures~\ref{fig:mh_max} and ~\ref{fig:mh_mod}.
+%A comparison of the scenarios can be seen in Figures~\ref{fig:mh_max} and ~\ref{fig:mh_mod}.
 
 
 
@@ -620,8 +634,8 @@ femtobarns at the LHC \cite{Gori}.
 The discovery in July 2012 of an SM-like Higgs boson provides important constraints of the MSSM Higgs sector,
  but leaves other aspects of the theory tantalizingly unconstrained.  On the one hand, 
 for many values of $m_h$, measuring the exact value of $m_h$ 
-places a strong constraint on $m_A$--so once $h$ is found, one may have a good idea of what the mass of 
-$A$ is, assuming the latter exists.  An important exception is when 
+places a strong constraint on $m_A$.
+ An important exception is when 
 $m_A$ is much larger than the mass of the SM Higgs 
 boson $m_h$, which is called the decoupling limit, where the 
 properties of $h$ are unaffected by the existence of $H/A$.
@@ -632,18 +646,18 @@ or so (recall that the mass of the discovered particle is about 126 GeV),
  Higgs sector from a number of directions: 
 
 \begin{itemize}
-    \item Decays of $H/A$ to charginos and neutralinos only occur when kinematically 
-allowed--the lack of evidence for these particles (the chargino and neutralino) below several hundred GeV suggests
-that in our search region for $H/A$ (which tops out at 800 GeV) there should be little
-effect from supersymmetric decays
-    \item The chargino and neutralino mass limits also suggest that the higgsino mass
+%    \item Decays of $H/A$ to charginos and neutralinos only occur when kinematically 
+%allowed--the lack of evidence for these particles (the chargino and neutralino) below several hundred GeV suggests
+%that in our search region for $H/A$ (which tops out at 800 GeV) there should be little
+%effect from supersymmetric decays
+    \item The chargino and neutralino mass limits suggest that the higgsino mass
 parameter $\mu$ is large, above several hundred GeV
     \item $B_s^0\rightarrow\mu\mu$ appears consistent with the Standard Model predictions,
 placing strong constraints on the possibility of nonstandard Higgs contributions
 to that decay at loop level \cite{bs_to_mumu}
     \item In the MSSM, $H^+$ and $H^-$ are very close to $H$ and $A$ in mass, so searches
 for $H^\pm$ can constrain the likely MSSM phase space available for $H$ and $A$ (Figure~\ref{fig:susy_higgs_masses}).
-    In practice, the mass regime probed by this analysis (400-800 GeV) is not
+    In practice, the mass regime probed by this analysis (450-800 GeV) is not
     constrained by searches such as e.g.~\cite{charged_higgs_search}
 %Outside of the MSSM, when some of the assumptions of the MSSM are be relaxed,
 \end{itemize}
@@ -665,13 +679,13 @@ for $H^\pm$ can constrain the likely MSSM phase space available for $H$ and $A$ 
 \section{From Beautiful Theory to Messy Experiment}
 
 It is the experimentalist's job to understand what all this theoretical physics actually 
-looks like it the detector.  This is a deep topic, and one could 
+looks like in the detector.  This is a deep topic, and one could 
 go into great detail, but a few key trends are outlined here.
 
 First, as we've implied throughout this section, many of the particles 
 for which a physicist searches cannot be seen directly--they live for a fraction 
 of a second, and then decay into other particles.  Those daughter particles often 
-decay themselves, and so on into a  multi-step decay chain.  Only 
+decay themselves, and so on, in a multi-step decay chain.  Only 
 the particles from the last stage in this chain actually get detected, so part 
 of the physicist's job is to reconstruct the original particle(s) 
 from the daughter particles.  Once the daughter particles are identified, all that is 
@@ -687,11 +701,11 @@ and gluons hadronize and shower.  A spray of particles, largely pions, show
 up in the detector in the general direction of the original parent quark or gluon
 --if all the shower particles could be collected, they could be recombined into 
 the parent particle.  These showers of particles are called jets, and are often 
-named after the parent particle, such as $b$-jets, light jets 
+named after the parent particle, such as $b$-jets, light-quark jets 
 and gluon jets.  The topic of jet reconstruction is detailed further in Section~\ref{sec:jet_reco}.  
 Photons and electrons shower as well, but they generate much narrower electromagnetic showers that 
 are easy to identify and reconstruct, when compared to most QCD showers.  Muons 
-have the cleanest signature of all; because of their large mass, they don't 
+have the cleanest signature of all; they are relatively long-lived and do not 
 decay before exiting the detector, so they generally make a single charged track that 
 is distinctive in the dedicated muon layers of the detector.
 
@@ -700,10 +714,10 @@ or transverse momentum.  Since the initial state of each collision involves two 
 which are composite particles, it is impossible to know the exact longitudinal momentum of 
 two quarks when they collide.  However, the transverse momentum is zero, so 
 in the final state, the transverse momentum must also sum to zero.  When 
-heavy particles are created and then decay, or have other particles deflecting off of 
+heavy particles are created and then decay, or have other particles deflecting off 
 them, the $p_T$ of the resulting particles can be tens 
 to hundreds of GeV, which creates a striking signal in the detector and provides 
-an experiment handle when trying to understand the event.
+an experimental handle when trying to understand the event.
 
 The main challenges of this particular search arise from several kinematic features. 
 First, the final state is all-hadronic, where reconstruction is difficult and 
@@ -726,8 +740,8 @@ when searching over approximately 5 $fb^{-1}$ of data at $\sqrt{s}$=7 TeV \cite{
 
 This analysis serves as an important update and extension of the searches done
 in other experiments.  Due to differences in the triggers for these analyses,
-the ATLAS search does not have access to $m_A$ values below 400 GeV, but it does 
-provide the first limits between 400-800 GeV.  This analysis is also the only
+the ATLAS search does not have access to $m_A$ values below 450 GeV, but it does 
+provide the first limits between 450-800 GeV.  This analysis is also the only
 search at $\sqrt{s}$=8 TeV, and searches over an integrated luminosity (19.5 $fb^{-1}$)
 that is about 4 times higher than the next largest search, done at CMS.
 

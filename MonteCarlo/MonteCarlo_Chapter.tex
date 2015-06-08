@@ -106,8 +106,8 @@ for experimental detection in this analysis, and perturbativity starts to break
 down for such large values of $\tan\beta$.
 Since both the production and decay of $bH\rightarrow b\bar{b}b$ 
 happen via SM interactions, with SUSY only becoming relevant for increasing the production cross section and 
-widening the inherent width of the $A/H$ distributions, the signal generation can 
-be done by using an SM $bH\rightarrow b\bar{b}bb$ production model but with a 
+widening the intrinsic width of the $A/H$ distributions, the signal generation can 
+be done by using an SM $bH\rightarrow b\bar{b}b$ production model but with a 
 modified $Hb\bar{b}$ coupling and Higgs width.  There are 300,000 signal events generated for each mass point.
 
 % ATF-II source: http://iopscience.iop.org/1742-6596/396/2/022031
@@ -201,7 +201,7 @@ the initial production, although
 an exchange with the Sherpa authors\footnote{most notably Stefan H\"{o}che and Steffen 
 Schumann, who we thank for their helpful advice throughout this analysis} provided 
 a patch that enabled $gg\rightarrow H$ diagrams.  To understand
-if the absence $gg\rightarrow H$ diagrams in Sherpa were responsible for the disagreement
+if the absence of $gg\rightarrow H$ diagrams in Sherpa was responsible for the disagreement
 with MadGraph, we generated samples of MadGraph events with and without the $gg\rightarrow H$
 diagrams and compared the $p_T$ and $\eta$ of the Higgs system (Figure ~\ref{fig:ggH}).
 The Higgs $p_T$ and $\eta$ do not show a bias depending on whether the gluon diagrams
@@ -245,7 +245,7 @@ expected to be significant but generally require different MC generation strateg
 
 
 \subsubsection{QCD Multijet}
-The ATLAS QCD multijet MC collection is dataset is generated using Pythia8 \cite{Pythia8}.  
+The ATLAS QCD multijet MC dataset is generated using Pythia8 \cite{Pythia8}.  
 One of the major challenges of a truly inclusive sample like this one is that 
 low-$p_T$ jets dominate the production cross section but generally have 
 very low efficiency through the triggers or analysis cut flows, which is addressed by 
@@ -258,7 +258,7 @@ relative weights to produce an inclusive spectrum with high statistics at all $p
 \begin{table}[h]
  \begin{center}
 \caption{Hard subprocesses simulated in the inclusive QCD MC event sample, along with their cross sections. Here
-$j=u,\bar{u},d,\bar{d},s,\bar{s},c\bar{c},g$.  The QCD slices are defined by the $p_T$ cut placed
+$j=u,\bar{u},d,\bar{d},s,\bar{s},c,\bar{c},g$.  The QCD slices are defined by the $p_T$ cut placed
 on the leading jet in the event, which is documented in the ``$p_T$ range'' column.  The dataset
 ID is noted as a reference for internal ATLAS bookkeeping.
 \label{tab:qcd_mc_parameters}}
@@ -398,7 +398,8 @@ $bb\rightarrow bb\ \ +\ \  \bar{b}\bar{b}\rightarrow \bar{b} \bar{b}$ & 30 \cr
 %---------------------------------------
 
 
-The kinematics of the leading three jets are compared between data and bb QCD MC simulations in 
+The kinematics of the leading three jets are compared between 19.5 fb$^{-1}$ of 8 TeV 
+ATLAS data and bb QCD MC simulations (scaled to the same luminosity as data) in 
 Figures~\ref{fig:bb_qcd_mc_pt0}-~\ref{fig:bb_qcd_mc_eta2}.  The kinematics are
 generally in good (but not perfect) agreement, with the notable exception of the
 $p_T$ distribution of the second leading jet in the \textit{bbb} 3-jet category.

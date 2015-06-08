@@ -20,7 +20,7 @@ distribution then come into play in a few major ways:
     turned into a type of background if the associated $b$-jet is 
     chosen when reconstructing the Higgs; unfortunately these combinatorial mistakes can arise easily when 
     there are 3 $b$-jets but only two jets being used for reconstruction.
-    \item Mass Resolution: The Higgs resonance width depends on $m_A$/tan$\beta$, with inherent widths
+    \item Mass Resolution: The Higgs resonance width depends on $m_A$/tan$\beta$, with intrinsic widths
 of up to a few tens of GeV; however, if energy is lost to FSR, the resonance can be much wider and this makes
 the signal much more difficult to distinguish from the background.
     \item Eigenvector Rotation: In signal events, especially those with low FSR and good mass resolution,
@@ -116,7 +116,7 @@ the leading two jets overall--for example, there can be a very hard light jet, a
 jets are the second and third jets in $p_T$.  When we introduce a cut that eliminates these events,                                 
 by requiring that the leading two jets in the event be $b$-tagged, both the signal to background                                      
 ratio improves (this cut is about 25\% efficient in background, and over 90\% efficient                                             
-in signal) and the mass resolution is improved in signal as the events that rejected have                                           
+in signal) and the mass resolution is improved in signal as the events that are rejected have                                           
 hard FSR present and the reconstructed $m_{bb}$ is far from the generated $m_A$.    
 
 %The first strategy for recovering mass resolution is to require, as part of the cut flow,
@@ -142,13 +142,14 @@ definition can be seen in Figure~\ref{fig:shoulders}, for a low-mass and high-ma
 The right shoulder is much narrower,
 and any events in the high-mass tail (above the generated value for $m_A$) arise from 
 combinatorial mis-reconstructions.  The left shoulder, where FSR and combinatorics are
-at play, is significantly wider but improved by 40\% (at $m_A$=800 GeV) to 300\% (at $m_A$=250 GeV)
+at play, is significantly wider but the metric of left shoulder width in GeV shows a decrease
+from 40\% (at $m_A$=800 GeV) to 300\% (at $m_A$=250 GeV)
 once we require that the leading two jets in the event be $b$-tagged.  The widths of the shoulders
 for all mass points, before and after this cut is applied, can be seen in Table~\ref{tab:signal_mass_RMS_compare}.
 
 \begin{figure}[hbt]
-  \includegraphics[width=0.5\linewidth]{SignalKin/shoulder_400.pdf}
-  \includegraphics[width=0.5\linewidth]{SignalKin/shoulder_800.pdf}
+  \includegraphics[width=0.5\linewidth]{SignalKin/shoulders_400.pdf}
+  \includegraphics[width=0.5\linewidth]{SignalKin/shoulders_800.pdf}
   \caption{A schematic diagram showing how the shoulders are defined,
   for the purposes of parameterizing the width of the signal distribution.
   The left shoulder especially is affected when FSR is present, as the
@@ -194,60 +195,64 @@ for all mass points, before and after this cut is applied, can be seen in Table~
 
 \section{Mass Resolution}
 \label{sec:mass_res}
-%Once the trigger and all the analysis cuts have been applied, we take the leading 2 jets in the 
-%event (which are also the leading 2 $b$-tagged jets, since we place a cut requiring 
-%that the leading 2 jets in the event be $b$-tagged) and reconstruct their combined invariant mass
-%--if they came from a decaying particle, the reconstructed mass should be the mass of the parent particle
-%.  On the other hand, if the leading 2 jets come from continuum QCD processes, there should be 
-%no resonance present, so we look for the presence of a resonance peak on top of a decaying power
-%-law background.
 
+%A consistent refrain throughout this analysis is the challenge of poor mass resolution when reconstructing
+%the signal, especially in the low-mass tail for high values of $m_A$. The 
+%issue is important because a poorly-reconstructed (very wide)
+%signal peak can easily be confused with a background normalization error, which makes the analysis less
+%sensitive to small signals. This section will summarize the efforts to make the mass resolution as good
+%as possible; some tactics did produce an improvement while others did not.  In brief, the tactics
+%attempted include the following:
 
-A consistent refrain throughout this analysis is the challenge of poor mass resolution when reconstructing
-the signal, especially in the low-mass tail for high values of $m_A$. The 
-issue is important because a poorly-reconstructed (very wide)
-signal peak can easily be confused with a background normalization error, which makes the analysis less
-sensitive to small signals. This section will summarize the efforts to make the mass resolution as good
-as possible; some tactics did produce an improvement while others did not.  In brief, the tactics
-attempted include the following:
+Although the cut on the $b$-tag status of the leading two jets improves the combinatorics and 
+mass resolution, the width of the $m_{bb}$ distributions after this cut still remain very broad, 
+which makes them challenging to distinguish from background.  In this section, we document a number
+of investigations into the mass resolution, and some attempts to recover FSR or mitigate its effects.
+In brief summary, this section includes discussion of the following mass resolution topics: 
 
 \begin{itemize}
-    \item require that the leading 2 jets in the event be b-tagged (improved resolution)
-    \item when b-tagged jets have one or more jets nearby, include those jets in the mbb reconstruction (does
-not improve resolution)
-    \item when a hard ($>$80 GeV) untagged jet is present in an event, include it in the mbb reconstruction
-(does not improve resolution)
+    \item validation that FSR has a relatively larger effect for high-mass Higgs events than for low-mass ones
+    \item investigation of modifications to the jet reconstruction parameters, and the effect on the mass resolution 
+    \item an FSR recovery algorithm that looks for additional jets near ($\Delta R<$1.0) the $b$-jets
+    in signal candidate events, with the goal including the additional jets in the reconstruction
+    \item an FSR recovery algorithm that looks for additional hard ($p_T>$80 GeV) non-$b$-tagged
+    jets in signal candidate events, for possible inclusion when reconstructing the Higgs 
+    \item a change of basis where the discriminating variable is changed from the reconstructed mass, $m_{bb}$,
+    to a linear combination of the reconstructed mass and the $p_T$s of the leading two jets ($p_{T,1}$
+    and $p_{T,2}$), which takes advantage of correlations between $m_{bb}$, $p_{T,1}$ and $p_{T,2}$ 
+    that are present for signal (and especially signal events with good mass resolution) to suppress
+    the backgrounds
 \end{itemize}
 
 
-The problem is significantly worse at higher masses;
-to some extent, this is inevitable because the inherent width of the Higgs resonance increases with $m_A$
-(quantification of this effect can be found in Figure~\ref{fig:width}). However, the inherent width goes up to about 12
-GeV (at $m_A$=800 GeV), while the width of the reconstructed mass peak goes up to several hundred GeV.
-With this in mind, it’s clear that other effects drive the mass resolution.  The following sections, 
-and the tactics documented in them that attempt to recover lost mass resolution, focus mainly 
-on two hypotheses: that the lost mass resolution arises from final state radiation (FSR), and/or
-that it arises from incorrectly picking the jets when reconstructing (combinatorics). 
+%The problem is significantly worse at higher masses;
+%to some extent, this is inevitable because the intrinsic width of the Higgs resonance increases with $m_A$
+%(quantification of this effect can be found in Figure~\ref{fig:width}). However, the intrinsic width goes up to about 12
+%GeV (at $m_A$=800 GeV), while the width of the reconstructed mass peak goes up to several hundred GeV.
+%With this in mind, it’s clear that other effects drive the mass resolution.  The following sections, 
+%and the tactics documented in them that attempt to recover lost mass resolution, focus mainly 
+%on two hypotheses: that the lost mass resolution arises from final state radiation (FSR), and/or
+%that it arises from incorrectly picking the jets when reconstructing (combinatorics). 
 
 
 
 
 
 \subsection{Validation of Qualitative Shape Differences}
-The first question to ask is whether the high-mass mbb distributions are qualitatively lower-resolution than
-the low-mass distributions–in other words, whether the ratio of the width to the generated mass changes
-as a function of mass. We probe this by “normalizing” the signal MC mass, dividing each entry in the mbb
+The first question to ask is whether the high-mass $m_{bb}$ distributions are qualitatively lower-resolution than
+the low-mass distributions–-in other words, whether the ratio of the width to the generated mass changes
+as a function of mass. We probe this by ``normalizing'' the signal MC mass, dividing each entry in the $m_{bb}$
 histogram by the nominal mass which was generated; for example, a signal MC event that was generated
 with a Higgs mass of 350 GeV and reconstructed to have 300 GeV would be entered into the histogram
 as (300/350). Repeating this normalization process for several mass points allows us to compare the
 shapes for different $m_A$ values.
-We find that even when the mbb distributions are renormalized, the high-mass distributions remain
+We find that even when the $m_{bb}$ distributions are renormalized, the high-mass distributions remain
 wider than the low-mass distributions. That points toward FSR as a likely culprit, and in the following
 sections we will detail several attempts at FSR recovery.
 \begin{figure}[hbt]
   \includegraphics[width=0.78\linewidth]{SignalKin/mbb_normalized_signal.pdf}
-  \label{fig:mbb_norm}
-  \caption{The normalized $m_{bb}$ distributions for several signal mass points}
+  \caption{The normalized $m_{bb}$ distributions for several signal mass points. The mass resolution
+  is qualitatively worse for higher-mass Higgs bosons.\label{fig:mbb_norm}}
 \end{figure}
 
 
@@ -271,16 +276,16 @@ would be much more difficult to quantify.
 
 
 \subsection{Topology-Based Energy Recovery Algorithm}
- One hypothesis for the distribution of the FSR is that, for the high-\pt jets that result from the Higgs
- daughter b-quarks, they might radiate away partons that are hard enough to be clustered into their own
- jets (\pt$>$25 GeV) but end up nearby the leading jets in the detector (where nearby is defined as within
- dR$<$1.0). In other words, we look for a topology where there are one or more jets near one of the leading
-2 jets, and in cases where such jets are found, we add them back in when reconstructing mbb.
- This is found to have little ect on the mass resolution. In practice, only about 20\% of events
- have the topology where additional jet(s) are found near the leading 2 jets, and the mass resolution
- looks virtually unchanged before and after adding this correction. This suggests a couple of possible
- conditions: either the FSR is too diffuse and/or low-energy to be clustered into jets, and/or it is farther
- than the dR $<$ 1.0 search zone allows for recovery. 
+One hypothesis for the distribution of the FSR is that, for the high-\pt jets that result from the Higgs
+daughter $b$-quarks, they might radiate away partons that are hard enough to be clustered into their own
+jets (\pt$>$25 GeV) but end up nearby the leading jets in the detector (where nearby is defined as within
+$\Delta R<$1.0). In other words, we look for a topology where there are one or more jets near one of the leading
+two jets, and in cases where such jets are found, we add them back in when reconstructing $m_{bb}$.
+This is found to have little effect on the mass resolution. In practice, only about 20\% of events
+have the topology where additional jet(s) are found near the leading two jets, and the mass resolution
+looks virtually unchanged before and after adding this correction. This suggests a couple of possible
+conditions: either the FSR is too diffuse and/or low-energy to be clustered into jets, and/or it is farther
+than the $\Delta R<$1.0 search zone allows for recovery. 
     
 \begin{figure}[hbt]
   \includegraphics[width=0.45\linewidth]{SignalKin/fsr_recovery_bAbb_250.pdf}
@@ -288,20 +293,21 @@ would be much more difficult to quantify.
 \newline
   \includegraphics[width=0.45\linewidth]{SignalKin/fsr_recovery_bAbb_550.pdf}
   \includegraphics[width=0.45\linewidth]{SignalKin/fsr_recovery_bAbb_800.pdf}
-  \label{fig:fsr_recovery}
-  \caption{The $m_{bb}$ distributions out-of-the-box, and after attempting the $p_T$-based and topology-based FSR recovery algorithms, for several signal mass points.}
+  \caption{Comparisons of the $m_{bb}$ distributions out-of-the-box, 
+  and after attempting the $p_T$-based and topology-based 
+  FSR recovery algorithms, for several signal mass points. \label{fig:fsr_recovery}}
 \end{figure}
 
 
 
 \subsection{\pt-Based Energy Recovery Algorithm}
 The \pt-based energy recovery algorithm is based on the idea that perhaps the FSR takes the form of one
- or two very high-energy radiated particles that can end up far away from the leading 2 jets but can be
- identified by their high pT . In practice, what this means is looking for events with a non-b-tagged jet that
- has \pt$>$80 GeV, and when one is found, adding this back in when reconstructing mbb.
- Unfortunately the ect on the mass resolution is negligible. A few events move out of the low-mass
- tail, and the high-mass tail gets a few more events as jets can be mistakenly added back in even when no
- FSR was lost.
+or two very high-energy radiated partons that can end up far away from the leading two jets but can be
+identified by their high $p_T$. In practice, what this means is looking for events with a non-$b$-tagged jet that
+has \pt$>$80 GeV, and when one is found, adding this back in when reconstructing $m_{bb}$.
+Unfortunately the effect on the mass resolution is negligible. A few events move out of the low-mass
+tail, and the high-mass tail gets a few more events as jets can be mistakenly added back in even when no
+FSR was lost.
 
 
 
@@ -312,9 +318,10 @@ The \pt-based energy recovery algorithm is based on the idea that perhaps the FS
 \label{sec:n_jets_sig}
 
 The signal mass resolution also displays a large dependence on $n_{jets}$, the 
-number of jets over 25 GeV in the event.  If the event has significant FSR,
+number of central\footnote{central is defined here as $|\eta|<2.5$} 
+jets over 25 GeV in the event.  If the event has significant FSR,
 that radiation can end up clustered into extra jets in the event, and the 
-mass resolution suffers at the same time.  In events where there are only 3 jets,
+mass resolution suffers at the same time.  In events where there are only three jets,
 we can say rather confidently that two of the jets come from the Higgs decay
 and the third is from the associated production; as long as we pick the jets
 properly, the mass resolution should not show major effects of FSR.  That 
@@ -334,43 +341,33 @@ be found in Section~\ref{subsec:fitmodel}.
 \newline
   \includegraphics[width=0.45\linewidth]{SignalKin/mbb_njets_bAbb_550.pdf}
   \includegraphics[width=0.45\linewidth]{SignalKin/mbb_njets_bAbb_800.pdf}
-  \label{fig:mbb_njets_signal}
-  \caption{The $m_{bb}$ distributions at a few representative mass points in signal MC, as a function of the number of jets in the event.  
-    The 5+ jets bin contains all events with 5 jets or more.}
+  \caption{The $m_{bb}$ distributions at a few representative mass points in signal MC simulations, 
+  as a function of the number of jets in the event.  
+    The 5+ jets bin contains all events with 5 jets or more.\label{fig:mbb_njets_signal}}
 \end{figure}
 
-
+%%% START HERE
 \section{Eigenvector Rotation}
 \label{sec:rotation}
-%\begin{itemize}
-%    \item for high-mass points, we have trouble when FSR is bad (but it isn't always bad)
-%    \item FSR is worst when jets are low-pT--suggests a cut or categorization based
-%    on pT of the jets
-%    \item However, simple cut can sculpt background b/c of correlations btwn pT1, pT2, mbb,
-%    and it also reduces background to rates too low to model well
-%    \item use signal MC to identify eigenvectors based on pT1, pT2 and mbb, transform
-%    into this basis 
-%    \item Place cuts on pT1' and pt2'
-%    \item Use $mbb'$ as the discriminating variable, proceed to fit with exponential
-%    \item Impact on final sensitivity in the results section
-%\end{itemize}
 
 Once the events have been categorized based on $b$-tag status and the number of jets in the
-events, but before doing the final fit, we apply a change of variables based on the jet
-$p_T$ values and $m_{bb}$ in each event and a kinematic cut.  Together these analysis 
-steps effectively allow for a discriminating variable, which we call $m_{bb}'$, that
-separates signal and background better than ordinary $m_{bb}$.  Once these steps have
-been applied, the result is an analysis that is 15-50\% more sensitive
-than if no transformation were applied.  This section will 
-outline this procedure and its rationale.  
+events, but before doing the final fit, we apply a change of variables based on
+$p_T$s of the leading two jets and $m_{bb}$ in each event.  These three kinematic variables
+as the discriminating variable (rather than $m_{bb}$).  This section details the 
+motivation and procedure of the variable change, which helps separate the
+signal and background in the final search and results in an analysis 
+sensitivity that is 15-50\% better than an analysis without these steps.
 
-The motivation for this strategy has its origins in trying to control the effect of
+
+
+The motivation for this variable change strategy has its origins in trying to control the effect of
 FSR on the analysis sensitivity.  At high $m_A$, the jets from the Higgs (and also 
 the associated $b$-quark) have large $p_T$, which they then tend to radiate away 
 as FSR.  This causes the $m_{bb}$ peak to smear out and be more difficult to 
 distinguish from background than in the lower-$m_A$ cases.  However, since FSR
 occurs stochastically on an event-by-event basis, a subset of the signal events
-will have little or no FSR and will reconstruct to $m_A$--if these events 
+will have little or no FSR and will reconstruct to (nearly) $m_A$\footnote{modulo any
+systematic errors in the jet reconstruction, calorimeter noise, etc.}--if these events 
 can be isolated from the others, they offer a chance to improve the sensitivity
 via the improved mass resolution and signal-to-background ratio. 
 
@@ -379,45 +376,47 @@ second jet in the event, and only accept events where the $p_T$ is above some
 threshold optimized by comparing signal MC to \textit{bbanti} data.  
 That would isolate events with poor mass resolution (i.e. lots of FSR) from
 those with little FSR and better reconstruction properties.  However, since
-there is a correlation between $p_T^1$, $p_T^2$ and $m_{bb}$, a cut like
-this ends up sculpting the background as well.  In addition, the $p_T^1$ and
-$p_T^2$ cut thresholds that looked best on signal MC are ``too good'' on 
+there is a correlation between $p_{T,1}$, $p_{T,2}$ and $m_{bb}$, a cut like
+this ends up sculpting the background as well.  In addition, the $p_{T,1}$ and
+$p_{T,2}$ cut thresholds that looked best on signal MC are ``too good'' on 
 background-dominated \textit{bbanti} events and there is no background
 above a certain $m_{bb}$ value.  That makes modeling the background extremely 
 difficult, and any fit difficult to validate.  
 
 The rotation is performed as follows:
 \begin{itemize}
-    \item For $m_{bb}$, $p_T^1$ and $p_T^2$ calculate the center of gravity
+    \item For each variable $m_{bb}$, $p_{T,1}$ and $p_{T,2}$, calculate the mean 
     of all signal MC simulation events, and subtract it from each event
     \item For each event, fill a 3$\times$3 tensor with the following components
     \begin{equation}
         \begin{bmatrix}
-        m_{bb}m_{bb} & m_{bb}p_T^1 & m_{bb}p_T^2 \\
-                     & p_T^1 p_T^1 & p_T^1 p_T^2 \\
-                     &             & p_T^2 p_T^2 \\ 
+        m_{bb}m_{bb} & m_{bb}p_{T,1} & m_{bb}p_{T,2} \\
+                     & p_T^1 p_{T,1} & p_{T,1} p_{T,2} \\
+                     &               & p_{T,2} p_{T,2} \\ 
         \end{bmatrix}
     \end{equation}
     (the matrix is symmetric, so we write only the elements above the diagonal for
     brevity and clarity)
-    \item Sum these tensor matrices for all signal events in a given tag/jet category
+    \item Sum these tensor matrices for all signal events in a given $n_{jets}$ category;
+    do not differentiate based on tag category
     (the resulting tensor will also be 3$\times$3)
     \item Find the leading eigenvector\footnote{where the leading eigenvector is the
     eigenvector associated with the largest eigenvalue} of the tensor matrix
     \item Define the $m_{bb}^{'}$ variable as follows:
     \begin{equation}
-        m_{bb}^{'} = [m_{bb}\ p_T^1\ p_T^2] \cdot [e_1\ e_2\ e_3]
+        m_{bb}^{'} = [m_{bb}\ p_{T,1}\ p_{T,2}] \cdot [e_1\ e_2\ e_3]
     \end{equation}
     where the latter vector is the leading eigenvector of the tensor matrix
+    \item perform this transformation for each signal mass point separately
 \end{itemize}
 
-After this rotation, $m_{bb}^{'}$ is an admixture of $m_{bb}$, $p_T^1$, and 
-$p_T^2$.  The exact contribution from each of these variables changes on a mass-point-by-mass-point
+After this rotation, $m_{bb}^{'}$ is an admixture of $m_{bb}$, $p_{T,1}$, and 
+$p_{T,2}$.  The exact contribution from each of these variables changes on a mass-point-by-mass-point
 basis, as the correlations between them change.  At lower masses, $m_{bb}$ provides
 most of the basis for $m_{bb}^{'}$, with 76\% of the $m_{bb}^{'}$ coming from 
 $m_{bb}$.  At higher masses, where FSR is more of an issue, the correlations between 
 $m_{bb}$ and the leading jets' $p_T$s are more important and for $m_A$=800 GeV,
-over half of $m_{bb}^{'}$ (55\%) comes from $p_T^1$ and $p_T^2$.  The full set 
+over half of $m_{bb}^{'}$ (55\%) comes from $p_{T,1}$ and $p_{T,2}$.  The full set 
 of $m_{bb}^{'}$ components can be found in Table~\ref{tab:eigenvector_elements}.
 
 
@@ -441,7 +440,7 @@ of $m_{bb}^{'}$ components can be found in Table~\ref{tab:eigenvector_elements}.
     squares of the elements sum to 1.0 and can provide some physical intuition
     for the relative contributions of $p_T^1$, $p_T^2$ and $m_{bb}$. \label{tab:eigenvector_elements}}
     \begin{tabular}{ c c c c c c c } \hline \hline
-        $m_A$ & $m_{bb}$ & $p_T^1$ & $p_T^2$ & $m_{bb}^2$ & $(p_T^{1})^2$ & $(p_T^2)^2$ \\ \hline
+        $m_A$ & $e_1$ & $e_2$ & $e_3$ & $e_1^2$ & $e_2^2$ & $e_3^2$ \\ \hline
         450 & 0.87 & 0.35 & 0.35 & 0.76 & 0.12 & 0.12 \\
         500 & 0.84 & 0.38 & 0.39 & 0.71 & 0.14 & 0.15 \\
         550 & 0.80 & 0.40 & 0.46 & 0.64 & 0.16 & 0.21 \\
@@ -461,7 +460,7 @@ with the mass distribution being pushed to lower values
 in the background distribution while the signal mass maintains a similar shape.  
 This background reshaping affects the signal to background ratio in the 
 neighborhood of the signal peak; before the rotation,
-significant background remaining in the neighborhood of the signal peak, 
+significant background remains in the neighborhood of the signal peak, 
 but after the rotation the signal is virtually
 unchanged while the background has been shifted lower.  
 
@@ -483,17 +482,37 @@ unchanged while the background has been shifted lower.
 
 While the $m_{bb}^{'}$ variable is derived using the leading eigenvector of the
 tensor matrix, the second and third eigenvectors can also be used in an analagous
-way and we refer to the resulting transformed variables as $p_T^{1'}$ and $p_{T}^{2'}$.
+way and we refer to the resulting transformed variables as $p_{T,1}^{'}$ and $p_{T,2}^{'}$.
 
 
 There is one more step that optimizes the signal to background
-discrimination further, which is placing cuts on $p_T^{1'}$ and $p_T^{2'}$.
-If we require that $p_T^{1'}>-10$ GeV, and $p_T^{2'}>-50$ GeV, it 
+discrimination further, which is placing cuts on $p_{T,1}^{'}$ and $p_{T,2}^{'}$.
+If we require that $p_{T,1}^{'}>-10$ GeV, and $p_{T,2}^{'}>-50$ GeV, it 
 excludes a region of $m_{bb}^{'}$ phase space where the modeling is difficult
 and little sensitivity is gained.  
 
+Since the rotation is calculated on each signal mass point separately, and the
+mass points are characterized by different correlations between $m_{bb}^{'}$, 
+$p_{T,1}$ and $p_{T,2}$, in particular because the mass resolution varies
+significantly based on the mass of $H/A$.  As a result, the background will change
+as a function of the signal mass point.  The signal and background shapes 
+after the rotation can be seen in Figure~\ref{fig:sig_bkg_after_rotation}.
 
 
+\begin{figure}[hbt]
+\includegraphics[width=0.45\linewidth]{SignalKin/bkg_3jets_rotated.pdf}
+\includegraphics[width=0.45\linewidth]{SignalKin/sig_3jets_rotated.pdf} \\
+\includegraphics[width=0.45\linewidth]{SignalKin/bkg_4jets_rotated.pdf}
+\includegraphics[width=0.45\linewidth]{SignalKin/sig_4jets_rotated.pdf} \\
+\includegraphics[width=0.45\linewidth]{SignalKin/bkg_5jets_rotated.pdf}
+\includegraphics[width=0.45\linewidth]{SignalKin/sig_5jets_rotated.pdf} \\
+\caption{ The signal and background distributions for each signal mass 
+point after the rotation, binned in $n_{jets}$ category.  The effect of the 
+rotation on the background can be clearly seen in these plots, pushing the
+background further to the left (lower $m^{'}_{bb}$ values) for higher mass
+signal points. 
+     \label{fig:sig_bkg_after_rotation}}
+\end{figure}
 
 
 
@@ -505,10 +524,40 @@ The signal shape is fit using an RhhBinnedPdf in RooFit, a form of parameterized
 histogram where the parameterization helps the fit converge more reliably and allows
 a single parameter to capture the integral (i.e. signal yield) of the distribution.
 Once the full analysis cut chain has been applied, including the rotation, the 
-signal $m_{bb}$ distributions are fit in signal MC and then the shapes are fixed.
-The mass range for the signal fits (and also the background fits) is -50 GeV $< m_{bb}^{'}<$ 350 GeV,
-and the bins are 40 GeV wide in a compromise between trying to capture as much
-shape information as possible while also dealing with limited signal MC statistics.
+signal $m_{bb}^{'}$ distributions are fit in signal MC and then the shapes are fixed.
+
+
+The search range in $m^{'}_{bb}$ varies by mass point.  As Figure~\ref{fig:sig_bkg_after_rotation}
+shows, the background can shift significantly from left to right depending on the details
+of the (mass-point-specific) rotation, so in particular the low edge of the search window
+can be moved to more negative values of $m^{'}_{bb}$  when one is looking for a high-mass $H/A$,
+than when searching for an $H/A$ with a lower mass.  The mass windows for each search
+point are listed in Table~\ref{tab:mass_windows}.
+
+\begin{table}
+    \caption{The search windows in $m^{'}_{bb}$, based on the signal mass point 
+    under investigation.  The background gets pushed to lower values of $m^{'}_{bb}$ 
+    by the rotation for higher signal mass values, which allows for wider mass 
+    windows for higher signal mass points.  \label{tab:mass_windows}}
+    \begin{tabular}{ c c c } \hline \hline 
+    signal mass point & low edge $m^{'}_{bb}$  &  high edge $m^{'}_{bb}$ \\ \hline
+    450 GeV & -50 & 350 \\
+    500 GeV & -90 & 350 \\ 
+    550 GeV & -130 & 350 \\
+    600 GeV & -130 & 350 \\
+    650 GeV & -170 & 350 \\
+    700 GeV & -210 & 350 \\
+    800 GeV & -250 & 350 \\ \hline
+    \end{tabular}
+\end{table}
+
+For all fits, the histogram bins are 40 GeV wide.  20 GeV binning was also investigated,
+as well as variable-width binning, but there were only negligible differences in the
+final sensitivity based on with bin widths.
+
+%The mass range for the signal fits (and also the background fits) is -50 GeV $< m_{bb}^{'}<$ 350 GeV,
+%and the bins are 40 GeV wide in a compromise between trying to capture as much
+%shape information as possible while also dealing with limited signal MC statistics.
 
 The choice of a parameterized histogram was taken after it was found that 
 the signal distribution is a difficult one to fit to a function, since the shape can vary
@@ -516,7 +565,7 @@ widely by jet bin and $b$-tag category.  Attempts to fit the distributions with 
 Cruijff function (a bifurcated Gaussian function with non-Gaussian tails) would work
 well for some categories and signal mass points, but fail to give good shape descriptions
 for other categories and signal mass points.  By fitting to a histogram, we are able
-to fit trickier shapes than could be reliably fit with a function, and the fits are
+to fit more difficult shapes than could be reliably fit with a function, and the fits are
 more stable under the addition of perturbations from systematic errors.
 
 

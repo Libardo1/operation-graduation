@@ -5,17 +5,20 @@
 
 \chapter[Interpretation]{Interpretation of Results}
 
-Since the experimental result is phrased in terms of a production cross section
-times a branching ratio, an interpretation step is required to draw physics conclusions
-about the non-Standard Model Higgs sector. A number of standard benchmark scenarios
+The last component of this search is asking how the sensitivity in terms of 
+(the model-independent) quantity of production cross section times branching ratio
+can be interpreted as a sensitivity with respect to the MSSM parameters $\tan\beta$
+and $m_A$.  This interpretation introduces model dependence, as any interpretation does,
+%Since the experimental result is phrased in terms of a production cross section
+%times a branching ratio, an interpretation step is required to draw physics conclusions
+%about the non-Standard Model Higgs sector. 
+and a number of standard benchmark scenarios
 are provided by the LHC Higgs Cross Section Working Group \cite{mssm_xsec_wg} which span 
-a range of plausible model structures.  The interpretation under these benchmarks
-is explained in Section~\ref{sec:interp_benchmark}, while in Section~\ref{sec:interp_new_benchmark} we examine other scenarios
-that fall outside the standard benchmarks.
+a range of plausible MSSM scenarios including $m_h^{max}$ and $m_h^{mod,\pm}$. 
 
 \section{Standard Benchmark Scenarios}
 \label{sec:interp_benchmark}
-Since there are so many analyses at the LHC that deal, either directly or indirectly,
+Since there are many analyses at the LHC that deal, either directly or indirectly,
 with non-SM Higgs bosons, a set of standard benchmark scenarios are used to bring
 order to the chaos and allow for potentially easier comparison and combination 
 of results.  These benchmark scenarios are a joint effort of ATLAS, CMS, and 
@@ -31,7 +34,7 @@ The $m_h^{max}$ scenario is one of the older and more ``classic'' scenarios for
 SUSY Higgs searches.  It uses the value of $X_t$ that maximizes
 $m_h$ for large $m_A$ and a given tan$\beta$ value.  Once the Higgs boson was discovered
 around 126 GeV, this scenario fell somewhat out of favor because it tends to have an $m_h$ that
-is too high, around 140 GeV.  In the era of LEP searches, of course, it wasn't known
+is too high, around 140 GeV.  In the era of LEP searches, of course, it was not yet known
 what the mass of the Higgs was, and that was as good a guess as any other.  In addition,
 this scenario gives conservative bounds on $m_A$ and tan$\beta$.
 
@@ -39,7 +42,6 @@ In the post-Higgs discovery world, the $m_h^{max}$ scenario still serves as a us
 benchmark for its conservative limits, and for placing comparisons against legacy analyses
 that used this scenario in their interpretations.   
 
-\textbf{m$_A$/tan$\beta$ exclusion plot for $m^h_{max}$}
 
 
 \subsection{$m_h^{mod}$ Scenarios}
@@ -48,7 +50,8 @@ a larger amount of phase space that is still consistent with $m_h$=126 GeV; one
 can reduce the amount of mixing in the stop sector to bring $m_h$ down to a value
 that agrees better with experiment.  In this scenario, the sign of $X_t$ can be either
 positive or negative, with small changes in the excluded region depending on 
-which one is chosen.
+which one is chosen\footnote{the scenario name encodes the sign of $X_t$; $m_h^{mod,+}$
+has a positive $X_t$ while $X_t$ is negative for $m_h^{mod,-}$}.
 
 The $m_h^{mod+}$ and $m_h^{mod-}$ scenarios are generated with the following setup:
 \begin{itemize}
@@ -58,7 +61,39 @@ The $m_h^{mod+}$ and $m_h^{mod-}$ scenarios are generated with the following set
     \item bbH (4FS) scans for Higgstrahlung off bottom quarks in the 4-flavor scheme \cite{bbh_4fs_1} \cite{bbh_4fs_2}
 \end{itemize}
 
-\textbf{m$_A$/tan$\beta$ exclusion plot for $m^h_{mod}$}
+\textbf{m$_A$/tan$\beta$ exclusion plot for $m^h_{mod}$--to be added}
+
+In the final calculus, this search does not surpass searches for $bA/H\rightarrow b\tau\tau$
+in terms of either sensitivity to production cross section times branching fraction, 
+or exclusions in $m_A/\tan\beta$.  This is for several reasons--at low $m_A$, the 
+search in the $\tau\tau$ final state is advantaged by lower trigger $p_T$ thresholds
+on the $\tau$ leptons than can be afforded for $b$-jets; at high $m_A$, the FSR from
+the $b$-quarks smears out the Higgs mass peak more severely than radiative effects 
+in the $\tau\tau$ search.  Additionally, this analysis has the constant challenge of
+combinatorial mismatches, where the jets can be incorrectly chosen when reconstructing $H/A$.
+
+On the other hand, this search channel remains a very interesting one.  The branching
+fraction to $b$-quarks is 5-7 times higher than the branching fraction to $\tau$ leptons,
+and with more clever triggering in planned in the LHC Run 2\footnote{specifically, topological triggers that look
+for the presence of muons in jets, allowing for a rough form of $b$-tagging at L1 of the trigger}, 
+this search channel remains an interesting one to continue developing.  Similarly, 
+smart offline analysis advances such as a multivariate analysis or kinematic cuts that are 
+more carefully tuned for the $m_A$ values under investigation might yield more sensitive limits.
+Nonetheless, the search reported here (which is the first known search in this final state and mass range)
+reinforces the conclusions draw by the $b\tau\tau$ analysis with respect to $m_A/\tan\beta$,
+covers new ground for a search in the $bb\bar{b}$ final state, and lays an important piece of groundwork
+for studies in this channel going forward.
+
+
+\begin{figure}[hbt]
+\center
+\includegraphics[width=0.9\linewidth]{Interpretation/exclusions.pdf}
+\caption{The expected 95\% excluded $(H+A)$ $\sigma\times$BR as a function of $m_A$, 
+for 450$<m_A<$800 GeV.
+\label{fig:exclusions}}
+\end{figure}
+
+
 
 
 
